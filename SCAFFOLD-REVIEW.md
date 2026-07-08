@@ -1,0 +1,127 @@
+# CheckMyBasket Scaffold Review
+
+**Date:** 8 July 2026 · **Reviewed by:** Claude Code
+**Scaffold commit:** `041f770` ("Build CheckMyBasket Secret Santa app — full prototype", 4 June 2026)
+**Deployed:** Vercel `checkmybasket` (production READY, built from github.com/checkmybasket/checkmybasket @ same commit)
+**Database:** Supabase `nejkvrzabdetsnhpeqtl` — ACTIVE_HEALTHY, 1 migration (`initial_schema`), 11 tables, RLS on all, 0 rows
+
+## Headline verdict
+
+The scaffold is **worth keeping — but it is a UI prototype, not a partially-built app**. Every screen exists and is well-branded (correct fonts, colours, UK English, mobile-first, tasteful animations), and the Supabase schema is genuinely good (server-side draw function, rate-limited messaging, thoughtful RLS). **But the two halves have never been connected**: there is not a single Supabase call in any page. All flows run on hardcoded `MOCK_*` constants. "Continue the build" (Phase 3) is therefore mostly *wiring*, not redesign — which is the right kind of remaining work.
+
+**One genuine security bug found** (anonymous-messaging identity leak at the API level — exactly what the brief told me to check). Details in C2.
+
+**Caveat:** the five strategy documents (development brief, feature/anti-feature list, 48-item backlog, Gift Predictions brief, rebrand brief) were **not found in the project directory or anywhere on this machine**. This audit is against the review brief itself. Backlog priorities, exact rebrand copy, and the detailed Gift Predictions data model remain unverified — drop the docs into the repo (e.g. `docs/`) and I'll re-check.
+
+---
+
+## Critical — blocks launch quality
+
+### C1. Frontend is 100% mock data; no persistence anywhere
+- **Where:** every page — `app/create/page.tsx` (create just flips local state, nothing saved), `app/join/[invite_code]/page.tsx` (`MOCK_GROUP`, redirects to `/g/demo-group-id`), `app/g/[group_id]/page.tsx` (`MOCK_GROUP/ME/MEMBERS/WISHLISTS/MESSAGES/RESULTS`), `reveal/page.tsx` (`MOCK_MATCH`), `settings/page.tsx` (`MOCK_GROUP`)
+- **Issue:** Nothing a user does is stored. Two people opening the same link see the same fake "Marketing Team Secret Santa". The deployed site is a demo.
+- **Fix:** Wire each flow to Supabase (clients already written in `lib/supabase/`). Create → insert `groups` + organiser member; join → anonymous auth session + insert `group_members`; dashboard → live queries; draw → call `execute_draw` RPC; reveal → read own `draws` row; messages → `anon_messages_safe` view; predictions → `prediction_rounds`/`predictions`.
+- **Effort:** L (1–2 days of focused work; this *is* Phase 3)
+
+### C2. Anonymous messaging leaks the buyer's identity via the API 🔴
+- **Where:** Supabase — `anon_messages` table policies + grants
+- **Issue:** A masking view `anon_messages_safe` exists (nulls `sender_id` unless you are the sender) — but the **base table is still fully readable**. The SELECT policy `sender_id = auth.uid() OR recipient_id = auth.uid()` grants the *recipient* row access, and `anon`/`authenticated` roles hold column-level SELECT on `sender_id`. Any recipient can call `GET /rest/v1/anon_messages?select=sender_id&recipient_id=eq.<me>` and unmask their Secret Santa. This defeats the product's primary differentiator.
+- **Fix (migration):** revoke SELECT (and UPDATE/INSERT via table grant hygiene) on `anon_messages` from `anon`/`authenticated` except the columns needed, or drop the recipient arm from the base-table SELECT policy so recipients can *only* read via the view. Convert the view to `security_invoker` with proper policies (also clears the advisor ERROR on SECURITY DEFINER views). Add a test that queries as a recipient and asserts `sender_id` is null.
+- **Effort:** S (one migration + verification queries)
+
+### C3. Recipients can rewrite messages they receive
+- **Where:** `anon_messages` UPDATE policy "Recipients can report (soft-delete via update)"
+- **Issue:** No `WITH CHECK`, and `authenticated` holds UPDATE on **all** columns — a recipient can edit `content` (or even `sender_id`) of any message sent to them. Reporting should not grant editing.
+- **Fix:** column-level `GRANT UPDATE (reported)` only (add a `reported`/`hidden` boolean if missing), or move reporting behind an RPC. Same pattern for `draws` "Giver marks gift as bought" — restrict UPDATE to `gift_bought` so a giver can't alter `recipient_id`.
+- **Effort:** S
+
+### C4. `lib/supabase/` was never committed to git
+- **Where:** `git status` → `lib/supabase/` and `.claude/` untracked
+- **Issue:** The only Supabase integration code exists solely on this machine. The GitHub repo (and therefore Vercel builds) has no DB layer at all. A `git clean` or another machine loses it.
+- **Fix:** `git add lib/supabase .claude/launch.json` (rename `giftcircle-dev` → `checkmybasket-dev` first) and commit.
+- **Effort:** XS
+
+### C5. Every user can enumerate all names and emails
+- **Where:** `profiles` policy "Users can read any profile" — `USING (true)`; table has an `email` column
+- **Issue:** Any signed-in (including anonymous) user can `SELECT name, email FROM profiles` for **every user of the product**, across all groups. Contradicts the minimal-personal-data posture and is a GDPR problem.
+- **Fix:** replace with "profiles visible to co-members" (EXISTS join through `group_members`). Strongly consider dropping `email` from `profiles` entirely — the no-account join flow doesn't collect it; if organisers later opt into email reminders, store it purpose-bound at that point.
+- **Effort:** S
+
+---
+
+## Important — fix before feature work
+
+### I1. No-account join has no auth strategy implemented
+The schema requires `auth.uid()` everywhere (correctly), which for "join in seconds, no account" means **Supabase anonymous sign-ins**. Nothing in the codebase creates a session. Decide + implement: silent `signInAnonymously()` on join/create, session persisted in cookie, later upgradeable. Verify anonymous sign-ins are enabled in the Supabase dashboard and `handle_new_user` copes with null email. **Effort: M** (foundational for C1)
+
+### I2. Schema lives only in Supabase, not in the repo
+One migration exists (`20260604115605_initial_schema`) but there's no `supabase/migrations/` in git. Pull the schema down (`supabase db pull` or export the migration SQL) and commit, so schema changes are reviewable and reproducible. **Effort: S**
+
+### I3. Fabricated social proof on the landing page
+`app/page.tsx:97` — "**1,247 groups** created this week" is hardcoded fiction. Untrue claims are a trust killer and risky under UK consumer-protection rules. Remove, or replace with a real counter once persistence exists (or honest copy: "Loved by families, flatmates and office teams"). **Effort: XS**
+
+### I4. No OG image — WhatsApp previews will be bare
+The brief explicitly requires a 1200×630 OG image slot; `metadata.openGraph` has no `images` and there's no `app/opengraph-image.*`. For a product whose whole invite flow lives in WhatsApp, the link preview *is* the first impression. Add branded `opengraph-image` (static or `next/og` generated, forest green + gold, "Secret Santa, sorted."), plus a per-group join-page variant later ("Priya invited you to Marketing Team Secret Santa"). **Effort: S**
+
+### I5. SEO plumbing missing
+No `app/robots.ts`, no `app/sitemap.ts` (the `/gifts/*` category pages are the SEO play and are invisible to crawlers), favicon appears to be the create-next-app default, unused template SVGs in `public/` (`next.svg`, `vercel.svg`, etc.), README is stock create-next-app. Also `<html lang="en">` → `en-GB`. **Effort: S**
+
+### I6. Residual GiftCircle traces
+Zero in app code/copy (good). Remaining: `package-lock.json` `"name": "giftcircle"` (regenerate lockfile), `.claude/launch.json` `"giftcircle-dev"`, CSS token prefix `--gc-*` throughout `globals.css` and every page (cosmetic; rename to `--cmb-*` in one mechanical pass or accept), and the local folder name `~/giftcircle` (suggest `mv ~/giftcircle ~/checkmybasket-app`; requires re-linking nothing — `.vercel/` and `.git` move with it). **Effort: S**
+
+### I7. Supabase advisor findings
+- ERROR: `anon_messages_safe` is SECURITY DEFINER (resolved by C2 fix)
+- WARN ×4: mutable `search_path` on `execute_draw`, `daily_message_count`, `is_group_member`, `is_group_organiser` → `ALTER FUNCTION ... SET search_path = ''` (qualify references)
+- WARN: those functions + `handle_new_user` are callable via `/rest/v1/rpc/*` by `anon` → revoke EXECUTE where not needed (`handle_new_user` should be trigger-only)
+**Effort: S**
+
+### I8. Exclusions `bidirectional` flag is ignored by the draw
+`exclusions.bidirectional` exists in schema and `lib/types.ts`, and the (now-redundant) client-side `drawNames()` in `lib/utils.ts` respects it — but `execute_draw` in Postgres always treats exclusions as bidirectional. Pick one semantic (bidirectional-only is simpler and matches "couples don't draw each other"), and delete the unused client implementation so there's a single source of truth. **Effort: S**
+
+### I9. Invite code generation: client-side `Math.random`, no uniqueness guarantee
+`generateInviteCode()` runs in the browser with `Math.random`, and the create flow never checks collisions. Move generation into the `groups` insert (DB default using `gen_random_uuid()`-derived slug or a unique-constrained retry), keep 31-char alphabet / 8 chars. **Effort: S**
+
+### I10. QR code is a permanent skeleton
+`app/create/page.tsx:76-83` shows a shimmering placeholder that never resolves — looks broken. Either render a real QR (tiny dependency-free SVG QR is fine) or drop the panel until built. **Effort: S**
+
+---
+
+## Nice-to-have
+
+| # | Item | Where | Effort |
+|---|------|-------|--------|
+| N1 | Duplicate `GiftCard` component defined twice | `app/gifts/page.tsx`, `app/gifts/[category]/page.tsx` | XS |
+| N2 | Heavy inline `style={{}}` usage instead of Tailwind utility classes mapped to the tokens already in `@theme` — harder to maintain, no hover/dark variants | all pages | M (incremental) |
+| N3 | Contrast audit where gold `#D4A574` sits on light backgrounds (fails ~1.8:1 on cream; it's currently mostly on dark green, which is fine — keep it that way) | `globals.css` `--gc-warning`, awards UI | XS |
+| N4 | `timeAgo()` has no week/month units and mishandles future dates | `lib/utils.ts:58` | XS |
+| N5 | `.DS_Store` files scattered; add to `.gitignore` | repo root | XS |
+| N6 | Gifts catalogue is hardcoded placeholder data with dummy URLs — real affiliate strategy is Phase 3 backlog work | `app/gifts/*` | — |
+| N7 | Lighthouse not yet run (do after C1/I4/I5 land; landing page is static and light, 90+ is realistic) | — | — |
+| N8 | `viewport.themeColor` is set and copy is UK English throughout — no action, noted as ✅ | — | — |
+
+---
+
+## What's already right (don't touch)
+
+- **Branding:** Fraunces + DM Sans correctly loaded via `next/font`; tokens exactly match spec (#1B4332 / #D4A574 / #FFF8F0); "Secret Santa, sorted." present; no-ads promise and affiliate disclosure in the footer; UK English ("organiser") throughout.
+- **No Guess the Baby remnants** anywhere — schema, routes, copy all clean. Gift Predictions uses the fixed 12-category enum in both `lib/types.ts` and the DB.
+- **No secrets in the repo:** `.env*` gitignored; only `NEXT_PUBLIC_*` vars exist locally; no service-role key anywhere.
+- **`execute_draw` is the right design:** SECURITY DEFINER RPC, organiser-only, ≥3 members, self-draw + exclusion checks, retries then fails loudly, single transaction. Draws are only readable by the giver (`giver_id = auth.uid()`) — assignments can't be scraped.
+- **Message rate-limiting** (10/day/group) enforced in the INSERT policy.
+- **Mobile-first UX** is genuinely good: bottom tab bar with safe-area insets, one-handed reach, `prefers-reduced-motion` respected, focus-visible styles, WhatsApp-first share screen.
+
+## Suggested fix order (Phase 2, pending your approval)
+
+1. **C4** commit `lib/supabase/` (30 s, protects work)
+2. **C2 + C3 + C5 + I7** one security migration (half a day, testable immediately)
+3. **I3** delete fake stat (1 min)
+4. **I1 + C1** anonymous auth + wire create → join → draw → reveal end-to-end (the big one)
+5. **I2** pull schema into repo
+6. **I4 + I5 + I6** OG image, robots/sitemap/favicon/README, GiftCircle stragglers
+7. **I8–I10**, then N-items opportunistically alongside Phase 3 feature work
+
+## Infrastructure status (checked today)
+
+- Supabase: **ACTIVE_HEALTHY** (already unpaused), Postgres 17, eu-west-2, no pending migrations, all tables empty
+- Vercel: production deployment READY on `checkmybasket.vercel.app`, GitHub-connected, `NEXT_PUBLIC_APP_URL=https://www.checkmybasket.co.uk` set locally — **verify the same env vars exist in Vercel project settings** before the next deploy
+- Domain: not touched, per the transition plan
