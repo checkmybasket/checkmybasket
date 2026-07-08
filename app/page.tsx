@@ -85,18 +85,6 @@ export default function HomePage() {
           <p className="mt-5 text-sm animate-fade-up animate-delay-300" style={{ color: "rgba(255,248,240,0.5)" }}>
             Free forever. No account needed. Takes 30 seconds.
           </p>
-          <div className="mt-10 inline-flex items-center gap-3 rounded-2xl px-5 py-3 animate-fade-up animate-delay-400"
-            style={{ background: "rgba(255,248,240,0.08)", border: "1px solid rgba(255,248,240,0.12)" }}>
-            <div className="flex -space-x-2">
-              {["🎅","🤶","🎁","⭐"].map((e,i) => (
-                <div key={i} className="w-8 h-8 rounded-full flex items-center justify-center text-sm border-2"
-                  style={{ background: "var(--gc-primary-dark)", borderColor: "var(--gc-primary)" }}>{e}</div>
-              ))}
-            </div>
-            <p className="text-sm" style={{ color: "rgba(255,248,240,0.75)" }}>
-              <span style={{ color: "var(--gc-warm)", fontWeight: 600 }}>1,247 groups</span> created this week
-            </p>
-          </div>
         </div>
       </section>
 
