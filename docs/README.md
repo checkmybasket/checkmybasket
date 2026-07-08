@@ -1,17 +1,18 @@
 # Strategy documents
 
-Recovered on 8 July 2026 from the 4 June 2026 Claude Code session transcript
-("GiftCircle mobile app prototype") where they were pasted as chat text — they
-were never saved as files on disk. Text is verbatim as pasted; note these are
-the June versions and still use the GiftCircle name internally.
+Canonical originals, added 8 July 2026 from Hassan's Google Drive ("4th June"
+folder). These supersede the transcript-recovered versions previously in this
+folder (removed; see git history if needed). Docs written in June 2026 still
+use the GiftCircle name internally — the product is now CheckMyBasket (see
+the rebrand brief).
 
-| Doc | File | Status |
-|---|---|---|
-| Definitive feature and anti-feature list | `feature-anti-feature-list.md` | ✅ recovered |
-| Rebrand brief (GiftCircle → CheckMyBasket) | `rebrand-brief.md` | ✅ recovered |
-| Gift Predictions game brief | `gift-predictions-brief.md` | ✅ recovered |
-| Claude Code development brief (skills-integrated) | — | ❌ not found on this machine or in local chat history |
-| 48-item feature backlog (xlsx) | — | ❌ not found (xlsx was never attached in a local session) |
-
-The missing two most likely live in a claude.ai web chat or elsewhere —
-Hassan to export and drop them in here before end-to-end wiring begins.
+| Doc | File |
+|---|---|
+| Rebrand brief (GiftCircle → CheckMyBasket) | `CheckMyBasket-Rebrand-Brief.md` |
+| Claude Code development brief v2 (skills-integrated) | `GiftCircle-ClaudeCode-Brief-v2.md` |
+| Definitive feature and anti-feature list | `GiftCircle-Feature-and-Anti-Feature-List.md` |
+| Feature backlog (48 items, xlsx) | `GiftCircle-Feature-Backlog.xlsx` |
+| Game replacement brief (Gift Predictions) | `GiftCircle-Game-Replacement-Brief.md` |
+| Market analysis | `GiftCircle-Market-Analysis.md` |
+| DrawNames social media competitor analysis | `DrawNames-Social-Media-Competitor-Analysis.md` |
+| Elfster social media competitor analysis | `Elfster-Social-Media-Competitor-Analysis.md` |

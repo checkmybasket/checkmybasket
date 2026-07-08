@@ -11,7 +11,7 @@ The scaffold is **worth keeping — but it is a UI prototype, not a partially-bu
 
 **One genuine security bug found** (anonymous-messaging identity leak at the API level — exactly what the brief told me to check). Details in C2.
 
-**Caveat:** the five strategy documents (development brief, feature/anti-feature list, 48-item backlog, Gift Predictions brief, rebrand brief) were **not found in the project directory or anywhere on this machine**. This audit is against the review brief itself. Backlog priorities, exact rebrand copy, and the detailed Gift Predictions data model remain unverified — drop the docs into the repo (e.g. `docs/`) and I'll re-check.
+**Caveat (resolved 8 July, evening):** the strategy documents were originally not found on this machine. The canonical 8 docs are now in `docs/` (from Hassan's Google Drive "4th June" folder) and the previously unverified items have been re-checked — see **"Re-verification against strategy docs"** below. Headline: Gift Predictions conforms exactly; rebrand copy conforms with three small gaps; backlog P0 scope confirms the wiring-first fix order.
 
 ---
 
@@ -35,7 +35,10 @@ The scaffold is **worth keeping — but it is a UI prototype, not a partially-bu
 - **Fix:** column-level `GRANT UPDATE (reported)` only (add a `reported`/`hidden` boolean if missing), or move reporting behind an RPC. Same pattern for `draws` "Giver marks gift as bought" — restrict UPDATE to `gift_bought` so a giver can't alter `recipient_id`.
 - **Effort:** S
 
-### C4. `lib/supabase/` was never committed to git
+### C4. `lib/supabase/` was never committed to git — ✅ RESOLVED 8 July
+Committed in `012e3bd` (with `.claude/launch.json`, already renamed `checkmybasket-dev`). Original finding kept below for the record.
+
+
 - **Where:** `git status` → `lib/supabase/` and `.claude/` untracked
 - **Issue:** The only Supabase integration code exists solely on this machine. The GitHub repo (and therefore Vercel builds) has no DB layer at all. A `git clean` or another machine loses it.
 - **Fix:** `git add lib/supabase .claude/launch.json` (rename `giftcircle-dev` → `checkmybasket-dev` first) and commit.
@@ -67,7 +70,7 @@ The brief explicitly requires a 1200×630 OG image slot; `metadata.openGraph` ha
 No `app/robots.ts`, no `app/sitemap.ts` (the `/gifts/*` category pages are the SEO play and are invisible to crawlers), favicon appears to be the create-next-app default, unused template SVGs in `public/` (`next.svg`, `vercel.svg`, etc.), README is stock create-next-app. Also `<html lang="en">` → `en-GB`. **Effort: S**
 
 ### I6. Residual GiftCircle traces
-Zero in app code/copy (good). Remaining: `package-lock.json` `"name": "giftcircle"` (regenerate lockfile), `.claude/launch.json` `"giftcircle-dev"`, CSS token prefix `--gc-*` throughout `globals.css` and every page (cosmetic; rename to `--cmb-*` in one mechanical pass or accept), and the local folder name `~/giftcircle` (suggest `mv ~/giftcircle ~/checkmybasket-app`; requires re-linking nothing — `.vercel/` and `.git` move with it). **Effort: S**
+Zero in app code/copy (good). Remaining: `package-lock.json` `"name": "giftcircle"` (regenerate lockfile — this is on the rebrand brief's explicit find-and-replace list, so not optional), ~~`.claude/launch.json`~~ (done — now `checkmybasket-dev`), CSS token prefix `--gc-*` throughout `globals.css` and every page (cosmetic; rename to `--cmb-*` in one mechanical pass or accept), and the local folder name `~/giftcircle` (suggest `mv ~/giftcircle ~/checkmybasket-app`; requires re-linking nothing — `.vercel/` and `.git` move with it). **Effort: S**
 
 ### I7. Supabase advisor findings
 - ERROR: `anon_messages_safe` is SECURITY DEFINER (resolved by C2 fix)
@@ -109,6 +112,32 @@ Zero in app code/copy (good). Remaining: `package-lock.json` `"name": "giftcircl
 - **`execute_draw` is the right design:** SECURITY DEFINER RPC, organiser-only, ≥3 members, self-draw + exclusion checks, retries then fails loudly, single transaction. Draws are only readable by the giver (`giver_id = auth.uid()`) — assignments can't be scraped.
 - **Message rate-limiting** (10/day/group) enforced in the INSERT policy.
 - **Mobile-first UX** is genuinely good: bottom tab bar with safe-area insets, one-handed reach, `prefers-reduced-motion` respected, focus-visible styles, WhatsApp-first share screen.
+
+## Re-verification against strategy docs (8 July, evening)
+
+The canonical 8 strategy documents are now in `docs/`. The three items the original audit couldn't verify:
+
+### R1. Backlog priorities (`GiftCircle-Feature-Backlog.xlsx`) — scaffold matches P0 scope; wiring is the gap
+48 items across P0 (20 items, 52 days, deadline 1 Oct 2026) → P3. Checked P0 against the scaffold:
+- **UI surface exists for every P0 feature** (GC-005, GC-007–GC-017 screens, GC-018 gift pages) — but all on mock data, so the real P0 gap is exactly C1 + I1 (GC-004 anonymous auth is the only P0 item with *nothing* built).
+- **GC-006 (SEO/OG) is P0-High in the backlog** — upgrades the urgency of I4 (OG image) and I5 (sitemap): these are launch-blocking per the backlog, not polish.
+- **GC-019 is still "Guess the Baby" in the xlsx** — expected: the Game Replacement Brief explicitly supersedes it (§"What This Replaces in Other Documents"). Gift Predictions is the correct implementation target; the xlsx was never updated.
+- The fabricated social-proof stat (removed in `4bb1b02`) is confirmed correct: a **real** counter is GC-025, deliberately P1 — not faked in P0.
+- Suggested fix order below is consistent with backlog priorities; no re-ordering needed.
+
+### R2. Gift Predictions conformance (`GiftCircle-Game-Replacement-Brief.md`) — ✅ exact match
+- **12 categories identical** in brief, `lib/types.ts` `GiftCategory`, and the DB `gift_category` enum: mug, chocolate, bath_body, candle, cosy, joke, book, drinks, gift_card, experience, useful, surprise.
+- **Data model field-for-field**: `prediction_rounds`, `predictions`, `actual_gifts` in Supabase match the brief's PredictionRound/Prediction/ActualGift exactly (incl. `round_status` enum open|closed|revealed, nullable `closed_at`, `logged_by`). DB uses proper enums where the brief said "string" — a conforming improvement.
+- **No Guess the Baby remnants in the DB** (11 tables, no BabyPhoto/BabyPhotoGuess) — confirms the original spot-check.
+- One forward note: the brief's **48-hour auto-close** of prediction rounds needs a scheduled job or lazy check; nothing implements it yet (falls under C1 wiring).
+
+### R3. Rebrand conformance (`CheckMyBasket-Rebrand-Brief.md`) — ✅ conforms, three gaps
+Verified exact: hero headline/subheadline/CTA/trust line, bottom-CTA tagline "Secret Santa, sorted.", footer brand line, affiliate disclosure wording, WhatsApp share message format, homepage/create/gifts title tags, colour palette (all 5 hex), Fraunces + DM Sans, `metadataBase` = www.checkmybasket.co.uk, `package.json` name.
+Gaps found:
+1. **Footer is missing "About · Privacy · Terms · Contact" links and the standalone "No ads, ever." line** (brief §4 Footer). No Privacy/Terms pages exist at all — also a GDPR item, fold into I5.
+2. **Join page has no title tag** — brief specifies "Join Secret Santa — CheckMyBasket"; `app/join/[invite_code]/page.tsx` is a client component with no metadata export.
+3. **Meta description deviates slightly**: layout adds "from any shop" to the brief's exact sentence. Harmless (arguably better), flagging only for the record.
+Already tracked elsewhere: `package-lock.json` still `giftcircle` (I6 — now confirmed against the brief's mandatory find-and-replace table); OG image missing (I4 — brief §4 requires it with CheckMyBasket alt text).
 
 ## Suggested fix order (Phase 2, pending your approval)
 
