@@ -14,37 +14,8 @@ export function formatBudget(pence: number, currency = "GBP"): string {
   }).format(pence / 100);
 }
 
-export function generateInviteCode(): string {
-  const chars = "abcdefghjkmnpqrstuvwxyz23456789";
-  return Array.from({ length: 8 }, () => chars[Math.floor(Math.random() * chars.length)]).join("");
-}
-
-/** Derangement — nobody draws themselves, exclusions respected */
-export function drawNames(
-  memberIds: string[],
-  exclusions: Array<{ user_a_id: string; user_b_id: string; bidirectional: boolean }>
-): Map<string, string> | null {
-  const MAX_ATTEMPTS = 1000;
-  for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
-    const shuffled = [...memberIds].sort(() => Math.random() - 0.5);
-    const result = new Map<string, string>();
-    let valid = true;
-    for (let i = 0; i < memberIds.length; i++) {
-      const giver = memberIds[i];
-      const recipient = shuffled[i];
-      if (giver === recipient) { valid = false; break; }
-      const excluded = exclusions.some(
-        (e) =>
-          (e.user_a_id === giver && e.user_b_id === recipient) ||
-          (e.bidirectional && e.user_a_id === recipient && e.user_b_id === giver)
-      );
-      if (excluded) { valid = false; break; }
-      result.set(giver, recipient);
-    }
-    if (valid) return result;
-  }
-  return null;
-}
+// Invite codes are generated server-side (create_group RPC) and the draw runs
+// in Postgres (execute_draw) — the single sources of truth for both.
 
 export function getInitials(name: string): string {
   return name

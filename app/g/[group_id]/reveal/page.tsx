@@ -1,35 +1,78 @@
 "use client";
 
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { Gift, MessageCircle, ShoppingBag, CheckCircle2, Lock, ChevronLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { formatBudget } from "@/lib/utils";
 import { toast } from "sonner";
+import { createClient } from "@/lib/supabase/client";
 
-// Mock — in a real app, fetched server-side for the current user only
-const MOCK_MATCH = {
-  name: "James O'Brien",
-  likes: "Coffee, hiking, 90s films, board games, anything spicy",
-  dislikes: "Candles (has too many), anything lime-flavoured",
-  wishlist: [
-    { id: "w1", title: "Coffee subscription box", url: "https://example.com", price: 1800, shop: "Onyx Coffee" },
-    { id: "w2", title: "Moleskine notebook — A5, plain", price: 1299, shop: "Amazon" },
-    { id: "w3", title: "Nice hot sauce set", price: 1500 },
-  ],
-  budget: 1500,
-  totalMatched: 6,
-};
+interface Match {
+  drawId: string;
+  name: string;
+  likes: string | null;
+  dislikes: string | null;
+  sizes: string | null;
+  wishlist: { id:string; title:string; url:string|null; price:number|null; shop_name:string|null }[];
+  budget: number | null;
+  totalMatched: number;
+  giftBought: boolean;
+}
 
-type Stage = "pre" | "animating" | "revealed";
+type Stage = "loading" | "nodraw" | "pre" | "animating" | "revealed";
 
-export default function RevealPage() {
-  const [stage, setStage] = useState<Stage>("pre");
-  const [giftBought, setGiftBought] = useState(false);
+export default function RevealPage({ params }: { params: Promise<{ group_id: string }> }) {
+  const { group_id } = use(params);
+  const [stage, setStage] = useState<Stage>("loading");
+  const [match, setMatch] = useState<Match | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) { setStage("nodraw"); return; }
+
+      const { data: draw } = await supabase.from("draws")
+        .select("id,recipient_id,gift_bought").eq("group_id", group_id).maybeSingle();
+      if (!draw) { setStage("nodraw"); return; }
+
+      const [{ data: group }, { data: member }, { data: wishlist }, { count }] = await Promise.all([
+        supabase.from("groups").select("budget_amount").eq("id", group_id).maybeSingle(),
+        supabase.from("group_members").select("name,likes,dislikes,sizes").eq("group_id", group_id).eq("user_id", draw.recipient_id).maybeSingle(),
+        supabase.from("wishlist_items").select("id,title,url,price,shop_name").eq("group_id", group_id).eq("user_id", draw.recipient_id).order("created_at"),
+        supabase.from("draws").select("id", { count: "exact", head: true }).eq("group_id", group_id),
+      ]);
+
+      setMatch({
+        drawId: draw.id,
+        name: member?.name ?? "Your match",
+        likes: member?.likes ?? null,
+        dislikes: member?.dislikes ?? null,
+        sizes: member?.sizes ?? null,
+        wishlist: wishlist ?? [],
+        budget: group?.budget_amount ?? null,
+        totalMatched: count ?? 0,
+        giftBought: draw.gift_bought,
+      });
+      setStage("pre");
+    })();
+  }, [group_id]);
 
   function handleReveal() {
     setStage("animating");
-    setTimeout(() => setStage("revealed"), 2600);
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setTimeout(() => setStage("revealed"), reduced ? 300 : 2600);
+  }
+
+  async function toggleBought() {
+    if (!match) return;
+    const supabase = createClient();
+    const next = !match.giftBought;
+    const { error } = await supabase.from("draws").update({ gift_bought: next }).eq("id", match.drawId);
+    if (error) { toast.error(error.message); return; }
+    setMatch(m => m ? { ...m, giftBought: next } : m);
+    toast.success(next ? "Marked as bought — only you can see this" : "Unmarked as bought");
   }
 
   return (
@@ -37,7 +80,7 @@ export default function RevealPage() {
       {/* Header */}
       <header className="sticky top-0 z-30 border-b" style={{ borderColor: "var(--gc-border)", background: "rgba(255,248,240,0.92)", backdropFilter: "blur(12px)" }}>
         <div className="max-w-xl mx-auto px-4 h-14 flex items-center gap-3">
-          <Link href="/g/demo-group-id" aria-label="Back to group">
+          <Link href={`/g/${group_id}`} aria-label="Back to group">
             <Button variant="ghost" size="sm" className="h-9 w-9 p-0 rounded-lg">
               <ChevronLeft size={20} strokeWidth={1.5} />
             </Button>
@@ -51,17 +94,23 @@ export default function RevealPage() {
 
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-12">
         <div className="w-full max-w-sm">
+          {stage === "loading" && <div className="rounded-3xl h-64 skeleton" />}
+          {stage === "nodraw" && (
+            <div className="text-center">
+              <Lock size={36} strokeWidth={1.5} className="mx-auto mb-4" style={{ color: "var(--gc-text-muted)" }} />
+              <h1 className="text-xl font-bold mb-2" style={{ fontFamily: "var(--font-fraunces)" }}>No match to show yet</h1>
+              <p className="text-sm mb-6" style={{ color: "var(--gc-text-secondary)" }}>
+                Either names haven&apos;t been drawn, or you joined after the draw.
+              </p>
+              <Link href={`/g/${group_id}`}>
+                <Button variant="outline" className="rounded-xl h-11 px-6" style={{ borderColor: "var(--gc-border-strong)" }}>Back to group</Button>
+              </Link>
+            </div>
+          )}
           {stage === "pre" && <PreReveal onReveal={handleReveal} />}
           {stage === "animating" && <AnimatingReveal />}
-          {stage === "revealed" && (
-            <RevealedScreen
-              match={MOCK_MATCH}
-              giftBought={giftBought}
-              onToggleBought={() => {
-                setGiftBought((b) => !b);
-                toast.success(giftBought ? "Unmarked as bought" : "Marked as bought — only you can see this");
-              }}
-            />
+          {stage === "revealed" && match && (
+            <RevealedScreen groupId={group_id} match={match} onToggleBought={toggleBought} />
           )}
         </div>
       </main>
@@ -164,14 +213,15 @@ function AnimatingReveal() {
 }
 
 function RevealedScreen({
+  groupId,
   match,
-  giftBought,
   onToggleBought,
 }: {
-  match: typeof MOCK_MATCH;
-  giftBought: boolean;
+  groupId: string;
+  match: Match;
   onToggleBought: () => void;
 }) {
+  const firstName = match.name.split(" ")[0];
   return (
     <div className="animate-fade-in">
       {/* Name reveal */}
@@ -189,9 +239,11 @@ function RevealedScreen({
           {match.name}
         </h1>
         <div className="text-3xl my-3" role="img" aria-label="gift">🎁</div>
-        <p className="text-sm" style={{ color: "rgba(255,248,240,0.7)" }}>
-          Budget: {formatBudget(match.budget)}
-        </p>
+        {match.budget != null && (
+          <p className="text-sm" style={{ color: "rgba(255,248,240,0.7)" }}>
+            Budget: {formatBudget(match.budget)}
+          </p>
+        )}
       </div>
 
       {/* Trust signals */}
@@ -208,8 +260,8 @@ function RevealedScreen({
         ))}
       </div>
 
-      {/* Likes / dislikes */}
-      {(match.likes || match.dislikes) && (
+      {/* Likes / dislikes / sizes */}
+      {(match.likes || match.dislikes || match.sizes) && (
         <div
           className="rounded-2xl p-5 mb-4"
           style={{ background: "var(--gc-surface)", border: "1px solid var(--gc-border)", boxShadow: "var(--shadow-sm)" }}
@@ -221,9 +273,15 @@ function RevealedScreen({
             </div>
           )}
           {match.dislikes && (
-            <div>
+            <div className="mb-3 last:mb-0">
               <p className="text-xs font-semibold uppercase mb-1" style={{ color: "var(--gc-text-muted)" }}>Avoid</p>
               <p className="text-sm">{match.dislikes}</p>
+            </div>
+          )}
+          {match.sizes && (
+            <div>
+              <p className="text-xs font-semibold uppercase mb-1" style={{ color: "var(--gc-text-muted)" }}>Sizes</p>
+              <p className="text-sm">{match.sizes}</p>
             </div>
           )}
         </div>
@@ -232,7 +290,7 @@ function RevealedScreen({
       {/* Wishlist */}
       {match.wishlist.length > 0 && (
         <div className="mb-4">
-          <p className="text-sm font-semibold mb-2">{match.name.split(" ")[0]}&apos;s wishlist</p>
+          <p className="text-sm font-semibold mb-2">{firstName}&apos;s wishlist</p>
           <div className="space-y-2">
             {match.wishlist.map((item) => (
               <div
@@ -243,7 +301,7 @@ function RevealedScreen({
                 <Gift size={16} strokeWidth={1.5} style={{ color: "var(--gc-primary)", flexShrink: 0 }} />
                 <div className="flex-1 min-w-0">
                   <p className="font-medium text-sm truncate">{item.title}</p>
-                  {item.price && (
+                  {item.price != null && (
                     <p className="text-xs" style={{ color: "var(--gc-text-muted)" }}>~{formatBudget(item.price)}</p>
                   )}
                 </div>
@@ -262,37 +320,37 @@ function RevealedScreen({
 
       {/* Action buttons */}
       <div className="space-y-3">
-        <Link href="/g/demo-group-id?tab=messages">
+        <Link href={`/g/${groupId}`}>
           <Button
             variant="outline"
             className="w-full h-12 rounded-xl font-medium"
             style={{ borderColor: "var(--gc-border-strong)" }}
           >
             <MessageCircle size={18} strokeWidth={1.5} className="mr-2" />
-            Ask {match.name.split(" ")[0]} a question
+            Ask {firstName} a question
           </Button>
         </Link>
-        <Link href={`/gifts?budget=${match.budget}`}>
+        <Link href={match.budget != null ? `/gifts?budget=${match.budget}` : "/gifts"}>
           <Button
             variant="outline"
             className="w-full h-12 rounded-xl font-medium"
             style={{ borderColor: "var(--gc-border-strong)" }}
           >
             <ShoppingBag size={18} strokeWidth={1.5} className="mr-2" />
-            Find gifts under {formatBudget(match.budget)}
+            {match.budget != null ? `Find gifts under ${formatBudget(match.budget)}` : "Browse gift ideas"}
           </Button>
         </Link>
         <Button
           onClick={onToggleBought}
           className="w-full h-12 rounded-xl font-medium"
           style={{
-            background: giftBought ? "var(--gc-success)" : "var(--gc-surface)",
-            color: giftBought ? "#fff" : "var(--gc-text-primary)",
-            border: `1px solid ${giftBought ? "var(--gc-success)" : "var(--gc-border-strong)"}`,
+            background: match.giftBought ? "var(--gc-success)" : "var(--gc-surface)",
+            color: match.giftBought ? "#fff" : "var(--gc-text-primary)",
+            border: `1px solid ${match.giftBought ? "var(--gc-success)" : "var(--gc-border-strong)"}`,
           }}
         >
-          <CheckCircle2 size={18} strokeWidth={giftBought ? 2 : 1.5} className="mr-2" />
-          {giftBought ? "Gift marked as bought" : "Mark gift as bought"}
+          <CheckCircle2 size={18} strokeWidth={match.giftBought ? 2 : 1.5} className="mr-2" />
+          {match.giftBought ? "Gift marked as bought" : "Mark gift as bought"}
         </Button>
       </div>
     </div>

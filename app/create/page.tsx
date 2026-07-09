@@ -5,9 +5,11 @@ import { Gift, Copy, MessageCircle, QrCode, ChevronLeft, Check, Heart, Briefcase
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { cn, generateInviteCode } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import type { GroupMode } from "@/lib/types";
 import { toast } from "sonner";
+import { createClient } from "@/lib/supabase/client";
+import { ensureSession } from "@/lib/supabase/auth";
 
 const BUDGET_PRESETS = [500, 1000, 1500, 2000, 2500] as const;
 const GROUP_MODES: { value: GroupMode; label: string; icon: React.ElementType; desc: string }[] = [
@@ -21,7 +23,9 @@ interface FormData { groupName: string; mode: GroupMode; budget: number; customB
 
 export default function CreatePage() {
   const [step, setStep]       = useState<"form"|"share">("form");
-  const [inviteCode]          = useState(generateInviteCode);
+  const [inviteCode, setInviteCode] = useState("");
+  const [groupId, setGroupId] = useState("");
+  const [busy, setBusy]       = useState(false);
   const [copied, setCopied]   = useState(false);
   const [form, setForm]       = useState<FormData>({ groupName:"", mode:"friends", budget:-1, customBudget:"", exchangeDate:"", location:"", yourName:"" });
   const [errors, setErrors]   = useState<Partial<Record<keyof FormData,string>>>({});
@@ -38,7 +42,33 @@ export default function CreatePage() {
     setErrors(e); return Object.keys(e).length === 0;
   }
 
-  function handleCreate() { if (!validate()) return; setStep("share"); }
+  async function handleCreate() {
+    if (!validate() || busy) return;
+    setBusy(true);
+    try {
+      await ensureSession();
+      const budgetPence = form.budget === -1 ? null
+        : form.budget === 0 ? Math.round(parseFloat(form.customBudget) * 100)
+        : form.budget;
+      const supabase = createClient();
+      const { data, error } = await supabase.rpc("create_group", {
+        p_name: form.groupName,
+        p_mode: form.mode,
+        p_budget_amount: budgetPence,
+        p_exchange_date: form.exchangeDate || null,
+        p_location: form.location || null,
+        p_organiser_name: form.yourName,
+      });
+      if (error) throw new Error(error.message);
+      setInviteCode(data.invite_code);
+      setGroupId(data.group_id);
+      setStep("share");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Something went wrong — please try again");
+    } finally {
+      setBusy(false);
+    }
+  }
   async function copyLink() {
     await navigator.clipboard.writeText(inviteLink);
     setCopied(true); toast.success("Link copied"); setTimeout(() => setCopied(false), 2000);
@@ -81,6 +111,12 @@ export default function CreatePage() {
             <QrCode size={56} strokeWidth={0.75} style={{ color:"var(--gc-border)" }} />
           </div>
         </div>
+
+        <Link href={`/g/${groupId}`} className="block mt-6 animate-fade-up animate-delay-400">
+          <Button size="lg" variant="outline" className="w-full h-12 rounded-xl font-semibold" style={{ borderColor:"var(--gc-border-strong)" }}>
+            Go to your group
+          </Button>
+        </Link>
       </div>
     </div>
   );
@@ -166,8 +202,8 @@ export default function CreatePage() {
 
       <div className="fixed bottom-0 left-0 right-0 z-20 px-4 pt-4 border-t safe-bottom" style={{ background:"var(--gc-bg)", borderColor:"var(--gc-border)" }}>
         <div className="max-w-xl mx-auto">
-          <Button onClick={handleCreate} size="lg" className="w-full h-14 text-base rounded-xl font-semibold" style={{ background:"var(--gc-primary)", color:"var(--gc-text-inverse)" }}>
-            <Gift size={20} strokeWidth={1.5} className="mr-2"/> Create your draw
+          <Button onClick={handleCreate} disabled={busy} size="lg" className="w-full h-14 text-base rounded-xl font-semibold" style={{ background:"var(--gc-primary)", color:"var(--gc-text-inverse)" }}>
+            <Gift size={20} strokeWidth={1.5} className="mr-2"/> {busy ? "Creating…" : "Create your draw"}
           </Button>
           <p className="text-center mt-2 text-xs pb-2" style={{ color:"var(--gc-text-muted)" }}>Free forever. No account needed.</p>
         </div>

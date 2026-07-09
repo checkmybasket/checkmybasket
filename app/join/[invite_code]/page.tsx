@@ -1,31 +1,117 @@
 "use client";
-import { use, useState } from "react";
+import { use, useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Gift, Users, ChevronLeft, ArrowRight, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { createClient } from "@/lib/supabase/client";
+import { ensureSession } from "@/lib/supabase/auth";
+import type { GroupMode, DrawStatus } from "@/lib/types";
 
-const MOCK_GROUP = { name:"Marketing Team Secret Santa 2026", mode:"workplace" as const, budget:1500, exchange_date:"2026-12-19", organiser_name:"Priya", member_count:6 };
+interface GroupPreview {
+  group_id: string;
+  name: string;
+  mode: GroupMode;
+  budget_amount: number | null;
+  exchange_date: string | null;
+  draw_status: DrawStatus;
+  member_count: number;
+  organiser_name: string | null;
+}
 
 export default function JoinPage({ params }: { params: Promise<{ invite_code: string }> }) {
-  const { invite_code } = use(params); // eslint-disable-line @typescript-eslint/no-unused-vars
+  const { invite_code } = use(params);
+  const router = useRouter();
+  const [group, setGroup] = useState<GroupPreview | null>(null);
+  const [loadState, setLoadState] = useState<"loading"|"ready"|"notfound">("loading");
   const [step, setStep] = useState<"join"|"onboard">("join");
+  const [busy, setBusy] = useState(false);
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState("");
   const [likes, setLikes] = useState("");
   const [dislikes, setDislikes] = useState("");
   const [wishItems, setWishItems] = useState<string[]>([""]);
 
-  function handleJoin() {
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.rpc("get_group_preview", { p_invite_code: invite_code }).then(({ data, error }) => {
+      if (error || !data) { setLoadState("notfound"); return; }
+      setGroup(data as GroupPreview);
+      setLoadState("ready");
+    });
+  }, [invite_code]);
+
+  async function handleJoin() {
     if (!name.trim()) { setNameError("Please enter your name"); return; }
-    setNameError(""); toast.success(`Welcome, ${name}!`); setStep("onboard");
+    if (busy || !group) return;
+    setNameError(""); setBusy(true);
+    try {
+      await ensureSession();
+      const supabase = createClient();
+      const { error } = await supabase.rpc("join_group", { p_invite_code: invite_code, p_name: name });
+      if (error) throw new Error(error.message);
+      toast.success(`Welcome, ${name.trim()}!`);
+      setStep("onboard");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Could not join — please try again");
+    } finally {
+      setBusy(false);
+    }
   }
 
-  const exchangeDate = MOCK_GROUP.exchange_date
-    ? new Date(MOCK_GROUP.exchange_date).toLocaleDateString("en-GB", { day:"numeric", month:"long" }) : null;
+  async function saveOnboarding() {
+    if (busy || !group) return;
+    setBusy(true);
+    try {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Session expired — please rejoin");
+      if (likes.trim() || dislikes.trim()) {
+        const { error } = await supabase.from("group_members")
+          .update({ likes: likes.trim() || null, dislikes: dislikes.trim() || null })
+          .eq("group_id", group.group_id).eq("user_id", user.id);
+        if (error) throw new Error(error.message);
+      }
+      const items = wishItems.map(t => t.trim()).filter(Boolean);
+      if (items.length) {
+        const { error } = await supabase.from("wishlist_items")
+          .insert(items.map(title => ({ title, user_id: user.id, group_id: group.group_id })));
+        if (error) throw new Error(error.message);
+      }
+      toast.success("Saved");
+      router.push(`/g/${group.group_id}`);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Could not save — please try again");
+      setBusy(false);
+    }
+  }
+
+  const exchangeDate = group?.exchange_date
+    ? new Date(group.exchange_date).toLocaleDateString("en-GB", { day:"numeric", month:"long" }) : null;
+
+  if (loadState === "loading") return (
+    <div className="min-h-dvh flex items-center justify-center" style={{ background:"var(--gc-bg)" }}>
+      <div className="w-full max-w-md px-4 space-y-4">
+        <div className="rounded-2xl h-40 skeleton" />
+        <div className="rounded-2xl h-56 skeleton" />
+      </div>
+    </div>
+  );
+
+  if (loadState === "notfound" || !group) return (
+    <div className="min-h-dvh flex flex-col items-center justify-center px-4 text-center" style={{ background:"var(--gc-bg)" }}>
+      <Gift size={40} strokeWidth={1.5} className="mb-4" style={{ color:"var(--gc-text-muted)" }} />
+      <h1 className="text-xl font-bold mb-2" style={{ fontFamily:"var(--font-fraunces)" }}>Invite link not recognised</h1>
+      <p className="text-sm mb-6 max-w-sm" style={{ color:"var(--gc-text-secondary)" }}>
+        Double-check the link you were sent, or ask your organiser to share it again.
+      </p>
+      <Link href="/"><Button variant="outline" className="rounded-xl h-11 px-6" style={{ borderColor:"var(--gc-border-strong)" }}>Back to home</Button></Link>
+    </div>
+  );
 
   if (step === "onboard") return (
     <div className="min-h-dvh" style={{ background:"var(--gc-bg)" }}>
@@ -73,11 +159,11 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
       </div>
       <div className="fixed bottom-0 left-0 right-0 z-20 px-4 pt-4 border-t safe-bottom" style={{ background:"var(--gc-bg)", borderColor:"var(--gc-border)" }}>
         <div className="max-w-md mx-auto flex gap-3">
-          <Button variant="outline" size="lg" onClick={() => { window.location.href="/g/demo-group-id"; }} className="h-12 flex-1 rounded-xl" style={{ borderColor:"var(--gc-border-strong)" }}>
+          <Button variant="outline" size="lg" disabled={busy} onClick={() => router.push(`/g/${group.group_id}`)} className="h-12 flex-1 rounded-xl" style={{ borderColor:"var(--gc-border-strong)" }}>
             Skip for now
           </Button>
-          <Button size="lg" onClick={() => { toast.success("Saved"); window.location.href="/g/demo-group-id"; }} className="h-12 flex-1 rounded-xl font-semibold" style={{ background:"var(--gc-primary)", color:"var(--gc-text-inverse)" }}>
-            Save and go <ArrowRight size={16} strokeWidth={1.5} className="ml-1"/>
+          <Button size="lg" disabled={busy} onClick={saveOnboarding} className="h-12 flex-1 rounded-xl font-semibold" style={{ background:"var(--gc-primary)", color:"var(--gc-text-inverse)" }}>
+            {busy ? "Saving…" : <>Save and go <ArrowRight size={16} strokeWidth={1.5} className="ml-1"/></>}
           </Button>
         </div>
       </div>
@@ -99,31 +185,40 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
           <div className="rounded-2xl p-6 animate-scale-in" style={{ background:"var(--gc-surface)", border:"1px solid var(--gc-border)", boxShadow:"var(--shadow-lg)" }}>
             <div className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium mb-4"
               style={{ background:"rgba(27,67,50,0.08)", color:"var(--gc-primary)" }}>
-              <Gift size={12} strokeWidth={1.5}/> {MOCK_GROUP.mode.charAt(0).toUpperCase()+MOCK_GROUP.mode.slice(1)} Secret Santa
+              <Gift size={12} strokeWidth={1.5}/> {group.mode.charAt(0).toUpperCase()+group.mode.slice(1)} Secret Santa
             </div>
-            <h1 className="text-xl font-bold mb-1" style={{ fontFamily:"var(--font-fraunces)" }}>{MOCK_GROUP.name}</h1>
-            <p className="text-sm mb-4" style={{ color:"var(--gc-text-secondary)" }}>Created by {MOCK_GROUP.organiser_name}</p>
+            <h1 className="text-xl font-bold mb-1" style={{ fontFamily:"var(--font-fraunces)" }}>{group.name}</h1>
+            {group.organiser_name && <p className="text-sm mb-4" style={{ color:"var(--gc-text-secondary)" }}>Created by {group.organiser_name}</p>}
             <div className="flex gap-4 flex-wrap">
               <div className="flex items-center gap-1.5 text-sm" style={{ color:"var(--gc-text-secondary)" }}>
-                <Users size={14} strokeWidth={1.5}/> {MOCK_GROUP.member_count} people joined
+                <Users size={14} strokeWidth={1.5}/> {group.member_count} {group.member_count === 1 ? "person" : "people"} joined
               </div>
-              <div className="text-sm font-medium" style={{ color:"var(--gc-primary)" }}>Budget: £{MOCK_GROUP.budget/100}</div>
+              {group.budget_amount != null && <div className="text-sm font-medium" style={{ color:"var(--gc-primary)" }}>Budget: £{group.budget_amount/100}</div>}
               {exchangeDate && <div className="text-sm" style={{ color:"var(--gc-text-secondary)" }}>{exchangeDate}</div>}
             </div>
           </div>
           <div className="rounded-2xl p-6 animate-fade-up" style={{ background:"var(--gc-surface)", border:"1px solid var(--gc-border)", boxShadow:"var(--shadow-md)" }}>
             <h2 className="text-lg font-semibold mb-4">Join this Secret Santa</h2>
-            <div className="mb-5">
-              <Label htmlFor="name" className="text-base font-medium mb-1.5 block">Your name</Label>
-              <Input id="name" autoFocus placeholder="What should we call you?" value={name}
-                onChange={e => setName(e.target.value)} onKeyDown={e => e.key==="Enter" && handleJoin()}
-                className="h-12 text-base rounded-xl" style={{ borderColor:nameError?"var(--gc-error)":"var(--gc-border-strong)" }}/>
-              {nameError && <p className="mt-1 text-sm" style={{ color:"var(--gc-error)" }}>{nameError}</p>}
-            </div>
-            <Button onClick={handleJoin} size="lg" className="w-full h-12 text-base rounded-xl font-semibold" style={{ background:"var(--gc-primary)", color:"var(--gc-text-inverse)" }}>
-              Join this Secret Santa <ArrowRight size={18} strokeWidth={1.5} className="ml-2"/>
-            </Button>
-            <p className="text-center text-xs mt-3" style={{ color:"var(--gc-text-muted)" }}>No account needed. Joining is free.</p>
+            {group.draw_status !== "pending" ? (
+              <p className="text-sm" style={{ color:"var(--gc-text-secondary)" }}>
+                Names have already been drawn for this group. If you&apos;re already a member,{" "}
+                <Link href={`/g/${group.group_id}`} className="underline" style={{ color:"var(--gc-primary)" }}>open your group</Link>.
+              </p>
+            ) : (
+              <>
+                <div className="mb-5">
+                  <Label htmlFor="name" className="text-base font-medium mb-1.5 block">Your name</Label>
+                  <Input id="name" autoFocus placeholder="What should we call you?" value={name}
+                    onChange={e => setName(e.target.value)} onKeyDown={e => e.key==="Enter" && handleJoin()}
+                    className="h-12 text-base rounded-xl" style={{ borderColor:nameError?"var(--gc-error)":"var(--gc-border-strong)" }}/>
+                  {nameError && <p className="mt-1 text-sm" style={{ color:"var(--gc-error)" }}>{nameError}</p>}
+                </div>
+                <Button onClick={handleJoin} disabled={busy} size="lg" className="w-full h-12 text-base rounded-xl font-semibold" style={{ background:"var(--gc-primary)", color:"var(--gc-text-inverse)" }}>
+                  {busy ? "Joining…" : <>Join this Secret Santa <ArrowRight size={18} strokeWidth={1.5} className="ml-2"/></>}
+                </Button>
+                <p className="text-center text-xs mt-3" style={{ color:"var(--gc-text-muted)" }}>No account needed. Joining is free.</p>
+              </>
+            )}
           </div>
         </div>
       </main>
