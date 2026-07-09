@@ -41,7 +41,8 @@ export default function RevealPage({ params }: { params: Promise<{ group_id: str
         supabase.from("groups").select("budget_amount").eq("id", group_id).maybeSingle(),
         supabase.from("group_members").select("name,likes,dislikes,sizes").eq("group_id", group_id).eq("user_id", draw.recipient_id).maybeSingle(),
         supabase.from("wishlist_items").select("id,title,url,price,shop_name").eq("group_id", group_id).eq("user_id", draw.recipient_id).order("created_at"),
-        supabase.from("draws").select("id", { count: "exact", head: true }).eq("group_id", group_id),
+        // draws rows are giver-visible only, so count members for "All N matched"
+        supabase.from("group_members").select("id", { count: "exact", head: true }).eq("group_id", group_id),
       ]);
 
       setMatch({

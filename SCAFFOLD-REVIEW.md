@@ -139,6 +139,20 @@ Gaps found:
 3. **Meta description deviates slightly**: layout adds "from any shop" to the brief's exact sentence. Harmless (arguably better), flagging only for the record.
 Already tracked elsewhere: `package-lock.json` still `giftcircle` (I6 — now confirmed against the brief's mandatory find-and-replace table); OG image missing (I4 — brief §4 requires it with CheckMyBasket alt text).
 
+## Phase 2 status (9 July)
+
+Executed and **verified end-to-end in the browser plus API-level security probes** (test data cleaned up afterwards):
+- **C1 + I1 ✅** — anonymous auth (enabled in the Supabase dashboard) + full wiring: create → share → join (×3 users) → wishlists → exclusions → draw (execute_draw RPC) → reveal animation with real match → gift-bought toggle → organiser gifts-bought aggregate → anonymous message + blind reply → Gift Predictions round → pre-reveal privacy → results + awards. All exercised live on 9 July.
+- **I2 ✅** — full migration history mirrored in `supabase/migrations/` (initial schema recovered byte-identical, md5-verified).
+- **I7 ✅** — search_path pinned, anon EXECUTE revoked everywhere; 5 remaining advisor WARNs are intentional (authenticated needs execute_draw + policy helpers).
+- **I8 ✅** — bidirectional-only semantic chosen; client `drawNames()` deleted; `exclusions.bidirectional` column retained but unused.
+- **I9 ✅** — invite codes generated server-side in `create_group` with unique-collision retry.
+- **New RPCs** (all SECURITY DEFINER, pinned search_path, least-privilege grants): `create_group`, `get_group_preview` (only anon-callable function), `join_group`, `gifts_bought_count`, `reply_to_anon_message` (recipients reply without ever learning the sender id).
+- **Extra hardening beyond the audit:** wishlist claims now hidden from the item owner at RLS level (was UI-only in the design).
+- **Security probes re-verified:** `profiles?select=*` → 403, `anon_messages?select=sender_id` → 403, pre-reveal predictions visible to predictor only, claim invisible to item owner.
+
+Still open: I4 (OG image), I5 (robots/sitemap/favicon/Privacy+Terms pages), I6 (package-lock name, `--gc-*` prefix), I10 (QR placeholder), R3 gaps (footer links, join page title), N-items, and the game brief's 48-hour round auto-close (needs a scheduled job).
+
 ## Suggested fix order (Phase 2, pending your approval)
 
 1. **C4** commit `lib/supabase/` (30 s, protects work)
