@@ -25,7 +25,7 @@ export const viewport: Viewport = { width: "device-width", initialScale: 1, them
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${dmSans.variable} ${jetbrainsMono.variable} h-full`}>
+    <html lang="en-GB" className={`${fraunces.variable} ${dmSans.variable} ${jetbrainsMono.variable} h-full`}>
       <body className="min-h-dvh flex flex-col antialiased">
         {children}
         <Toaster richColors position="top-center" />
