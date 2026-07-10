@@ -179,11 +179,15 @@ export default function HomePage() {
               <span style={{ fontFamily: "var(--font-fraunces)", color: "var(--gc-primary)", fontWeight: 600 }}>CheckMyBasket</span>
             </div>
             <span className="hidden sm:inline">·</span>
-            <span>Free Secret Santa with wishlists, anonymous messaging, and group games.</span>
+            <span>Free Secret Santa with wishlists, anonymous messaging, and group games. No ads, ever.</span>
           </div>
-          <div className="flex gap-5">
+          <div className="flex gap-5 flex-wrap justify-center">
             <Link href="/gifts" className="hover:text-[var(--gc-primary)] transition-colors">Gift ideas</Link>
             <Link href="/create" className="hover:text-[var(--gc-primary)] transition-colors">Create draw</Link>
+            <Link href="/about" className="hover:text-[var(--gc-primary)] transition-colors">About</Link>
+            <Link href="/privacy" className="hover:text-[var(--gc-primary)] transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-[var(--gc-primary)] transition-colors">Terms</Link>
+            <Link href="/contact" className="hover:text-[var(--gc-primary)] transition-colors">Contact</Link>
           </div>
         </div>
         <div className="max-w-5xl mx-auto mt-5 pt-4 border-t flex flex-col sm:flex-row items-center justify-between gap-3 text-xs"
