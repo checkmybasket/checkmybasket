@@ -151,7 +151,9 @@ Executed and **verified end-to-end in the browser plus API-level security probes
 - **Extra hardening beyond the audit:** wishlist claims now hidden from the item owner at RLS level (was UI-only in the design).
 - **Security probes re-verified:** `profiles?select=*` → 403, `anon_messages?select=sender_id` → 403, pre-reveal predictions visible to predictor only, claim invisible to item owner.
 
-Still open: I4 (OG image), I5 (robots/sitemap/favicon/Privacy+Terms pages), I6 (package-lock name, `--gc-*` prefix), I10 (QR placeholder), R3 gaps (footer links, join page title), N-items, and the game brief's 48-hour round auto-close (needs a scheduled job).
+**Update 10 July:** I4 ✅ (generated OG image, live), I5 ✅ (robots.ts disallowing /g/ + /join/, sitemap with all 15 URLs, generated favicon, `lang=en-GB`, template SVGs deleted, About/Privacy/Terms/Contact pages shipped), I6 ✅ lockfile renamed (only `--gc-*` CSS prefix remains, accepted as cosmetic), R3 gaps ✅ (footer links + "No ads, ever." + join page title). All verified live on checkmybasket.vercel.app. Note: og:image URLs resolve via metadataBase to www.checkmybasket.co.uk, so link previews show the image only after the domain cutover.
+
+Still open: I10 (QR placeholder), N-items, the game brief's 48-hour round auto-close (needs a scheduled job), and the domain cutover itself (Hassan-triggered).
 
 ## Suggested fix order (Phase 2, pending your approval)
 
