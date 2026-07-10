@@ -40,7 +40,7 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
   }, [group_id, router]);
 
   if (!group || !me) return (
-    <div className="min-h-dvh flex items-center justify-center" style={{ background:"var(--gc-bg)" }}>
+    <div className="min-h-dvh flex items-center justify-center" style={{ background:"var(--cmb-bg)" }}>
       <div className="w-full max-w-xl px-4 space-y-4"><div className="rounded-2xl h-40 skeleton"/><div className="rounded-2xl h-40 skeleton"/></div>
     </div>
   );
@@ -94,11 +94,11 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
   }
 
   return (
-    <div className="min-h-dvh" style={{ background:"var(--gc-bg)" }}>
-      <header className="sticky top-0 z-30 border-b" style={{ borderColor:"var(--gc-border)", background:"rgba(255,248,240,0.92)", backdropFilter:"blur(12px)" }}>
+    <div className="min-h-dvh" style={{ background:"var(--cmb-bg)" }}>
+      <header className="sticky top-0 z-30 border-b" style={{ borderColor:"var(--cmb-border)", background:"rgba(255,248,240,0.92)", backdropFilter:"blur(12px)" }}>
         <div className="max-w-xl mx-auto px-4 h-14 flex items-center gap-3">
           <Link href={`/g/${group_id}`}><Button variant="ghost" size="sm" className="h-9 w-9 p-0 rounded-lg"><ChevronLeft size={20} strokeWidth={1.5}/></Button></Link>
-          <div className="flex items-center gap-2" style={{ color:"var(--gc-primary)" }}>
+          <div className="flex items-center gap-2" style={{ color:"var(--cmb-primary)" }}>
             <Gift size={18} strokeWidth={1.5}/><span className="font-semibold" style={{ fontFamily:"var(--font-fraunces)" }}>Group settings</span>
           </div>
         </div>
@@ -111,8 +111,8 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
                 <Label className="text-sm font-medium mb-1.5 block">Group name</Label>
                 {editName ? (
                   <div className="flex gap-2">
-                    <Input value={groupName} onChange={e=>setGroupName(e.target.value)} className="h-11 rounded-xl flex-1" style={{ borderColor:"var(--gc-border-strong)" }}/>
-                    <Button className="h-11 px-4 rounded-xl" disabled={busy} style={{ background:"var(--gc-primary)", color:"var(--gc-text-inverse)" }}
+                    <Input value={groupName} onChange={e=>setGroupName(e.target.value)} className="h-11 rounded-xl flex-1" style={{ borderColor:"var(--cmb-border-strong)" }}/>
+                    <Button className="h-11 px-4 rounded-xl" disabled={busy} style={{ background:"var(--cmb-primary)", color:"var(--cmb-text-inverse)" }}
                       onClick={saveName} aria-label="Save name">
                       <CheckCircle2 size={16} strokeWidth={2}/>
                     </Button>
@@ -125,13 +125,13 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
                 )}
               </div>
               {group.exchange_date && (
-                <div className="flex items-center gap-3 text-sm" style={{ color:"var(--gc-text-secondary)" }}>
+                <div className="flex items-center gap-3 text-sm" style={{ color:"var(--cmb-text-secondary)" }}>
                   <Calendar size={14} strokeWidth={1.5} style={{ flexShrink:0 }}/>
                   <span>{new Date(group.exchange_date).toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})}</span>
                 </div>
               )}
               {group.exchange_location && (
-                <div className="flex items-center gap-3 text-sm" style={{ color:"var(--gc-text-secondary)" }}>
+                <div className="flex items-center gap-3 text-sm" style={{ color:"var(--cmb-text-secondary)" }}>
                   <MapPin size={14} strokeWidth={1.5} style={{ flexShrink:0 }}/><span>{group.exchange_location}</span>
                 </div>
               )}
@@ -141,23 +141,23 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
 
         <Section title="Invite link">
           <div className="p-5 space-y-3">
-            <p className="text-sm break-all" style={{ color:"var(--gc-primary)", fontFamily:"var(--font-jetbrains-mono)", fontSize:"0.8rem" }}>{inviteLink}</p>
-            <div className="w-32 h-32 rounded-xl mx-auto overflow-hidden" style={{ background:"#fff", border:"1px solid var(--gc-border)" }}>
+            <p className="text-sm break-all" style={{ color:"var(--cmb-primary)", fontFamily:"var(--font-jetbrains-mono)", fontSize:"0.8rem" }}>{inviteLink}</p>
+            <div className="w-32 h-32 rounded-xl mx-auto overflow-hidden" style={{ background:"#fff", border:"1px solid var(--cmb-border)" }}>
               <QRCodeSvg value={inviteLink} size={126} />
             </div>
             <Button variant="outline" onClick={copyLink} className="w-full h-10 rounded-xl text-sm font-medium"
-              style={{ borderColor:copied?"var(--gc-success)":"var(--gc-border-strong)", color:copied?"var(--gc-success)":"var(--gc-text-primary)" }}>
+              style={{ borderColor:copied?"var(--cmb-success)":"var(--cmb-border-strong)", color:copied?"var(--cmb-success)":"var(--cmb-text-primary)" }}>
               {copied?<><Check size={15} strokeWidth={2} className="mr-2"/>Copied</>:<><Copy size={15} strokeWidth={1.5} className="mr-2"/>Copy invite link</>}
             </Button>
           </div>
         </Section>
 
         <Section title="Your data">
-          <div className="divide-y" style={{ borderColor:"var(--gc-border)" }}>
+          <div className="divide-y" style={{ borderColor:"var(--cmb-border)" }}>
             <div className="px-5 py-4 flex items-center gap-3">
-              <Gift size={16} strokeWidth={1.5} style={{ color:"var(--gc-text-muted)", flexShrink:0 }}/>
-              <div className="flex-1 min-w-0"><p className="text-sm font-medium">Your wishlist</p><p className="text-xs" style={{ color:"var(--gc-text-muted)" }}>Delete all your wishlist items</p></div>
-              <Button variant="outline" size="sm" className="h-8 px-3 text-xs rounded-lg" style={{ borderColor:"var(--gc-border-strong)" }}
+              <Gift size={16} strokeWidth={1.5} style={{ color:"var(--cmb-text-muted)", flexShrink:0 }}/>
+              <div className="flex-1 min-w-0"><p className="text-sm font-medium">Your wishlist</p><p className="text-xs" style={{ color:"var(--cmb-text-muted)" }}>Delete all your wishlist items</p></div>
+              <Button variant="outline" size="sm" className="h-8 px-3 text-xs rounded-lg" style={{ borderColor:"var(--cmb-border-strong)" }}
                 disabled={busy} onClick={clearWishlist}>Clear wishlist</Button>
             </div>
           </div>
@@ -167,18 +167,18 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
           <Section title="Leave group">
             <div className="p-5">
               {!showLeaveConfirm ? (
-                <Button variant="outline" className="w-full h-11 rounded-xl font-medium" style={{ borderColor:"var(--gc-accent)", color:"var(--gc-accent)" }} onClick={()=>setShowLeaveConfirm(true)}>
+                <Button variant="outline" className="w-full h-11 rounded-xl font-medium" style={{ borderColor:"var(--cmb-accent)", color:"var(--cmb-accent)" }} onClick={()=>setShowLeaveConfirm(true)}>
                   <LogOut size={16} strokeWidth={1.5} className="mr-2"/> Leave this group
                 </Button>
               ) : (
                 <div className="space-y-3">
                   <div className="rounded-xl p-4 flex gap-2" style={{ background:"rgba(193,18,31,0.06)", border:"1px solid rgba(193,18,31,0.2)" }}>
-                    <AlertTriangle size={16} strokeWidth={1.5} style={{ color:"var(--gc-error)", flexShrink:0 }}/>
-                    <p className="text-sm" style={{ color:"var(--gc-error)" }}>You&apos;ll be removed and your wishlist deleted. This can&apos;t be undone.</p>
+                    <AlertTriangle size={16} strokeWidth={1.5} style={{ color:"var(--cmb-error)", flexShrink:0 }}/>
+                    <p className="text-sm" style={{ color:"var(--cmb-error)" }}>You&apos;ll be removed and your wishlist deleted. This can&apos;t be undone.</p>
                   </div>
                   <div className="flex gap-3">
                     <Button variant="outline" className="flex-1 rounded-xl" disabled={busy} onClick={()=>setShowLeaveConfirm(false)}>Cancel</Button>
-                    <Button className="flex-1 rounded-xl font-semibold" disabled={busy} style={{ background:"var(--gc-accent)", color:"#fff" }} onClick={handleLeave}>
+                    <Button className="flex-1 rounded-xl font-semibold" disabled={busy} style={{ background:"var(--cmb-accent)", color:"#fff" }} onClick={handleLeave}>
                       {busy?"Leaving…":"Yes, leave"}
                     </Button>
                   </div>
@@ -193,26 +193,26 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
             <div className="p-5">
               {!showDeleteConfirm ? (
                 <>
-                  <p className="text-sm mb-4" style={{ color:"var(--gc-text-secondary)" }}>Permanently deletes the group, all wishlists, messages, and prediction data. Cannot be undone.</p>
-                  <Button variant="outline" className="w-full h-11 rounded-xl font-medium" style={{ borderColor:"var(--gc-accent)", color:"var(--gc-accent)" }} onClick={()=>setShowDeleteConfirm(true)}>
+                  <p className="text-sm mb-4" style={{ color:"var(--cmb-text-secondary)" }}>Permanently deletes the group, all wishlists, messages, and prediction data. Cannot be undone.</p>
+                  <Button variant="outline" className="w-full h-11 rounded-xl font-medium" style={{ borderColor:"var(--cmb-accent)", color:"var(--cmb-accent)" }} onClick={()=>setShowDeleteConfirm(true)}>
                     <Trash2 size={16} strokeWidth={1.5} className="mr-2"/> Delete this group
                   </Button>
                 </>
               ) : (
                 <div className="space-y-4">
                   <div className="rounded-xl p-4 flex gap-2" style={{ background:"rgba(193,18,31,0.06)", border:"1px solid rgba(193,18,31,0.2)" }}>
-                    <AlertTriangle size={16} strokeWidth={1.5} style={{ color:"var(--gc-error)", flexShrink:0 }}/>
-                    <p className="text-sm" style={{ color:"var(--gc-error)" }}>This permanently deletes all data for all members. Cannot be undone.</p>
+                    <AlertTriangle size={16} strokeWidth={1.5} style={{ color:"var(--cmb-error)", flexShrink:0 }}/>
+                    <p className="text-sm" style={{ color:"var(--cmb-error)" }}>This permanently deletes all data for all members. Cannot be undone.</p>
                   </div>
                   <div>
                     <Label htmlFor="delete-confirm" className="text-sm font-medium mb-2 block">Type <strong>{group.name}</strong> to confirm</Label>
                     <Input id="delete-confirm" placeholder={group.name} value={deleteInput} onChange={e=>setDeleteInput(e.target.value)}
-                      className="h-11 rounded-xl mb-3" style={{ borderColor:"var(--gc-border-strong)" }}/>
+                      className="h-11 rounded-xl mb-3" style={{ borderColor:"var(--cmb-border-strong)" }}/>
                   </div>
                   <div className="flex gap-3">
                     <Button variant="outline" className="flex-1 rounded-xl" disabled={busy} onClick={()=>{setShowDeleteConfirm(false);setDeleteInput("");}}>Cancel</Button>
                     <Button className="flex-1 rounded-xl font-semibold" disabled={busy||deleteInput!==group.name}
-                      style={{ background:"var(--gc-accent)", color:"#fff" }} onClick={handleDelete}>
+                      style={{ background:"var(--cmb-accent)", color:"#fff" }} onClick={handleDelete}>
                       {busy?"Deleting…":"Delete permanently"}
                     </Button>
                   </div>
@@ -222,7 +222,7 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
           </Section>
         )}
 
-        <p className="text-xs text-center pb-8" style={{ color:"var(--gc-text-muted)" }}>
+        <p className="text-xs text-center pb-8" style={{ color:"var(--cmb-text-muted)" }}>
           Your data is stored securely and never shared with advertisers.
         </p>
       </main>
@@ -232,9 +232,9 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
 
 function Section({ title, children }: { title:string; children:React.ReactNode }) {
   return (
-    <div className="rounded-2xl overflow-hidden" style={{ background:"var(--gc-surface)", border:"1px solid var(--gc-border)", boxShadow:"var(--shadow-sm)" }}>
-      <div className="px-5 py-3 border-b" style={{ borderColor:"var(--gc-border)", background:"var(--gc-bg)" }}>
-        <h2 className="text-sm font-semibold" style={{ color:"var(--gc-text-secondary)" }}>{title.toUpperCase()}</h2>
+    <div className="rounded-2xl overflow-hidden" style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)", boxShadow:"var(--shadow-sm)" }}>
+      <div className="px-5 py-3 border-b" style={{ borderColor:"var(--cmb-border)", background:"var(--cmb-bg)" }}>
+        <h2 className="text-sm font-semibold" style={{ color:"var(--cmb-text-secondary)" }}>{title.toUpperCase()}</h2>
       </div>
       {children}
     </div>

@@ -79,13 +79,13 @@ export default function CreatePage() {
   }
 
   if (step === "share") return (
-    <div className="min-h-dvh flex flex-col items-center justify-center px-4 py-12" style={{ background:"var(--gc-bg)" }}>
+    <div className="min-h-dvh flex flex-col items-center justify-center px-4 py-12" style={{ background:"var(--cmb-bg)" }}>
       <div className="w-full max-w-sm text-center">
-        <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 animate-scale-in" style={{ background:"var(--gc-primary)", boxShadow:"var(--shadow-lg)" }}>
-          <Check size={36} strokeWidth={2} style={{ color:"var(--gc-text-inverse)" }} />
+        <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 animate-scale-in" style={{ background:"var(--cmb-primary)", boxShadow:"var(--shadow-lg)" }}>
+          <Check size={36} strokeWidth={2} style={{ color:"var(--cmb-text-inverse)" }} />
         </div>
         <h1 className="text-2xl font-bold mb-1 animate-fade-up" style={{ fontFamily:"var(--font-fraunces)" }}>{form.groupName} is ready</h1>
-        <p className="text-sm mb-8 animate-fade-up animate-delay-100" style={{ color:"var(--gc-text-secondary)" }}>Share the link below to invite your group</p>
+        <p className="text-sm mb-8 animate-fade-up animate-delay-100" style={{ color:"var(--cmb-text-secondary)" }}>Share the link below to invite your group</p>
 
         {/* WhatsApp — primary */}
         <Button onClick={shareWhatsApp} size="lg" className="w-full h-14 rounded-xl font-semibold mb-3 animate-fade-up animate-delay-200"
@@ -95,26 +95,26 @@ export default function CreatePage() {
 
         {/* Copy link — secondary */}
         <div className="rounded-2xl p-5 mb-4 text-left animate-fade-up animate-delay-300"
-          style={{ background:"var(--gc-surface)", border:"1px solid var(--gc-border)", boxShadow:"var(--shadow-md)" }}>
-          <p className="text-xs font-medium mb-2" style={{ color:"var(--gc-text-muted)" }}>OR COPY THE LINK</p>
-          <p className="text-sm break-all mb-3" style={{ color:"var(--gc-primary)", fontFamily:"var(--font-jetbrains-mono)", fontSize:"0.8rem" }}>{inviteLink}</p>
+          style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)", boxShadow:"var(--shadow-md)" }}>
+          <p className="text-xs font-medium mb-2" style={{ color:"var(--cmb-text-muted)" }}>OR COPY THE LINK</p>
+          <p className="text-sm break-all mb-3" style={{ color:"var(--cmb-primary)", fontFamily:"var(--font-jetbrains-mono)", fontSize:"0.8rem" }}>{inviteLink}</p>
           <Button onClick={copyLink} variant="outline" className="w-full h-10 rounded-xl font-medium text-sm"
-            style={{ borderColor:copied?"var(--gc-success)":"var(--gc-border-strong)", color:copied?"var(--gc-success)":"var(--gc-text-primary)" }}>
+            style={{ borderColor:copied?"var(--cmb-success)":"var(--cmb-border-strong)", color:copied?"var(--cmb-success)":"var(--cmb-text-primary)" }}>
             {copied ? <><Check size={15} strokeWidth={2} className="mr-2"/>Copied</> : <><Copy size={15} strokeWidth={1.5} className="mr-2"/>Copy link</>}
           </Button>
         </div>
 
         {/* QR code */}
-        <div className="rounded-2xl p-5 text-center animate-fade-up animate-delay-400" style={{ background:"var(--gc-surface)", border:"1px solid var(--gc-border)" }}>
-          <QrCode size={18} strokeWidth={1.5} className="mx-auto mb-1" style={{ color:"var(--gc-text-muted)" }} />
-          <p className="text-xs mb-3" style={{ color:"var(--gc-text-muted)" }}>QR code for in-person sharing</p>
-          <div className="w-32 h-32 rounded-xl mx-auto overflow-hidden" style={{ background:"#fff", border:"1px solid var(--gc-border)" }}>
+        <div className="rounded-2xl p-5 text-center animate-fade-up animate-delay-400" style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)" }}>
+          <QrCode size={18} strokeWidth={1.5} className="mx-auto mb-1" style={{ color:"var(--cmb-text-muted)" }} />
+          <p className="text-xs mb-3" style={{ color:"var(--cmb-text-muted)" }}>QR code for in-person sharing</p>
+          <div className="w-32 h-32 rounded-xl mx-auto overflow-hidden" style={{ background:"#fff", border:"1px solid var(--cmb-border)" }}>
             <QRCodeSvg value={inviteLink} size={126} />
           </div>
         </div>
 
         <Link href={`/g/${groupId}`} className="block mt-6 animate-fade-up animate-delay-400">
-          <Button size="lg" variant="outline" className="w-full h-12 rounded-xl font-semibold" style={{ borderColor:"var(--gc-border-strong)" }}>
+          <Button size="lg" variant="outline" className="w-full h-12 rounded-xl font-semibold" style={{ borderColor:"var(--cmb-border-strong)" }}>
             Go to your group
           </Button>
         </Link>
@@ -123,11 +123,11 @@ export default function CreatePage() {
   );
 
   return (
-    <div className="min-h-dvh" style={{ background:"var(--gc-bg)" }}>
-      <header className="sticky top-0 z-30 border-b" style={{ borderColor:"var(--gc-border)", background:"rgba(255,248,240,0.92)", backdropFilter:"blur(12px)" }}>
+    <div className="min-h-dvh" style={{ background:"var(--cmb-bg)" }}>
+      <header className="sticky top-0 z-30 border-b" style={{ borderColor:"var(--cmb-border)", background:"rgba(255,248,240,0.92)", backdropFilter:"blur(12px)" }}>
         <div className="max-w-xl mx-auto px-4 h-14 flex items-center gap-3">
           <Link href="/"><Button variant="ghost" size="sm" className="h-9 w-9 p-0 rounded-lg"><ChevronLeft size={20} strokeWidth={1.5}/></Button></Link>
-          <div className="flex items-center gap-2" style={{ color:"var(--gc-primary)" }}>
+          <div className="flex items-center gap-2" style={{ color:"var(--cmb-primary)" }}>
             <Gift size={20} strokeWidth={1.5}/>
             <span className="font-semibold" style={{ fontFamily:"var(--font-fraunces)" }}>CheckMyBasket</span>
           </div>
@@ -137,14 +137,14 @@ export default function CreatePage() {
       <main className="max-w-xl mx-auto px-4 py-8 pb-28 space-y-8">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold mb-2" style={{ fontFamily:"var(--font-fraunces)" }}>Create your draw</h1>
-          <p style={{ color:"var(--gc-text-secondary)" }}>Fill in the details below, then share the invite link with your group.</p>
+          <p style={{ color:"var(--cmb-text-secondary)" }}>Fill in the details below, then share the invite link with your group.</p>
         </div>
 
         {/* Group name */}
         <Field label="Group name" error={errors.groupName} required>
           <Input id="group-name" placeholder="e.g. Office Secret Santa 2026" value={form.groupName}
             onChange={e => setForm(f => ({ ...f, groupName:e.target.value }))}
-            className="h-12 text-base rounded-xl" style={{ borderColor:errors.groupName?"var(--gc-error)":"var(--gc-border-strong)" }}/>
+            className="h-12 text-base rounded-xl" style={{ borderColor:errors.groupName?"var(--cmb-error)":"var(--cmb-border-strong)" }}/>
         </Field>
 
         {/* Mode */}
@@ -153,11 +153,11 @@ export default function CreatePage() {
           <div className="grid grid-cols-2 gap-3">
             {GROUP_MODES.map(({ value, label, icon:Icon, desc }) => (
               <button key={value} type="button" onClick={() => setForm(f => ({ ...f, mode:value }))}
-                className={cn("rounded-xl p-4 text-left border-2 transition-all duration-150", form.mode===value?"border-[var(--gc-primary)]":"border-[var(--gc-border)]")}
-                style={{ background:form.mode===value?"rgba(27,67,50,0.06)":"var(--gc-surface)" }}>
-                <Icon size={20} strokeWidth={1.5} className="mb-2" style={{ color:form.mode===value?"var(--gc-primary)":"var(--gc-text-muted)" }}/>
+                className={cn("rounded-xl p-4 text-left border-2 transition-all duration-150", form.mode===value?"border-[var(--cmb-primary)]":"border-[var(--cmb-border)]")}
+                style={{ background:form.mode===value?"rgba(27,67,50,0.06)":"var(--cmb-surface)" }}>
+                <Icon size={20} strokeWidth={1.5} className="mb-2" style={{ color:form.mode===value?"var(--cmb-primary)":"var(--cmb-text-muted)" }}/>
                 <p className="font-semibold text-sm">{label}</p>
-                <p className="text-xs mt-0.5" style={{ color:"var(--gc-text-muted)" }}>{desc}</p>
+                <p className="text-xs mt-0.5" style={{ color:"var(--cmb-text-muted)" }}>{desc}</p>
               </button>
             ))}
           </div>
@@ -166,47 +166,47 @@ export default function CreatePage() {
         {/* Budget — optional */}
         <div>
           <Label className="text-base font-medium mb-1 block">Budget per person</Label>
-          <p className="text-sm mb-3" style={{ color:"var(--gc-text-muted)" }}>Optional — this is per person, everyone buys one gift</p>
+          <p className="text-sm mb-3" style={{ color:"var(--cmb-text-muted)" }}>Optional — this is per person, everyone buys one gift</p>
           <div className="flex gap-2 flex-wrap">
             {([[-1,"No budget"],...BUDGET_PRESETS.map(p=>[p,`£${p/100}`]),[0,"Custom"]] as [number,string][]).map(([val,label]) => (
               <button key={val} type="button" onClick={() => setForm(f => ({ ...f, budget:val, customBudget:"" }))}
                 className={cn("rounded-full px-4 py-2 text-sm font-medium border-2 transition-all duration-150",
-                  form.budget===val?"border-[var(--gc-primary)] bg-[var(--gc-primary)] text-[var(--gc-text-inverse)]":"border-[var(--gc-border)] bg-[var(--gc-surface)]")}>
+                  form.budget===val?"border-[var(--cmb-primary)] bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]":"border-[var(--cmb-border)] bg-[var(--cmb-surface)]")}>
                 {label}
               </button>
             ))}
           </div>
           {form.budget === 0 && (
             <div className="mt-3 relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm" style={{ color:"var(--gc-text-secondary)" }}>£</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm" style={{ color:"var(--cmb-text-secondary)" }}>£</span>
               <Input type="number" inputMode="decimal" placeholder="Enter amount" value={form.customBudget}
                 onChange={e => setForm(f => ({ ...f, customBudget:e.target.value }))}
-                className="h-12 pl-7 text-base rounded-xl" style={{ borderColor:errors.customBudget?"var(--gc-error)":"var(--gc-border-strong)" }}/>
-              {errors.customBudget && <p className="mt-1 text-sm" style={{ color:"var(--gc-error)" }}>{errors.customBudget}</p>}
+                className="h-12 pl-7 text-base rounded-xl" style={{ borderColor:errors.customBudget?"var(--cmb-error)":"var(--cmb-border-strong)" }}/>
+              {errors.customBudget && <p className="mt-1 text-sm" style={{ color:"var(--cmb-error)" }}>{errors.customBudget}</p>}
             </div>
           )}
         </div>
 
         <Field label="Gift exchange day" hint="Optional">
           <Input type="date" value={form.exchangeDate} onChange={e => setForm(f => ({ ...f, exchangeDate:e.target.value }))}
-            className="h-12 text-base rounded-xl" style={{ borderColor:"var(--gc-border-strong)" }}/>
+            className="h-12 text-base rounded-xl" style={{ borderColor:"var(--cmb-border-strong)" }}/>
         </Field>
         <Field label="Exchange location" hint="Optional">
           <Input placeholder="e.g. The Rose & Crown, 7pm" value={form.location} onChange={e => setForm(f => ({ ...f, location:e.target.value }))}
-            className="h-12 text-base rounded-xl" style={{ borderColor:"var(--gc-border-strong)" }}/>
+            className="h-12 text-base rounded-xl" style={{ borderColor:"var(--cmb-border-strong)" }}/>
         </Field>
         <Field label="Your name" error={errors.yourName} required>
           <Input placeholder="What should we call you?" value={form.yourName} onChange={e => setForm(f => ({ ...f, yourName:e.target.value }))}
-            className="h-12 text-base rounded-xl" style={{ borderColor:errors.yourName?"var(--gc-error)":"var(--gc-border-strong)" }}/>
+            className="h-12 text-base rounded-xl" style={{ borderColor:errors.yourName?"var(--cmb-error)":"var(--cmb-border-strong)" }}/>
         </Field>
       </main>
 
-      <div className="fixed bottom-0 left-0 right-0 z-20 px-4 pt-4 border-t safe-bottom" style={{ background:"var(--gc-bg)", borderColor:"var(--gc-border)" }}>
+      <div className="fixed bottom-0 left-0 right-0 z-20 px-4 pt-4 border-t safe-bottom" style={{ background:"var(--cmb-bg)", borderColor:"var(--cmb-border)" }}>
         <div className="max-w-xl mx-auto">
-          <Button onClick={handleCreate} disabled={busy} size="lg" className="w-full h-14 text-base rounded-xl font-semibold" style={{ background:"var(--gc-primary)", color:"var(--gc-text-inverse)" }}>
+          <Button onClick={handleCreate} disabled={busy} size="lg" className="w-full h-14 text-base rounded-xl font-semibold" style={{ background:"var(--cmb-primary)", color:"var(--cmb-text-inverse)" }}>
             <Gift size={20} strokeWidth={1.5} className="mr-2"/> {busy ? "Creating…" : "Create your draw"}
           </Button>
-          <p className="text-center mt-2 text-xs pb-2" style={{ color:"var(--gc-text-muted)" }}>Free forever. No account needed.</p>
+          <p className="text-center mt-2 text-xs pb-2" style={{ color:"var(--cmb-text-muted)" }}>Free forever. No account needed.</p>
         </div>
       </div>
     </div>
@@ -217,11 +217,11 @@ function Field({ label, children, hint, error, required }: { label:string; child
   return (
     <div>
       <Label className="text-base font-medium mb-1.5 flex items-center gap-1">
-        {label}{required && <span style={{ color:"var(--gc-accent)" }}>*</span>}
+        {label}{required && <span style={{ color:"var(--cmb-accent)" }}>*</span>}
       </Label>
-      {hint && <p className="text-sm mb-2" style={{ color:"var(--gc-text-muted)" }}>{hint}</p>}
+      {hint && <p className="text-sm mb-2" style={{ color:"var(--cmb-text-muted)" }}>{hint}</p>}
       {children}
-      {error && <p className="mt-1 text-sm" style={{ color:"var(--gc-error)" }}>{error}</p>}
+      {error && <p className="mt-1 text-sm" style={{ color:"var(--cmb-error)" }}>{error}</p>}
     </div>
   );
 }

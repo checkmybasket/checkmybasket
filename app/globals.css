@@ -5,53 +5,53 @@
 
 /* ─── CheckMyBasket Design Tokens ──────────────────────────────────────────── */
 :root {
-  --gc-primary:        #1B4332;
-  --gc-primary-light:  #2D6A4F;
-  --gc-primary-dark:   #143026;
-  --gc-accent:         #C1121F;
-  --gc-accent-light:   #D4343F;
-  --gc-warm:           #D4A574;
-  --gc-bg:             #FFF8F0;
-  --gc-surface:        #FFFFFF;
-  --gc-surface-hover:  #FEF3E6;
-  --gc-text-primary:   #1A1A1A;
-  --gc-text-secondary: #5C5C5C;
-  --gc-text-muted:     #8A8A8A;
-  --gc-text-inverse:   #FFF8F0;
-  --gc-border:         #E8DDD0;
-  --gc-border-strong:  #C4B8A8;
-  --gc-success:        #2D6A4F;
-  --gc-error:          #C1121F;
-  --gc-warning:        #D4A574;
+  --cmb-primary:        #1B4332;
+  --cmb-primary-light:  #2D6A4F;
+  --cmb-primary-dark:   #143026;
+  --cmb-accent:         #C1121F;
+  --cmb-accent-light:   #D4343F;
+  --cmb-warm:           #D4A574;
+  --cmb-bg:             #FFF8F0;
+  --cmb-surface:        #FFFFFF;
+  --cmb-surface-hover:  #FEF3E6;
+  --cmb-text-primary:   #1A1A1A;
+  --cmb-text-secondary: #5C5C5C;
+  --cmb-text-muted:     #8A8A8A;
+  --cmb-text-inverse:   #FFF8F0;
+  --cmb-border:         #E8DDD0;
+  --cmb-border-strong:  #C4B8A8;
+  --cmb-success:        #2D6A4F;
+  --cmb-error:          #C1121F;
+  --cmb-warning:        #D4A574;
 
   /* shadcn compat */
-  --background:           var(--gc-bg);
-  --foreground:           var(--gc-text-primary);
-  --card:                 var(--gc-surface);
-  --card-foreground:      var(--gc-text-primary);
-  --popover:              var(--gc-surface);
-  --popover-foreground:   var(--gc-text-primary);
-  --primary:              var(--gc-primary);
-  --primary-foreground:   var(--gc-text-inverse);
-  --secondary:            var(--gc-surface-hover);
-  --secondary-foreground: var(--gc-text-primary);
-  --muted:                var(--gc-surface-hover);
-  --muted-foreground:     var(--gc-text-muted);
-  --accent:               var(--gc-surface-hover);
-  --accent-foreground:    var(--gc-text-primary);
-  --destructive:          var(--gc-accent);
-  --border:               var(--gc-border);
-  --input:                var(--gc-border-strong);
-  --ring:                 var(--gc-primary);
+  --background:           var(--cmb-bg);
+  --foreground:           var(--cmb-text-primary);
+  --card:                 var(--cmb-surface);
+  --card-foreground:      var(--cmb-text-primary);
+  --popover:              var(--cmb-surface);
+  --popover-foreground:   var(--cmb-text-primary);
+  --primary:              var(--cmb-primary);
+  --primary-foreground:   var(--cmb-text-inverse);
+  --secondary:            var(--cmb-surface-hover);
+  --secondary-foreground: var(--cmb-text-primary);
+  --muted:                var(--cmb-surface-hover);
+  --muted-foreground:     var(--cmb-text-muted);
+  --accent:               var(--cmb-surface-hover);
+  --accent-foreground:    var(--cmb-text-primary);
+  --destructive:          var(--cmb-accent);
+  --border:               var(--cmb-border);
+  --input:                var(--cmb-border-strong);
+  --ring:                 var(--cmb-primary);
   --radius:               0.75rem;
-  --sidebar: var(--gc-surface);
-  --sidebar-foreground: var(--gc-text-primary);
-  --sidebar-primary: var(--gc-primary);
-  --sidebar-primary-foreground: var(--gc-text-inverse);
-  --sidebar-accent: var(--gc-surface-hover);
-  --sidebar-accent-foreground: var(--gc-text-primary);
-  --sidebar-border: var(--gc-border);
-  --sidebar-ring: var(--gc-primary);
+  --sidebar: var(--cmb-surface);
+  --sidebar-foreground: var(--cmb-text-primary);
+  --sidebar-primary: var(--cmb-primary);
+  --sidebar-primary-foreground: var(--cmb-text-inverse);
+  --sidebar-accent: var(--cmb-surface-hover);
+  --sidebar-accent-foreground: var(--cmb-text-primary);
+  --sidebar-border: var(--cmb-border);
+  --sidebar-ring: var(--cmb-primary);
   --shadow-sm: 0 1px 3px rgba(26,26,26,0.06);
   --shadow-md: 0 4px 12px rgba(26,26,26,0.08);
   --shadow-lg: 0 8px 24px rgba(26,26,26,0.12);
@@ -105,7 +105,7 @@
     -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
   }
   h1,h2,h3,h4,h5,h6 { font-family: var(--font-fraunces),"Playfair Display",Georgia,serif; line-height: 1.2; }
-  :focus-visible { outline: 2px solid var(--gc-primary); outline-offset: 2px; border-radius: 4px; }
+  :focus-visible { outline: 2px solid var(--cmb-primary); outline-offset: 2px; border-radius: 4px; }
 }
 
 .noise-bg { position: relative; }
@@ -143,6 +143,6 @@
 .tab-bar     { padding-bottom: max(env(safe-area-inset-bottom,0px),0.75rem); }
 
 .skeleton {
-  background: linear-gradient(90deg,var(--gc-surface-hover) 25%,var(--gc-border) 50%,var(--gc-surface-hover) 75%);
+  background: linear-gradient(90deg,var(--cmb-surface-hover) 25%,var(--cmb-border) 50%,var(--cmb-surface-hover) 75%);
   background-size: 200% auto; animation: shimmer 1.4s linear infinite; border-radius: var(--radius-md);
 }

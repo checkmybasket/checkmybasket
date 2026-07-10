@@ -12,7 +12,7 @@ export default function ContactPage() {
       <Section heading="Email">
         <p>
           For anything — a question, a problem with your draw, feedback, reporting misuse, or a data request — email{" "}
-          <a href="mailto:checkmybasketuk@gmail.com" className="underline" style={{ color: "var(--gc-primary)" }}>checkmybasketuk@gmail.com</a>.
+          <a href="mailto:checkmybasketuk@gmail.com" className="underline" style={{ color: "var(--cmb-primary)" }}>checkmybasketuk@gmail.com</a>.
           We&apos;re a small team, but we read everything and reply as quickly as we can.
         </p>
       </Section>
