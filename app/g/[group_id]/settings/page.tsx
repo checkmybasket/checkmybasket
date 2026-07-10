@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { createClient } from "@/lib/supabase/client";
+import { QRCodeSvg } from "@/components/qr-code";
 
 interface GroupInfo { id:string; name:string; exchange_date:string|null; exchange_location:string|null; invite_code:string; organiser_id:string; }
 
@@ -141,6 +142,9 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
         <Section title="Invite link">
           <div className="p-5 space-y-3">
             <p className="text-sm break-all" style={{ color:"var(--gc-primary)", fontFamily:"var(--font-jetbrains-mono)", fontSize:"0.8rem" }}>{inviteLink}</p>
+            <div className="w-32 h-32 rounded-xl mx-auto overflow-hidden" style={{ background:"#fff", border:"1px solid var(--gc-border)" }}>
+              <QRCodeSvg value={inviteLink} size={126} />
+            </div>
             <Button variant="outline" onClick={copyLink} className="w-full h-10 rounded-xl text-sm font-medium"
               style={{ borderColor:copied?"var(--gc-success)":"var(--gc-border-strong)", color:copied?"var(--gc-success)":"var(--gc-text-primary)" }}>
               {copied?<><Check size={15} strokeWidth={2} className="mr-2"/>Copied</>:<><Copy size={15} strokeWidth={1.5} className="mr-2"/>Copy invite link</>}

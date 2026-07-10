@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import type { GroupMode } from "@/lib/types";
 import { toast } from "sonner";
 import { createClient } from "@/lib/supabase/client";
+import { QRCodeSvg } from "@/components/qr-code";
 import { ensureSession } from "@/lib/supabase/auth";
 
 const BUDGET_PRESETS = [500, 1000, 1500, 2000, 2500] as const;
@@ -103,12 +104,12 @@ export default function CreatePage() {
           </Button>
         </div>
 
-        {/* QR placeholder */}
+        {/* QR code */}
         <div className="rounded-2xl p-5 text-center animate-fade-up animate-delay-400" style={{ background:"var(--gc-surface)", border:"1px solid var(--gc-border)" }}>
           <QrCode size={18} strokeWidth={1.5} className="mx-auto mb-1" style={{ color:"var(--gc-text-muted)" }} />
           <p className="text-xs mb-3" style={{ color:"var(--gc-text-muted)" }}>QR code for in-person sharing</p>
-          <div className="w-32 h-32 rounded-xl mx-auto flex items-center justify-center skeleton">
-            <QrCode size={56} strokeWidth={0.75} style={{ color:"var(--gc-border)" }} />
+          <div className="w-32 h-32 rounded-xl mx-auto overflow-hidden" style={{ background:"#fff", border:"1px solid var(--gc-border)" }}>
+            <QRCodeSvg value={inviteLink} size={126} />
           </div>
         </div>
 

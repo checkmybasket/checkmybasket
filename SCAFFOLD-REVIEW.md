@@ -155,6 +155,8 @@ Executed and **verified end-to-end in the browser plus API-level security probes
 
 Still open: I10 (QR placeholder), N-items, the game brief's 48-hour round auto-close (needs a scheduled job), and the domain cutover itself (Hassan-triggered).
 
+**Update 10 July (afternoon):** I10 ✅ — real QR codes on the create share step and group settings, rendered by a dependency-free encoder in `lib/qr.ts` (byte mode, level M, versions 1–10, verified 5/5 against a jsQR decode round-trip including a version-10 symbol) via `components/qr-code.tsx` (SVG, forest green on white, 2-module quiet zone). 48-hour auto-close ✅ — migration `20260710140940_prediction_rounds_48h_auto_close` enables pg_cron and schedules `auto_close_prediction_rounds` hourly (at :07) calling a SECURITY DEFINER function that flips `prediction_rounds` open→revealed (with `closed_at`) after 48h, mirroring the organiser-reveal path; client EXECUTE revoked. Verified live: backdated round auto-revealed, test group + orphaned anon users deleted afterwards.
+
 ## Suggested fix order (Phase 2, pending your approval)
 
 1. **C4** commit `lib/supabase/` (30 s, protects work)
