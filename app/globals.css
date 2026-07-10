@@ -16,7 +16,7 @@
   --cmb-surface-hover:  #FEF3E6;
   --cmb-text-primary:   #1A1A1A;
   --cmb-text-secondary: #5C5C5C;
-  --cmb-text-muted:     #8A8A8A;
+  --cmb-text-muted:     #6E6E6E; /* WCAG AA (≥4.5:1) on both white surface and cream bg */
   --cmb-text-inverse:   #FFF8F0;
   --cmb-border:         #E8DDD0;
   --cmb-border-strong:  #C4B8A8;

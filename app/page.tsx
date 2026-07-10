@@ -51,6 +51,7 @@ export default function HomePage() {
         </div>
       </header>
 
+      <main>
       {/* Hero */}
       <section className="noise-bg relative overflow-hidden" style={{ background: "var(--cmb-primary)" }}>
         <div className="relative z-10 max-w-5xl mx-auto px-4 py-20 sm:py-28 text-center">
@@ -98,7 +99,7 @@ export default function HomePage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {steps.map((step) => (
               <div key={step.num} className="rounded-2xl p-6" style={{ background: "var(--cmb-surface)", boxShadow: "var(--shadow-md)", border: "1px solid var(--cmb-border)" }}>
-                <div className="text-4xl font-bold mb-3" style={{ color: "var(--cmb-border)", fontFamily: "var(--font-fraunces)" }}>{step.num}</div>
+                <div aria-hidden="true" className="text-4xl font-bold mb-3" style={{ color: "#A08A6B", fontFamily: "var(--font-fraunces)" }}>{step.num}</div>
                 <h3 className="font-semibold text-base mb-2">{step.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: "var(--cmb-text-secondary)" }}>{step.body}</p>
               </div>
@@ -169,6 +170,7 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
+      </main>
 
       {/* Footer */}
       <footer className="py-10 px-4 border-t" style={{ borderColor: "var(--cmb-border)", background: "var(--cmb-surface)" }}>

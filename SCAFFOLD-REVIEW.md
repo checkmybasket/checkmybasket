@@ -157,6 +157,8 @@ Still open: I10 (QR placeholder), N-items, the game brief's 48-hour round auto-c
 
 **Update 10 July (afternoon):** I10 ✅ — real QR codes on the create share step and group settings, rendered by a dependency-free encoder in `lib/qr.ts` (byte mode, level M, versions 1–10, verified 5/5 against a jsQR decode round-trip including a version-10 symbol) via `components/qr-code.tsx` (SVG, forest green on white, 2-module quiet zone). 48-hour auto-close ✅ — migration `20260710140940_prediction_rounds_48h_auto_close` enables pg_cron and schedules `auto_close_prediction_rounds` hourly (at :07) calling a SECURITY DEFINER function that flips `prediction_rounds` open→revealed (with `closed_at`) after 48h, mirroring the organiser-reveal path; client EXECUTE revoked. Verified live: backdated round auto-revealed, test group + orphaned anon users deleted afterwards.
 
+**Update 10 July (evening):** `--gc-*` → `--cmb-*` token rename ✅ (14 files, 18 tokens, 0 stragglers, verified against served output). Lighthouse pass on the landing page ✅ — mobile 92/100/100/100, desktop 99+/100/100/100 (production build, headless Chrome). Fixes: `<main>` landmark added, step numerals recoloured `#E8DDD0` → `#A08A6B` (3.3:1, large-text AA) and marked `aria-hidden`, `--cmb-text-muted` darkened `#8A8A8A` → `#6E6E6E` (≥4.5:1 on white and cream). Remaining mobile perf gap is Next.js runtime JS on a throttled connection — not worth chasing. Still open: email notifications (needs Hassan's Resend decision), domain cutover (Hassan-triggered).
+
 ## Suggested fix order (Phase 2, pending your approval)
 
 1. **C4** commit `lib/supabase/` (30 s, protects work)
