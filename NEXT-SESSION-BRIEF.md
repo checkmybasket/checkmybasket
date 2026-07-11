@@ -1,15 +1,34 @@
 # CheckMyBasket — Next Session Brief
 
 **For:** a fresh Claude Code session, working in `~/giftcircle`
-**Written:** 11 July 2026 (updated after the code-quality pass landed)
-**Repo:** `checkmybasket/checkmybasket`, branch `main`, pushes auto-deploy Vercel prod. **Last commit: `32ab2a7`. Tree is clean and building.**
+**Written:** 11 July 2026 (updated after the 11 July evening session: security fixes, domain cutover, email scaffold, N2 pilot+batch)
+**Repo:** `checkmybasket/checkmybasket`, branch `main`, pushes auto-deploy Vercel prod. **Last commit: `d5f363e`. Tree is clean and building.**
 **Supabase:** `nejkvrzabdetsnhpeqtl` (eu-west-2). History in `SCAFFOLD-REVIEW.md`; product specs in `docs/`.
 
 ## Status of the four-part request
-1. **Domain cutover** — NOT done (Hassan-triggered). Instructions below to hand him.
-2. **Email notifications** — NOT started; blocked on Hassan (Resend account/key + PII decision). Plan below.
-3. **Security features** (2 low-severity fixes) — NOT started. Specs below.
-4. **Code quality** — ✅ **DONE** (N1, N4, N3), except **N2** which is a large judgement-call refactor (see below). Committed in `32ab2a7`.
+1. **Domain cutover** — ✅ **DONE 11 July.** `www.checkmybasket.co.uk` live, apex redirects, link previews work. (Details in section 1.)
+2. **Email notifications** — ✅ **SCAFFOLD BUILT 11 July** (RPCs + `send-draw-emails` edge fn + capture UI). **Only remaining:** Hassan adds `RESEND_API_KEY` + verifies a Resend sending domain. (Section 2.)
+3. **Security features** (2 low-severity fixes) — ✅ **DONE 11 July** (all 3, migrations `20260711214435/214443/214459`). (Section 3.)
+4. **Code quality** — N1/N4/N3 ✅ done (`32ab2a7`); **N2 IN PROGRESS** — 11 of 16 files converted (landing, reveal, both gifts pages, gift-card, info-page, 4 static pages). **4 files remain: `join`, `create`, `settings`, `group`.** (See "N2 continuation" below.)
+
+## ⭐ START HERE — outstanding work for tomorrow
+
+**A. Finish N2 (inline styles → Tailwind utilities).** 4 pages left, in order:
+- `app/join/[invite_code]/page.tsx` (~39 sites)
+- `app/create/page.tsx` (~38)
+- `app/g/[group_id]/settings/page.tsx` (~34)
+- `app/g/[group_id]/page.tsx` (~148 — the big one; do it last, in sections)
+
+**The locked pattern** (established + verified over 11 files, `git show d5f363e` / `83d42b6` for examples):
+- Static colour → arbitrary utility referencing the same token: `style={{ color:"var(--cmb-primary)" }}` → `className="… text-[var(--cmb-primary)]"`; `background` → `bg-[var(--cmb-X)]`; `borderColor`/`border:"1px solid var(--cmb-X)"` → `border-[var(--cmb-X)]` (add a bare `border` if there was no border utility yet).
+- `fontFamily:"var(--font-fraunces)"` → `font-display`. `boxShadow:"var(--shadow-N)"` → `shadow-[var(--shadow-N)]`. `color:"#fff"` → `text-white`. `flexShrink:0` → `shrink-0`. `marginTop:2` → `mt-0.5`.
+- **LEAVE INLINE** (do NOT convert): `rgba(...)` literals (e.g. cream-on-primary `rgba(255,248,240,0.x)`), gradients, `backdropFilter`, `clipPath`/`animation` keyframe strings, and **dynamic/conditional** values (`background: cond ? A : B`). Split mixed attributes: move the static props to `className`, keep the dynamic/rgba props inline.
+- These use identical CSS vars, so there is **zero visual change** — that's the safety guarantee. Available semantic utilities exist too (`bg-primary`, `bg-card`, `border-border`, `text-foreground`) via `@theme inline` in `globals.css`, but the arbitrary `[var(--cmb-*)]` form was chosen for uniformity and to avoid semantic-name mismatches (e.g. `--cmb-accent` maps to `--destructive`).
+- **Verify each page:** `npx next build` (must stay green), then serve + screenshot. **Preview is flaky via preview_start; use `npx next start -p 3101` (run_in_background) then the browser pane** at `http://localhost:3101/<path>`. The group page needs a live drawn group to see fully — reuse the anon-session + service-SQL setup pattern from the email E2E test (see git history), or convert + build-verify and eyeball the diff. Commit per page or per small batch.
+
+**B. Email — activate it (needs Hassan, then a 5-min verify).** Once Hassan has (1) added `RESEND_API_KEY` as a Supabase secret and (2) verified a Resend sending domain + set the `EMAIL_FROM` secret (e.g. `CheckMyBasket <noreply@send.checkmybasket.co.uk>`): draw a test group where a member saved an email and confirm delivery. Also **add a privacy-policy line** for the optional email to `app/privacy/page.tsx`. Full detail in section 2.
+
+**C. (Optional) Secondary email** — 24h stalled-organiser nudge (design in section 2), not yet built.
 
 ## The full request (four parts, in order the user gave them)
 
@@ -83,7 +102,7 @@ Both still OUTSTANDING. Apply as a Supabase migration via the MCP `apply_migrati
 QR codes (I10, `lib/qr.ts` + `components/qr-code.tsx`); 48h prediction-round auto-close (pg_cron, migration `20260710140940`); `--gc-*`→`--cmb-*` rename; Lighthouse (mobile 92, all others 100); security review — fixed CRITICAL member→organiser escalation + 2 medium issues (migrations `20260711100522`, `20260711101340`, `20260711103024`) and added security headers; prediction rounds organiser-only to create; code-quality pass N1/N4/N3 (`components/gift-card.tsx`, `timeAgo`, contrast + new `--cmb-gold-strong` token). **Last commit on `main`: `32ab2a7`.**
 
 ## What's left, at a glance
-- **N2** inline-styles → Tailwind refactor (scope it, don't mass-edit).
+- **N2** inline-styles → Tailwind refactor — **11/16 files done**; remaining: `join`, `create`, `settings`, `group` (see "N2 continuation / START HERE" at top).
 - ~~**Security features** — 2 low-severity RLS/rate-limit fixes (section 3).~~ ✅ DONE 11 July (all 3: migrations `20260711214435`, `20260711214443`, `20260711214459`; commit `596feab`, deployed prod).
 - **Email notifications** — scaffold ✅ BUILT (RPCs + `send-draw-emails` edge fn + capture UI, section 2); **only** remaining: Hassan adds `RESEND_API_KEY` + verifies a Resend sending domain, then E2E send can be tested.
 - ~~**Domain cutover** — Hassan-triggered (section 1); OG previews stay broken until then.~~ ✅ DONE 11 July — `www.checkmybasket.co.uk` live, apex redirects, link previews working.
