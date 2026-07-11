@@ -836,13 +836,21 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
               </div>
             ))}
           </div>
-          <Button onClick={startRound} disabled={busy} size="lg" className="w-full h-12 rounded-xl font-semibold"
-            style={{ background:"var(--cmb-primary)", color:"var(--cmb-text-inverse)" }}>
-            {busy?"Starting…":<>Start the game <ArrowRight size={18} strokeWidth={1.5} className="ml-2"/></>}
-          </Button>
-          <p className="text-xs text-center" style={{ color:"var(--cmb-text-muted)" }}>
-            Everyone predicts for {subjects.length} people — takes about 2 minutes
-          </p>
+          {isOrganiser ? (
+            <>
+              <Button onClick={startRound} disabled={busy} size="lg" className="w-full h-12 rounded-xl font-semibold"
+                style={{ background:"var(--cmb-primary)", color:"var(--cmb-text-inverse)" }}>
+                {busy?"Starting…":<>Start the game <ArrowRight size={18} strokeWidth={1.5} className="ml-2"/></>}
+              </Button>
+              <p className="text-xs text-center" style={{ color:"var(--cmb-text-muted)" }}>
+                Everyone predicts for {subjects.length} people — takes about 2 minutes
+              </p>
+            </>
+          ) : (
+            <p className="text-sm text-center" style={{ color:"var(--cmb-text-muted)" }}>
+              Waiting for the organiser to start the game.
+            </p>
+          )}
         </div>
       </div>
     </div>
