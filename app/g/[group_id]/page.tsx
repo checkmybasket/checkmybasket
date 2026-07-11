@@ -211,7 +211,13 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
     const supabase = createClient();
     const { error } = await supabase.rpc("execute_draw", { p_group_id: group.id });
     if (error) { toast.error(error.message); }
-    else { toast.success("Names drawn! Everyone can now see their match."); }
+    else {
+      toast.success("Names drawn! Everyone can now see their match.");
+      // Best-effort: email members who saved an address. No-op until RESEND_API_KEY
+      // is configured; never block or fail the draw on this.
+      supabase.functions.invoke("send-draw-emails", { body: { group_id: group.id } })
+        .catch(() => {});
+    }
     setShowConfirm(false); setDrawBusy(false);
     await refresh();
   }

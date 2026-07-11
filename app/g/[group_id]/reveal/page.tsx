@@ -2,7 +2,7 @@
 
 import { use, useEffect, useState } from "react";
 import Link from "next/link";
-import { Gift, MessageCircle, ShoppingBag, CheckCircle2, Lock, ChevronLeft, ArrowRight } from "lucide-react";
+import { Gift, MessageCircle, ShoppingBag, CheckCircle2, Lock, ChevronLeft, ArrowRight, Mail, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { formatBudget } from "@/lib/utils";
 import { toast } from "sonner";
@@ -352,6 +352,78 @@ function RevealedScreen({
         >
           <CheckCircle2 size={18} strokeWidth={match.giftBought ? 2 : 1.5} className="mr-2" />
           {match.giftBought ? "Gift marked as bought" : "Mark gift as bought"}
+        </Button>
+      </div>
+
+      {/* Delayed ask: optional email so members can be notified / regain access */}
+      <EmailCapture />
+    </div>
+  );
+}
+
+function EmailCapture() {
+  const [email, setEmail]   = useState("");
+  const [status, setStatus] = useState<"loading" | "idle" | "saving" | "saved">("loading");
+
+  useEffect(() => {
+    (async () => {
+      const supabase = createClient();
+      const { data } = await supabase.rpc("get_my_email");
+      if (typeof data === "string" && data) { setEmail(data); setStatus("saved"); }
+      else { setStatus("idle"); }
+    })();
+  }, []);
+
+  async function save() {
+    const trimmed = email.trim();
+    if (!trimmed) return;
+    setStatus("saving");
+    const supabase = createClient();
+    const { error } = await supabase.rpc("set_my_email", { p_email: trimmed });
+    if (error) { toast.error(error.message || "Couldn't save your email"); setStatus("idle"); return; }
+    setStatus("saved");
+    toast.success("Email saved — we'll only use it for this group");
+  }
+
+  if (status === "loading") return null;
+
+  return (
+    <div
+      className="rounded-2xl p-5 mt-6"
+      style={{ background: "var(--cmb-surface)", border: "1px solid var(--cmb-border)", boxShadow: "var(--shadow-sm)" }}
+    >
+      <div className="flex items-center gap-2 mb-1">
+        <Mail size={16} strokeWidth={1.5} style={{ color: "var(--cmb-primary)" }} />
+        <p className="font-semibold text-sm">Save access to your group</p>
+      </div>
+      <p className="text-xs mb-3" style={{ color: "var(--cmb-text-secondary)" }}>
+        Add your email and we&apos;ll send you a link back to your match. Optional — never shared with the group, no spam.
+      </p>
+      <div className="flex gap-2">
+        <input
+          type="email"
+          inputMode="email"
+          autoComplete="email"
+          value={email}
+          onChange={(e) => { setEmail(e.target.value); if (status === "saved") setStatus("idle"); }}
+          onKeyDown={(e) => { if (e.key === "Enter") save(); }}
+          placeholder="you@example.com"
+          aria-label="Your email address"
+          className="flex-1 h-11 rounded-xl px-3 text-sm outline-none"
+          style={{ background: "var(--cmb-bg)", border: "1px solid var(--cmb-border-strong)", color: "var(--cmb-text-primary)" }}
+        />
+        <Button
+          onClick={save}
+          disabled={status === "saving" || !email.trim()}
+          className="h-11 px-4 rounded-xl font-medium"
+          style={{
+            background: status === "saved" ? "var(--cmb-success)" : "var(--cmb-primary)",
+            color: "var(--cmb-text-inverse)",
+          }}
+        >
+          {status === "saved"
+            ? <><Check size={16} strokeWidth={2} className="mr-1" />Saved</>
+            : status === "saving" ? "Saving…" : "Save"}
         </Button>
       </div>
     </div>

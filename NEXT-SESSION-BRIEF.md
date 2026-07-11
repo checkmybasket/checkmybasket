@@ -28,7 +28,22 @@
 
 </details>
 
-### 2. Email notifications — user said "lets do email notifications" (approving the feature)
+### 2. Email notifications — scaffold ✅ BUILT 11 July (activates when `RESEND_API_KEY` is set)
+**Shipped this session (commit pending):**
+- **`profiles.email`** already existed (nullable) with **no client column grant** — kept that way. All email access is behind two SECURITY DEFINER, own-row-only RPCs: **`set_my_email(text)`** (normalises, validates format, empty clears it) and **`get_my_email()`** (migration `20260711221929`). The co-member SELECT policy therefore can NEVER leak one member's email to another.
+- **Edge function `send-draw-emails`** (`supabase/functions/send-draw-emails/`, deployed, `verify_jwt=true`): re-derives the caller from their JWT, requires they are the group's **organiser** AND the group is **drawn**, reads member emails with the service-role key, sends via Resend. **No-op (200 `{skipped}`) when `RESEND_API_KEY` is absent**, so it never blocks the draw. Verified E2E against prod with real anon sessions: organiser→200 skipped, eligible-recipient join→1, outsider→403, no-auth→401, missing group_id→400; test data cleaned.
+- **Client:** `handleDraw` (`app/g/[group_id]/page.tsx`) fire-and-forget invokes the function after `execute_draw` succeeds; **post-reveal `EmailCapture`** card in `app/g/[group_id]/reveal/page.tsx` ("Save access to your group") calls `set_my_email`/`get_my_email`. `tsconfig.json` excludes `supabase/functions` (Deno) from the Next build.
+
+**STILL BLOCKED ON HASSAN (only he can do these — I cannot enter secrets):**
+1. **Create the Resend account** and add **`RESEND_API_KEY`** as a Supabase secret (Edge Functions → Secrets, or `supabase secrets set`). Until then the function is a live no-op.
+2. **Verify a sending domain in Resend** (e.g. `send.checkmybasket.co.uk` — add its DNS records at the registrar). Then set the **`EMAIL_FROM`** secret to `CheckMyBasket <noreply@send.checkmybasket.co.uk>`. Until verified, the default `onboarding@resend.dev` only delivers to the Resend account's own address.
+3. (optional) **`APP_URL`** secret defaults to `https://www.checkmybasket.co.uk` — no change needed now that the domain is live.
+4. **Privacy-policy line** for the optional email (add to `/privacy`).
+
+Once (1)+(2) are done, end-to-end send can be verified by drawing a group where a member has saved an email.
+
+<details><summary>Original design + blocker notes (for reference)</summary>
+
 **Design (from `docs/GiftCircle-ClaudeCode-Brief-v2.md` + `docs/CheckMyBasket-Rebrand-Brief.md`):** email is **optional**, **collected AFTER the draw reveal** ("Add your email to save access to your group" — Layer 3 delayed ask), transactional via **Resend**. Primary email = **"Names have been drawn! 🎅 Open CheckMyBasket to see your match"** sent on draw execution. Sender name **CheckMyBasket**; footer: "You're receiving this because you joined a Secret Santa group on CheckMyBasket. Unsubscribe anytime." Secondary (later): 24h stalled-organiser nudge.
 
 **HARD BLOCKERS — cannot be finished without Hassan (surface these, don't guess):**
@@ -36,6 +51,10 @@
 - **Resend account + API key + verified sending domain** — I cannot create the account or enter the key (prohibited). The sending domain ties to the **domain cutover** (DNS verification); until then only Resend's `onboarding@resend.dev` test sender works. The key must live as a **Supabase secret** (`RESEND_API_KEY`), consumed by a **Supabase Edge Function** (keep it server-side, never in the `NEXT_PUBLIC_*` client bundle).
 
 **Recommended build shape (once Hassan confirms + provides the key):** a Supabase Edge Function `send-draw-emails` invoked from `execute_draw` (or a DB trigger/pg_net call) that reads members' optional emails and calls Resend. Do NOT expose email addresses through RLS to other members (same privacy discipline as the rest of the app). **Suggest asking Hassan up front:** (a) confirm optional-email-post-reveal model + adding the PII column, (b) has he created the Resend account / can he add `RESEND_API_KEY` as a Supabase secret, (c) which sender domain (blocks on cutover, or use resend.dev to prototype). Build the schema + capture UI + edge function scaffold that activates when the key is present; full end-to-end send-verification is blocked on the key.
+
+_(Build note: went with **client-invokes-edge-function-after-execute_draw** rather than pg_net — `pg_net` isn't installed and that path would mean storing the service key in the DB. The client already calls `execute_draw`; invoking the function right after keeps the service key server-side only.)_
+
+</details>
 
 ### 3. Security features — the two LOW-severity items from the 11 July review (user said "implement the security features")
 Both still OUTSTANDING. Apply as a Supabase migration via the MCP `apply_migration`, then **mirror the SQL into `supabase/migrations/` with the applied version timestamp** (query `supabase_migrations.schema_migrations` for it — established workflow). Verify each with RLS-simulated sessions (see pattern below), then clean up test data.
@@ -66,7 +85,7 @@ QR codes (I10, `lib/qr.ts` + `components/qr-code.tsx`); 48h prediction-round aut
 ## What's left, at a glance
 - **N2** inline-styles → Tailwind refactor (scope it, don't mass-edit).
 - ~~**Security features** — 2 low-severity RLS/rate-limit fixes (section 3).~~ ✅ DONE 11 July (all 3: migrations `20260711214435`, `20260711214443`, `20260711214459`; commit `596feab`, deployed prod).
-- **Email notifications** — blocked on Hassan's Resend account/key + PII decision (section 2).
+- **Email notifications** — scaffold ✅ BUILT (RPCs + `send-draw-emails` edge fn + capture UI, section 2); **only** remaining: Hassan adds `RESEND_API_KEY` + verifies a Resend sending domain, then E2E send can be tested.
 - ~~**Domain cutover** — Hassan-triggered (section 1); OG previews stay broken until then.~~ ✅ DONE 11 July — `www.checkmybasket.co.uk` live, apex redirects, link previews working.
 
 ## Backlog (revisit later, not urgent)
