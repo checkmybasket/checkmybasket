@@ -30,7 +30,7 @@ export default function AboutPage() {
 
       <Section heading="Get started">
         <p>
-          <Link href="/create" className="underline" style={{ color: "var(--cmb-primary)" }}>Create a free draw</Link> — it takes about 30 seconds, and it&apos;s free forever.
+          <Link href="/create" className="underline text-[var(--cmb-primary)]">Create a free draw</Link> — it takes about 30 seconds, and it&apos;s free forever.
         </p>
       </Section>
     </InfoPage>

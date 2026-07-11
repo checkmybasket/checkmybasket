@@ -69,40 +69,39 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
   const products = getProducts(category);
 
   return (
-    <div className="min-h-dvh" style={{ background:"var(--cmb-bg)" }}>
-      <header className="sticky top-0 z-30 border-b" style={{ borderColor:"var(--cmb-border)", background:"rgba(255,248,240,0.92)", backdropFilter:"blur(12px)" }}>
+    <div className="min-h-dvh bg-[var(--cmb-bg)]">
+      <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background:"rgba(255,248,240,0.92)", backdropFilter:"blur(12px)" }}>
         <div className="max-w-5xl mx-auto px-4 h-14 flex items-center gap-3">
           <Link href="/gifts"><Button variant="ghost" size="sm" className="h-9 w-9 p-0 rounded-lg"><ChevronLeft size={20} strokeWidth={1.5}/></Button></Link>
           <div className="flex items-center gap-2 flex-1 min-w-0">
-            <Gift size={18} strokeWidth={1.5} style={{ color:"var(--cmb-primary)", flexShrink:0 }}/>
-            <span className="font-semibold truncate" style={{ fontFamily:"var(--font-fraunces)", color:"var(--cmb-primary)" }}>{cat.label}</span>
+            <Gift size={18} strokeWidth={1.5} className="text-[var(--cmb-primary)] shrink-0"/>
+            <span className="font-semibold truncate font-display text-[var(--cmb-primary)]">{cat.label}</span>
           </div>
-          <Link href="/create"><Button size="sm" className="h-9 px-3 rounded-lg text-xs font-semibold flex-shrink-0" style={{ background:"var(--cmb-primary)", color:"var(--cmb-text-inverse)" }}>Create draw</Button></Link>
+          <Link href="/create"><Button size="sm" className="h-9 px-3 rounded-lg text-xs font-semibold flex-shrink-0 bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">Create draw</Button></Link>
         </div>
       </header>
       <main className="max-w-5xl mx-auto px-4 py-10">
         <div className="mb-8">
-          <h1 className="text-3xl sm:text-4xl font-bold mb-2" style={{ fontFamily:"var(--font-fraunces)" }}>{cat.label}</h1>
-          <p style={{ color:"var(--cmb-text-secondary)" }}>{cat.desc}</p>
+          <h1 className="text-3xl sm:text-4xl font-bold mb-2 font-display">{cat.label}</h1>
+          <p className="text-[var(--cmb-text-secondary)]">{cat.desc}</p>
         </div>
         <div className="flex gap-2 overflow-x-auto pb-2 mb-8">
           {Object.entries(CATEGORIES).filter(([s])=>s!==category).map(([slug,c]) => (
             <Link key={slug} href={`/gifts/${slug}`}
-              className="flex-shrink-0 rounded-full px-4 py-2 text-sm font-medium border transition-all duration-150"
-              style={{ background:"var(--cmb-surface)", borderColor:"var(--cmb-border)", color:"var(--cmb-text-secondary)" }}>{c.label}</Link>
+              className="flex-shrink-0 rounded-full px-4 py-2 text-sm font-medium border transition-all duration-150 bg-[var(--cmb-surface)] border-[var(--cmb-border)] text-[var(--cmb-text-secondary)]">{c.label}</Link>
           ))}
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
           {products.map(item => <GiftCard key={item.title} size="lg" {...item}/>)}
         </div>
-        <div className="rounded-2xl p-8 text-center mb-8" style={{ background:"var(--cmb-primary)", boxShadow:"var(--shadow-lg)" }}>
-          <h2 className="text-2xl font-bold mb-2" style={{ fontFamily:"var(--font-fraunces)", color:"var(--cmb-text-inverse)" }}>Found the perfect gift?</h2>
+        <div className="rounded-2xl p-8 text-center mb-8 bg-[var(--cmb-primary)] shadow-[var(--shadow-lg)]">
+          <h2 className="text-2xl font-bold mb-2 font-display text-[var(--cmb-text-inverse)]">Found the perfect gift?</h2>
           <p className="mb-6" style={{ color:"rgba(255,248,240,0.75)" }}>Set up Secret Santa for your group in 30 seconds — free, no account needed.</p>
-          <Link href="/create"><Button size="lg" className="h-12 px-8 rounded-xl font-semibold" style={{ background:"var(--cmb-accent)", color:"#fff" }}>Create a free draw</Button></Link>
+          <Link href="/create"><Button size="lg" className="h-12 px-8 rounded-xl font-semibold bg-[var(--cmb-accent)] text-white">Create a free draw</Button></Link>
         </div>
-        <div className="rounded-xl p-4 flex gap-2" style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)" }}>
-          <ShieldOff size={16} strokeWidth={1.5} style={{ color:"var(--cmb-text-muted)", flexShrink:0, marginTop:2 }}/>
-          <p className="text-xs" style={{ color:"var(--cmb-text-muted)" }}>Some gift links may earn us a small commission at no extra cost to you. This is how we keep CheckMyBasket free and ad-free.</p>
+        <div className="rounded-xl p-4 flex gap-2 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]">
+          <ShieldOff size={16} strokeWidth={1.5} className="text-[var(--cmb-text-muted)] shrink-0 mt-0.5"/>
+          <p className="text-xs text-[var(--cmb-text-muted)]">Some gift links may earn us a small commission at no extra cost to you. This is how we keep CheckMyBasket free and ad-free.</p>
         </div>
       </main>
     </div>

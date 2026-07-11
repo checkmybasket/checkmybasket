@@ -77,18 +77,18 @@ export default function RevealPage({ params }: { params: Promise<{ group_id: str
   }
 
   return (
-    <div className="min-h-dvh flex flex-col" style={{ background: "var(--cmb-bg)" }}>
+    <div className="min-h-dvh flex flex-col bg-[var(--cmb-bg)]">
       {/* Header */}
-      <header className="sticky top-0 z-30 border-b" style={{ borderColor: "var(--cmb-border)", background: "rgba(255,248,240,0.92)", backdropFilter: "blur(12px)" }}>
+      <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background: "rgba(255,248,240,0.92)", backdropFilter: "blur(12px)" }}>
         <div className="max-w-xl mx-auto px-4 h-14 flex items-center gap-3">
           <Link href={`/g/${group_id}`} aria-label="Back to group">
             <Button variant="ghost" size="sm" className="h-9 w-9 p-0 rounded-lg">
               <ChevronLeft size={20} strokeWidth={1.5} />
             </Button>
           </Link>
-          <div className="flex items-center gap-2" style={{ color: "var(--cmb-primary)" }}>
+          <div className="flex items-center gap-2 text-[var(--cmb-primary)]">
             <Gift size={20} strokeWidth={1.5} />
-            <span className="font-semibold" style={{ fontFamily: "var(--font-fraunces)" }}>Your match</span>
+            <span className="font-semibold font-display">Your match</span>
           </div>
         </div>
       </header>
@@ -98,13 +98,13 @@ export default function RevealPage({ params }: { params: Promise<{ group_id: str
           {stage === "loading" && <div className="rounded-3xl h-64 skeleton" />}
           {stage === "nodraw" && (
             <div className="text-center">
-              <Lock size={36} strokeWidth={1.5} className="mx-auto mb-4" style={{ color: "var(--cmb-text-muted)" }} />
-              <h1 className="text-xl font-bold mb-2" style={{ fontFamily: "var(--font-fraunces)" }}>No match to show yet</h1>
-              <p className="text-sm mb-6" style={{ color: "var(--cmb-text-secondary)" }}>
+              <Lock size={36} strokeWidth={1.5} className="mx-auto mb-4 text-[var(--cmb-text-muted)]" />
+              <h1 className="text-xl font-bold mb-2 font-display">No match to show yet</h1>
+              <p className="text-sm mb-6 text-[var(--cmb-text-secondary)]">
                 Either names haven&apos;t been drawn, or you joined after the draw.
               </p>
               <Link href={`/g/${group_id}`}>
-                <Button variant="outline" className="rounded-xl h-11 px-6" style={{ borderColor: "var(--cmb-border-strong)" }}>Back to group</Button>
+                <Button variant="outline" className="rounded-xl h-11 px-6 border-[var(--cmb-border-strong)]">Back to group</Button>
               </Link>
             </div>
           )}
@@ -122,28 +122,24 @@ export default function RevealPage({ params }: { params: Promise<{ group_id: str
 function PreReveal({ onReveal }: { onReveal: () => void }) {
   return (
     <div className="text-center animate-fade-in">
-      <div
-        className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse-warm"
-        style={{ background: "var(--cmb-primary)", boxShadow: "var(--shadow-xl)" }}
-      >
-        <Gift size={40} strokeWidth={1.5} style={{ color: "var(--cmb-warm)" }} />
+      <div className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse-warm bg-[var(--cmb-primary)] shadow-[var(--shadow-xl)]">
+        <Gift size={40} strokeWidth={1.5} className="text-[var(--cmb-warm)]" />
       </div>
-      <h1 className="text-3xl font-bold mb-3" style={{ fontFamily: "var(--font-fraunces)" }}>
+      <h1 className="text-3xl font-bold mb-3 font-display">
         Ready to find out who you&apos;re buying for?
       </h1>
-      <p className="mb-10" style={{ color: "var(--cmb-text-secondary)" }}>
+      <p className="mb-10 text-[var(--cmb-text-secondary)]">
         Your match has been made. Tap below to reveal.
       </p>
       <Button
         size="lg"
         onClick={onReveal}
-        className="h-14 px-10 text-base rounded-xl font-semibold"
-        style={{ background: "var(--cmb-primary)", color: "var(--cmb-text-inverse)" }}
+        className="h-14 px-10 text-base rounded-xl font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]"
       >
         Reveal my match
         <ArrowRight size={18} strokeWidth={1.5} className="ml-2" />
       </Button>
-      <div className="mt-6 flex items-center gap-2 justify-center text-sm" style={{ color: "var(--cmb-text-muted)" }}>
+      <div className="mt-6 flex items-center gap-2 justify-center text-sm text-[var(--cmb-text-muted)]">
         <Lock size={14} strokeWidth={1.5} />
         <span>Only you can see this</span>
       </div>
@@ -226,17 +222,11 @@ function RevealedScreen({
   return (
     <div className="animate-fade-in">
       {/* Name reveal */}
-      <div
-        className="rounded-3xl p-8 text-center mb-6 animate-card-rise"
-        style={{ background: "var(--cmb-primary)", boxShadow: "var(--shadow-xl)" }}
-      >
+      <div className="rounded-3xl p-8 text-center mb-6 animate-card-rise bg-[var(--cmb-primary)] shadow-[var(--shadow-xl)]">
         <p className="text-sm mb-2" style={{ color: "rgba(255,248,240,0.6)" }}>
           You&apos;re buying for...
         </p>
-        <h1
-          className="text-4xl font-bold mb-1"
-          style={{ fontFamily: "var(--font-fraunces)", color: "var(--cmb-text-inverse)" }}
-        >
+        <h1 className="text-4xl font-bold mb-1 font-display text-[var(--cmb-text-inverse)]">
           {match.name}
         </h1>
         <div className="text-3xl my-3" role="img" aria-label="gift">🎁</div>
@@ -254,8 +244,8 @@ function RevealedScreen({
           "The organiser cannot see individual matches.",
           `All ${match.totalMatched} people matched successfully`,
         ].map((t, i) => (
-          <div key={i} className="flex items-center gap-2 text-sm" style={{ color: "var(--cmb-text-secondary)" }}>
-            <CheckCircle2 size={14} strokeWidth={2} style={{ color: "var(--cmb-success)", flexShrink: 0 }} />
+          <div key={i} className="flex items-center gap-2 text-sm text-[var(--cmb-text-secondary)]">
+            <CheckCircle2 size={14} strokeWidth={2} className="text-[var(--cmb-success)] shrink-0" />
             {t}
           </div>
         ))}
@@ -263,25 +253,22 @@ function RevealedScreen({
 
       {/* Likes / dislikes / sizes */}
       {(match.likes || match.dislikes || match.sizes) && (
-        <div
-          className="rounded-2xl p-5 mb-4"
-          style={{ background: "var(--cmb-surface)", border: "1px solid var(--cmb-border)", boxShadow: "var(--shadow-sm)" }}
-        >
+        <div className="rounded-2xl p-5 mb-4 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
           {match.likes && (
             <div className="mb-3">
-              <p className="text-xs font-semibold uppercase mb-1" style={{ color: "var(--cmb-text-muted)" }}>They like</p>
+              <p className="text-xs font-semibold uppercase mb-1 text-[var(--cmb-text-muted)]">They like</p>
               <p className="text-sm">{match.likes}</p>
             </div>
           )}
           {match.dislikes && (
             <div className="mb-3 last:mb-0">
-              <p className="text-xs font-semibold uppercase mb-1" style={{ color: "var(--cmb-text-muted)" }}>Avoid</p>
+              <p className="text-xs font-semibold uppercase mb-1 text-[var(--cmb-text-muted)]">Avoid</p>
               <p className="text-sm">{match.dislikes}</p>
             </div>
           )}
           {match.sizes && (
             <div>
-              <p className="text-xs font-semibold uppercase mb-1" style={{ color: "var(--cmb-text-muted)" }}>Sizes</p>
+              <p className="text-xs font-semibold uppercase mb-1 text-[var(--cmb-text-muted)]">Sizes</p>
               <p className="text-sm">{match.sizes}</p>
             </div>
           )}
@@ -296,14 +283,13 @@ function RevealedScreen({
             {match.wishlist.map((item) => (
               <div
                 key={item.id}
-                className="rounded-xl px-4 py-3 flex items-center gap-3"
-                style={{ background: "var(--cmb-surface)", border: "1px solid var(--cmb-border)" }}
+                className="rounded-xl px-4 py-3 flex items-center gap-3 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]"
               >
-                <Gift size={16} strokeWidth={1.5} style={{ color: "var(--cmb-primary)", flexShrink: 0 }} />
+                <Gift size={16} strokeWidth={1.5} className="text-[var(--cmb-primary)] shrink-0" />
                 <div className="flex-1 min-w-0">
                   <p className="font-medium text-sm truncate">{item.title}</p>
                   {item.price != null && (
-                    <p className="text-xs" style={{ color: "var(--cmb-text-muted)" }}>~{formatBudget(item.price)}</p>
+                    <p className="text-xs text-[var(--cmb-text-muted)]">~{formatBudget(item.price)}</p>
                   )}
                 </div>
                 {item.url && (
@@ -324,8 +310,7 @@ function RevealedScreen({
         <Link href={`/g/${groupId}`}>
           <Button
             variant="outline"
-            className="w-full h-12 rounded-xl font-medium"
-            style={{ borderColor: "var(--cmb-border-strong)" }}
+            className="w-full h-12 rounded-xl font-medium border-[var(--cmb-border-strong)]"
           >
             <MessageCircle size={18} strokeWidth={1.5} className="mr-2" />
             Ask {firstName} a question
@@ -334,8 +319,7 @@ function RevealedScreen({
         <Link href={match.budget != null ? `/gifts?budget=${match.budget}` : "/gifts"}>
           <Button
             variant="outline"
-            className="w-full h-12 rounded-xl font-medium"
-            style={{ borderColor: "var(--cmb-border-strong)" }}
+            className="w-full h-12 rounded-xl font-medium border-[var(--cmb-border-strong)]"
           >
             <ShoppingBag size={18} strokeWidth={1.5} className="mr-2" />
             {match.budget != null ? `Find gifts under ${formatBudget(match.budget)}` : "Browse gift ideas"}
@@ -388,15 +372,12 @@ function EmailCapture() {
   if (status === "loading") return null;
 
   return (
-    <div
-      className="rounded-2xl p-5 mt-6"
-      style={{ background: "var(--cmb-surface)", border: "1px solid var(--cmb-border)", boxShadow: "var(--shadow-sm)" }}
-    >
+    <div className="rounded-2xl p-5 mt-6 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
       <div className="flex items-center gap-2 mb-1">
-        <Mail size={16} strokeWidth={1.5} style={{ color: "var(--cmb-primary)" }} />
+        <Mail size={16} strokeWidth={1.5} className="text-[var(--cmb-primary)]" />
         <p className="font-semibold text-sm">Save access to your group</p>
       </div>
-      <p className="text-xs mb-3" style={{ color: "var(--cmb-text-secondary)" }}>
+      <p className="text-xs mb-3 text-[var(--cmb-text-secondary)]">
         Add your email and we&apos;ll send you a link back to your match. Optional — never shared with the group, no spam.
       </p>
       <div className="flex gap-2">
@@ -409,17 +390,13 @@ function EmailCapture() {
           onKeyDown={(e) => { if (e.key === "Enter") save(); }}
           placeholder="you@example.com"
           aria-label="Your email address"
-          className="flex-1 h-11 rounded-xl px-3 text-sm outline-none"
-          style={{ background: "var(--cmb-bg)", border: "1px solid var(--cmb-border-strong)", color: "var(--cmb-text-primary)" }}
+          className="flex-1 h-11 rounded-xl px-3 text-sm outline-none bg-[var(--cmb-bg)] border border-[var(--cmb-border-strong)] text-[var(--cmb-text-primary)]"
         />
         <Button
           onClick={save}
           disabled={status === "saving" || !email.trim()}
-          className="h-11 px-4 rounded-xl font-medium"
-          style={{
-            background: status === "saved" ? "var(--cmb-success)" : "var(--cmb-primary)",
-            color: "var(--cmb-text-inverse)",
-          }}
+          className="h-11 px-4 rounded-xl font-medium text-[var(--cmb-text-inverse)]"
+          style={{ background: status === "saved" ? "var(--cmb-success)" : "var(--cmb-primary)" }}
         >
           {status === "saved"
             ? <><Check size={16} strokeWidth={2} className="mr-1" />Saved</>

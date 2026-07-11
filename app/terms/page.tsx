@@ -60,7 +60,7 @@ export default function TermsPage() {
       </Section>
 
       <Section heading="Contact">
-        <p>Questions: <a href="mailto:checkmybasketuk@gmail.com" className="underline" style={{ color: "var(--cmb-primary)" }}>checkmybasketuk@gmail.com</a></p>
+        <p>Questions: <a href="mailto:checkmybasketuk@gmail.com" className="underline text-[var(--cmb-primary)]">checkmybasketuk@gmail.com</a></p>
       </Section>
     </InfoPage>
   );
