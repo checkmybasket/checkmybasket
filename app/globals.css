@@ -11,6 +11,7 @@
   --cmb-accent:         #C1121F;
   --cmb-accent-light:   #D4343F;
   --cmb-warm:           #D4A574;
+  --cmb-gold-strong:    #8A6D2F; /* gold that meets WCAG AA (4.5:1) as text on white/cream */
   --cmb-bg:             #FFF8F0;
   --cmb-surface:        #FFFFFF;
   --cmb-surface-hover:  #FEF3E6;

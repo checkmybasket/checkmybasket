@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Gift, ChevronLeft, ExternalLink, ShieldOff } from "lucide-react";
+import { Gift, ChevronLeft, ShieldOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { GiftCard } from "@/components/gift-card";
 import { notFound } from "next/navigation";
 
 const CATEGORIES: Record<string,{ label:string; desc:string; budget:number }> = {
@@ -93,7 +93,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
           ))}
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
-          {products.map(item => <GiftCard key={item.title} {...item}/>)}
+          {products.map(item => <GiftCard key={item.title} size="lg" {...item}/>)}
         </div>
         <div className="rounded-2xl p-8 text-center mb-8" style={{ background:"var(--cmb-primary)", boxShadow:"var(--shadow-lg)" }}>
           <h2 className="text-2xl font-bold mb-2" style={{ fontFamily:"var(--font-fraunces)", color:"var(--cmb-text-inverse)" }}>Found the perfect gift?</h2>
@@ -105,31 +105,6 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
           <p className="text-xs" style={{ color:"var(--cmb-text-muted)" }}>Some gift links may earn us a small commission at no extra cost to you. This is how we keep CheckMyBasket free and ad-free.</p>
         </div>
       </main>
-    </div>
-  );
-}
-
-function GiftCard({ title, price, shop, tags, url }: { title:string; price:number; shop:string; tags:string[]; url:string }) {
-  return (
-    <div className="rounded-2xl overflow-hidden transition-shadow duration-200 hover:shadow-lg"
-      style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)", boxShadow:"var(--shadow-sm)" }}>
-      <div className="w-full h-40 flex items-center justify-center" style={{ background:"var(--cmb-surface-hover)" }}>
-        <Gift size={40} strokeWidth={1} style={{ color:"var(--cmb-border)" }}/>
-      </div>
-      <div className="p-4">
-        <div className="flex gap-1.5 mb-2 flex-wrap">
-          {tags.map(tag => <Badge key={tag} variant="outline" className="text-xs rounded-full px-2" style={{ borderColor:"var(--cmb-border)", color:"var(--cmb-text-muted)" }}>{tag}</Badge>)}
-        </div>
-        <p className="font-semibold text-sm mb-1 leading-snug">{title}</p>
-        <div className="flex items-center justify-between mt-3">
-          <div><p className="text-lg font-bold" style={{ color:"var(--cmb-primary)" }}>£{(price/100).toFixed(0)}</p><p className="text-xs" style={{ color:"var(--cmb-text-muted)" }}>{shop}</p></div>
-          <a href={url} target="_blank" rel="noopener sponsored">
-            <Button className="h-10 px-4 rounded-xl text-sm font-semibold" style={{ background:"var(--cmb-accent)", color:"#fff" }}>
-              Buy now <ExternalLink size={13} strokeWidth={1.5} className="ml-1.5"/>
-            </Button>
-          </a>
-        </div>
-      </div>
     </div>
   );
 }

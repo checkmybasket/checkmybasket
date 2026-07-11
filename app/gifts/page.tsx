@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { Gift, ChevronRight, ExternalLink, Star, ShieldOff } from "lucide-react";
+import { Gift, ChevronRight, Star, ShieldOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { GiftCard } from "@/components/gift-card";
 
 export const metadata = { title: "Secret Santa Gift Ideas UK", description: "Curated Secret Santa gift ideas from UK shops. Under £5, £10, £15, £20, £25. No ads." };
 
@@ -68,31 +68,6 @@ export default function GiftsPage() {
           </p>
         </div>
       </main>
-    </div>
-  );
-}
-
-function GiftCard({ title, price, shop, tags, url }: { title:string; price:number; shop:string; tags:string[]; url:string }) {
-  return (
-    <div className="rounded-2xl overflow-hidden transition-shadow duration-200 hover:shadow-md"
-      style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)", boxShadow:"var(--shadow-sm)" }}>
-      <div className="w-full h-36 flex items-center justify-center" style={{ background:"var(--cmb-surface-hover)" }}>
-        <Gift size={36} strokeWidth={1} style={{ color:"var(--cmb-border)" }}/>
-      </div>
-      <div className="p-4">
-        <div className="flex gap-1.5 mb-2 flex-wrap">
-          {tags.map(tag => <Badge key={tag} variant="outline" className="text-xs rounded-full px-2" style={{ borderColor:"var(--cmb-border)", color:"var(--cmb-text-muted)" }}>{tag}</Badge>)}
-        </div>
-        <p className="font-semibold text-sm mb-1 leading-snug">{title}</p>
-        <div className="flex items-center justify-between mt-2">
-          <div><p className="font-bold" style={{ color:"var(--cmb-primary)" }}>£{(price/100).toFixed(0)}</p><p className="text-xs" style={{ color:"var(--cmb-text-muted)" }}>{shop}</p></div>
-          <a href={url} target="_blank" rel="noopener sponsored">
-            <Button size="sm" className="h-9 px-3 rounded-xl text-xs font-semibold" style={{ background:"var(--cmb-accent)", color:"#fff" }}>
-              View <ExternalLink size={12} strokeWidth={1.5} className="ml-1"/>
-            </Button>
-          </a>
-        </div>
-      </div>
     </div>
   );
 }

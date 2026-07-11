@@ -325,7 +325,7 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
             </div>
             <div className="flex gap-1.5 flex-wrap justify-end">
               <Badge variant="outline" className="text-xs rounded-full" style={{ borderColor:"var(--cmb-success)", color:"var(--cmb-success)" }}>Joined</Badge>
-              {usersWithWishes.has(m.user_id) && <Badge variant="outline" className="text-xs rounded-full" style={{ borderColor:"var(--cmb-warm)", color:"var(--cmb-warm)" }}>Wishlist</Badge>}
+              {usersWithWishes.has(m.user_id) && <Badge variant="outline" className="text-xs rounded-full" style={{ borderColor:"var(--cmb-gold-strong)", color:"var(--cmb-gold-strong)" }}>Wishlist</Badge>}
             </div>
           </div>
         ))}
@@ -711,7 +711,7 @@ function MessagesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<voi
               <div key={msg.id} className={cn("flex", isMe?"justify-end":"justify-start")}>
                 <div className="rounded-2xl px-4 py-3 max-w-[80%]"
                   style={{ background:isMe?"var(--cmb-primary)":"var(--cmb-surface)", color:isMe?"var(--cmb-text-inverse)":"var(--cmb-text-primary)", border:isMe?"none":"1px solid var(--cmb-border)" }}>
-                  {!isMe && <p className="text-xs font-medium mb-1" style={{ color:"var(--cmb-warm)" }}>
+                  {!isMe && <p className="text-xs font-medium mb-1" style={{ color:"var(--cmb-primary)" }}>
                     {thread==="santa"?"Your Secret Santa 🤫":`${recipientName ?? "Them"}`}
                   </p>}
                   <p className="text-sm leading-relaxed">{msg.content}</p>
