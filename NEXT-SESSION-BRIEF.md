@@ -13,7 +13,11 @@
 
 ## The full request (four parts, in order the user gave them)
 
-### 1. Domain cutover — INSTRUCTIONS ONLY (do not touch the domain yourself)
+### 1. Domain cutover — ✅ DONE 11 July (LIVE)
+`www.checkmybasket.co.uk` is primary (HTTP 200, valid TLS, serving the app); apex `checkmybasket.co.uk` 308-redirects → www. DNS points at Vercel — apex A `216.198.79.1` (Vercel's **newer** anycast IP, NOT the old `76.76.21.21`), www → `*.vercel-dns-017.com`. Verified live: canonical + og:url + og:image + twitter tags all resolve to the www host, OG image renders (200 image/png ~60KB) → **link previews now work**. `NEXT_PUBLIC_APP_URL` resolving correctly in prod; no redeploy needed. Original instructions kept below for reference.
+
+<details><summary>Original cutover instructions (for reference)</summary>
+
 `checkmybasket.co.uk` still points at an old site; the cutover is **Hassan-triggered**. Rule from prior sessions: **do NOT modify the domain**; the Vercel CLI token is stale so use the dashboard via Hassan's Chrome. Give Hassan these steps (confirm exact DNS records against what the Vercel dashboard shows him — Vercel displays the authoritative values):
 1. Vercel → project `checkmybasket` → **Settings → Domains** → add `checkmybasket.co.uk` and `www.checkmybasket.co.uk`.
 2. At the registrar, point DNS at Vercel: apex `A @ → 76.76.21.21`, and `www CNAME → cname.vercel-dns.com` (use whatever Vercel's panel states — it may differ).
@@ -21,6 +25,8 @@
 4. Set the env var in Vercel → Settings → Environment Variables: `NEXT_PUBLIC_APP_URL=https://www.checkmybasket.co.uk` (match the canonical host chosen), then **redeploy**.
 5. Verify OG/link previews now render — they resolve via `metadataBase` to the `.co.uk` host, so they only work after cutover. Test with the WhatsApp/Twitter card validators.
 6. Also confirm the other env vars exist in Vercel (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`).
+
+</details>
 
 ### 2. Email notifications — user said "lets do email notifications" (approving the feature)
 **Design (from `docs/GiftCircle-ClaudeCode-Brief-v2.md` + `docs/CheckMyBasket-Rebrand-Brief.md`):** email is **optional**, **collected AFTER the draw reveal** ("Add your email to save access to your group" — Layer 3 delayed ask), transactional via **Resend**. Primary email = **"Names have been drawn! 🎅 Open CheckMyBasket to see your match"** sent on draw execution. Sender name **CheckMyBasket**; footer: "You're receiving this because you joined a Secret Santa group on CheckMyBasket. Unsubscribe anytime." Secondary (later): 24h stalled-organiser nudge.
@@ -61,7 +67,7 @@ QR codes (I10, `lib/qr.ts` + `components/qr-code.tsx`); 48h prediction-round aut
 - **N2** inline-styles → Tailwind refactor (scope it, don't mass-edit).
 - ~~**Security features** — 2 low-severity RLS/rate-limit fixes (section 3).~~ ✅ DONE 11 July (all 3: migrations `20260711214435`, `20260711214443`, `20260711214459`; commit `596feab`, deployed prod).
 - **Email notifications** — blocked on Hassan's Resend account/key + PII decision (section 2).
-- **Domain cutover** — Hassan-triggered (section 1); OG previews stay broken until then.
+- ~~**Domain cutover** — Hassan-triggered (section 1); OG previews stay broken until then.~~ ✅ DONE 11 July — `www.checkmybasket.co.uk` live, apex redirects, link previews working.
 
 ## Backlog (revisit later, not urgent)
 - **`rl_group_preview` table growth / write-amplification.** The `get_group_preview` rate limiter (migration `20260711214459`) adds one small upsert write per anonymous preview call, keyed by IP, and the table grows one row per distinct IP with **no auto-prune**. Fine at current scale. Revisit when the table grows: either add a **pg_cron sweep** (e.g. hourly `delete from rl_group_preview where window_start < now() - interval '20 minutes'`), or, to avoid the DB writes entirely, **replace it with a Vercel/Supabase edge WAF rate limit** and back the table + plpgsql body out (reverting `get_group_preview` to the original STABLE sql version). Trigger to act: table row count climbing into the tens of thousands, or preview-endpoint write load showing up in DB metrics.
