@@ -59,6 +59,9 @@ QR codes (I10, `lib/qr.ts` + `components/qr-code.tsx`); 48h prediction-round aut
 
 ## What's left, at a glance
 - **N2** inline-styles → Tailwind refactor (scope it, don't mass-edit).
-- **Security features** — 2 low-severity RLS/rate-limit fixes (section 3).
+- ~~**Security features** — 2 low-severity RLS/rate-limit fixes (section 3).~~ ✅ DONE 11 July (all 3: migrations `20260711214435`, `20260711214443`, `20260711214459`; commit `596feab`, deployed prod).
 - **Email notifications** — blocked on Hassan's Resend account/key + PII decision (section 2).
 - **Domain cutover** — Hassan-triggered (section 1); OG previews stay broken until then.
+
+## Backlog (revisit later, not urgent)
+- **`rl_group_preview` table growth / write-amplification.** The `get_group_preview` rate limiter (migration `20260711214459`) adds one small upsert write per anonymous preview call, keyed by IP, and the table grows one row per distinct IP with **no auto-prune**. Fine at current scale. Revisit when the table grows: either add a **pg_cron sweep** (e.g. hourly `delete from rl_group_preview where window_start < now() - interval '20 minutes'`), or, to avoid the DB writes entirely, **replace it with a Vercel/Supabase edge WAF rate limit** and back the table + plpgsql body out (reverting `get_group_preview` to the original STABLE sql version). Trigger to act: table row count climbing into the tens of thousands, or preview-endpoint write load showing up in DB metrics.
