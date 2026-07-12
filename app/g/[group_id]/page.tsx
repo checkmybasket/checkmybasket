@@ -119,7 +119,7 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
   useEffect(() => { refresh(); }, [refresh]);
 
   if (loadState === "loading") return (
-    <div className="min-h-dvh flex items-center justify-center" style={{ background:"var(--cmb-bg)" }}>
+    <div className="min-h-dvh flex items-center justify-center bg-[var(--cmb-bg)]">
       <div className="w-full max-w-2xl px-4 space-y-4">
         <div className="rounded-2xl h-36 skeleton" />
         <div className="rounded-2xl h-64 skeleton" />
@@ -128,13 +128,13 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
   );
 
   if (loadState === "noaccess" || !data) return (
-    <div className="min-h-dvh flex flex-col items-center justify-center px-4 text-center" style={{ background:"var(--cmb-bg)" }}>
-      <Lock size={36} strokeWidth={1.5} className="mb-4" style={{ color:"var(--cmb-text-muted)" }} />
-      <h1 className="text-xl font-bold mb-2" style={{ fontFamily:"var(--font-fraunces)" }}>This group is private</h1>
-      <p className="text-sm mb-6 max-w-sm" style={{ color:"var(--cmb-text-secondary)" }}>
+    <div className="min-h-dvh flex flex-col items-center justify-center px-4 text-center bg-[var(--cmb-bg)]">
+      <Lock size={36} strokeWidth={1.5} className="mb-4 text-[var(--cmb-text-muted)]" />
+      <h1 className="text-xl font-bold mb-2 font-display">This group is private</h1>
+      <p className="text-sm mb-6 max-w-sm text-[var(--cmb-text-secondary)]">
         Open the invite link you were sent to join, or ask your organiser to share it again.
       </p>
-      <Link href="/"><Button variant="outline" className="rounded-xl h-11 px-6" style={{ borderColor:"var(--cmb-border-strong)" }}>Back to home</Button></Link>
+      <Link href="/"><Button variant="outline" className="rounded-xl h-11 px-6 border border-[var(--cmb-border-strong)]">Back to home</Button></Link>
     </div>
   );
 
@@ -143,13 +143,13 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
   const unreadMessages = data.messages.some(m => m.recipient_id === me);
 
   return (
-    <div className="flex flex-col min-h-dvh" style={{ background:"var(--cmb-bg)" }}>
-      <header className="sticky top-0 z-30 border-b" style={{ borderColor:"var(--cmb-border)", background:"rgba(255,248,240,0.95)", backdropFilter:"blur(12px)" }}>
+    <div className="flex flex-col min-h-dvh bg-[var(--cmb-bg)]">
+      <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background:"rgba(255,248,240,0.95)", backdropFilter:"blur(12px)" }}>
         <div className="max-w-2xl mx-auto px-4 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2 min-w-0">
-            <Gift size={18} strokeWidth={1.5} style={{ color:"var(--cmb-primary)", flexShrink:0 }}/>
-            <span className="font-semibold truncate" style={{ fontFamily:"var(--font-fraunces)", color:"var(--cmb-primary)" }}>{group.name}</span>
-            <span className="rounded-full px-2 py-0.5 text-xs font-medium flex-shrink-0" style={{ background:"rgba(27,67,50,0.1)", color:"var(--cmb-primary)" }}>
+            <Gift size={18} strokeWidth={1.5} className="text-[var(--cmb-primary)] shrink-0"/>
+            <span className="font-semibold truncate font-display text-[var(--cmb-primary)]">{group.name}</span>
+            <span className="rounded-full px-2 py-0.5 text-xs font-medium flex-shrink-0 text-[var(--cmb-primary)]" style={{ background:"rgba(27,67,50,0.1)" }}>
               {members.length} member{members.length===1?"":"s"}
             </span>
           </div>
@@ -168,7 +168,7 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
         {tab==="games"     && <GamesTab data={data} refresh={refresh}/>}
       </main>
 
-      <nav className="fixed bottom-0 left-0 right-0 z-30 border-t tab-bar" style={{ background:"var(--cmb-surface)", borderColor:"var(--cmb-border)" }}>
+      <nav className="fixed bottom-0 left-0 right-0 z-30 border-t tab-bar bg-[var(--cmb-surface)] border-[var(--cmb-border)]">
         <div className="max-w-2xl mx-auto px-2 flex">
           {([
             { key:"draw",      icon:Dice5,         label:"Draw",      dot:false },
@@ -180,8 +180,8 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
               style={{ color:tab===key?"var(--cmb-primary)":"var(--cmb-text-muted)" }} aria-label={label}>
               <Icon size={22} strokeWidth={1.5}/>
               <span className="text-xs font-medium">{label}</span>
-              {dot && tab!==key && <span className="absolute top-1.5 right-1/4 w-2 h-2 rounded-full" style={{ background:"var(--cmb-accent)" }} aria-hidden/>}
-              {tab===key && <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5 rounded-full" style={{ background:"var(--cmb-primary)" }}/>}
+              {dot && tab!==key && <span className="absolute top-1.5 right-1/4 w-2 h-2 rounded-full bg-[var(--cmb-accent)]" aria-hidden/>}
+              {tab===key && <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5 rounded-full bg-[var(--cmb-primary)]"/>}
             </button>
           ))}
         </div>
@@ -229,42 +229,42 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
   // ── Post-draw: both roles see their match card + trust messaging ──
   if (drawn) return (
     <div className="space-y-5">
-      <div className="rounded-2xl p-8 text-center" style={{ background:"var(--cmb-primary)", boxShadow:"var(--shadow-lg)" }}>
+      <div className="rounded-2xl p-8 text-center bg-[var(--cmb-primary)] shadow-[var(--shadow-lg)]">
         <div className="text-4xl mb-3">🎁</div>
-        <h2 className="font-bold text-xl mb-2" style={{ color:"var(--cmb-text-inverse)", fontFamily:"var(--font-fraunces)" }}>Names have been drawn</h2>
+        <h2 className="font-bold text-xl mb-2 text-[var(--cmb-text-inverse)] font-display">Names have been drawn</h2>
         <p className="text-sm mb-5" style={{ color:"rgba(255,248,240,0.75)" }}>
           {myDraw ? "Your match is ready and waiting." : "You joined after the draw — ask your organiser about a redraw."}
         </p>
         {myDraw && (
           <Link href={`/g/${group.id}/reveal`}>
-            <Button size="lg" className="h-12 px-8 rounded-xl font-semibold" style={{ background:"var(--cmb-accent)", color:"#fff" }}>
+            <Button size="lg" className="h-12 px-8 rounded-xl font-semibold bg-[var(--cmb-accent)] text-white">
               See who you&apos;re buying for <ArrowRight size={18} strokeWidth={1.5} className="ml-2"/>
             </Button>
           </Link>
         )}
       </div>
 
-      <div className="rounded-2xl p-5 space-y-3" style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)", boxShadow:"var(--shadow-sm)" }}>
+      <div className="rounded-2xl p-5 space-y-3 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
         {[
           { icon:CheckCircle2, text:`All ${joined} people matched successfully` },
           { icon:Lock,         text:"Your match is private. Nobody can see who picked who." },
           { icon:Lock,         text:"The organiser cannot see individual matches." },
         ].map(({ icon:Icon, text }) => (
           <div key={text} className="flex items-center gap-2.5 text-sm">
-            <Icon size={16} strokeWidth={2} style={{ color:"var(--cmb-success)", flexShrink:0 }}/>
-            <span style={{ color:"var(--cmb-text-secondary)" }}>{text}</span>
+            <Icon size={16} strokeWidth={2} className="text-[var(--cmb-success)] shrink-0"/>
+            <span className="text-[var(--cmb-text-secondary)]">{text}</span>
           </div>
         ))}
       </div>
 
       {isOrganiser && giftsBought && giftsBought.total > 0 && (
-        <div className="rounded-2xl p-5" style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)", boxShadow:"var(--shadow-sm)" }}>
+        <div className="rounded-2xl p-5 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
           <div className="flex items-center justify-between mb-2">
             <h2 className="font-semibold text-sm">Gifts bought</h2>
-            <span className="text-sm font-medium" style={{ color:"var(--cmb-primary)" }}>{giftsBought.bought} of {giftsBought.total}</span>
+            <span className="text-sm font-medium text-[var(--cmb-primary)]">{giftsBought.bought} of {giftsBought.total}</span>
           </div>
           <Progress value={Math.round((giftsBought.bought/giftsBought.total)*100)} className="h-2 mb-2"/>
-          <p className="text-xs" style={{ color:"var(--cmb-text-muted)" }}>Only visible to you. Individual names are private.</p>
+          <p className="text-xs text-[var(--cmb-text-muted)]">Only visible to you. Individual names are private.</p>
         </div>
       )}
     </div>
@@ -273,14 +273,14 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
   // ── Pre-draw, non-organiser ──
   if (!isOrganiser) return (
     <div className="space-y-5">
-      <div className="rounded-2xl p-8 text-center" style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)", boxShadow:"var(--shadow-sm)" }}>
-        <Dice5 size={36} strokeWidth={1.5} className="mx-auto mb-3" style={{ color:"var(--cmb-primary)" }}/>
-        <h2 className="font-semibold text-lg mb-2" style={{ fontFamily:"var(--font-fraunces)" }}>Waiting for the draw</h2>
-        <p style={{ color:"var(--cmb-text-secondary)" }}>{organiserName} will draw names when everyone&apos;s ready.</p>
+      <div className="rounded-2xl p-8 text-center bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
+        <Dice5 size={36} strokeWidth={1.5} className="mx-auto mb-3 text-[var(--cmb-primary)]"/>
+        <h2 className="font-semibold text-lg mb-2 font-display">Waiting for the draw</h2>
+        <p className="text-[var(--cmb-text-secondary)]">{organiserName} will draw names when everyone&apos;s ready.</p>
       </div>
       <div className="rounded-xl p-4 flex gap-3" style={{ background:"rgba(27,67,50,0.06)", border:"1px solid rgba(27,67,50,0.15)" }}>
-        <Gift size={18} strokeWidth={1.5} style={{ color:"var(--cmb-primary)", flexShrink:0 }}/>
-        <p className="text-sm" style={{ color:"var(--cmb-text-secondary)" }}>While you wait, add your wishlist so your Secret Santa knows what to get you.</p>
+        <Gift size={18} strokeWidth={1.5} className="text-[var(--cmb-primary)] shrink-0"/>
+        <p className="text-sm text-[var(--cmb-text-secondary)]">While you wait, add your wishlist so your Secret Santa knows what to get you.</p>
       </div>
     </div>
   );
@@ -289,10 +289,10 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
   return (
     <div className="space-y-5">
       {/* Progress */}
-      <div className="rounded-2xl p-5" style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)", boxShadow:"var(--shadow-sm)" }}>
+      <div className="rounded-2xl p-5 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
         <div className="flex items-center justify-between mb-3">
           <h2 className="font-semibold">Setup progress</h2>
-          <span className="text-sm font-medium" style={{ color:"var(--cmb-primary)" }}>{progress}% done</span>
+          <span className="text-sm font-medium text-[var(--cmb-primary)]">{progress}% done</span>
         </div>
         <Progress value={progress} className="mb-4 h-2"/>
         <div className="space-y-3">
@@ -303,7 +303,7 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
             { label:"Names drawn",                                done:false },
           ].map(({ label, done }) => (
             <div key={label} className="flex items-center gap-2.5 text-sm">
-              {done ? <CheckCircle2 size={16} strokeWidth={2} style={{ color:"var(--cmb-success)", flexShrink:0 }}/> : <Circle size={16} strokeWidth={1.5} style={{ color:"var(--cmb-border-strong)", flexShrink:0 }}/>}
+              {done ? <CheckCircle2 size={16} strokeWidth={2} className="text-[var(--cmb-success)] shrink-0"/> : <Circle size={16} strokeWidth={1.5} className="text-[var(--cmb-border-strong)] shrink-0"/>}
               <span style={{ color:done?"var(--cmb-text-primary)":"var(--cmb-text-secondary)" }}>{label}</span>
             </div>
           ))}
@@ -311,11 +311,11 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
       </div>
 
       {/* Members + remind */}
-      <div className="rounded-2xl overflow-hidden" style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)", boxShadow:"var(--shadow-sm)" }}>
-        <div className="px-5 py-3 border-b flex items-center justify-between" style={{ borderColor:"var(--cmb-border)" }}>
+      <div className="rounded-2xl overflow-hidden bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
+        <div className="px-5 py-3 border-b flex items-center justify-between border-[var(--cmb-border)]">
           <h2 className="font-semibold text-sm">Members</h2>
           <div className="flex items-center gap-2">
-            <span className="text-xs" style={{ color:"var(--cmb-text-muted)" }}>{joined} joined</span>
+            <span className="text-xs text-[var(--cmb-text-muted)]">{joined} joined</span>
             <Button size="sm" variant="outline" onClick={sendReminder} className="h-7 px-2.5 text-xs rounded-lg gap-1"
               style={{ borderColor:"#25D366", color:"#25D366" }} aria-label="Send reminder via WhatsApp">
               <Share2 size={12} strokeWidth={1.5}/> {reminderSent?"Sent":"Remind"}
@@ -323,15 +323,15 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
           </div>
         </div>
         {members.map(m => (
-          <div key={m.id} className="px-5 py-3 flex items-center gap-3 border-b last:border-0" style={{ borderColor:"var(--cmb-border)" }}>
+          <div key={m.id} className="px-5 py-3 flex items-center gap-3 border-b last:border-0 border-[var(--cmb-border)]">
             <Avatar name={m.name} size={32}/>
             <div className="flex-1 min-w-0">
               <p className="font-medium text-sm truncate">{m.name}{m.user_id===me?" (you)":""}</p>
-              <p className="text-xs" style={{ color:"var(--cmb-text-muted)" }}>{m.role}</p>
+              <p className="text-xs text-[var(--cmb-text-muted)]">{m.role}</p>
             </div>
             <div className="flex gap-1.5 flex-wrap justify-end">
-              <Badge variant="outline" className="text-xs rounded-full" style={{ borderColor:"var(--cmb-success)", color:"var(--cmb-success)" }}>Joined</Badge>
-              {usersWithWishes.has(m.user_id) && <Badge variant="outline" className="text-xs rounded-full" style={{ borderColor:"var(--cmb-gold-strong)", color:"var(--cmb-gold-strong)" }}>Wishlist</Badge>}
+              <Badge variant="outline" className="text-xs rounded-full border border-[var(--cmb-success)] text-[var(--cmb-success)]">Joined</Badge>
+              {usersWithWishes.has(m.user_id) && <Badge variant="outline" className="text-xs rounded-full border border-[var(--cmb-gold-strong)] text-[var(--cmb-gold-strong)]">Wishlist</Badge>}
             </div>
           </div>
         ))}
@@ -344,12 +344,12 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
       {showConfirm ? (
         <div className="rounded-2xl p-5" style={{ background:"rgba(193,18,31,0.06)", border:"1px solid rgba(193,18,31,0.2)" }}>
           <div className="flex gap-2 mb-3">
-            <AlertTriangle size={18} strokeWidth={1.5} style={{ color:"var(--cmb-error)", flexShrink:0 }}/>
-            <p className="text-sm font-medium" style={{ color:"var(--cmb-error)" }}>Once names are drawn, this can&apos;t be undone. Make sure everyone has joined first.</p>
+            <AlertTriangle size={18} strokeWidth={1.5} className="text-[var(--cmb-error)] shrink-0"/>
+            <p className="text-sm font-medium text-[var(--cmb-error)]">Once names are drawn, this can&apos;t be undone. Make sure everyone has joined first.</p>
           </div>
           <div className="flex gap-3">
             <Button variant="outline" className="flex-1 rounded-xl" disabled={drawBusy} onClick={()=>setShowConfirm(false)}>Cancel</Button>
-            <Button className="flex-1 rounded-xl font-semibold" disabled={drawBusy} onClick={handleDraw} style={{ background:"var(--cmb-accent)", color:"#fff" }}>
+            <Button className="flex-1 rounded-xl font-semibold bg-[var(--cmb-accent)] text-white" disabled={drawBusy} onClick={handleDraw}>
               {drawBusy?"Drawing…":"Yes, draw names"}
             </Button>
           </div>
@@ -388,44 +388,43 @@ function ExclusionsEditor({ data, open, setOpen, refresh }: { data:DashData; ope
   }
 
   return (
-    <div className="rounded-2xl overflow-hidden" style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)", boxShadow:"var(--shadow-sm)" }}>
+    <div className="rounded-2xl overflow-hidden bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
       <button className="w-full px-5 py-4 flex items-center justify-between text-left" onClick={() => setOpen(v=>!v)}>
         <div>
           <p className="font-semibold text-sm">Exclusion rules</p>
-          <p className="text-xs mt-0.5" style={{ color:"var(--cmb-text-muted)" }}>
+          <p className="text-xs mt-0.5 text-[var(--cmb-text-muted)]">
             {exclusions.length===0?"No exclusions set — couples, siblings, last year's match":`${exclusions.length} pair${exclusions.length===1?"":"s"} won't draw each other`}
           </p>
         </div>
-        <span className="text-xs font-medium" style={{ color:"var(--cmb-primary)" }}>{open?"Done":"Edit"}</span>
+        <span className="text-xs font-medium text-[var(--cmb-primary)]">{open?"Done":"Edit"}</span>
       </button>
       {open && (
-        <div className="px-5 pb-5 border-t space-y-3 pt-4" style={{ borderColor:"var(--cmb-border)" }}>
-          <p className="text-xs" style={{ color:"var(--cmb-text-muted)" }}>These people won&apos;t draw each other (works both ways).</p>
+        <div className="px-5 pb-5 border-t space-y-3 pt-4 border-[var(--cmb-border)]">
+          <p className="text-xs text-[var(--cmb-text-muted)]">These people won&apos;t draw each other (works both ways).</p>
           {exclusions.map(exc => (
             <div key={exc.id} className="flex items-center gap-2 text-sm">
               <span className="flex-1 truncate">{nameOf(exc.user_a_id)}</span>
-              <span className="text-xs font-medium" style={{ color:"var(--cmb-text-muted)" }}>↔</span>
+              <span className="text-xs font-medium text-[var(--cmb-text-muted)]">↔</span>
               <span className="flex-1 truncate">{nameOf(exc.user_b_id)}</span>
-              <button onClick={() => removeExclusion(exc.id)} className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                style={{ background:"var(--cmb-surface-hover)" }} aria-label="Remove exclusion">
-                <X size={14} strokeWidth={2} style={{ color:"var(--cmb-text-muted)" }}/>
+              <button onClick={() => removeExclusion(exc.id)} className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-[var(--cmb-surface-hover)]" aria-label="Remove exclusion">
+                <X size={14} strokeWidth={2} className="text-[var(--cmb-text-muted)]"/>
               </button>
             </div>
           ))}
           <div className="flex items-center gap-2">
             <select value={pendingA} onChange={e => setPendingA(e.target.value)}
-              className="flex-1 h-10 rounded-xl border px-3 text-sm bg-white" style={{ borderColor:"var(--cmb-border-strong)" }} aria-label="First person">
+              className="flex-1 h-10 rounded-xl border px-3 text-sm bg-white border-[var(--cmb-border-strong)]" aria-label="First person">
               <option value="">Select person</option>
               {members.map(m=><option key={m.user_id} value={m.user_id}>{m.name}</option>)}
             </select>
-            <span className="text-xs font-medium" style={{ color:"var(--cmb-text-muted)" }}>↔</span>
+            <span className="text-xs font-medium text-[var(--cmb-text-muted)]">↔</span>
             <select value={pendingB} onChange={e => setPendingB(e.target.value)}
-              className="flex-1 h-10 rounded-xl border px-3 text-sm bg-white" style={{ borderColor:"var(--cmb-border-strong)" }} aria-label="Second person">
+              className="flex-1 h-10 rounded-xl border px-3 text-sm bg-white border-[var(--cmb-border-strong)]" aria-label="Second person">
               <option value="">Select person</option>
               {members.map(m=><option key={m.user_id} value={m.user_id}>{m.name}</option>)}
             </select>
           </div>
-          <Button variant="outline" size="sm" onClick={addExclusion} disabled={!pendingA||!pendingB} className="rounded-xl text-xs h-9" style={{ borderColor:"var(--cmb-border-strong)" }}>
+          <Button variant="outline" size="sm" onClick={addExclusion} disabled={!pendingA||!pendingB} className="rounded-xl text-xs h-9 border border-[var(--cmb-border-strong)]">
             <Plus size={14} strokeWidth={1.5} className="mr-1"/> Add exclusion
           </Button>
         </div>
@@ -513,10 +512,10 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
         ))}
       </div>
       <div className="flex items-center justify-between">
-        <h2 className="font-semibold text-lg" style={{ fontFamily:"var(--font-fraunces)" }}>
+        <h2 className="font-semibold text-lg font-display">
           {isMyList?"Your wishlist":`${activeMember?.name.split(" ")[0] ?? "Their"}'s wishlist`}
         </h2>
-        {isMyList && <Badge className="text-xs" style={{ background:"rgba(27,67,50,0.1)", color:"var(--cmb-primary)" }}>{items.length} item{items.length===1?"":"s"}</Badge>}
+        {isMyList && <Badge className="text-xs text-[var(--cmb-primary)]" style={{ background:"rgba(27,67,50,0.1)" }}>{items.length} item{items.length===1?"":"s"}</Badge>}
       </div>
       {items.length===0 ? (
         <EmptyState title="No wishlist items yet"
@@ -528,7 +527,7 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
             const claim = claimsByItem.get(item.id);
             const claimedByMe = claim?.claimed_by === me;
             return (
-              <div key={item.id} className="rounded-2xl p-4" style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)", boxShadow:"var(--shadow-sm)", opacity:!isMyList&&claim?0.6:1 }}>
+              <div key={item.id} className="rounded-2xl p-4 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]" style={{ opacity:!isMyList&&claim?0.6:1 }}>
                 <div className="flex items-start gap-3">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1 flex-wrap">
@@ -536,11 +535,11 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
                         style={{ background:`color-mix(in srgb, ${priorityColor[item.priority]} 12%, transparent)`, color:priorityColor[item.priority] }}>
                         {priorityLabel[item.priority]}
                       </span>
-                      {item.shop_name && <span className="text-xs" style={{ color:"var(--cmb-text-muted)" }}>{item.shop_name}</span>}
+                      {item.shop_name && <span className="text-xs text-[var(--cmb-text-muted)]">{item.shop_name}</span>}
                     </div>
                     <p className={cn("font-medium", !isMyList&&claim&&"line-through")}>{item.title}</p>
-                    {item.price != null && <p className="text-sm mt-0.5" style={{ color:"var(--cmb-text-secondary)" }}>~{formatBudget(item.price)}</p>}
-                    {item.notes && <p className="text-xs mt-1" style={{ color:"var(--cmb-text-muted)" }}>{item.notes}</p>}
+                    {item.price != null && <p className="text-sm mt-0.5 text-[var(--cmb-text-secondary)]">~{formatBudget(item.price)}</p>}
+                    {item.notes && <p className="text-xs mt-1 text-[var(--cmb-text-muted)]">{item.notes}</p>}
                   </div>
                   <div className="flex gap-1.5 flex-shrink-0">
                     {item.url && <a href={item.url} target="_blank" rel="noopener noreferrer"><Button variant="ghost" size="sm" className="h-9 w-9 p-0 rounded-lg" aria-label="View product"><ExternalLink size={16} strokeWidth={1.5}/></Button></a>}
@@ -552,7 +551,7 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
                     )}
                     {isMyList && (
                       <Button variant="ghost" size="sm" onClick={()=>deleteItem(item.id)} className="h-9 w-9 p-0 rounded-lg" aria-label="Delete item">
-                        <Trash2 size={16} strokeWidth={1.5} style={{ color:"var(--cmb-text-muted)" }}/>
+                        <Trash2 size={16} strokeWidth={1.5} className="text-[var(--cmb-text-muted)]"/>
                       </Button>
                     )}
                   </div>
@@ -564,50 +563,50 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
       )}
       {isMyList && (
         <>
-          <div className="rounded-2xl p-4" style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)", boxShadow:"var(--shadow-sm)" }}>
+          <div className="rounded-2xl p-4 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
             <Label htmlFor="new-wish" className="text-sm font-medium mb-2 block">Add a wish</Label>
             <div className="flex gap-2">
               <Input id="new-wish" placeholder="e.g. Heated blanket, or paste a link..." value={newItem}
                 onChange={e=>setNewItem(e.target.value)} onKeyDown={e=>e.key==="Enter"&&addItem()}
-                className="h-11 text-base rounded-xl flex-1" style={{ borderColor:"var(--cmb-border-strong)" }}/>
-              <Button className="h-11 w-11 p-0 rounded-xl flex-shrink-0" style={{ background:"var(--cmb-primary)", color:"var(--cmb-text-inverse)" }}
+                className="h-11 text-base rounded-xl flex-1 border border-[var(--cmb-border-strong)]"/>
+              <Button className="h-11 w-11 p-0 rounded-xl flex-shrink-0 bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]"
                 aria-label="Add item" disabled={busy||!newItem.trim()} onClick={addItem}>
                 <Plus size={18} strokeWidth={2}/>
               </Button>
             </div>
-            <p className="text-xs mt-2" style={{ color:"var(--cmb-text-muted)" }}>Add links from any shop — Etsy, John Lewis, Amazon, anywhere</p>
+            <p className="text-xs mt-2 text-[var(--cmb-text-muted)]">Add links from any shop — Etsy, John Lewis, Amazon, anywhere</p>
           </div>
-          <div className="rounded-2xl overflow-hidden" style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)", boxShadow:"var(--shadow-sm)" }}>
+          <div className="rounded-2xl overflow-hidden bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
             <button className="w-full px-5 py-4 flex items-center justify-between text-left" onClick={()=>setEditingMeta(v=>!v)}>
               <div>
                 <p className="font-semibold text-sm">Please avoid &amp; my sizes</p>
-                <p className="text-xs mt-0.5" style={{ color:"var(--cmb-text-muted)" }}>Allergies, dislikes, clothing sizes — visible to your Secret Santa</p>
+                <p className="text-xs mt-0.5 text-[var(--cmb-text-muted)]">Allergies, dislikes, clothing sizes — visible to your Secret Santa</p>
               </div>
-              <span className="text-xs font-medium" style={{ color:"var(--cmb-primary)" }}>{editingMeta?"Close":"Edit"}</span>
+              <span className="text-xs font-medium text-[var(--cmb-primary)]">{editingMeta?"Close":"Edit"}</span>
             </button>
             {editingMeta && (
-              <div className="px-5 pb-5 border-t space-y-4 pt-4" style={{ borderColor:"var(--cmb-border)" }}>
+              <div className="px-5 pb-5 border-t space-y-4 pt-4 border-[var(--cmb-border)]">
                 <div>
                   <Label className="text-sm font-medium mb-1.5 block">Please avoid</Label>
                   <Textarea placeholder="Allergies, things you hate, stuff you have plenty of..." value={pleaseAvoid}
-                    onChange={e=>setPleaseAvoid(e.target.value)} className="min-h-[72px] rounded-xl text-sm resize-none" style={{ borderColor:"var(--cmb-border-strong)" }}/>
+                    onChange={e=>setPleaseAvoid(e.target.value)} className="min-h-[72px] rounded-xl text-sm resize-none border border-[var(--cmb-border-strong)]"/>
                 </div>
                 <div>
                   <Label className="text-sm font-medium mb-1.5 block">My sizes</Label>
                   <Input placeholder="e.g. Top: M, Shoe: UK 7, Ring: O" value={mySizes} onChange={e=>setMySizes(e.target.value)}
-                    className="h-10 rounded-xl text-sm" style={{ borderColor:"var(--cmb-border-strong)" }}/>
+                    className="h-10 rounded-xl text-sm border border-[var(--cmb-border-strong)]"/>
                 </div>
-                <Button size="sm" onClick={saveMeta} className="rounded-xl" style={{ background:"var(--cmb-primary)", color:"var(--cmb-text-inverse)" }}>Save</Button>
+                <Button size="sm" onClick={saveMeta} className="rounded-xl bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">Save</Button>
               </div>
             )}
           </div>
         </>
       )}
       {!isMyList && activeMember && (activeMember.dislikes || activeMember.sizes || activeMember.likes) && (
-        <div className="rounded-2xl p-4 space-y-3" style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)" }}>
-          {activeMember.likes    && <div><p className="text-xs font-semibold uppercase mb-1" style={{ color:"var(--cmb-text-muted)" }}>Likes</p><p className="text-sm">{activeMember.likes}</p></div>}
-          {activeMember.dislikes && <div><p className="text-xs font-semibold uppercase mb-1" style={{ color:"var(--cmb-text-muted)" }}>Please avoid</p><p className="text-sm">{activeMember.dislikes}</p></div>}
-          {activeMember.sizes    && <div><p className="text-xs font-semibold uppercase mb-1" style={{ color:"var(--cmb-text-muted)" }}>Sizes</p><p className="text-sm">{activeMember.sizes}</p></div>}
+        <div className="rounded-2xl p-4 space-y-3 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]">
+          {activeMember.likes    && <div><p className="text-xs font-semibold uppercase mb-1 text-[var(--cmb-text-muted)]">Likes</p><p className="text-sm">{activeMember.likes}</p></div>}
+          {activeMember.dislikes && <div><p className="text-xs font-semibold uppercase mb-1 text-[var(--cmb-text-muted)]">Please avoid</p><p className="text-sm">{activeMember.dislikes}</p></div>}
+          {activeMember.sizes    && <div><p className="text-xs font-semibold uppercase mb-1 text-[var(--cmb-text-muted)]">Sizes</p><p className="text-sm">{activeMember.sizes}</p></div>}
         </div>
       )}
     </div>
@@ -695,8 +694,8 @@ function MessagesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<voi
       </div>
 
       <div className="rounded-xl p-3 flex gap-2" style={{ background:"rgba(27,67,50,0.06)", border:"1px solid rgba(27,67,50,0.15)" }}>
-        <Lock size={14} strokeWidth={1.5} style={{ color:"var(--cmb-primary)", flexShrink:0, marginTop:2 }}/>
-        <p className="text-xs" style={{ color:"var(--cmb-text-secondary)" }}>
+        <Lock size={14} strokeWidth={1.5} className="text-[var(--cmb-primary)] shrink-0 mt-0.5"/>
+        <p className="text-xs text-[var(--cmb-text-secondary)]">
           {thread==="recipient"
             ? <>You&apos;re anonymous here — {recipientName ?? "they"} will only see &ldquo;Your Secret Santa 🤫&rdquo;</>
             : <>Questions from the person buying for you. They can&apos;t see who you are either.</>}
@@ -717,7 +716,7 @@ function MessagesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<voi
               <div key={msg.id} className={cn("flex", isMe?"justify-end":"justify-start")}>
                 <div className="rounded-2xl px-4 py-3 max-w-[80%]"
                   style={{ background:isMe?"var(--cmb-primary)":"var(--cmb-surface)", color:isMe?"var(--cmb-text-inverse)":"var(--cmb-text-primary)", border:isMe?"none":"1px solid var(--cmb-border)" }}>
-                  {!isMe && <p className="text-xs font-medium mb-1" style={{ color:"var(--cmb-primary)" }}>
+                  {!isMe && <p className="text-xs font-medium mb-1 text-[var(--cmb-primary)]">
                     {thread==="santa"?"Your Secret Santa 🤫":`${recipientName ?? "Them"}`}
                   </p>}
                   <p className="text-sm leading-relaxed">{msg.content}</p>
@@ -731,11 +730,10 @@ function MessagesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<voi
 
       {thread==="recipient" && (
         <div>
-          <p className="text-xs font-medium mb-2" style={{ color:"var(--cmb-text-muted)" }}>SUGGESTED QUESTIONS</p>
+          <p className="text-xs font-medium mb-2 text-[var(--cmb-text-muted)]">SUGGESTED QUESTIONS</p>
           <div className="flex flex-wrap gap-2">
             {SUGGESTED_QUESTIONS.map(q => (
-              <button key={q} onClick={()=>sendMessage(q)} className="rounded-full px-3 py-1.5 text-xs border transition-colors duration-150 text-left"
-                style={{ background:"var(--cmb-surface)", borderColor:"var(--cmb-border)", color:"var(--cmb-text-secondary)" }}>{q}</button>
+              <button key={q} onClick={()=>sendMessage(q)} className="rounded-full px-3 py-1.5 text-xs border transition-colors duration-150 text-left bg-[var(--cmb-surface)] border-[var(--cmb-border)] text-[var(--cmb-text-secondary)]">{q}</button>
             ))}
           </div>
         </div>
@@ -744,13 +742,12 @@ function MessagesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<voi
       <div className="flex gap-2">
         <Input placeholder={canSend?(thread==="recipient"?"Ask a question...":"Reply to your Secret Santa..."):"You can reply once they message you"}
           value={draft} onChange={e=>setDraft(e.target.value)} onKeyDown={e=>e.key==="Enter"&&sendMessage(draft)} disabled={!canSend||busy}
-          maxLength={500} className="h-11 text-base rounded-xl flex-1" style={{ borderColor:"var(--cmb-border-strong)" }}/>
-        <Button onClick={()=>sendMessage(draft)} disabled={!draft.trim()||!canSend||busy} className="h-11 w-11 p-0 rounded-xl flex-shrink-0"
-          style={{ background:"var(--cmb-primary)", color:"var(--cmb-text-inverse)" }} aria-label="Send message">
+          maxLength={500} className="h-11 text-base rounded-xl flex-1 border border-[var(--cmb-border-strong)]"/>
+        <Button onClick={()=>sendMessage(draft)} disabled={!draft.trim()||!canSend||busy} className="h-11 w-11 p-0 rounded-xl flex-shrink-0 bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]" aria-label="Send message">
           <Send size={16} strokeWidth={1.5}/>
         </Button>
       </div>
-      <p className="text-xs" style={{ color:"var(--cmb-text-muted)" }}>{draft.length}/500 · 10 messages per day</p>
+      <p className="text-xs text-[var(--cmb-text-muted)]">{draft.length}/500 · 10 messages per day</p>
     </div>
   );
 }
@@ -823,20 +820,20 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
   /* ── No round yet / intro ── */
   if (!round) return (
     <div className="space-y-5">
-      <div className="rounded-2xl overflow-hidden" style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)", boxShadow:"var(--shadow-md)" }}>
-        <div className="px-5 py-4 border-b" style={{ background:"var(--cmb-primary)", borderColor:"var(--cmb-primary-dark)" }}>
+      <div className="rounded-2xl overflow-hidden bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-md)]">
+        <div className="px-5 py-4 border-b bg-[var(--cmb-primary)] border-[var(--cmb-primary-dark)]">
           <div className="flex items-center gap-2">
-            <Gamepad2 size={18} strokeWidth={1.5} style={{ color:"var(--cmb-warm)" }}/>
-            <h2 className="font-semibold" style={{ color:"var(--cmb-text-inverse)", fontFamily:"var(--font-fraunces)" }}>Gift Predictions</h2>
+            <Gamepad2 size={18} strokeWidth={1.5} className="text-[var(--cmb-warm)]"/>
+            <h2 className="font-semibold text-[var(--cmb-text-inverse)] font-display">Gift Predictions</h2>
           </div>
         </div>
         <div className="p-5 space-y-4">
-          <p className="text-sm leading-relaxed" style={{ color:"var(--cmb-text-secondary)" }}>
+          <p className="text-sm leading-relaxed text-[var(--cmb-text-secondary)]">
             Think you know your group? Predict what type of Secret Santa gift everyone will get — then earn Stereotype Awards based on what the group said.
           </p>
           <div className="grid grid-cols-3 gap-2">
             {GIFT_CATEGORIES.slice(0,6).map(c => (
-              <div key={c.key} className="rounded-xl p-2.5 text-center" style={{ background:"var(--cmb-bg)", border:"1px solid var(--cmb-border)" }}>
+              <div key={c.key} className="rounded-xl p-2.5 text-center bg-[var(--cmb-bg)] border border-[var(--cmb-border)]">
                 <div className="text-xl mb-1">{c.emoji}</div>
                 <p className="text-xs font-medium leading-tight">{c.label}</p>
               </div>
@@ -844,16 +841,15 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
           </div>
           {isOrganiser ? (
             <>
-              <Button onClick={startRound} disabled={busy} size="lg" className="w-full h-12 rounded-xl font-semibold"
-                style={{ background:"var(--cmb-primary)", color:"var(--cmb-text-inverse)" }}>
+              <Button onClick={startRound} disabled={busy} size="lg" className="w-full h-12 rounded-xl font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">
                 {busy?"Starting…":<>Start the game <ArrowRight size={18} strokeWidth={1.5} className="ml-2"/></>}
               </Button>
-              <p className="text-xs text-center" style={{ color:"var(--cmb-text-muted)" }}>
+              <p className="text-xs text-center text-[var(--cmb-text-muted)]">
                 Everyone predicts for {subjects.length} people — takes about 2 minutes
               </p>
             </>
           ) : (
-            <p className="text-sm text-center" style={{ color:"var(--cmb-text-muted)" }}>
+            <p className="text-sm text-center text-[var(--cmb-text-muted)]">
               Waiting for the organiser to start the game.
             </p>
           )}
@@ -895,17 +891,17 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
     return (
       <div className="space-y-5">
         <div className="text-center mb-2">
-          <p className="text-sm font-medium" style={{ color:"var(--cmb-accent)" }}>Gift Prediction Results</p>
-          <h2 className="text-2xl font-bold" style={{ fontFamily:"var(--font-fraunces)" }}>The group has spoken</h2>
+          <p className="text-sm font-medium text-[var(--cmb-accent)]">Gift Prediction Results</p>
+          <h2 className="text-2xl font-bold font-display">The group has spoken</h2>
         </div>
 
         {bySubject.map(r => (
-          <div key={r.member.user_id} className="rounded-2xl p-5" style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)", boxShadow:"var(--shadow-sm)" }}>
+          <div key={r.member.user_id} className="rounded-2xl p-5 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
             <div className="flex items-center gap-3 mb-3">
               <Avatar name={r.member.name} size={36}/>
               <div>
                 <p className="font-semibold">{r.member.name}</p>
-                {r.top && <p className="text-xs" style={{ color:"var(--cmb-text-muted)" }}>
+                {r.top && <p className="text-xs text-[var(--cmb-text-muted)]">
                   The group predicted: <strong>{catOf(r.top[0])?.emoji} {catOf(r.top[0])?.label}</strong> ({r.top[1]}/{r.votes} votes)
                 </p>}
               </div>
@@ -916,12 +912,12 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
                 if (!cat) return null;
                 return (
                   <div key={key} className="flex items-center gap-2 text-xs">
-                    <span className="w-24 flex-shrink-0 truncate" style={{ color:"var(--cmb-text-secondary)" }}>{cat.emoji} {cat.label}</span>
-                    <div className="flex-1 rounded-full overflow-hidden h-2" style={{ background:"var(--cmb-border)" }}>
+                    <span className="w-24 flex-shrink-0 truncate text-[var(--cmb-text-secondary)]">{cat.emoji} {cat.label}</span>
+                    <div className="flex-1 rounded-full overflow-hidden h-2 bg-[var(--cmb-border)]">
                       <div className="h-full rounded-full transition-all duration-500"
                         style={{ width:`${(votes/r.votes)*100}%`, background:r.top&&key===r.top[0]?"var(--cmb-primary)":"var(--cmb-warm)" }}/>
                     </div>
-                    <span className="w-4 text-right font-medium" style={{ color:"var(--cmb-text-muted)" }}>{votes}</span>
+                    <span className="w-4 text-right font-medium text-[var(--cmb-text-muted)]">{votes}</span>
                   </div>
                 );
               })}
@@ -930,11 +926,11 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
         ))}
 
         {awards.length>0 && (
-          <div className="rounded-2xl overflow-hidden" style={{ background:"var(--cmb-primary)", boxShadow:"var(--shadow-lg)" }}>
-            <div className="px-5 py-4 border-b" style={{ borderColor:"var(--cmb-primary-dark)" }}>
+          <div className="rounded-2xl overflow-hidden bg-[var(--cmb-primary)] shadow-[var(--shadow-lg)]">
+            <div className="px-5 py-4 border-b border-[var(--cmb-primary-dark)]">
               <div className="flex items-center gap-2">
-                <Trophy size={18} strokeWidth={1.5} style={{ color:"var(--cmb-warm)" }}/>
-                <h2 className="font-bold" style={{ color:"var(--cmb-text-inverse)", fontFamily:"var(--font-fraunces)" }}>🏆 Gift Prediction Awards</h2>
+                <Trophy size={18} strokeWidth={1.5} className="text-[var(--cmb-warm)]"/>
+                <h2 className="font-bold text-[var(--cmb-text-inverse)] font-display">🏆 Gift Prediction Awards</h2>
               </div>
             </div>
             <div className="p-5 space-y-4">
@@ -942,8 +938,8 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
                 <div key={award.title+award.winner} className="flex items-start gap-3">
                   <span className="text-xl flex-shrink-0">{award.emoji}</span>
                   <div>
-                    <p className="font-semibold text-sm" style={{ color:"var(--cmb-text-inverse)" }}>{award.title}</p>
-                    <p className="text-sm" style={{ color:"var(--cmb-warm)" }}>{award.winner}</p>
+                    <p className="font-semibold text-sm text-[var(--cmb-text-inverse)]">{award.title}</p>
+                    <p className="text-sm text-[var(--cmb-warm)]">{award.winner}</p>
                     <p className="text-xs mt-0.5" style={{ color:"rgba(255,248,240,0.6)" }}>{award.detail}</p>
                   </div>
                 </div>
@@ -953,13 +949,13 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
         )}
 
         {/* Post-Christmas reveal */}
-        <div className="rounded-2xl overflow-hidden" style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)", boxShadow:"var(--shadow-sm)" }}>
+        <div className="rounded-2xl overflow-hidden bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
           {myActual ? (
             <div className="p-5 text-center">
               <div className="text-3xl mb-2">{catOf(myActual.actual_category)?.emoji}</div>
               <p className="font-semibold mb-1">You received: {catOf(myActual.actual_category)?.label}</p>
               {votesForMe>0 && (
-                <p className="text-sm" style={{ color:"var(--cmb-text-secondary)" }}>
+                <p className="text-sm text-[var(--cmb-text-secondary)]">
                   🎯 <strong>{correctForMe} out of {votesForMe}</strong> {votesForMe===1?"person":"people"} predicted correctly!
                 </p>
               )}
@@ -967,13 +963,13 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
           ) : !showLog ? (
             <div className="p-5">
               <div className="flex items-center gap-2 mb-2">
-                <Star size={16} strokeWidth={1.5} style={{ color:"var(--cmb-warm)" }}/>
+                <Star size={16} strokeWidth={1.5} className="text-[var(--cmb-warm)]"/>
                 <p className="font-semibold text-sm">Log what you actually received</p>
               </div>
-              <p className="text-sm mb-4" style={{ color:"var(--cmb-text-secondary)" }}>
+              <p className="text-sm mb-4 text-[var(--cmb-text-secondary)]">
                 Gifts have been exchanged? Log yours to see who predicted correctly.
               </p>
-              <Button variant="outline" onClick={()=>setShowLog(true)} className="w-full h-10 rounded-xl text-sm" style={{ borderColor:"var(--cmb-border-strong)" }}>
+              <Button variant="outline" onClick={()=>setShowLog(true)} className="w-full h-10 rounded-xl text-sm border border-[var(--cmb-border-strong)]">
                 Log my actual gift
               </Button>
             </div>
@@ -983,8 +979,7 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
               <div className="grid grid-cols-3 gap-2 mb-2">
                 {GIFT_CATEGORIES.map(cat => (
                   <button key={cat.key} onClick={()=>logActual(cat.key)} disabled={busy}
-                    className="rounded-xl p-2.5 text-center transition-all duration-150"
-                    style={{ background:"var(--cmb-bg)", border:"1px solid var(--cmb-border)" }}>
+                    className="rounded-xl p-2.5 text-center transition-all duration-150 bg-[var(--cmb-bg)] border border-[var(--cmb-border)]">
                     <div className="text-xl mb-1">{cat.emoji}</div>
                     <p className="text-xs font-medium leading-tight">{cat.label}</p>
                   </button>
@@ -1006,10 +1001,10 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
             style={{ width: i===step?16:8, height:8, background:i<=step?"var(--cmb-primary)":"var(--cmb-border)" }}/>
         ))}
       </div>
-      <div className="rounded-2xl p-6 text-center" style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)", boxShadow:"var(--shadow-md)" }}>
-        <p className="text-sm mb-1" style={{ color:"var(--cmb-text-muted)" }}>What will</p>
-        <h2 className="text-2xl font-bold mb-1" style={{ fontFamily:"var(--font-fraunces)" }}>{current.name}</h2>
-        <p className="text-sm" style={{ color:"var(--cmb-text-muted)" }}>get for Secret Santa?</p>
+      <div className="rounded-2xl p-6 text-center bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-md)]">
+        <p className="text-sm mb-1 text-[var(--cmb-text-muted)]">What will</p>
+        <h2 className="text-2xl font-bold mb-1 font-display">{current.name}</h2>
+        <p className="text-sm text-[var(--cmb-text-muted)]">get for Secret Santa?</p>
       </div>
       <div className="grid grid-cols-3 gap-3">
         {GIFT_CATEGORIES.map(cat => {
@@ -1027,9 +1022,8 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
       </div>
       <div className="flex gap-3">
         {step>0 && <Button variant="outline" className="flex-1 h-12 rounded-xl" onClick={()=>setStep(s=>s-1)}>← Back</Button>}
-        <Button className="flex-1 h-12 rounded-xl font-semibold" disabled={!picks[current.user_id]||busy}
-          onClick={() => { if (step<subjects.length-1){setStep(s=>s+1);}else{submitPredictions();} }}
-          style={{ background:"var(--cmb-primary)", color:"var(--cmb-text-inverse)" }}>
+        <Button className="flex-1 h-12 rounded-xl font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]" disabled={!picks[current.user_id]||busy}
+          onClick={() => { if (step<subjects.length-1){setStep(s=>s+1);}else{submitPredictions();} }}>
           {step<subjects.length-1?"Next →":busy?"Submitting…":"Lock in predictions"}
         </Button>
       </div>
@@ -1039,14 +1033,14 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
   /* ── Round open: submitted or ready to predict ── */
   if (hasSubmitted) return (
     <div className="space-y-4">
-      <div className="rounded-2xl p-6 text-center animate-scale-in" style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)", boxShadow:"var(--shadow-md)" }}>
+      <div className="rounded-2xl p-6 text-center animate-scale-in bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-md)]">
         <div className="text-4xl mb-3">🔒</div>
-        <h2 className="text-xl font-bold mb-2" style={{ fontFamily:"var(--font-fraunces)" }}>Your predictions are locked in!</h2>
-        <p className="text-sm" style={{ color:"var(--cmb-text-secondary)" }}>
+        <h2 className="text-xl font-bold mb-2 font-display">Your predictions are locked in!</h2>
+        <p className="text-sm text-[var(--cmb-text-secondary)]">
           Results unlock when the organiser reveals them — predictions stay secret until then.
         </p>
       </div>
-      <div className="rounded-2xl p-5 space-y-3" style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)" }}>
+      <div className="rounded-2xl p-5 space-y-3 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]">
         <h3 className="font-semibold text-sm">Your predictions</h3>
         {subjects.map(m => {
           const pred = myPreds.find(p=>p.subject_id===m.user_id);
@@ -1060,7 +1054,7 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
         })}
       </div>
       {isOrganiser && (
-        <Button onClick={revealResults} disabled={busy} className="w-full h-11 rounded-xl text-sm font-semibold" style={{ background:"var(--cmb-primary)", color:"var(--cmb-text-inverse)" }}>
+        <Button onClick={revealResults} disabled={busy} className="w-full h-11 rounded-xl text-sm font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">
           {busy?"Revealing…":"Reveal results to the group"}
         </Button>
       )}
@@ -1069,22 +1063,21 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
 
   return (
     <div className="space-y-5">
-      <div className="rounded-2xl overflow-hidden" style={{ background:"var(--cmb-surface)", border:"1px solid var(--cmb-border)", boxShadow:"var(--shadow-md)" }}>
-        <div className="px-5 py-4 border-b" style={{ background:"var(--cmb-primary)", borderColor:"var(--cmb-primary-dark)" }}>
+      <div className="rounded-2xl overflow-hidden bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-md)]">
+        <div className="px-5 py-4 border-b bg-[var(--cmb-primary)] border-[var(--cmb-primary-dark)]">
           <div className="flex items-center gap-2">
-            <Gamepad2 size={18} strokeWidth={1.5} style={{ color:"var(--cmb-warm)" }}/>
-            <h2 className="font-semibold" style={{ color:"var(--cmb-text-inverse)", fontFamily:"var(--font-fraunces)" }}>Gift Predictions</h2>
+            <Gamepad2 size={18} strokeWidth={1.5} className="text-[var(--cmb-warm)]"/>
+            <h2 className="font-semibold text-[var(--cmb-text-inverse)] font-display">Gift Predictions</h2>
           </div>
         </div>
         <div className="p-5 space-y-4">
-          <p className="text-sm leading-relaxed" style={{ color:"var(--cmb-text-secondary)" }}>
+          <p className="text-sm leading-relaxed text-[var(--cmb-text-secondary)]">
             The game is on! Predict what type of Secret Santa gift each person will get.
           </p>
-          <Button onClick={()=>setPredicting(true)} size="lg" className="w-full h-12 rounded-xl font-semibold"
-            style={{ background:"var(--cmb-primary)", color:"var(--cmb-text-inverse)" }}>
+          <Button onClick={()=>setPredicting(true)} size="lg" className="w-full h-12 rounded-xl font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">
             Make my predictions <ArrowRight size={18} strokeWidth={1.5} className="ml-2"/>
           </Button>
-          <p className="text-xs text-center" style={{ color:"var(--cmb-text-muted)" }}>
+          <p className="text-xs text-center text-[var(--cmb-text-muted)]">
             Predict for {subjects.length} people — takes about 2 minutes
           </p>
         </div>
@@ -1106,10 +1099,10 @@ function Avatar({ name, size=36 }: { name:string; size?:number }) {
 
 function EmptyState({ title, body, icon:Icon }: { title:string; body:string; icon:React.ElementType }) {
   return (
-    <div className="rounded-2xl p-10 text-center" style={{ background:"var(--cmb-surface)", border:"2px dashed var(--cmb-border)" }}>
-      <Icon size={32} strokeWidth={1.5} className="mx-auto mb-3" style={{ color:"var(--cmb-text-muted)" }}/>
+    <div className="rounded-2xl p-10 text-center bg-[var(--cmb-surface)] border-2 border-dashed border-[var(--cmb-border)]">
+      <Icon size={32} strokeWidth={1.5} className="mx-auto mb-3 text-[var(--cmb-text-muted)]"/>
       <h3 className="font-semibold mb-2">{title}</h3>
-      <p className="text-sm max-w-xs mx-auto" style={{ color:"var(--cmb-text-secondary)" }}>{body}</p>
+      <p className="text-sm max-w-xs mx-auto text-[var(--cmb-text-secondary)]">{body}</p>
     </div>
   );
 }
