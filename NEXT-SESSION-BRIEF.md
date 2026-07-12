@@ -9,22 +9,24 @@
 1. **Domain cutover** — ✅ **DONE 11 July.** `www.checkmybasket.co.uk` live, apex redirects, link previews work. (Details in section 1.)
 2. **Email notifications** — ✅ **SCAFFOLD BUILT 11 July** (RPCs + `send-draw-emails` edge fn + capture UI). **Only remaining:** Hassan adds `RESEND_API_KEY` + verifies a Resend sending domain. (Section 2.)
 3. **Security features** (2 low-severity fixes) — ✅ **DONE 11 July** (all 3, migrations `20260711214435/214443/214459`). (Section 3.)
-4. **Code quality** — N1/N4/N3 ✅ done (`32ab2a7`); **N2 IN PROGRESS** — 11 of 16 files converted (landing, reveal, both gifts pages, gift-card, info-page, 4 static pages). **4 files remain: `join`, `create`, `settings`, `group`.** (See "N2 continuation" below.)
+4. **Code quality** — N1/N4/N3 ✅ done (`32ab2a7`); **N2 ✅ DONE 12 July — 16/16 files** (last 4: `join` `12492c6`, `create` `81085b9`, `settings` `785b788`, `group` `b9074ac`; all deployed prod). All N-items now complete.
 
 ## ⭐ START HERE — outstanding work for tomorrow
 
-**A. Finish N2 (inline styles → Tailwind utilities).** 4 pages left, in order:
-- `app/join/[invite_code]/page.tsx` (~39 sites)
-- `app/create/page.tsx` (~38)
-- `app/g/[group_id]/settings/page.tsx` (~34)
-- `app/g/[group_id]/page.tsx` (~148 — the big one; do it last, in sections)
+**A. Finish N2 (inline styles → Tailwind utilities). ✅ DONE 12 July — N2 is now 16/16 complete.** The final 4 pages were converted, build-verified, screenshot-checked against a live drawn group, committed and deployed to prod:
+- `app/join/[invite_code]/page.tsx` — 39 → 4 inline (`12492c6`)
+- `app/create/page.tsx` — 38 → 9 inline (`81085b9`)
+- `app/g/[group_id]/settings/page.tsx` — 34 → 5 inline (`785b788`)
+- `app/g/[group_id]/page.tsx` — 148 → 20 inline (`b9074ac`)
 
-**The locked pattern** (established + verified over 11 files, `git show d5f363e` / `83d42b6` for examples):
+All remaining inline styles are the intentional leave-inline set (rgba literals, `backdropFilter`, the WhatsApp `#25D366` hex, `color-mix` priority tint, the hsl-based Avatar, and dynamic/conditional values). All 4 deploys reached READY on prod; test data created for verification was deleted (groups/group_members/auth.users confirmed back to 0). **Nothing left to do on N2.**
+
+**The locked pattern** (established + verified over all 16 files, `git show d5f363e` / `83d42b6` for examples):
 - Static colour → arbitrary utility referencing the same token: `style={{ color:"var(--cmb-primary)" }}` → `className="… text-[var(--cmb-primary)]"`; `background` → `bg-[var(--cmb-X)]`; `borderColor`/`border:"1px solid var(--cmb-X)"` → `border-[var(--cmb-X)]` (add a bare `border` if there was no border utility yet).
 - `fontFamily:"var(--font-fraunces)"` → `font-display`. `boxShadow:"var(--shadow-N)"` → `shadow-[var(--shadow-N)]`. `color:"#fff"` → `text-white`. `flexShrink:0` → `shrink-0`. `marginTop:2` → `mt-0.5`.
 - **LEAVE INLINE** (do NOT convert): `rgba(...)` literals (e.g. cream-on-primary `rgba(255,248,240,0.x)`), gradients, `backdropFilter`, `clipPath`/`animation` keyframe strings, and **dynamic/conditional** values (`background: cond ? A : B`). Split mixed attributes: move the static props to `className`, keep the dynamic/rgba props inline.
 - These use identical CSS vars, so there is **zero visual change** — that's the safety guarantee. Available semantic utilities exist too (`bg-primary`, `bg-card`, `border-border`, `text-foreground`) via `@theme inline` in `globals.css`, but the arbitrary `[var(--cmb-*)]` form was chosen for uniformity and to avoid semantic-name mismatches (e.g. `--cmb-accent` maps to `--destructive`).
-- **Verify each page:** `npx next build` (must stay green), then serve + screenshot. **Preview is flaky via preview_start; use `npx next start -p 3101` (run_in_background) then the browser pane** at `http://localhost:3101/<path>`. The group page needs a live drawn group to see fully — reuse the anon-session + service-SQL setup pattern from the email E2E test (see git history), or convert + build-verify and eyeball the diff. Commit per page or per small batch.
+- **Verify each page:** `npx next build` (must stay green), then serve + screenshot. **Preview is flaky via preview_start; use `npx next start -p 3101` (run_in_background) then the browser pane** at `http://localhost:3101/<path>`. Note (learned 12 July): the `@supabase/ssr` browser client's session does NOT survive the browser tool's hard `navigate()` in the pane — verify authed pages (group/settings) via one continuous in-app flow (create → click the app's own client-side `<Link>`s), and force a data refresh after DB inserts by client-side-navigating away and back (remounts + re-runs `refresh()`).
 
 **B. Email — activate it (needs Hassan, then a 5-min verify).** Once Hassan has (1) added `RESEND_API_KEY` as a Supabase secret and (2) verified a Resend sending domain + set the `EMAIL_FROM` secret (e.g. `CheckMyBasket <noreply@send.checkmybasket.co.uk>`): draw a test group where a member saved an email and confirm delivery. Also **add a privacy-policy line** for the optional email to `app/privacy/page.tsx`. Full detail in section 2.
 
@@ -81,11 +83,11 @@ Both still OUTSTANDING. Apply as a Supabase migration via the MCP `apply_migrati
 - **wishlist_items** "Owner manages own wishlist" (FOR ALL) checks only `user_id = auth.uid()` — `group_id` unconstrained, so a user could insert an item into a group they're not in. Add a write-side check: keep `USING (user_id = auth.uid())` but set `WITH CHECK (user_id = auth.uid() AND is_group_member(group_id))` (reads/deletes stay ownership-only so leave-group cleanup still works — the leave flow deletes wishlist_items *before* removing membership).
 - **get_group_preview** (anon-callable, no rate limit) — enumeration is impractical (invite code = 31^8) but the user asked to implement. Rewrite as VOLATILE plpgsql with a small IP-keyed rate-limit table (IP from `current_setting('request.headers', true)::json->>'x-forwarded-for'`), e.g. ~60 calls / IP / 10 min, fail-open if the header is absent so legit users aren't harmed. (Weigh the write-amplification; if Hassan prefers, a Supabase edge/WAF rate limit is an alternative — note the tradeoff.)
 
-### 4. Code quality — "fix all code quality" (the N-items) — ✅ DONE except N2
+### 4. Code quality — "fix all code quality" (the N-items) — ✅ ALL DONE
 - **N1 ✅** — duplicated `GiftCard` extracted to `components/gift-card.tsx` with a `size="sm"|"lg"` variant; both gift pages use it. Verified via served HTML: `/gifts` renders 12 compact "View"/h-36 cards, `/gifts/under-15` renders 12 "Buy now"/h-40 cards, no crossover.
 - **N4 ✅** — `lib/utils.ts` `timeAgo()` now clamps future timestamps to "just now" and adds w/mo/y units. Unit-checked at every boundary.
 - **N3 ✅** — found two real small-text gold-on-white failures and fixed them: the received anon-message sender label (`app/g/[group_id]/page.tsx` ~714) now uses `--cmb-primary`; the "Wishlist" member badge (~328) uses a new `--cmb-gold-strong` token (`#8A6D2F`, 4.87:1 on white). Gold on dark green (awards, hero, CTAs) left as-is — already compliant.
-- **N2 (STILL OPEN — JUDGEMENT CALL, do NOT blindly mass-edit)** — heavy inline `style={{}}` instead of Tailwind utilities mapped to the `@theme` tokens, across every page. Large incremental refactor with real visual-regression risk. Recommend scoping it (one component/page at a time, verifying each in the preview) rather than a single sweeping change. Flag to the user before doing the whole thing.
+- **N2 ✅ DONE 12 July (16/16 files)** — heavy inline `style={{}}` replaced with `[var(--cmb-*)]` arbitrary-value Tailwind utilities (identical CSS, zero visual change) across every page. Done one page at a time, build + screenshot verified each. Final 4 pages: `join` (39→4) `12492c6`, `create` (38→9) `81085b9`, `settings` (34→5) `785b788`, `group` (148→20) `b9074ac` — all deployed prod. Remaining inline is the intentional leave-inline set only (rgba/gradient/backdropFilter/`#25D366`/`color-mix`/hsl-Avatar/dynamic-conditional). Pattern + rationale in `SCAFFOLD-REVIEW.md` and the ⭐ START HERE block above.
 
 ## Verification patterns (reuse these)
 - **RLS attacker simulation** (proved the role-escalation fixes): create fake `auth.users` rows (a trigger auto-creates `profiles` — do NOT insert profiles manually), build a group + members, then `SET LOCAL role authenticated; SET LOCAL request.jwt.claims = '{"sub":"<uuid>","role":"authenticated"}';` and run the attack/legit query. **Prod DB is currently empty (0 rows)** — always delete test groups + orphaned `auth.users WHERE is_anonymous AND NOT EXISTS (member)` afterwards.
@@ -102,7 +104,7 @@ Both still OUTSTANDING. Apply as a Supabase migration via the MCP `apply_migrati
 QR codes (I10, `lib/qr.ts` + `components/qr-code.tsx`); 48h prediction-round auto-close (pg_cron, migration `20260710140940`); `--gc-*`→`--cmb-*` rename; Lighthouse (mobile 92, all others 100); security review — fixed CRITICAL member→organiser escalation + 2 medium issues (migrations `20260711100522`, `20260711101340`, `20260711103024`) and added security headers; prediction rounds organiser-only to create; code-quality pass N1/N4/N3 (`components/gift-card.tsx`, `timeAgo`, contrast + new `--cmb-gold-strong` token). **Last commit on `main`: `32ab2a7`.**
 
 ## What's left, at a glance
-- **N2** inline-styles → Tailwind refactor — **11/16 files done**; remaining: `join`, `create`, `settings`, `group` (see "N2 continuation / START HERE" at top).
+- ~~**N2** inline-styles → Tailwind refactor — 11/16 files done; remaining: `join`, `create`, `settings`, `group`.~~ ✅ **DONE 12 July — 16/16** (last 4: `12492c6`/`81085b9`/`785b788`/`b9074ac`, all deployed prod; verification test data cleaned).
 - ~~**Security features** — 2 low-severity RLS/rate-limit fixes (section 3).~~ ✅ DONE 11 July (all 3: migrations `20260711214435`, `20260711214443`, `20260711214459`; commit `596feab`, deployed prod).
 - **Email notifications** — scaffold ✅ BUILT (RPCs + `send-draw-emails` edge fn + capture UI, section 2); **only** remaining: Hassan adds `RESEND_API_KEY` + verifies a Resend sending domain, then E2E send can be tested.
 - ~~**Domain cutover** — Hassan-triggered (section 1); OG previews stay broken until then.~~ ✅ DONE 11 July — `www.checkmybasket.co.uk` live, apex redirects, link previews working.
