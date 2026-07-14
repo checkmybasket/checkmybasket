@@ -191,7 +191,7 @@ export default function HomePage() {
         </div>
         <div className="max-w-5xl mx-auto mt-5 pt-4 border-t border-[var(--cmb-border)] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[var(--cmb-text-muted)]">
           <p>Some gift links may earn us a small commission at no extra cost to you. This is how we keep CheckMyBasket free and ad-free.</p>
-          <p className="flex-shrink-0">Made in the UK 🇬🇧 · © 2026 CheckMyBasket</p>
+          <p className="flex-shrink-0">© 2026 CheckMyBasket</p>
         </div>
       </footer>
     </div>

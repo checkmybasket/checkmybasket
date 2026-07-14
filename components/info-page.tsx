@@ -27,7 +27,7 @@ export function InfoPage({ title, updated, children }: { title: string; updated?
           <Link href="/terms" className="hover:underline">Terms</Link>
           <Link href="/contact" className="hover:underline">Contact</Link>
         </div>
-        <p>Made in the UK 🇬🇧 · © 2026 CheckMyBasket</p>
+        <p>© 2026 CheckMyBasket</p>
       </footer>
     </div>
   );
