@@ -58,10 +58,10 @@ export default function HomePage() {
           <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm mb-6 animate-fade-in text-[var(--cmb-warm)]"
             style={{ background: "rgba(255,248,240,0.1)", border: "1px solid rgba(212,165,116,0.3)" }}>
             <Star size={14} strokeWidth={1.5} />
-            <span>Hate buying for someone you barely know?</span>
+            <span>Thoughtful gifts, no matter how well you know them.</span>
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-5 animate-fade-up text-[var(--cmb-text-inverse)] font-display leading-[1.15]">
-            Secret Santa<br />made simple
+            Gifting made simple
           </h1>
           <p className="text-lg sm:text-xl max-w-xl mx-auto mb-8 animate-fade-up animate-delay-100 leading-[1.6]"
             style={{ color: "rgba(255,248,240,0.8)" }}>

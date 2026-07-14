@@ -15,7 +15,7 @@ import type { DrawStatus, GiftCategory, MemberRole, PredictionRoundStatus, Wishl
 
 // ─── Row shapes (explicit columns — select=* is denied on locked-down tables) ─
 interface GroupRow   { id:string; name:string; mode:string; budget_amount:number|null; exchange_date:string|null; exchange_location:string|null; invite_code:string; draw_status:DrawStatus; organiser_id:string; }
-interface MemberRow  { id:string; user_id:string; role:MemberRole; name:string; likes:string|null; dislikes:string|null; sizes:string|null; joined_at:string; }
+interface MemberRow  { id:string; user_id:string; role:MemberRole; name:string; likes:string|null; dislikes:string|null; sizes:string|null; surprise_me:boolean; joined_at:string; }
 interface WishRow    { id:string; user_id:string; title:string; url:string|null; price:number|null; shop_name:string|null; notes:string|null; priority:WishlistPriority; created_at:string; }
 interface ClaimRow   { id:string; wishlist_item_id:string; claimed_by:string; }
 interface DrawRow    { id:string; giver_id:string; recipient_id:string; gift_bought:boolean; }
@@ -75,7 +75,7 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
     if (!group) { setLoadState("noaccess"); return; }
 
     const [members, wishes, myDraw, messages, exclusions, round] = await Promise.all([
-      supabase.from("group_members").select("id,user_id,role,name,likes,dislikes,sizes,joined_at").eq("group_id", group_id).order("joined_at"),
+      supabase.from("group_members").select("id,user_id,role,name,likes,dislikes,sizes,surprise_me,joined_at").eq("group_id", group_id).order("joined_at"),
       supabase.from("wishlist_items").select("id,user_id,title,url,price,shop_name,notes,priority,created_at").eq("group_id", group_id).order("created_at"),
       supabase.from("draws").select("id,giver_id,recipient_id,gift_bought").eq("group_id", group_id).maybeSingle(),
       supabase.from("anon_messages").select("id,recipient_id,content,is_reply,parent_message_id,created_at").eq("group_id", group_id).order("created_at"),
@@ -443,11 +443,23 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
   const myMember = members.find(m=>m.user_id===me);
   const [pleaseAvoid, setPleaseAvoid] = useState(myMember?.dislikes ?? "");
   const [mySizes,     setMySizes]     = useState(myMember?.sizes ?? "");
+  const [surpriseMe,  setSurpriseMe]  = useState(myMember?.surprise_me ?? false);
+  const [surpriseBusy, setSurpriseBusy] = useState(false);
 
   const isMyList = activeUser === me;
   const items    = wishes.filter(w=>w.user_id===activeUser);
   const activeMember = members.find(m=>m.user_id===activeUser);
   const claimsByItem = useMemo(() => new Map(claims.map(c=>[c.wishlist_item_id, c])), [claims]);
+  // "Surprise me" is a TEMPORARY fallback pending the AI recommendation engine
+  // (blocked backlog item in checkmybasket-backlog.md). For now it only flags the
+  // member as open to suggestions and points their Santa at the generic
+  // budget-filtered gift pages — no personalised matching happens yet.
+  const budgetTiers = [500, 1000, 1500, 2000, 2500]; // pence, matching /gifts/under-* pages
+  const budgetTier  = data.group.budget_amount != null && data.group.budget_amount > 0
+    ? budgetTiers.find(t => data.group.budget_amount! <= t)
+    : undefined;
+  const giftIdeasHref = budgetTier ? `/gifts/under-${budgetTier / 100}` : "/gifts";
+
   const priorityLabel: Record<string,string> = { love:"Would love", like:"Would like", inspiration:"Just inspiration" };
   const priorityColor: Record<string,string> = { love:"var(--cmb-accent)", like:"var(--cmb-primary)", inspiration:"var(--cmb-text-muted)" };
 
@@ -488,6 +500,23 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
     const { error } = await supabase.from("wishlist_items").delete().eq("id", id);
     if (error) { toast.error(error.message); return; }
     await refresh();
+  }
+
+  async function toggleSurpriseMe() {
+    if (surpriseBusy) return;
+    setSurpriseBusy(true);
+    const next = !surpriseMe;
+    const supabase = createClient();
+    const { error } = await supabase.from("group_members")
+      .update({ surprise_me: next })
+      .eq("group_id", data.group.id).eq("user_id", me);
+    if (error) toast.error(error.message);
+    else {
+      setSurpriseMe(next);
+      toast.success(next ? "Your Secret Santa will be pointed at gift ideas in budget" : "Surprise me turned off");
+      await refresh();
+    }
+    setSurpriseBusy(false);
   }
 
   async function saveMeta() {
@@ -576,6 +605,21 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
             </div>
             <p className="text-xs mt-2 text-[var(--cmb-text-muted)]">Add links from any shop — Etsy, John Lewis, Amazon, anywhere</p>
           </div>
+          <div className="rounded-2xl p-4 flex items-center justify-between gap-3 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
+            <div>
+              <p className="font-semibold text-sm">Surprise me 🎁</p>
+              <p className="text-xs mt-0.5 text-[var(--cmb-text-muted)]">
+                {surpriseMe
+                  ? "On — your Secret Santa knows you're happy to be surprised and will see gift ideas in budget."
+                  : "Happy to be surprised? Your Secret Santa will be pointed at gift ideas instead of a list."}
+              </p>
+            </div>
+            <Button variant={surpriseMe?"default":"outline"} size="sm" onClick={toggleSurpriseMe} disabled={surpriseBusy}
+              className="h-9 rounded-lg text-xs px-3 flex-shrink-0"
+              style={surpriseMe?{ background:"var(--cmb-primary)", color:"var(--cmb-text-inverse)" }:{}}>
+              {surpriseMe?<><CheckCircle2 size={13} strokeWidth={2} className="mr-1"/>On</>:"Turn on"}
+            </Button>
+          </div>
           <div className="rounded-2xl overflow-hidden bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
             <button className="w-full px-5 py-4 flex items-center justify-between text-left" onClick={()=>setEditingMeta(v=>!v)}>
               <div>
@@ -601,6 +645,19 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
             )}
           </div>
         </>
+      )}
+      {!isMyList && activeMember?.surprise_me && (
+        <div className="rounded-2xl p-4 bg-[var(--cmb-surface)] border border-[var(--cmb-gold-strong)] shadow-[var(--shadow-sm)]">
+          <p className="font-semibold text-sm">🎁 {activeMember.name.split(" ")[0]} is happy to be surprised</p>
+          <p className="text-xs mt-1 mb-3 text-[var(--cmb-text-muted)]">
+            No need to stick to a list — browse curated ideas{budgetTier ? " within the group budget" : ""} and pick something you think they&apos;d like.
+          </p>
+          <Link href={giftIdeasHref}>
+            <Button size="sm" variant="outline" className="h-9 rounded-lg text-xs px-3">
+              Browse gift ideas <ArrowRight size={13} strokeWidth={2} className="ml-1"/>
+            </Button>
+          </Link>
+        </div>
       )}
       {!isMyList && activeMember && (activeMember.dislikes || activeMember.sizes || activeMember.likes) && (
         <div className="rounded-2xl p-4 space-y-3 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]">
