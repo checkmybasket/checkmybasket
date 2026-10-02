@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { GIFT_CATEGORIES } from "@/lib/gift-categories";
 import { Gift, Users, MessageCircle, ShoppingBag, Gamepad2, ShieldOff, ArrowRight, Star, CheckCircle2, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -18,16 +19,10 @@ const steps = [
   { num: "04", title: "Find the perfect gift", body: "Browse wishlists, ask anonymous questions, and shop from curated UK gift ideas." },
 ];
 
-const budgetLinks = [
-  { label: "Gifts under £5",  href: "/gifts/under-5" },
-  { label: "Gifts under £10", href: "/gifts/under-10" },
-  { label: "Gifts under £15", href: "/gifts/under-15" },
-  { label: "Gifts under £20", href: "/gifts/under-20" },
-  { label: "Gifts under £25", href: "/gifts/under-25" },
-  { label: "Funny gifts",     href: "/gifts/funny" },
-  { label: "Cosy gifts",      href: "/gifts/cosy" },
-  { label: "Safe for work",   href: "/gifts/colleague" },
-];
+const budgetLinks = GIFT_CATEGORIES.map(({ slug, label, heading, budget }) => ({
+  label: budget ? heading : label,
+  href: `/gifts/${slug}`,
+}));
 
 export default function HomePage() {
   return (

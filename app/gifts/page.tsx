@@ -1,20 +1,10 @@
 import Link from "next/link";
+import { GIFT_CATEGORIES } from "@/lib/gift-categories";
 import { Gift, ChevronRight, Star, ShieldOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GiftCard } from "@/components/gift-card";
 
-export const metadata = { title: "Secret Santa Gift Ideas UK", description: "Curated Secret Santa gift ideas from UK shops. Under £5, £10, £15, £20, £25. No ads." };
-
-const CATEGORIES = [
-  { slug:"under-5",   label:"Under £5",       desc:"Stocking fillers and tiny treats" },
-  { slug:"under-10",  label:"Under £10",      desc:"Great value crowd-pleasers" },
-  { slug:"under-15",  label:"Under £15",      desc:"The sweet spot for Secret Santa" },
-  { slug:"under-20",  label:"Under £20",      desc:"A bit more to play with" },
-  { slug:"under-25",  label:"Under £25",      desc:"Generous and thoughtful picks" },
-  { slug:"colleague", label:"For colleagues", desc:"Safe, tasteful, universally liked" },
-  { slug:"funny",     label:"Funny gifts",    desc:"Actually funny, not just novelty" },
-  { slug:"cosy",      label:"Cosy gifts",     desc:"Warm, snuggly, universally loved" },
-];
+export const metadata = { title: "Secret Santa Gift Ideas UK", description: "Curated Secret Santa gift ideas from UK shops. Under £10, £20, £30 and £50, plus colleague, funny, cosy and personalised gifts. No ads." };
 
 const FEATURED = [
   { title:"Personalised Star Map Print",       price:1499, shop:"Etsy",                  tags:["Thoughtful","Unique"],    url:"#" },
@@ -42,7 +32,7 @@ export default function GiftsPage() {
           <p className="text-[var(--cmb-text-secondary)]">Curated picks from UK shops. No ads — some links earn us a small commission.</p>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
-          {CATEGORIES.map(cat => (
+          {GIFT_CATEGORIES.map(cat => (
             <Link key={cat.slug} href={`/gifts/${cat.slug}`} className="rounded-2xl p-4 border transition-all duration-150 hover:scale-105 group bg-[var(--cmb-surface)] border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style={{ background:"rgba(27,67,50,0.08)" }}>
                 <Gift size={20} strokeWidth={1.5} className="text-[var(--cmb-primary)]"/>

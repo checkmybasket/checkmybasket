@@ -1,29 +1,24 @@
 import type { Metadata } from "next";
+import { GIFT_CATEGORIES } from "@/lib/gift-categories";
 import Link from "next/link";
 import { Gift, ChevronLeft, ShieldOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GiftCard } from "@/components/gift-card";
 import { notFound } from "next/navigation";
 
-const CATEGORIES: Record<string,{ label:string; desc:string; budget:number }> = {
-  "under-5":   { label:"Gifts under £5",        desc:"Small but mighty stocking fillers from UK shops.",    budget: 500 },
-  "under-10":  { label:"Gifts under £10",       desc:"Thoughtful picks that don't break the bank.",         budget:1000 },
-  "under-15":  { label:"Gifts under £15",       desc:"The sweet spot for most Secret Santa budgets.",       budget:1500 },
-  "under-20":  { label:"Gifts under £20",       desc:"A bit more to play with — quality guaranteed.",      budget:2000 },
-  "under-25":  { label:"Gifts under £25",       desc:"Generous and genuinely thoughtful gift ideas.",       budget:2500 },
-  "colleague": { label:"Gifts for colleagues",  desc:"Safe, tasteful, and universally appreciated.",        budget:1500 },
-  "funny":     { label:"Funny Secret Santa gifts", desc:"Actually funny. Not just another novelty mug.",   budget:1500 },
-  "cosy":      { label:"Cosy gifts",            desc:"Warm, snuggly, and universally adored.",              budget:2000 },
-};
-
 const PRODUCTS: Record<string,Array<{ title:string; price:number; shop:string; tags:string[]; url:string }>> = {
-  "under-15": [
+  "general": [
     { title:"Luxury Caramel Hot Chocolate Kit",  price: 999, shop:"Hotel Chocolat",        tags:["Cosy","Edible"],        url:"#" },
     { title:"Mini Enamel Notebook Set",          price:1099, shop:"Paperchase",            tags:["Stationery","Pretty"],  url:"#" },
     { title:"Grow Your Own Herbs Kit",           price:1299, shop:"Waitrose",              tags:["Eco","Fun"],            url:"#" },
     { title:"Personalised Bookmark",             price: 799, shop:"Not on the High Street",tags:["Thoughtful"],           url:"#" },
     { title:"Bath Salts Collection",             price:1199, shop:"Lush",                  tags:["Cosy","Relaxing"],      url:"#" },
     { title:"Mini Crossword Puzzle Book",        price: 599, shop:"Waterstones",           tags:["Books","Funny"],        url:"#" },
+  ],
+  "personalised": [
+    { title: "Personalised Star Map Print", price: 1499, shop: "Etsy", tags: ["Personalised", "Thoughtful"], url: "#" },
+    { title: "Personalised Enamel Mug", price: 1199, shop: "Not on the High Street", tags: ["Personalised", "Practical"], url: "#" },
+    { title: "Personalised Bookmark", price: 799, shop: "Not on the High Street", tags: ["Personalised", "Books"], url: "#" },
   ],
   "colleague": [
     { title:"Artisan Coffee Blend",              price:1299, shop:"Fortnum & Mason",       tags:["Coffee","Premium"],     url:"#" },
@@ -52,19 +47,25 @@ const PRODUCTS: Record<string,Array<{ title:string; price:number; shop:string; t
 };
 
 function getProducts(slug: string) {
-  return PRODUCTS[slug] ?? PRODUCTS["under-15"].map(p => ({ ...p, price: Math.min(p.price, CATEGORIES[slug]?.budget??1500) }));
+  const category = GIFT_CATEGORIES.find(cat => cat.slug === slug);
+  const budget = category?.budget;
+  if (budget !== undefined) {
+    const products = [...new Map(Object.values(PRODUCTS).flat().map(product => [product.title, product])).values()];
+    return products.filter(product => product.price < budget);
+  }
+  return PRODUCTS[slug] ?? [];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ category:string }> }): Promise<Metadata> {
   const { category } = await params;
-  const cat = CATEGORIES[category];
+  const cat = GIFT_CATEGORIES.find(cat => cat.slug === category);
   if (!cat) return {};
-  return { title:`${cat.label} UK`, description:`${cat.desc} Hand-picked from UK shops. No ads — curated by CheckMyBasket.` };
+  return { title:`${cat.heading} UK`, description:`${cat.desc} Hand-picked from UK shops. No ads — curated by CheckMyBasket.` };
 }
 
 export default async function CategoryPage({ params }: { params: Promise<{ category:string }> }) {
   const { category } = await params;
-  const cat = CATEGORIES[category];
+  const cat = GIFT_CATEGORIES.find(cat => cat.slug === category);
   if (!cat) notFound();
   const products = getProducts(category);
 
@@ -75,20 +76,20 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
           <Link href="/gifts"><Button variant="ghost" size="sm" className="h-9 w-9 p-0 rounded-lg"><ChevronLeft size={20} strokeWidth={1.5}/></Button></Link>
           <div className="flex items-center gap-2 flex-1 min-w-0">
             <Gift size={18} strokeWidth={1.5} className="text-[var(--cmb-primary)] shrink-0"/>
-            <span className="font-semibold truncate font-display text-[var(--cmb-primary)]">{cat.label}</span>
+            <span className="font-semibold truncate font-display text-[var(--cmb-primary)]">{cat.heading}</span>
           </div>
           <Link href="/create"><Button size="sm" className="h-9 px-3 rounded-lg text-xs font-semibold flex-shrink-0 bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">Create draw</Button></Link>
         </div>
       </header>
       <main className="max-w-5xl mx-auto px-4 py-10">
         <div className="mb-8">
-          <h1 className="text-3xl sm:text-4xl font-bold mb-2 font-display">{cat.label}</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold mb-2 font-display">{cat.heading}</h1>
           <p className="text-[var(--cmb-text-secondary)]">{cat.desc}</p>
         </div>
         <div className="flex gap-2 overflow-x-auto pb-2 mb-8">
-          {Object.entries(CATEGORIES).filter(([s])=>s!==category).map(([slug,c]) => (
+          {GIFT_CATEGORIES.filter(cat => cat.slug !== category).map(({ slug, label }) => (
             <Link key={slug} href={`/gifts/${slug}`}
-              className="flex-shrink-0 rounded-full px-4 py-2 text-sm font-medium border transition-all duration-150 bg-[var(--cmb-surface)] border-[var(--cmb-border)] text-[var(--cmb-text-secondary)]">{c.label}</Link>
+              className="flex-shrink-0 rounded-full px-4 py-2 text-sm font-medium border transition-all duration-150 bg-[var(--cmb-surface)] border-[var(--cmb-border)] text-[var(--cmb-text-secondary)]">{label}</Link>
           ))}
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
