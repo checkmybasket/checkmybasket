@@ -13,8 +13,8 @@ export default function PrivacyPage() {
         <p>
           We collect the minimum needed to run a Secret Santa: the name you type when you join, and anything you
           choose to add (wishlist items, likes and dislikes, messages). No account is required, so we don&apos;t ask for
-          a phone number or password. Email is optional, for draw notifications. We show no ads and use no advertising trackers. When you leave a
-          group or a group is deleted, its group data goes with it. A saved email stays on your anonymous profile until you remove it.
+          a phone number or password. Email is optional, for draw notifications and, if you verify it, password-free access on another device. We show no ads and use no advertising trackers. When you leave a
+          group or a group is deleted, its group data goes with it. A notification email stays on your profile until you remove it. A verified sign-in email is retained separately so you can return to your groups.
         </p>
       </Section>
 
@@ -22,7 +22,8 @@ export default function PrivacyPage() {
         <p><strong>Things you give us:</strong></p>
         <ul className="list-disc pl-5 space-y-1">
           <li>The display name you enter when creating or joining a group</li>
-          <li>An email address, only if you choose to receive draw notifications. It is saved on your anonymous profile and used for groups joined with that browser session.</li>
+          <li>An email address, only if you choose to receive draw notifications. It is saved on your profile and used for groups linked to your member identity.</li>
+          <li>A verified sign-in email, only if you choose to save access to your groups.</li>
           <li>Group details set by the organiser (group name, budget, exchange date and location)</li>
           <li>Wishlist items, likes, dislikes and sizes — only if you choose to add them</li>
           <li>Anonymous messages you send or receive within your group (text only, 500 characters)</li>
@@ -30,7 +31,7 @@ export default function PrivacyPage() {
         </ul>
         <p><strong>Things created automatically:</strong></p>
         <ul className="list-disc pl-5 space-y-1">
-          <li>An anonymous account identifier, stored in a cookie so you stay signed in to your group. It is linked to your optional email if you save one, but not to a phone number.</li>
+          <li>A member identifier, stored in a cookie so you stay signed in to your group. It starts anonymously and can be linked to a verified email for access on another device. It is never linked to a phone number.</li>
           <li>Your Secret Santa draw assignment</li>
         </ul>
         <p>
@@ -42,7 +43,7 @@ export default function PrivacyPage() {
       <Section heading="How we use it">
         <p>
           Solely to run your Secret Santa: matching the draw, showing wishlists to your group, delivering anonymous
-          messages, running the group game, and sending draw notifications if you provide an email. We never sell your data, never share it with advertisers, and never
+          messages, running the group game, sending draw notifications if you provide an email, and restoring access to your existing member identity when you verify a sign-in email. We never sell your data, never share it with advertisers, and never
           use it to build profiles of you.
         </p>
         <p>
@@ -54,7 +55,7 @@ export default function PrivacyPage() {
 
       <Section heading="Who can see what">
         <ul className="list-disc pl-5 space-y-1">
-          <li>Your optional email is private from group members and organisers. We use Resend to deliver draw emails, sharing your address, display name and group name with that service.</li>
+          <li>Your optional email is private from group members and organisers. We use Resend to deliver draw emails, sharing your address, display name and group name with that service. Verification and sign-in emails also use Resend, which receives your address and the private access link.</li>
           <li>Your name, wishlist, likes/dislikes and sizes are visible only to members of your group.</li>
           <li>Your draw assignment is visible only to you — not to other members, and not to the organiser. This is enforced at the database level.</li>
           <li>Anonymous messages show the recipient only &ldquo;Your Secret Santa 🤫&rdquo; — the sender&apos;s identity is never exposed, and this is also enforced at the database level.</li>
@@ -73,7 +74,9 @@ export default function PrivacyPage() {
         <ul className="list-disc pl-5 space-y-1">
           <li>Leave a group → your membership and wishlist for that group are deleted immediately.</li>
           <li>An organiser deletes a group → everything in it (members, wishlists, messages, draws, game data) is deleted immediately.</li>
-          <li>You can remove your saved email on the match reveal screen to stop future draw emails. Leaving or deleting a group does not itself remove the email stored on your anonymous profile.</li>
+          <li>You can remove your saved email on the match reveal screen to stop future draw emails. Leaving or deleting a group does not itself remove the notification email stored on your profile.</li>
+          <li>Sign-in links expire after 15 minutes and work once. We store only their hashes in the database; expired records are removed when further recovery requests are processed. Hashed rate-limit identifiers are kept for up to a day of inactivity, then removed on the next request.</li>
+          <li>Removing your notification email does not remove your verified sign-in email. Contact us to change or delete your sign-in identity; deleting it also ends email recovery.</li>
           <li>You can clear your wishlist at any time from group settings.</li>
         </ul>
       </Section>

@@ -12,7 +12,7 @@
 //  - If RESEND_API_KEY is not configured the function is a harmless no-op, so
 //    the draw flow is never blocked while email is still being set up.
 
-import { createClient } from "jsr:@supabase/supabase-js@2";
+import { createClient } from "jsr:@supabase/supabase-js@2.107.0";
 
 const CORS = {
   "Access-Control-Allow-Origin": "*",
@@ -96,8 +96,9 @@ Deno.serve(async (req) => {
     return json({ sent: 0, reason: "No members have saved an email yet" });
   }
 
-  const groupUrl = `${APP_URL}/g/${group_id}`;
+  const groupUrl = `${APP_URL}/return?group=${encodeURIComponent(group_id)}`;
   const groupName = (group.name as string) ?? "your Secret Santa group";
+  const escapeHtml = (value: string) => value.replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]!));
 
   const results = await Promise.allSettled(
     recipients.map((r) => {
@@ -105,7 +106,7 @@ Deno.serve(async (req) => {
       const html = `
         <div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:480px;margin:0 auto;color:#1B4332">
           <h1 style="font-size:22px">Names have been drawn! 🎅</h1>
-          <p>Hi ${first}, the draw for <strong>${groupName}</strong> is done — your Secret Santa match is ready.</p>
+          <p>Hi ${escapeHtml(first)}, the draw for <strong>${escapeHtml(groupName)}</strong> is done — your Secret Santa match is ready.</p>
           <p style="margin:24px 0">
             <a href="${groupUrl}" style="background:#1B4332;color:#FFF8F0;text-decoration:none;padding:12px 22px;border-radius:10px;display:inline-block;font-weight:600">Open CheckMyBasket to see your match</a>
           </p>

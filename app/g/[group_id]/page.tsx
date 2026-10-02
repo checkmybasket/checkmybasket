@@ -10,6 +10,7 @@ import { Progress } from "@/components/ui/progress";
 import { cn, formatBudget, getInitials, timeAgo } from "@/lib/utils";
 import Link from "next/link";
 import { toast } from "sonner";
+import { EmailRecovery } from "@/components/email-recovery";
 import { createClient } from "@/lib/supabase/client";
 import type { DrawStatus, GiftCategory, MemberRole, PredictionRoundStatus, WishlistPriority } from "@/lib/types";
 
@@ -116,6 +117,8 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
     setLoadState("ready");
   }, [group_id]);
 
+  // refresh updates state only after its asynchronous authentication/data reads.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { refresh(); }, [refresh]);
 
   if (loadState === "loading") return (
@@ -132,8 +135,9 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
       <Lock size={36} strokeWidth={1.5} className="mb-4 text-[var(--cmb-text-muted)]" />
       <h1 className="text-xl font-bold mb-2 font-display">This group is private</h1>
       <p className="text-sm mb-6 max-w-sm text-[var(--cmb-text-secondary)]">
-        Open the invite link you were sent to join, or ask your organiser to share it again.
+        Already joined? Use your verified email to return on this device. To join for the first time, open the invite link from your organiser.
       </p>
+      <Link href={`/return?group=${group_id}`}><Button className="rounded-xl h-11 px-6 mb-3">Return with email</Button></Link>
       <Link href="/"><Button variant="outline" className="rounded-xl h-11 px-6 border border-[var(--cmb-border-strong)]">Back to home</Button></Link>
     </div>
   );
@@ -162,7 +166,7 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
       </header>
 
       <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-6 pb-28">
-        {tab==="draw"      && <DrawTab data={data} isOrganiser={isOrganiser} refresh={refresh}/>}
+        {tab==="draw"      && <><DrawTab data={data} isOrganiser={isOrganiser} refresh={refresh}/><EmailRecovery groupId={group.id} /></>}
         {tab==="wishlists" && <WishlistsTab data={data} refresh={refresh}/>}
         {tab==="messages"  && <MessagesTab data={data} refresh={refresh}/>}
         {tab==="games"     && <GamesTab data={data} refresh={refresh}/>}

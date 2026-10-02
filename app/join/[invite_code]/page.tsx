@@ -229,7 +229,7 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
                     aria-describedby={emailError ? "email-hint email-error" : "email-hint"} aria-invalid={!!emailError}
                     className="h-12 text-base rounded-xl border border-[var(--cmb-border-strong)]"/>
                   {emailError && <p id="email-error" role="alert" className="mt-1 text-sm text-[var(--cmb-error)]">{emailError}</p>}
-                  <p className="text-xs mt-2 text-[var(--cmb-text-muted)]">This updates the saved email for groups you join in this browser; leaving it blank turns notifications off. <Link href="/privacy" className="underline">Privacy policy</Link></p>
+                  <p className="text-xs mt-2 text-[var(--cmb-text-muted)]">This updates your notification email across your groups; leaving it blank turns notifications off. Sign-in recovery is enabled separately after joining. <Link href="/privacy" className="underline">Privacy policy</Link></p>
                 </div>
                 <Button onClick={handleJoin} disabled={busy} size="lg" className="w-full h-12 text-base rounded-xl font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">
                   {busy ? "Joining…" : <>Join this Secret Santa <ArrowRight size={18} strokeWidth={1.5} className="ml-2"/></>}

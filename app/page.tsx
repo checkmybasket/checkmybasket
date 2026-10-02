@@ -35,6 +35,7 @@ export default function HomePage() {
             <span className="font-semibold text-lg font-display">CheckMyBasket</span>
           </Link>
           <nav className="hidden sm:flex items-center gap-6 text-sm text-[var(--cmb-text-secondary)]">
+            <Link href="/return" className="hover:text-[var(--cmb-primary)] transition-colors duration-150">Return to your group</Link>
             <Link href="/gifts" className="hover:text-[var(--cmb-primary)] transition-colors duration-150">Gift ideas</Link>
             <Link href="#how-it-works" className="hover:text-[var(--cmb-primary)] transition-colors duration-150">How it works</Link>
           </nav>
@@ -179,6 +180,7 @@ export default function HomePage() {
             <Link href="/gifts" className="hover:text-[var(--cmb-primary)] transition-colors">Gift ideas</Link>
             <Link href="/create" className="hover:text-[var(--cmb-primary)] transition-colors">Create draw</Link>
             <Link href="/about" className="hover:text-[var(--cmb-primary)] transition-colors">About</Link>
+            <Link href="/return" className="hover:text-[var(--cmb-primary)]">Return to your group</Link>
             <Link href="/privacy" className="hover:text-[var(--cmb-primary)] transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-[var(--cmb-primary)] transition-colors">Terms</Link>
             <Link href="/contact" className="hover:text-[var(--cmb-primary)] transition-colors">Contact</Link>

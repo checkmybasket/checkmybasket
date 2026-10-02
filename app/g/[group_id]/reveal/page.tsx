@@ -6,6 +6,7 @@ import { Gift, MessageCircle, ShoppingBag, CheckCircle2, Lock, ChevronLeft, Arro
 import { Button } from "@/components/ui/button";
 import { formatBudget } from "@/lib/utils";
 import { toast } from "sonner";
+import { EmailRecovery } from "@/components/email-recovery";
 import { createClient } from "@/lib/supabase/client";
 
 interface Match {
@@ -341,6 +342,7 @@ function RevealedScreen({
 
       {/* Manage the optional email saved before the draw */}
       <EmailCapture />
+      <EmailRecovery groupId={groupId} />
     </div>
   );
 }
@@ -377,7 +379,7 @@ function EmailCapture() {
         <p className="font-semibold text-sm">Draw notification email</p>
       </div>
       <p className="text-xs mb-3 text-[var(--cmb-text-secondary)]">
-        Manage your optional email for future draws in groups joined with this browser. Saving it here does not send an email for this draw. Clear the field and save to stop notifications.
+        Manage your optional notification email for future draws across your groups. Saving it here does not send an email for this draw. Clear the field and save to stop notifications. Your verified sign-in email is managed separately below.
       </p>
       <div className="flex gap-2">
         <input

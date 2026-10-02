@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import type { GroupMode } from "@/lib/types";
 import { toast } from "sonner";
 import { createClient } from "@/lib/supabase/client";
+import { EmailRecovery } from "@/components/email-recovery";
 import { QRCodeSvg } from "@/components/qr-code";
 import { ensureSession } from "@/lib/supabase/auth";
 
@@ -91,6 +92,8 @@ export default function CreatePage() {
         </div>
         <h1 className="text-2xl font-bold mb-1 animate-fade-up font-display">{form.groupName} is ready</h1>
         <p className="text-sm mb-8 animate-fade-up animate-delay-100 text-[var(--cmb-text-secondary)]">Share the link below to invite your group</p>
+
+        <EmailRecovery groupId={groupId} />
 
         {/* WhatsApp — primary */}
         <Button onClick={shareWhatsApp} size="lg" className="w-full h-14 rounded-xl font-semibold mb-3 animate-fade-up animate-delay-200 text-white"
@@ -210,7 +213,7 @@ export default function CreatePage() {
             onChange={e => setForm(f => ({ ...f, email:e.target.value }))} aria-describedby={errors.email ? "email-hint email-error" : "email-hint"} aria-invalid={!!errors.email}
             className="h-12 text-base rounded-xl border border-[var(--cmb-border-strong)]"/>
           {errors.email && <p id="email-error" role="alert" className="mt-1 text-sm text-[var(--cmb-error)]">{errors.email}</p>}
-          <p className="text-xs mt-2 text-[var(--cmb-text-muted)]">This updates the saved email for groups you join in this browser; leaving it blank turns notifications off. <Link href="/privacy" className="underline">Privacy policy</Link></p>
+          <p className="text-xs mt-2 text-[var(--cmb-text-muted)]">This updates your notification email across your groups; leaving it blank turns notifications off. Sign-in recovery is enabled separately after joining. <Link href="/privacy" className="underline">Privacy policy</Link></p>
         </div>
       </main>
 
