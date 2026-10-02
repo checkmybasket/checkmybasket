@@ -1,0 +1,356 @@
+{
+  "source": "Awin",
+  "advertiserId": "736",
+  "publisherId": "2918745",
+  "updatedAt": "2026-10-02T13:09:03Z",
+  "products": [
+    {
+      "id": "awin:736:4327336",
+      "merchantProductId": "4327336",
+      "awinProductId": "44777982182",
+      "title": "Cadbury Dairy Milk Chunk Collection Gift Tin 300g",
+      "price": 850,
+      "currency": "GBP",
+      "shop": "Cadbury Gifts Direct",
+      "tags": [
+        "Chocolate",
+        "Gift tin"
+      ],
+      "description": "Chocolate chunks in a reusable tin make a compact gift for a Dairy Milk fan.",
+      "url": "https://www.awin1.com/pclick.php?p=44777982182&a=2918745&m=736",
+      "merchantUrl": "https://www.cadburygiftsdirect.co.uk/cadbury-dairy-milk-chunk-collection-gift-tin-300g.html",
+      "image": "https://www.cadburygiftsdirect.co.uk/media/catalog/product/0/7/07622202804175_h1n1_s01_1.webp",
+      "categories": [
+        "colleague"
+      ],
+      "inStock": true,
+      "deliveryNote": "Delivery extra \u2014 check at checkout"
+    },
+    {
+      "id": "awin:736:4326228",
+      "merchantProductId": "4326228",
+      "awinProductId": "45294685081",
+      "title": "Cadbury Dairy Milk Chocolate Gift Bar 345g",
+      "price": 550,
+      "currency": "GBP",
+      "shop": "Cadbury Gifts Direct",
+      "tags": [
+        "Chocolate",
+        "Milk chocolate"
+      ],
+      "description": "A generous Dairy Milk bar for someone who enjoys a simple chocolate treat.",
+      "url": "https://www.awin1.com/pclick.php?p=45294685081&a=2918745&m=736",
+      "merchantUrl": "https://www.cadburygiftsdirect.co.uk/cadbury-dairy-milk-chocolate-gift-bar-345g.html",
+      "image": "https://www.cadburygiftsdirect.co.uk/media/catalog/product/c/d/cdm_345g_mob_opt.webp",
+      "categories": [
+        "colleague"
+      ],
+      "inStock": true,
+      "deliveryNote": "Delivery extra \u2014 check at checkout"
+    },
+    {
+      "id": "awin:736:4320089",
+      "merchantProductId": "4320089",
+      "awinProductId": "41784645926",
+      "title": "Cadbury Dairy Milk Favourites Chocolate Selection Box 351g",
+      "price": 758,
+      "currency": "GBP",
+      "shop": "Cadbury Gifts Direct",
+      "tags": [
+        "Chocolate",
+        "Selection box"
+      ],
+      "description": "A selection box offers a mix of familiar Cadbury favourites in one gift.",
+      "url": "https://www.awin1.com/pclick.php?p=41784645926&a=2918745&m=736",
+      "merchantUrl": "https://www.cadburygiftsdirect.co.uk/cadbury-favourites-chocolate-selection-box-351g.html",
+      "image": "https://www.cadburygiftsdirect.co.uk/media/catalog/product/0/7/07622202303340_h1n1_s01.webp",
+      "categories": [
+        "colleague"
+      ],
+      "inStock": true,
+      "deliveryNote": "Delivery extra \u2014 check at checkout"
+    },
+    {
+      "id": "awin:736:4316497",
+      "merchantProductId": "4316497",
+      "awinProductId": "41774990022",
+      "title": "Green & Black's Classic Miniatures Chocolate Bar Collection 180g",
+      "price": 725,
+      "currency": "GBP",
+      "shop": "Cadbury Gifts Direct",
+      "tags": [
+        "Chocolate",
+        "Miniatures"
+      ],
+      "description": "Miniature chocolate bars offer a tasting-style gift without a large box.",
+      "url": "https://www.awin1.com/pclick.php?p=41774990022&a=2918745&m=736",
+      "merchantUrl": "https://www.cadburygiftsdirect.co.uk/green-black-s-classic-miniatures-chocolate-bar-collection-180g.html",
+      "image": "https://www.cadburygiftsdirect.co.uk/media/catalog/product/g/_/g_b_classic_collection_right.jpg",
+      "categories": [
+        "colleague"
+      ],
+      "inStock": true,
+      "deliveryNote": "Delivery extra \u2014 check at checkout"
+    },
+    {
+      "id": "awin:736:THANK4257960",
+      "merchantProductId": "THANK4257960",
+      "awinProductId": "34394717693",
+      "title": "Cadbury Thank You Dairy Milk Chocolate Bar 180g",
+      "price": 449,
+      "currency": "GBP",
+      "shop": "Cadbury Gifts Direct",
+      "tags": [
+        "Chocolate",
+        "Thank you"
+      ],
+      "description": "A chocolate bar with a thank-you wrapper suits a small gesture of appreciation.",
+      "url": "https://www.awin1.com/pclick.php?p=34394717693&a=2918745&m=736",
+      "merchantUrl": "https://www.cadburygiftsdirect.co.uk/thank-you-dairy-milk-chocolate-bar-180g.html",
+      "image": "https://www.cadburygiftsdirect.co.uk/media/catalog/product/t/h/thank-you-cdm-180g-with-chunks-mob-opt_1.webp",
+      "categories": [
+        "colleague"
+      ],
+      "inStock": true,
+      "deliveryNote": "Delivery extra \u2014 check at checkout"
+    },
+    {
+      "id": "awin:736:TEACH4257960",
+      "merchantProductId": "TEACH4257960",
+      "awinProductId": "34394717789",
+      "title": "Cadbury Thank You Teacher Dairy Milk Chocolate Bar 180g",
+      "price": 449,
+      "currency": "GBP",
+      "shop": "Cadbury Gifts Direct",
+      "tags": [
+        "Chocolate",
+        "Teachers"
+      ],
+      "description": "A teacher-themed wrapper makes this a small end-of-term thank-you gift.",
+      "url": "https://www.awin1.com/pclick.php?p=34394717789&a=2918745&m=736",
+      "merchantUrl": "https://www.cadburygiftsdirect.co.uk/thank-you-teacher-dairy-milk-bar.html",
+      "image": "https://www.cadburygiftsdirect.co.uk/media/catalog/product/c/d/cdm-180g-thank-you-teacher_2.jpg",
+      "categories": [],
+      "inStock": true,
+      "deliveryNote": "Delivery extra \u2014 check at checkout"
+    },
+    {
+      "id": "awin:736:ZCBAPOST",
+      "merchantProductId": "ZCBAPOST",
+      "awinProductId": "27900251927",
+      "title": "Cadbury Chocolate Selection Box Bar Post Box",
+      "price": 1299,
+      "currency": "GBP",
+      "shop": "Cadbury Gifts Direct",
+      "tags": [
+        "Chocolate",
+        "Letterbox gift"
+      ],
+      "description": "A letterbox-sized selection of chocolate bars is handy for sending a gift directly.",
+      "url": "https://www.awin1.com/pclick.php?p=27900251927&a=2918745&m=736",
+      "merchantUrl": "https://www.cadburygiftsdirect.co.uk/cadbury-chocolate-selection-box-bar-post-box.html",
+      "image": "https://www.cadburygiftsdirect.co.uk/media/catalog/product/p/o/postal_box_10_bars_mob_opt_2.jpg",
+      "categories": [
+        "colleague"
+      ],
+      "inStock": true,
+      "deliveryNote": "Check postal delivery options at checkout"
+    },
+    {
+      "id": "awin:736:DAIMSB",
+      "merchantProductId": "DAIMSB",
+      "awinProductId": "40267777675",
+      "title": "Cadbury Daim & Dairy Milk Chocolate Selection Box 514g",
+      "price": 1200,
+      "currency": "GBP",
+      "shop": "Cadbury Gifts Direct",
+      "tags": [
+        "Chocolate",
+        "Selection box"
+      ],
+      "description": "A chocolate selection for someone who enjoys Daim and Dairy Milk.",
+      "url": "https://www.awin1.com/pclick.php?p=40267777675&a=2918745&m=736",
+      "merchantUrl": "https://www.cadburygiftsdirect.co.uk/daim-selection-box.html",
+      "image": "https://www.cadburygiftsdirect.co.uk/media/catalog/product/d/a/daim_selection-box_front.jpg",
+      "categories": [
+        "colleague"
+      ],
+      "inStock": true,
+      "deliveryNote": "Delivery extra \u2014 check at checkout"
+    },
+    {
+      "id": "awin:736:OREOSB",
+      "merchantProductId": "OREOSB",
+      "awinProductId": "40267777676",
+      "title": "Oreo Dairy Milk Chocolate & Oreo Biscuits Selection Box 681g",
+      "price": 1200,
+      "currency": "GBP",
+      "shop": "Cadbury Gifts Direct",
+      "tags": [
+        "Chocolate",
+        "Biscuits"
+      ],
+      "description": "Chocolate and Oreo biscuits bring two familiar treats together in one box.",
+      "url": "https://www.awin1.com/pclick.php?p=40267777676&a=2918745&m=736",
+      "merchantUrl": "https://www.cadburygiftsdirect.co.uk/oreo-chocolate-biscuits-selection-box.html",
+      "image": "https://www.cadburygiftsdirect.co.uk/media/catalog/product/o/r/oreo_selection-box_24_v1.jpg",
+      "categories": [
+        "colleague"
+      ],
+      "inStock": true,
+      "deliveryNote": "Delivery extra \u2014 check at checkout"
+    },
+    {
+      "id": "awin:736:DDGEN24",
+      "merchantProductId": "DDGEN24",
+      "awinProductId": "37245514930",
+      "title": "Cadbury Double Deck Chocolate Selection Box 524.5g",
+      "price": 1600,
+      "currency": "GBP",
+      "shop": "Cadbury Gifts Direct",
+      "tags": [
+        "Chocolate",
+        "Selection box"
+      ],
+      "description": "A larger selection box offers a mix of Cadbury bars for a chocolate fan.",
+      "url": "https://www.awin1.com/pclick.php?p=37245514930&a=2918745&m=736",
+      "merchantUrl": "https://www.cadburygiftsdirect.co.uk/cadbury-double-deck-chocolate-selection-box.html",
+      "image": "https://www.cadburygiftsdirect.co.uk/media/catalog/product/a/y/ayr_double_deck_selection_box_open_june26.webp",
+      "categories": [
+        "colleague"
+      ],
+      "inStock": true,
+      "deliveryNote": "Delivery extra \u2014 check at checkout"
+    },
+    {
+      "id": "awin:736:4327298",
+      "merchantProductId": "4327298",
+      "awinProductId": "44777982180",
+      "title": "Cadbury Heroes Limited Edition Tin 600g",
+      "price": 1400,
+      "currency": "GBP",
+      "shop": "Cadbury Gifts Direct",
+      "tags": [
+        "Chocolate",
+        "Gift tin"
+      ],
+      "description": "Individually wrapped Heroes in a gift tin are easy to share with workmates.",
+      "url": "https://www.awin1.com/pclick.php?p=44777982180&a=2918745&m=736",
+      "merchantUrl": "https://www.cadburygiftsdirect.co.uk/cadbury-heroes-limited-edition-tin-600g.html",
+      "image": "https://www.cadburygiftsdirect.co.uk/media/catalog/product/0/7/07622202804380_h1n1_s01.jpg",
+      "categories": [
+        "colleague"
+      ],
+      "inStock": true,
+      "deliveryNote": "Delivery extra \u2014 check at checkout"
+    },
+    {
+      "id": "awin:736:4327339",
+      "merchantProductId": "4327339",
+      "awinProductId": "44777982181",
+      "title": "Cadbury Roses Chocolates Limited Edition Tin 600g",
+      "price": 1400,
+      "currency": "GBP",
+      "shop": "Cadbury Gifts Direct",
+      "tags": [
+        "Chocolate",
+        "Gift tin"
+      ],
+      "description": "A Roses tin suits someone who enjoys choosing from assorted wrapped chocolates.",
+      "url": "https://www.awin1.com/pclick.php?p=44777982181&a=2918745&m=736",
+      "merchantUrl": "https://www.cadburygiftsdirect.co.uk/cadbury-roses-chocolates-limited-edition-tin-600g.html",
+      "image": "https://www.cadburygiftsdirect.co.uk/media/catalog/product/0/7/07622202804205_h1n1_s01.jpg",
+      "categories": [
+        "colleague"
+      ],
+      "inStock": true,
+      "deliveryNote": "Delivery extra \u2014 check at checkout"
+    },
+    {
+      "id": "awin:736:4316117",
+      "merchantProductId": "4316117",
+      "awinProductId": "41923417899",
+      "title": "Green & Black's Organic Chocolate Tasting Collection 360g",
+      "price": 1500,
+      "currency": "GBP",
+      "shop": "Cadbury Gifts Direct",
+      "tags": [
+        "Chocolate",
+        "Tasting gift"
+      ],
+      "description": "A tasting collection gives a chocolate enthusiast a range of flavours to explore.",
+      "url": "https://www.awin1.com/pclick.php?p=41923417899&a=2918745&m=736",
+      "merchantUrl": "https://www.cadburygiftsdirect.co.uk/green-black-s-organic-chocolate-tasting-collection-360g.html",
+      "image": "https://www.cadburygiftsdirect.co.uk/media/catalog/product/g/_/g_b_tasting_collection_with_bars.jpg",
+      "categories": [
+        "colleague"
+      ],
+      "inStock": true,
+      "deliveryNote": "Delivery extra \u2014 check at checkout"
+    },
+    {
+      "id": "awin:736:ZCTEACH20",
+      "merchantProductId": "ZCTEACH20",
+      "awinProductId": "40267777704",
+      "title": "Cadbury Teacher's Large Chocolate Gift Box",
+      "price": 2000,
+      "currency": "GBP",
+      "shop": "Cadbury Gifts Direct",
+      "tags": [
+        "Chocolate",
+        "Teachers"
+      ],
+      "description": "A teacher-themed presentation box makes a larger thank-you gift.",
+      "url": "https://www.awin1.com/pclick.php?p=40267777704&a=2918745&m=736",
+      "merchantUrl": "https://www.cadburygiftsdirect.co.uk/cadbury-teacher-s-chocolate-gift.html",
+      "image": "https://www.cadburygiftsdirect.co.uk/media/catalog/product/z/c/zcgen20_-_thank_you_teacher_cadbury_large_chocolate_gift_box.webp",
+      "categories": [],
+      "inStock": true,
+      "deliveryNote": "Delivery extra \u2014 check at checkout"
+    },
+    {
+      "id": "awin:736:4326456",
+      "merchantProductId": "4326456",
+      "awinProductId": "44777982183",
+      "title": "Cadbury Dairy Milk Chocolate Chunk Collection Tin 600g",
+      "price": 1400,
+      "currency": "GBP",
+      "shop": "Cadbury Gifts Direct",
+      "tags": [
+        "Chocolate",
+        "Gift tin"
+      ],
+      "description": "A larger Dairy Milk collection tin makes a gift for a devoted milk-chocolate fan.",
+      "url": "https://www.awin1.com/pclick.php?p=44777982183&a=2918745&m=736",
+      "merchantUrl": "https://www.cadburygiftsdirect.co.uk/cadbury-dairy-milk-chocolate-chunk-collection-tin-600g.html",
+      "image": "https://www.cadburygiftsdirect.co.uk/media/catalog/product/0/7/07622202382048_h1n1_s01.jpg",
+      "categories": [
+        "colleague"
+      ],
+      "inStock": true,
+      "deliveryNote": "Delivery extra \u2014 check at checkout"
+    },
+    {
+      "id": "awin:736:ZCGEN20",
+      "merchantProductId": "ZCGEN20",
+      "awinProductId": "31297154715",
+      "title": "Cadbury Classic Large Chocolate Gift Box",
+      "price": 2000,
+      "currency": "GBP",
+      "shop": "Cadbury Gifts Direct",
+      "tags": [
+        "Chocolate",
+        "Gift box"
+      ],
+      "description": "A presentation box of Cadbury classics makes a ready-to-give chocolate gift.",
+      "url": "https://www.awin1.com/pclick.php?p=31297154715&a=2918745&m=736",
+      "merchantUrl": "https://www.cadburygiftsdirect.co.uk/cadbury-classic-chocolate-gift.html",
+      "image": "https://www.cadburygiftsdirect.co.uk/media/catalog/product/z/c/zcgen20-classic-cadbury-large-chocolate-gift-box.webp",
+      "categories": [
+        "colleague"
+      ],
+      "inStock": true,
+      "deliveryNote": "Delivery extra \u2014 check at checkout"
+    }
+  ]
+}

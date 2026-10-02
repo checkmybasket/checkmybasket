@@ -32,6 +32,10 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [{ protocol: "https", hostname: "www.cadburygiftsdirect.co.uk", pathname: "/media/catalog/product/**", search: "" }],
+    maximumRedirects: 0,
+  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

@@ -1,5 +1,5 @@
-import { Gift, ExternalLink } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 export interface GiftCardProps {
@@ -8,40 +8,36 @@ export interface GiftCardProps {
   shop: string;
   tags: string[];
   url: string;
-  /** "sm" = compact catalogue card ("View"); "lg" = category detail card ("Buy now"). */
+  image: string;
+  description: string;
+  deliveryNote: string;
   size?: "sm" | "lg";
 }
 
-export function GiftCard({ title, price, shop, tags, url, size = "sm" }: GiftCardProps) {
+const currency = new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" });
+
+export function GiftCard({ title, price, shop, tags, url, image, description, deliveryNote, size = "sm" }: GiftCardProps) {
   const lg = size === "lg";
   return (
-    <div className={`rounded-2xl overflow-hidden transition-shadow duration-200 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)] ${lg ? "hover:shadow-lg" : "hover:shadow-md"}`}>
-      <div className={`w-full ${lg ? "h-40" : "h-36"} flex items-center justify-center bg-[var(--cmb-surface-hover)]`}>
-        <Gift size={lg ? 40 : 36} strokeWidth={1} className="text-[var(--cmb-border)]"/>
+    <article className={`rounded-2xl overflow-hidden flex flex-col transition-shadow duration-200 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)] ${lg ? "hover:shadow-lg" : "hover:shadow-md"}`}>
+      <div className={`relative w-full ${lg ? "h-56" : "h-48"} bg-white`}>
+        <Image src={image} alt={title} fill sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 1023px) 50vw, 320px" className="object-contain p-4" />
       </div>
-      <div className="p-4">
+      <div className="p-4 flex flex-col flex-1">
         <div className="flex gap-1.5 mb-2 flex-wrap">
           {tags.map(tag => <Badge key={tag} variant="outline" className="text-xs rounded-full px-2 border-[var(--cmb-border)] text-[var(--cmb-text-muted)]">{tag}</Badge>)}
         </div>
-        <p className="font-semibold text-sm mb-1 leading-snug">{title}</p>
-        <div className={`flex items-center justify-between ${lg ? "mt-3" : "mt-2"}`}>
-          <div>
-            <p className={`${lg ? "text-lg " : ""}font-bold text-[var(--cmb-primary)]`}>£{(price/100).toFixed(0)}</p>
-            <p className="text-xs text-[var(--cmb-text-muted)]">{shop}</p>
-          </div>
-          <a href={url} target="_blank" rel="noopener sponsored">
-            {lg ? (
-              <Button className="h-10 px-4 rounded-xl text-sm font-semibold bg-[var(--cmb-accent)] text-white">
-                Buy now <ExternalLink size={13} strokeWidth={1.5} className="ml-1.5"/>
-              </Button>
-            ) : (
-              <Button size="sm" className="h-9 px-3 rounded-xl text-xs font-semibold bg-[var(--cmb-accent)] text-white">
-                View <ExternalLink size={12} strokeWidth={1.5} className="ml-1"/>
-              </Button>
-            )}
+        <h3 className="font-semibold text-sm mb-2 leading-snug">{title}</h3>
+        <p className="text-sm text-[var(--cmb-text-secondary)] leading-relaxed mb-4">{description}</p>
+        <div className="mt-auto">
+          <p className="text-lg font-bold text-[var(--cmb-primary)]">{currency.format(price / 100)}</p>
+          <p className="text-xs text-[var(--cmb-text-muted)] mb-1">{deliveryNote}</p>
+          <p className="text-xs text-[var(--cmb-text-muted)] mb-3">{shop}</p>
+          <a href={url} target="_blank" rel="noopener noreferrer sponsored" aria-label={`Shop ${title} at ${shop} (opens in a new tab)`} className="inline-flex items-center justify-center gap-2 h-10 px-4 rounded-xl text-sm font-semibold bg-[var(--cmb-accent)] text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--cmb-primary)]">
+            Shop at Cadbury <ExternalLink size={13} strokeWidth={1.5} aria-hidden="true"/>
           </a>
         </div>
       </div>
-    </div>
+    </article>
   );
 }

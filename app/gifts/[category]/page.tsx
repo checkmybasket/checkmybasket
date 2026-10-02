@@ -1,60 +1,12 @@
 import type { Metadata } from "next";
+import { getGiftsForCategory } from "@/lib/gift-catalogue";
+import { CatalogueNotice } from "@/components/catalogue-notice";
 import { GIFT_CATEGORIES } from "@/lib/gift-categories";
 import Link from "next/link";
 import { Gift, ChevronLeft, ShieldOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GiftCard } from "@/components/gift-card";
 import { notFound } from "next/navigation";
-
-const PRODUCTS: Record<string,Array<{ title:string; price:number; shop:string; tags:string[]; url:string }>> = {
-  "general": [
-    { title:"Luxury Caramel Hot Chocolate Kit",  price: 999, shop:"Hotel Chocolat",        tags:["Cosy","Edible"],        url:"#" },
-    { title:"Mini Enamel Notebook Set",          price:1099, shop:"Paperchase",            tags:["Stationery","Pretty"],  url:"#" },
-    { title:"Grow Your Own Herbs Kit",           price:1299, shop:"Waitrose",              tags:["Eco","Fun"],            url:"#" },
-    { title:"Personalised Bookmark",             price: 799, shop:"Not on the High Street",tags:["Thoughtful"],           url:"#" },
-    { title:"Bath Salts Collection",             price:1199, shop:"Lush",                  tags:["Cosy","Relaxing"],      url:"#" },
-    { title:"Mini Crossword Puzzle Book",        price: 599, shop:"Waterstones",           tags:["Books","Funny"],        url:"#" },
-  ],
-  "personalised": [
-    { title: "Personalised Star Map Print", price: 1499, shop: "Etsy", tags: ["Personalised", "Thoughtful"], url: "#" },
-    { title: "Personalised Enamel Mug", price: 1199, shop: "Not on the High Street", tags: ["Personalised", "Practical"], url: "#" },
-    { title: "Personalised Bookmark", price: 799, shop: "Not on the High Street", tags: ["Personalised", "Books"], url: "#" },
-  ],
-  "colleague": [
-    { title:"Artisan Coffee Blend",              price:1299, shop:"Fortnum & Mason",       tags:["Coffee","Premium"],     url:"#" },
-    { title:"Leather Cable Organiser",           price:1299, shop:"Amazon",                tags:["Practical","Desk"],     url:"#" },
-    { title:"Mini Desk Plant (Succulent)",       price: 999, shop:"Waitrose",              tags:["Eco","Desk"],           url:"#" },
-    { title:"Fancy Biscuit Selection Tin",       price:1499, shop:"M&S",                   tags:["Edible","Classic"],     url:"#" },
-    { title:"Wireless Charging Pad",             price:1999, shop:"John Lewis",            tags:["Tech","Practical"],     url:"#" },
-    { title:"Branded Keep Cup",                  price:1599, shop:"Ecoffee",               tags:["Eco","Practical"],      url:"#" },
-  ],
-  "funny": [
-    { title:"Disappearing Coffee Mug — Meetings",price: 999, shop:"Amazon",               tags:["Office","Funny"],       url:"#" },
-    { title:"Terrible Jokes Book Vol. 3",        price: 699, shop:"Waterstones",           tags:["Books","Groan-worthy"], url:"#" },
-    { title:"Avocado Socks (3 pairs)",           price: 799, shop:"M&S",                   tags:["Clothing","Silly"],     url:"#" },
-    { title:"Office Bingo Card Set",             price: 599, shop:"Not on the High Street",tags:["Games","Office"],      url:"#" },
-    { title:"World's Okayest Mug",               price: 899, shop:"Redbubble",             tags:["Mug","Relatable"],      url:"#" },
-    { title:"Desk Stress Ball Set",              price:1099, shop:"Amazon",                tags:["Office","Stress"],      url:"#" },
-  ],
-  "cosy": [
-    { title:"Merino Wool Bed Socks",             price:1499, shop:"John Lewis",            tags:["Clothing","Warm"],      url:"#" },
-    { title:"Hot Chocolate & Marshmallow Set",   price:1299, shop:"Hotel Chocolat",        tags:["Edible","Warming"],     url:"#" },
-    { title:"Lavender Eye Pillow",               price: 999, shop:"Neal's Yard",           tags:["Relaxing","Self-care"], url:"#" },
-    { title:"Cashmere-Blend Hand Cream Duo",     price:1999, shop:"The White Company",     tags:["Luxury","Self-care"],   url:"#" },
-    { title:"Mini Aromatherapy Candle Set",      price:1799, shop:"Diptyque",              tags:["Home","Relaxing"],      url:"#" },
-    { title:"Fluffy Sherpa Blanket",             price:2499, shop:"Dunelm",               tags:["Home","Cosy"],          url:"#" },
-  ],
-};
-
-function getProducts(slug: string) {
-  const category = GIFT_CATEGORIES.find(cat => cat.slug === slug);
-  const budget = category?.budget;
-  if (budget !== undefined) {
-    const products = [...new Map(Object.values(PRODUCTS).flat().map(product => [product.title, product])).values()];
-    return products.filter(product => product.price < budget);
-  }
-  return PRODUCTS[slug] ?? [];
-}
 
 export async function generateMetadata({ params }: { params: Promise<{ category:string }> }): Promise<Metadata> {
   const { category } = await params;
@@ -67,13 +19,13 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
   const { category } = await params;
   const cat = GIFT_CATEGORIES.find(cat => cat.slug === category);
   if (!cat) notFound();
-  const products = getProducts(category);
+  const products = getGiftsForCategory(category);
 
   return (
     <div className="min-h-dvh bg-[var(--cmb-bg)]">
       <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background:"rgba(255,248,240,0.92)", backdropFilter:"blur(12px)" }}>
         <div className="max-w-5xl mx-auto px-4 h-14 flex items-center gap-3">
-          <Link href="/gifts"><Button variant="ghost" size="sm" className="h-9 w-9 p-0 rounded-lg"><ChevronLeft size={20} strokeWidth={1.5}/></Button></Link>
+          <Link href="/gifts"><Button variant="ghost" size="sm" aria-label="Back to gift ideas" className="h-9 w-9 p-0 rounded-lg"><ChevronLeft size={20} strokeWidth={1.5}/></Button></Link>
           <div className="flex items-center gap-2 flex-1 min-w-0">
             <Gift size={18} strokeWidth={1.5} className="text-[var(--cmb-primary)] shrink-0"/>
             <span className="font-semibold truncate font-display text-[var(--cmb-primary)]">{cat.heading}</span>
@@ -92,9 +44,18 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
               className="flex-shrink-0 rounded-full px-4 py-2 text-sm font-medium border transition-all duration-150 bg-[var(--cmb-surface)] border-[var(--cmb-border)] text-[var(--cmb-text-secondary)]">{label}</Link>
           ))}
         </div>
+        <CatalogueNotice />
+        {products.length === 0 ? (
+          <div className="rounded-2xl border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-8 text-center mb-10">
+            <h2 className="font-display text-xl font-bold mb-2">More gift ideas coming soon</h2>
+            <p className="text-sm text-[var(--cmb-text-secondary)] mb-4">We’re finding gifts for this collection. In the meantime, explore our chocolate gifts by budget.</p>
+            <Link href="/gifts/under-20" className="font-semibold text-[var(--cmb-primary)] underline underline-offset-4">Browse gifts under £20</Link>
+          </div>
+        ) : (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
-          {products.map(item => <GiftCard key={item.title} size="lg" {...item}/>)}
+          {products.map(item => <GiftCard key={item.id} size="lg" {...item}/>)}
         </div>
+        )}
         <div className="rounded-2xl p-8 text-center mb-8 bg-[var(--cmb-primary)] shadow-[var(--shadow-lg)]">
           <h2 className="text-2xl font-bold mb-2 font-display text-[var(--cmb-text-inverse)]">Found the perfect gift?</h2>
           <p className="mb-6" style={{ color:"rgba(255,248,240,0.75)" }}>Set up Secret Santa for your group in 30 seconds — free, no account needed.</p>

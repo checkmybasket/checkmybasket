@@ -1,19 +1,12 @@
 import Link from "next/link";
+import { featuredGifts } from "@/lib/gift-catalogue";
+import { CatalogueNotice } from "@/components/catalogue-notice";
 import { GIFT_CATEGORIES } from "@/lib/gift-categories";
 import { Gift, ChevronRight, Star, ShieldOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GiftCard } from "@/components/gift-card";
 
 export const metadata = { title: "Secret Santa Gift Ideas UK", description: "Curated Secret Santa gift ideas from UK shops. Under £10, £20, £30 and £50, plus colleague, funny, cosy and personalised gifts. No ads." };
-
-const FEATURED = [
-  { title:"Personalised Star Map Print",       price:1499, shop:"Etsy",                  tags:["Thoughtful","Unique"],    url:"#" },
-  { title:"Luxury Caramel Hot Chocolate Kit",  price: 999, shop:"Hotel Chocolat",        tags:["Cosy","Edible"],          url:"#" },
-  { title:"Leather Cable Organiser",           price:1299, shop:"Amazon",                tags:["Practical","Desk"],       url:"#" },
-  { title:"Herb Growing Kit",                  price:1499, shop:"Waitrose",              tags:["Eco","Fun"],              url:"#" },
-  { title:"Mini Crossword Puzzle Book",        price: 599, shop:"Waterstones",           tags:["Funny","Books"],          url:"#" },
-  { title:"Personalised Enamel Mug",           price:1199, shop:"Not on the High Street",tags:["Thoughtful"],            url:"#" },
-];
 
 export default function GiftsPage() {
   return (
@@ -47,8 +40,9 @@ export default function GiftsPage() {
           <Star size={18} strokeWidth={1.5} className="text-[var(--cmb-warm)]"/>
           <h2 className="text-xl font-bold font-display">Editor picks</h2>
         </div>
+        <CatalogueNotice />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
-          {FEATURED.map(item => <GiftCard key={item.title} {...item}/>)}
+          {featuredGifts.map(item => <GiftCard key={item.id} {...item}/>)}
         </div>
         <div className="rounded-xl p-4 flex gap-2 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]">
           <ShieldOff size={16} strokeWidth={1.5} className="text-[var(--cmb-text-muted)] shrink-0 mt-0.5"/>
