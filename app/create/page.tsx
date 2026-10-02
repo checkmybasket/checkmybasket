@@ -20,7 +20,7 @@ const GROUP_MODES: { value: GroupMode; label: string; icon: React.ElementType; d
   { value: "students",  label: "Students",  icon: GraduationCap,  desc: "Uni friends, class groups" },
 ];
 
-interface FormData { groupName: string; mode: GroupMode; budget: number; customBudget: string; exchangeDate: string; location: string; yourName: string; }
+interface FormData { groupName: string; mode: GroupMode; budget: number; customBudget: string; exchangeDate: string; location: string; yourName: string; email: string; }
 
 export default function CreatePage() {
   const [step, setStep]       = useState<"form"|"share">("form");
@@ -28,7 +28,7 @@ export default function CreatePage() {
   const [groupId, setGroupId] = useState("");
   const [busy, setBusy]       = useState(false);
   const [copied, setCopied]   = useState(false);
-  const [form, setForm]       = useState<FormData>({ groupName:"", mode:"friends", budget:-1, customBudget:"", exchangeDate:"", location:"", yourName:"" });
+  const [form, setForm]       = useState<FormData>({ groupName:"", mode:"friends", budget:-1, customBudget:"", exchangeDate:"", location:"", yourName:"", email:"" });
   const [errors, setErrors]   = useState<Partial<Record<keyof FormData,string>>>({});
 
   const inviteLink = typeof window !== "undefined"
@@ -40,6 +40,7 @@ export default function CreatePage() {
     if (!form.groupName.trim()) e.groupName = "Please name your group";
     if (!form.yourName.trim())  e.yourName  = "Please enter your name";
     if (form.budget === 0) { const b = parseInt(form.customBudget)*100; if (isNaN(b)||b<=0) e.customBudget="Please enter a valid amount"; }
+    if (form.email.trim() && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email.trim())) e.email = "Please enter a valid email address or leave it blank";
     setErrors(e); return Object.keys(e).length === 0;
   }
 
@@ -52,6 +53,10 @@ export default function CreatePage() {
         : form.budget === 0 ? Math.round(parseFloat(form.customBudget) * 100)
         : form.budget;
       const supabase = createClient();
+      {
+        const { error: emailError } = await supabase.rpc("set_my_email", { p_email: form.email.trim() });
+        if (emailError) throw new Error("Could not save your email. Please try again or leave it blank.");
+      }
       const { data, error } = await supabase.rpc("create_group", {
         p_name: form.groupName,
         p_mode: form.mode,
@@ -198,6 +203,15 @@ export default function CreatePage() {
           <Input placeholder="What should we call you?" value={form.yourName} onChange={e => setForm(f => ({ ...f, yourName:e.target.value }))}
             className="h-12 text-base rounded-xl" style={{ borderColor:errors.yourName?"var(--cmb-error)":"var(--cmb-border-strong)" }}/>
         </Field>
+        <div>
+          <Label htmlFor="email" className="text-base font-medium mb-1.5 block">Email (optional)</Label>
+          <p id="email-hint" className="text-sm mb-2 text-[var(--cmb-text-muted)]">Get an email when names are drawn. Private from your group. Leave blank to skip.</p>
+          <Input id="email" type="email" inputMode="email" autoComplete="email" placeholder="you@example.com" value={form.email}
+            onChange={e => setForm(f => ({ ...f, email:e.target.value }))} aria-describedby={errors.email ? "email-hint email-error" : "email-hint"} aria-invalid={!!errors.email}
+            className="h-12 text-base rounded-xl border border-[var(--cmb-border-strong)]"/>
+          {errors.email && <p id="email-error" role="alert" className="mt-1 text-sm text-[var(--cmb-error)]">{errors.email}</p>}
+          <p className="text-xs mt-2 text-[var(--cmb-text-muted)]">This updates the saved email for groups you join in this browser; leaving it blank turns notifications off. <Link href="/privacy" className="underline">Privacy policy</Link></p>
+        </div>
       </main>
 
       <div className="fixed bottom-0 left-0 right-0 z-20 px-4 pt-4 border-t safe-bottom bg-[var(--cmb-bg)] border-[var(--cmb-border)]">

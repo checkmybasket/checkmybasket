@@ -8,13 +8,13 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <InfoPage title="Privacy Policy" updated="10 July 2026">
+    <InfoPage title="Privacy Policy" updated="2 October 2026">
       <Section heading="The short version">
         <p>
           We collect the minimum needed to run a Secret Santa: the name you type when you join, and anything you
           choose to add (wishlist items, likes and dislikes, messages). No account is required, so we don&apos;t ask for
-          your email, phone number or password. We show no ads and use no advertising trackers. When you leave a
-          group or a group is deleted, your data goes with it.
+          a phone number or password. Email is optional, for draw notifications. We show no ads and use no advertising trackers. When you leave a
+          group or a group is deleted, its group data goes with it. A saved email stays on your anonymous profile until you remove it.
         </p>
       </Section>
 
@@ -22,6 +22,7 @@ export default function PrivacyPage() {
         <p><strong>Things you give us:</strong></p>
         <ul className="list-disc pl-5 space-y-1">
           <li>The display name you enter when creating or joining a group</li>
+          <li>An email address, only if you choose to receive draw notifications. It is saved on your anonymous profile and used for groups joined with that browser session.</li>
           <li>Group details set by the organiser (group name, budget, exchange date and location)</li>
           <li>Wishlist items, likes, dislikes and sizes — only if you choose to add them</li>
           <li>Anonymous messages you send or receive within your group (text only, 500 characters)</li>
@@ -29,11 +30,11 @@ export default function PrivacyPage() {
         </ul>
         <p><strong>Things created automatically:</strong></p>
         <ul className="list-disc pl-5 space-y-1">
-          <li>An anonymous account identifier, stored in a cookie so you stay signed in to your group. It is not linked to your email, phone or any real-world identity.</li>
+          <li>An anonymous account identifier, stored in a cookie so you stay signed in to your group. It is linked to your optional email if you save one, but not to a phone number.</li>
           <li>Your Secret Santa draw assignment</li>
         </ul>
         <p>
-          We do <strong>not</strong> collect email addresses, payment details, photos, precise location, or contacts.
+          We do <strong>not</strong> require email addresses or collect payment details, photos, precise location, or contacts.
           We use no third-party advertising or tracking cookies.
         </p>
       </Section>
@@ -41,7 +42,7 @@ export default function PrivacyPage() {
       <Section heading="How we use it">
         <p>
           Solely to run your Secret Santa: matching the draw, showing wishlists to your group, delivering anonymous
-          messages, and running the group game. We never sell your data, never share it with advertisers, and never
+          messages, running the group game, and sending draw notifications if you provide an email. We never sell your data, never share it with advertisers, and never
           use it to build profiles of you.
         </p>
         <p>
@@ -53,6 +54,7 @@ export default function PrivacyPage() {
 
       <Section heading="Who can see what">
         <ul className="list-disc pl-5 space-y-1">
+          <li>Your optional email is private from group members and organisers. We use Resend to deliver draw emails, sharing your address, display name and group name with that service.</li>
           <li>Your name, wishlist, likes/dislikes and sizes are visible only to members of your group.</li>
           <li>Your draw assignment is visible only to you — not to other members, and not to the organiser. This is enforced at the database level.</li>
           <li>Anonymous messages show the recipient only &ldquo;Your Secret Santa 🤫&rdquo; — the sender&apos;s identity is never exposed, and this is also enforced at the database level.</li>
@@ -63,8 +65,7 @@ export default function PrivacyPage() {
       <Section heading="Where it lives">
         <p>
           Data is stored with Supabase in their London (eu-west-2) region and the site is hosted by Vercel. Both act
-          as our processors under their standard data processing terms. Your data does not leave the UK/EEA hosting
-          region in the ordinary course of the service.
+          as our processors under their standard data processing terms. Optional email notifications are processed by Resend and its delivery providers; delivery may involve processing outside the UK/EEA.
         </p>
       </Section>
 
@@ -72,6 +73,7 @@ export default function PrivacyPage() {
         <ul className="list-disc pl-5 space-y-1">
           <li>Leave a group → your membership and wishlist for that group are deleted immediately.</li>
           <li>An organiser deletes a group → everything in it (members, wishlists, messages, draws, game data) is deleted immediately.</li>
+          <li>You can remove your saved email on the match reveal screen to stop future draw emails. Leaving or deleting a group does not itself remove the email stored on your anonymous profile.</li>
           <li>You can clear your wishlist at any time from group settings.</li>
         </ul>
       </Section>

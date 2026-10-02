@@ -31,6 +31,8 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
   const [step, setStep] = useState<"join"|"onboard">("join");
   const [busy, setBusy] = useState(false);
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [nameError, setNameError] = useState("");
   const [likes, setLikes] = useState("");
   const [dislikes, setDislikes] = useState("");
@@ -47,11 +49,17 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
 
   async function handleJoin() {
     if (!name.trim()) { setNameError("Please enter your name"); return; }
+    setEmailError("");
+    if (email.trim() && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.trim())) { setEmailError("Please enter a valid email address or leave it blank"); return; }
     if (busy || !group) return;
     setNameError(""); setBusy(true);
     try {
       await ensureSession();
       const supabase = createClient();
+      {
+        const { error: emailError } = await supabase.rpc("set_my_email", { p_email: email.trim() });
+        if (emailError) throw new Error("Could not save your email. Please try again or leave it blank.");
+      }
       const { error } = await supabase.rpc("join_group", { p_invite_code: invite_code, p_name: name });
       if (error) throw new Error(error.message);
       toast.success(`Welcome, ${name.trim()}!`);
@@ -212,6 +220,16 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
                     onChange={e => setName(e.target.value)} onKeyDown={e => e.key==="Enter" && handleJoin()}
                     className="h-12 text-base rounded-xl" style={{ borderColor:nameError?"var(--cmb-error)":"var(--cmb-border-strong)" }}/>
                   {nameError && <p className="mt-1 text-sm text-[var(--cmb-error)]">{nameError}</p>}
+                </div>
+                <div className="mb-5">
+                  <Label htmlFor="email" className="text-base font-medium mb-1.5 block">Email (optional)</Label>
+                  <p id="email-hint" className="text-sm mb-2 text-[var(--cmb-text-muted)]">Get an email when names are drawn. Private from your group. Leave blank to skip.</p>
+                  <Input id="email" type="email" inputMode="email" autoComplete="email" placeholder="you@example.com" value={email}
+                    onChange={e => setEmail(e.target.value)} onKeyDown={e => e.key === "Enter" && handleJoin()}
+                    aria-describedby={emailError ? "email-hint email-error" : "email-hint"} aria-invalid={!!emailError}
+                    className="h-12 text-base rounded-xl border border-[var(--cmb-border-strong)]"/>
+                  {emailError && <p id="email-error" role="alert" className="mt-1 text-sm text-[var(--cmb-error)]">{emailError}</p>}
+                  <p className="text-xs mt-2 text-[var(--cmb-text-muted)]">This updates the saved email for groups you join in this browser; leaving it blank turns notifications off. <Link href="/privacy" className="underline">Privacy policy</Link></p>
                 </div>
                 <Button onClick={handleJoin} disabled={busy} size="lg" className="w-full h-12 text-base rounded-xl font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">
                   {busy ? "Joining…" : <>Join this Secret Santa <ArrowRight size={18} strokeWidth={1.5} className="ml-2"/></>}

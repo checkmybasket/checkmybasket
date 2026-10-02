@@ -339,7 +339,7 @@ function RevealedScreen({
         </Button>
       </div>
 
-      {/* Delayed ask: optional email so members can be notified / regain access */}
+      {/* Manage the optional email saved before the draw */}
       <EmailCapture />
     </div>
   );
@@ -360,13 +360,12 @@ function EmailCapture() {
 
   async function save() {
     const trimmed = email.trim();
-    if (!trimmed) return;
     setStatus("saving");
     const supabase = createClient();
     const { error } = await supabase.rpc("set_my_email", { p_email: trimmed });
     if (error) { toast.error(error.message || "Couldn't save your email"); setStatus("idle"); return; }
     setStatus("saved");
-    toast.success("Email saved — we'll only use it for this group");
+    toast.success(trimmed ? "Email saved for future draw notifications" : "Email removed — draw notifications turned off");
   }
 
   if (status === "loading") return null;
@@ -375,10 +374,10 @@ function EmailCapture() {
     <div className="rounded-2xl p-5 mt-6 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
       <div className="flex items-center gap-2 mb-1">
         <Mail size={16} strokeWidth={1.5} className="text-[var(--cmb-primary)]" />
-        <p className="font-semibold text-sm">Save access to your group</p>
+        <p className="font-semibold text-sm">Draw notification email</p>
       </div>
       <p className="text-xs mb-3 text-[var(--cmb-text-secondary)]">
-        Add your email and we&apos;ll send you a link back to your match. Optional — never shared with the group, no spam.
+        Manage your optional email for future draws in groups joined with this browser. Saving it here does not send an email for this draw. Clear the field and save to stop notifications.
       </p>
       <div className="flex gap-2">
         <input
@@ -394,7 +393,7 @@ function EmailCapture() {
         />
         <Button
           onClick={save}
-          disabled={status === "saving" || !email.trim()}
+          disabled={status === "saving"}
           className="h-11 px-4 rounded-xl font-medium text-[var(--cmb-text-inverse)]"
           style={{ background: status === "saved" ? "var(--cmb-success)" : "var(--cmb-primary)" }}
         >
