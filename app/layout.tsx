@@ -26,6 +26,10 @@ export const viewport: Viewport = { width: "device-width", initialScale: 1, them
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-GB" className={`${fraunces.variable} ${dmSans.variable} ${jetbrainsMono.variable} h-full`}>
+      <head>
+        {/* impact.com requires a value attribute rather than Metadata API's content. */}
+        <meta {...{ name: "impact-site-verification", value: "5bb17670-56ae-46ba-b997-a4d00d388e01" }} />
+      </head>
       <body className="min-h-dvh flex flex-col antialiased">
         {children}
         <Toaster richColors position="top-center" />
