@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { getGiftsForCategory } from "@/lib/gift-catalogue";
-import { CatalogueNotice } from "@/components/catalogue-notice";
 import { GIFT_CATEGORIES } from "@/lib/gift-categories";
 import Link from "next/link";
 import { Gift, ChevronLeft, ShieldOff } from "lucide-react";
@@ -44,7 +43,6 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
               className="flex-shrink-0 rounded-full px-4 py-2 text-sm font-medium border transition-all duration-150 bg-[var(--cmb-surface)] border-[var(--cmb-border)] text-[var(--cmb-text-secondary)]">{label}</Link>
           ))}
         </div>
-        <CatalogueNotice />
         {products.length === 0 ? (
           <div className="rounded-2xl border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-8 text-center mb-10">
             <h2 className="font-display text-xl font-bold mb-2">More gift ideas coming soon</h2>

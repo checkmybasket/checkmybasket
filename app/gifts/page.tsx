@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { featuredGifts } from "@/lib/gift-catalogue";
-import { CatalogueNotice } from "@/components/catalogue-notice";
 import { GIFT_CATEGORIES } from "@/lib/gift-categories";
-import { Gift, ChevronRight, Star, ShieldOff } from "lucide-react";
+import { Gift, ChevronRight, ShieldOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GiftCard } from "@/components/gift-card";
 
@@ -36,11 +35,6 @@ export default function GiftsPage() {
             </Link>
           ))}
         </div>
-        <div className="mb-4 flex items-center gap-2">
-          <Star size={18} strokeWidth={1.5} className="text-[var(--cmb-warm)]"/>
-          <h2 className="text-xl font-bold font-display">Editor picks</h2>
-        </div>
-        <CatalogueNotice />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
           {featuredGifts.map(item => <GiftCard key={item.id} {...item}/>)}
         </div>
