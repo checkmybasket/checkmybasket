@@ -1,31 +1,30 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, DM_Sans, JetBrains_Mono } from "next/font/google";
+import { Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
-const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-fraunces", display: "swap", axes: ["opsz","SOFT","WONK"] });
-const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans", display: "swap" });
-const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains-mono", display: "swap" });
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], weight: ["400", "500", "700"], variable: "--font-space-grotesk", display: "swap" });
+const ibmPlexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "600"], variable: "--font-ibm-plex-mono", display: "swap" });
 
 export const metadata: Metadata = {
-  title: { default: "CheckMyBasket — Free Secret Santa Generator with Wishlists and Gift Ideas", template: "%s — CheckMyBasket" },
-  description: "Draw names, share wishlists from any shop, ask anonymous questions and find gifts people actually want. Free Secret Santa generator with no ads. Made in the UK.",
+  title: { default: "CheckMyBasket | Free Secret Santa generator with wishlists", template: "%s | CheckMyBasket" },
+  description: "Draw names, share wishlists from any shop and ask anonymous questions. Organise a free Secret Santa draw and find UK gift ideas. No ads, ever.",
   keywords: ["Secret Santa","wishlist","gift exchange","Christmas","UK","free Secret Santa generator","Secret Santa gifts UK"],
   metadataBase: new URL("https://www.checkmybasket.co.uk"),
   openGraph: {
-    title: "CheckMyBasket — Free Secret Santa Generator with Wishlists and Gift Ideas",
-    description: "Draw names, share wishlists, ask anonymous questions and find gifts people actually want. No ads, no account needed. Made in the UK.",
+    title: "CheckMyBasket | Free Secret Santa generator with wishlists",
+    description: "Thoughtful gifts, no matter how well you know them. Free draws, wishlists and anonymous questions. No ads, ever.",
     type: "website", url: "https://www.checkmybasket.co.uk", siteName: "CheckMyBasket",
   },
-  twitter: { card: "summary_large_image", title: "CheckMyBasket — Free Secret Santa Generator", description: "Draw names, share wishlists, ask anonymous questions. No ads, ever." },
+  twitter: { card: "summary_large_image", title: "CheckMyBasket | Free Secret Santa generator", description: "Draw names, share wishlists, ask anonymous questions. No ads, ever." },
   alternates: { canonical: "https://www.checkmybasket.co.uk" },
 };
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#1B4332" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#FFFFFF" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-GB" className={`${fraunces.variable} ${dmSans.variable} ${jetbrainsMono.variable} h-full`}>
+    <html lang="en-GB" className={`${spaceGrotesk.variable} ${ibmPlexMono.variable} h-full`}>
       <head>
         {/* impact.com requires a value attribute rather than Metadata API's content. */}
         <meta {...{ name: "impact-site-verification", value: "5bb17670-56ae-46ba-b997-a4d00d388e01" }} />
