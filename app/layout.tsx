@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
+import { Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], weight: ["400", "500", "700"], variable: "--font-space-grotesk", display: "swap" });
+const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "700"], variable: "--font-inter", display: "swap" });
 const ibmPlexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "600"], variable: "--font-ibm-plex-mono", display: "swap" });
 
 export const metadata: Metadata = {
@@ -24,7 +24,7 @@ export const viewport: Viewport = { width: "device-width", initialScale: 1, them
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-GB" className={`${spaceGrotesk.variable} ${ibmPlexMono.variable} h-full`}>
+    <html lang="en-GB" className={`${inter.variable} ${ibmPlexMono.variable} h-full`}>
       <head>
         {/* impact.com requires a value attribute rather than Metadata API's content. */}
         <meta {...{ name: "impact-site-verification", value: "5bb17670-56ae-46ba-b997-a4d00d388e01" }} />

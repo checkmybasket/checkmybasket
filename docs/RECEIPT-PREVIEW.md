@@ -18,4 +18,4 @@ Shared typography and palette update other pages, but their detailed layouts, le
 - Lighthouse homepage accessibility score: 100.
 - Desktop and mobile screenshots inspected. Receipt is explicitly labelled as illustrative data.
 
-This is a visual review preview. Full interactive group journeys were not rerun because this branch does not change their logic. Review and approval are required before merging to production.
+The user approved The Receipt design and Inter typography for publication. Full interactive group journeys were not rerun because this branch does not change their logic. Inter is used in the shared font tokens and social sharing image; the headline is unchanged.

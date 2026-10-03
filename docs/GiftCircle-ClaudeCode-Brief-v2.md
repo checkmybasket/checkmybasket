@@ -1,5 +1,7 @@
 # GiftCircle — Claude Code Prototype Brief (v2)
 
+> Historical prototype reference. Current branding, typography and homepage copy are defined in `docs/BRAND.md`, which takes precedence over all design suggestions below. Inter is the approved sans serif font.
+
 **Incorporating:** UI/UX Pro Max, Frontend Design, Onboarding CRO, Signup Optimisation, Copywriting Principles, Marketing Psychology
 
 ---
@@ -95,7 +97,7 @@ Use semantic colour tokens throughout. Never hardcode hex values in components.
 
 ### Typography System
 
-**Never use:** Inter, Roboto, Arial, system fonts, Space Grotesk. These are generic AI defaults.
+**Current typography:** Follow `docs/BRAND.md`: Inter for headings and body/UI, IBM Plex Mono for the receipt. The historical font pairing below is superseded.
 
 **Font pairing:**
 - **Display/Headings:** Fraunces (variable weight, optical size) — warm, characterful serif with a festive quality. Fallback: Playfair Display.

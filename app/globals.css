@@ -11,7 +11,7 @@
   --cmb-receipt-edge: #DDDAD3;
   --cmb-red: #D42A24;
   --cmb-red-hover: #B3221D;
-  --cmb-font-sans: var(--font-space-grotesk), "Helvetica Neue", sans-serif;
+  --cmb-font-sans: var(--font-inter), "Helvetica Neue", sans-serif;
   --cmb-font-mono: var(--font-ibm-plex-mono), "Courier New", monospace;
   --cmb-rule: 2px solid var(--cmb-ink);
   --cmb-radius: 0;
@@ -114,8 +114,8 @@
   --radius-lg: calc(var(--radius) + 4px);
   --radius-xl: calc(var(--radius) + 12px);
   --radius-2xl: calc(var(--radius) + 20px);
-  --font-sans: var(--font-space-grotesk);
-  --font-display: var(--font-space-grotesk);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-inter);
   --font-mono: var(--font-ibm-plex-mono);
 }
 
@@ -124,11 +124,11 @@
   html { -webkit-text-size-adjust: 100%; touch-action: manipulation; height: 100%; }
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
     font-size: 1rem; line-height: 1.5; min-height: 100dvh;
     -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
   }
-  h1,h2,h3,h4,h5,h6 { font-family: var(--font-space-grotesk),"Helvetica Neue",sans-serif; line-height: 1.2; }
+  h1,h2,h3,h4,h5,h6 { font-family: var(--font-inter),"Helvetica Neue",sans-serif; line-height: 1.2; }
   :focus-visible { outline: 2px solid var(--cmb-primary); outline-offset: 2px; border-radius: 4px; }
 }
 

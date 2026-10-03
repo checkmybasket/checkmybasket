@@ -4,7 +4,7 @@ Reviewed 3 October 2026. Preview implementation only.
 
 ## Current decisions
 
-The headline is **Gifting made simple**. The tagline is **Thoughtful gifts, no matter how well you know them.** Keep **From group to gifts in minutes** for the journey section. CheckMyBasket is the evergreen gifting brand; Secret Santa describes the current draw feature. This brief covers the homepage, shared typography and palette, and social sharing image. Other page layouts will be reviewed separately. No route, draw logic, authentication, API or catalogue changes are part of this work. Optional verified email recovery is available; creating and joining a draw do not require an account. Individual wishlists and Basket Check remain future features. Gift categories may be empty until verified products are added.
+Inter is the approved font for headings, wordmark and body/UI text. IBM Plex Mono remains inside the receipt. The headline is **Gifting made simple**. The tagline is **Thoughtful gifts, no matter how well you know them.** Keep **From group to gifts in minutes** for the journey section. CheckMyBasket is the evergreen gifting brand; Secret Santa describes the current draw feature. This brief covers the homepage, shared typography and palette, and social sharing image. Other page layouts will be reviewed separately. No route, draw logic, authentication, API or catalogue changes are part of this work. Optional verified email recovery is available; creating and joining a draw do not require an account. Individual wishlists and Basket Check remain future features. Gift categories may be empty until verified products are added.
 
 Tailwind 4 uses CSS `@theme inline`, so map tokens there rather than adding a legacy configuration file. Shared functional status colours remain available outside the homepage. The receipt is illustrative sample data. No unsupported provenance claims should be introduced.
 
@@ -33,7 +33,7 @@ Design direction: "The Receipt". Swiss, stark and confident. White page, near bl
 Tasks:
 1. Inspect the repo. Identify the styling approach already in use (Tailwind, CSS modules or plain CSS) and keep using it. Do not add a new UI library.
 2. Create design tokens as CSS custom properties in the global stylesheet, exactly as listed in BRAND.md "Tokens". Map Tailwind 4 tokens into the existing @theme inline block.
-3. Load Space Grotesk (400, 500, 700) and IBM Plex Mono (400, 600) with next/font/google. Remove the old fonts and the old green theme colour (#1B4332). Set the theme-color meta to #FFFFFF.
+3. Load Inter (400, 500, 700) and IBM Plex Mono (400, 600) with next/font/google. Remove the old fonts and the old green theme colour (#1B4332). Set the theme-color meta to #FFFFFF.
 4. Replace the logo with the inline SVG basket mark and wordmark from BRAND.md "Logo". Make it a reusable Logo component.
 5. Rebuild the homepage (app/page.tsx or pages/index.tsx, whichever exists) as the sections in BRAND.md "Homepage spec", in that order, with that exact copy.
 6. Build these as reusable components: Header, Logo, Button (primary, secondary, inverse), Receipt, StepStrip, FeatureList, BudgetChips, CtaBand, Footer.
@@ -80,21 +80,21 @@ Red is the only accent. Use it for one primary action per screen and for the ste
 
 | Role | Font | Weight | Size (desktop) | Line height | Letter spacing |
 | --- | --- | --- | --- | --- | --- |
-| Hero headline | Space Grotesk | 700 | clamp(3rem, 7vw, 6.5rem) | 0.92 | -0.05em |
-| Closing headline | Space Grotesk | 700 | clamp(2.75rem, 6vw, 5.5rem) | 0.92 | -0.05em |
-| Section heading | Space Grotesk | 700 | clamp(2.25rem, 4.6vw, 4rem) | 0.98 | -0.045em |
-| Step number | Space Grotesk | 700 | 72px | 1 | -0.05em |
-| Card heading | Space Grotesk | 700 | 21 to 22px | 1.3 | -0.02em |
-| Lead paragraph | Space Grotesk | 400 | 21px | 1.55 | 0 |
-| Body | Space Grotesk | 400 | 17px | 1.55 | 0 |
-| Nav and buttons | Space Grotesk | 500 nav, 700 buttons | 17 to 20px | 1.2 | 0 |
+| Hero headline | Inter | 700 | clamp(3rem, 7vw, 6.5rem) | 0.92 | -0.05em |
+| Closing headline | Inter | 700 | clamp(2.75rem, 6vw, 5.5rem) | 0.92 | -0.05em |
+| Section heading | Inter | 700 | clamp(2.25rem, 4.6vw, 4rem) | 0.98 | -0.045em |
+| Step number | Inter | 700 | 72px | 1 | -0.05em |
+| Card heading | Inter | 700 | 21 to 22px | 1.3 | -0.02em |
+| Lead paragraph | Inter | 400 | 21px | 1.55 | 0 |
+| Body | Inter | 400 | 17px | 1.55 | 0 |
+| Nav and buttons | Inter | 500 nav, 700 buttons | 17 to 20px | 1.2 | 0 |
 | Receipt text | IBM Plex Mono | 400, 600 for totals | 15px, 18px totals | 1.7 | 0 |
 
 IBM Plex Mono appears only inside the receipt. Fallbacks: "Helvetica Neue", sans-serif and "Courier New", monospace.
 
 ### Logo
 
-A red shopping basket with a black handle and a white tick, followed by the wordmark "CheckMyBasket" in Space Grotesk 700, 23px, letter spacing -0.03em, Ink. Mark and wordmark sit 10px apart. Minimum mark size 24px. On a red background, the basket becomes white and the tick red.
+A red shopping basket with a black handle and a white tick, followed by the wordmark "CheckMyBasket" in Inter 700, 23px, letter spacing -0.03em, Ink. Mark and wordmark sit 10px apart. Minimum mark size 24px. On a red background, the basket becomes white and the tick red.
 
 ```html
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
@@ -119,7 +119,7 @@ The homepage specification has eight parts in this order. Content container is m
 ### 1. Header
 
 - Full width, 2px Ink bottom border. Inner row: 18px vertical padding, logo left, nav right, wraps on small screens.
-- Nav links (Space Grotesk 500, Ink, no underline, red on hover): "Gift ideas" to /gifts, "How it works" to #how-it-works, "Return to your group" to /return.
+- Nav links (Inter 500, Ink, no underline, red on hover): "Gift ideas" to /gifts, "How it works" to #how-it-works, "Return to your group" to /return.
 - Button, Ink background, white text, 12px by 20px padding: "Create a free draw" to /create.
 - Under 768px: links collapse into a menu button (aria-label "Open menu"); the Create button stays visible.
 
@@ -220,7 +220,7 @@ Put these tokens in the global stylesheet and build every component from them, n
   --cmb-red: #D42A24;
   --cmb-red-hover: #B3221D;
 
-  --cmb-font-sans: "Space Grotesk", "Helvetica Neue", sans-serif;
+  --cmb-font-sans: "Inter", "Helvetica Neue", sans-serif;
   --cmb-font-mono: "IBM Plex Mono", "Courier New", monospace;
 
   --cmb-rule: 2px solid var(--cmb-ink);
