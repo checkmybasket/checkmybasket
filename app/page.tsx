@@ -1,196 +1,23 @@
-import Link from "next/link";
-import { GIFT_CATEGORIES } from "@/lib/gift-categories";
-import { Gift, Users, MessageCircle, ShoppingBag, Gamepad2, ShieldOff, ArrowRight, Star, CheckCircle2, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-
-const features = [
-  { icon: Users,         title: "Draw names privately",           body: "Fair, private matching. Set exclusions so couples don't draw each other." },
-  { icon: Gift,          title: "Share wishlists from any shop",  body: "Add gift ideas from Etsy, John Lewis, Amazon — anywhere. No more guessing." },
-  { icon: MessageCircle, title: "Ask anonymous questions",        body: "Buying for someone you barely know? Ask what they like without giving yourself away." },
-  { icon: ShoppingBag,   title: "Find UK gifts under budget",     body: "Curated ideas from UK shops, filtered by budget. No ads, just good gifts." },
-  { icon: Gamepad2,      title: "Play festive group games",       body: "Predict what everyone's getting, earn Stereotype Awards, and settle scores after the exchange." },
-  { icon: ShieldOff,     title: "No ads, ever",                   body: "We earn from affiliate gift links, not ads. Your experience stays clean." },
-];
-
-const steps = [
-  { num: "01", title: "Create a free draw",    body: "Name your group, set a budget, pick a date. Takes 30 seconds." },
-  { num: "02", title: "Share the invite link", body: "Send it via WhatsApp or copy it. People join by tapping — no app needed." },
-  { num: "03", title: "Draw names",            body: "Names are matched fairly and privately. Each person only sees who they're buying for." },
-  { num: "04", title: "Find the perfect gift", body: "Browse wishlists, ask anonymous questions, and shop from curated UK gift ideas." },
-];
-
-const budgetLinks = GIFT_CATEGORIES.map(({ slug, label, heading, budget }) => ({
-  label: budget ? heading : label,
-  href: `/gifts/${slug}`,
-}));
+import { Header } from "@/components/receipt/header";
+import { Button, Receipt, StepStrip, FeatureList, BudgetChips, CtaBand, Footer } from "@/components/receipt/sections";
+import "./receipt.css";
 
 export default function HomePage() {
-  return (
-    <div className="flex flex-col min-h-dvh bg-[var(--cmb-bg)]">
-      {/* Nav */}
-      <header className="sticky top-0 z-40 border-b border-[var(--cmb-border)]" style={{ background: "rgba(255,248,240,0.92)", backdropFilter: "blur(12px)" }}>
-        <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-[var(--cmb-primary)]">
-            <Gift strokeWidth={1.5} size={22} />
-            <span className="font-semibold text-lg font-display">CheckMyBasket</span>
-          </Link>
-          <nav className="hidden sm:flex items-center gap-6 text-sm text-[var(--cmb-text-secondary)]">
-            <Link href="/return" className="hover:text-[var(--cmb-primary)] transition-colors duration-150">Return to your group</Link>
-            <Link href="/gifts" className="hover:text-[var(--cmb-primary)] transition-colors duration-150">Gift ideas</Link>
-            <Link href="#how-it-works" className="hover:text-[var(--cmb-primary)] transition-colors duration-150">How it works</Link>
-          </nav>
-          <Link href="/create">
-            <Button size="sm" className="h-9 px-4 rounded-lg text-sm font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">
-              Create a free draw
-            </Button>
-          </Link>
+  return <div className="receipt-home">
+    <a className="receipt-skip-link" href="#main-content">Skip to content</a>
+    <Header />
+    <main id="main-content">
+      <section className="receipt-container receipt-hero" aria-labelledby="hero-heading">
+        <div className="receipt-hero-copy">
+          <h1 id="hero-heading">Gifting made simple</h1>
+          <p className="receipt-tagline">Thoughtful gifts, no matter how well you know them.</p>
+          <p className="receipt-lead">Draw names, share wishlists from any shop and ask anonymous questions. Find gifts people actually want. No ads, ever.</p>
+          <div className="receipt-hero-buttons"><Button href="/create">Create a free draw</Button><Button href="/gifts" variant="secondary">Gift ideas</Button></div>
         </div>
-      </header>
-
-      <main>
-      {/* Hero */}
-      <section className="noise-bg relative overflow-hidden bg-[var(--cmb-primary)]">
-        <div className="relative z-10 max-w-5xl mx-auto px-4 py-20 sm:py-28 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm mb-6 animate-fade-in text-[var(--cmb-warm)]"
-            style={{ background: "rgba(255,248,240,0.1)", border: "1px solid rgba(212,165,116,0.3)" }}>
-            <Star size={14} strokeWidth={1.5} />
-            <span>Thoughtful gifts, no matter how well you know them.</span>
-          </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-5 animate-fade-up text-[var(--cmb-text-inverse)] font-display leading-[1.15]">
-            Gifting made simple
-          </h1>
-          <p className="text-lg sm:text-xl max-w-xl mx-auto mb-8 animate-fade-up animate-delay-100 leading-[1.6]"
-            style={{ color: "rgba(255,248,240,0.8)" }}>
-            Draw names, share wishlists, ask anonymous questions and find gifts people actually want.{" "}
-            <strong className="text-[var(--cmb-warm)]">No ads, ever.</strong>
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center animate-fade-up animate-delay-200">
-            <Link href="/create">
-              <Button size="lg" className="w-full sm:w-auto h-12 px-8 text-base rounded-xl font-semibold bg-[var(--cmb-accent)] text-white">
-                Create a free draw <ArrowRight size={18} strokeWidth={1.5} className="ml-2" />
-              </Button>
-            </Link>
-            <Link href="/gifts">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto h-12 px-8 text-base rounded-xl text-[var(--cmb-text-inverse)] bg-transparent"
-                style={{ borderColor: "rgba(255,248,240,0.3)" }}>
-                View gift ideas
-              </Button>
-            </Link>
-          </div>
-          <p className="mt-5 text-sm animate-fade-up animate-delay-300" style={{ color: "rgba(255,248,240,0.5)" }}>
-            Free forever. No account needed. Takes 30 seconds.
-          </p>
-        </div>
+        <div className="receipt-hero-card"><Receipt /></div>
       </section>
-
-      {/* How it works */}
-      <section id="how-it-works" className="py-16 sm:py-24 px-4">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-sm font-medium mb-2 text-[var(--cmb-accent)]">How it works</p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-display">From group to gifts in minutes</h2>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {steps.map((step) => (
-              <div key={step.num} className="rounded-2xl p-6 bg-[var(--cmb-surface)] shadow-[var(--shadow-md)] border border-[var(--cmb-border)]">
-                <div aria-hidden="true" className="text-4xl font-bold mb-3 text-[#A08A6B] font-display">{step.num}</div>
-                <h3 className="font-semibold text-base mb-2">{step.title}</h3>
-                <p className="text-sm leading-relaxed text-[var(--cmb-text-secondary)]">{step.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="py-16 sm:py-24 px-4 bg-[var(--cmb-surface)]">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-sm font-medium mb-2 text-[var(--cmb-accent)]">Everything included</p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-display">The app your group actually needs</h2>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {features.map(({ icon: Icon, title, body }) => (
-              <div key={title} className="rounded-2xl p-6 bg-[var(--cmb-bg)] border border-[var(--cmb-border)]">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">
-                  <Icon size={20} strokeWidth={1.5} />
-                </div>
-                <h3 className="font-semibold text-base mb-1.5">{title}</h3>
-                <p className="text-sm leading-relaxed text-[var(--cmb-text-secondary)]">{body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Gift ideas strip */}
-      <section className="py-16 sm:py-20 px-4">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-3 font-display">Need inspiration?</h2>
-            <p className="text-[var(--cmb-text-secondary)]">Curated gifts from UK shops, filtered by budget. No ads.</p>
-          </div>
-          <div className="flex flex-wrap gap-3 justify-center">
-            {budgetLinks.map((l) => (
-              <Link key={l.href} href={l.href}
-                className="flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all duration-150 hover:scale-105 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] text-[var(--cmb-text-primary)] shadow-[var(--shadow-sm)]">
-                {l.label} <ChevronRight size={14} strokeWidth={2} />
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Bottom CTA */}
-      <section className="py-16 px-4 bg-[var(--cmb-primary)]">
-        <div className="max-w-2xl mx-auto text-center">
-          <p className="text-sm font-medium mb-3 text-[var(--cmb-warm)]">Secret Santa, sorted.</p>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4 font-display text-[var(--cmb-text-inverse)]">
-            Ready to sort Secret Santa?
-          </h2>
-          <p className="mb-8 text-lg" style={{ color: "rgba(255,248,240,0.75)" }}>Free, ad-free, and takes 30 seconds to set up.</p>
-          <div className="flex flex-wrap gap-4 justify-center mb-8">
-            {["Free forever","No account needed","Works on any phone"].map((t) => (
-              <div key={t} className="flex items-center gap-2 text-sm" style={{ color: "rgba(255,248,240,0.8)" }}>
-                <CheckCircle2 size={16} strokeWidth={1.5} className="text-[var(--cmb-warm)]" /> {t}
-              </div>
-            ))}
-          </div>
-          <Link href="/create">
-            <Button size="lg" className="h-14 px-10 text-base rounded-xl font-semibold bg-[var(--cmb-accent)] text-white">
-              Create a free draw <ArrowRight size={18} strokeWidth={1.5} className="ml-2" />
-            </Button>
-          </Link>
-        </div>
-      </section>
-      </main>
-
-      {/* Footer */}
-      <footer className="py-10 px-4 border-t border-[var(--cmb-border)] bg-[var(--cmb-surface)]">
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-[var(--cmb-text-muted)]">
-          <div className="flex flex-col sm:flex-row items-center gap-2">
-            <div className="flex items-center gap-2">
-              <Gift size={16} strokeWidth={1.5} className="text-[var(--cmb-primary)]" />
-              <span className="font-display font-semibold text-[var(--cmb-primary)]">CheckMyBasket</span>
-            </div>
-            <span className="hidden sm:inline">·</span>
-            <span>Free Secret Santa with wishlists, anonymous messaging, and group games. No ads, ever.</span>
-          </div>
-          <div className="flex gap-5 flex-wrap justify-center">
-            <Link href="/gifts" className="hover:text-[var(--cmb-primary)] transition-colors">Gift ideas</Link>
-            <Link href="/create" className="hover:text-[var(--cmb-primary)] transition-colors">Create draw</Link>
-            <Link href="/about" className="hover:text-[var(--cmb-primary)] transition-colors">About</Link>
-            <Link href="/return" className="hover:text-[var(--cmb-primary)]">Return to your group</Link>
-            <Link href="/privacy" className="hover:text-[var(--cmb-primary)] transition-colors">Privacy</Link>
-            <Link href="/terms" className="hover:text-[var(--cmb-primary)] transition-colors">Terms</Link>
-            <Link href="/contact" className="hover:text-[var(--cmb-primary)] transition-colors">Contact</Link>
-          </div>
-        </div>
-        <div className="max-w-5xl mx-auto mt-5 pt-4 border-t border-[var(--cmb-border)] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[var(--cmb-text-muted)]">
-          <p>Some gift links may earn us a small commission at no extra cost to you. This is how we keep CheckMyBasket free and ad-free.</p>
-          <p className="flex-shrink-0">© 2026 CheckMyBasket</p>
-        </div>
-      </footer>
-    </div>
-  );
+      <StepStrip /><FeatureList /><BudgetChips /><CtaBand />
+    </main>
+    <Footer />
+  </div>;
 }

@@ -5,25 +5,48 @@
 
 /* ─── CheckMyBasket Design Tokens ──────────────────────────────────────────── */
 :root {
-  --cmb-primary:        #1B4332;
-  --cmb-primary-light:  #2D6A4F;
-  --cmb-primary-dark:   #143026;
-  --cmb-accent:         #C1121F;
-  --cmb-accent-light:   #D4343F;
-  --cmb-warm:           #D4A574;
-  --cmb-gold-strong:    #8A6D2F; /* gold that meets WCAG AA (4.5:1) as text on white/cream */
-  --cmb-bg:             #FFF8F0;
-  --cmb-surface:        #FFFFFF;
-  --cmb-surface-hover:  #FEF3E6;
-  --cmb-text-primary:   #1A1A1A;
-  --cmb-text-secondary: #5C5C5C;
-  --cmb-text-muted:     #6E6E6E; /* WCAG AA (≥4.5:1) on both white surface and cream bg */
-  --cmb-text-inverse:   #FFF8F0;
-  --cmb-border:         #E8DDD0;
-  --cmb-border-strong:  #C4B8A8;
-  --cmb-success:        #2D6A4F;
-  --cmb-error:          #C1121F;
-  --cmb-warning:        #D4A574;
+  --cmb-ink: #141414;
+  --cmb-paper: #FFFFFF;
+  --cmb-receipt: #F6F5F2;
+  --cmb-receipt-edge: #DDDAD3;
+  --cmb-red: #D42A24;
+  --cmb-red-hover: #B3221D;
+  --cmb-font-sans: var(--font-inter), "Helvetica Neue", sans-serif;
+  --cmb-font-mono: var(--font-ibm-plex-mono), "Courier New", monospace;
+  --cmb-rule: 2px solid var(--cmb-ink);
+  --cmb-radius: 0;
+  --cmb-container: 1280px;
+  --cmb-gutter: 32px;
+  --cmb-space-1: 8px;
+  --cmb-space-2: 12px;
+  --cmb-space-3: 16px;
+  --cmb-space-4: 24px;
+  --cmb-space-5: 32px;
+  --cmb-space-6: 48px;
+  --cmb-space-7: 64px;
+  --cmb-space-8: 88px;
+  --cmb-space-9: 104px;
+
+  /* Compatibility for existing functional pages, which retain their layouts. */
+  --cmb-primary: var(--cmb-ink);
+  --cmb-primary-light: var(--cmb-ink);
+  --cmb-primary-dark: var(--cmb-ink);
+  --cmb-accent: var(--cmb-red);
+  --cmb-accent-light: var(--cmb-red-hover);
+  --cmb-warm: #D4A574; /* Existing game states pending their own redesign. */
+  --cmb-gold-strong: var(--cmb-ink);
+  --cmb-bg: var(--cmb-paper);
+  --cmb-surface: var(--cmb-paper);
+  --cmb-surface-hover: var(--cmb-receipt);
+  --cmb-text-primary: var(--cmb-ink);
+  --cmb-text-secondary: var(--cmb-ink);
+  --cmb-text-muted: var(--cmb-ink);
+  --cmb-text-inverse: var(--cmb-paper);
+  --cmb-border: var(--cmb-receipt-edge);
+  --cmb-border-strong: var(--cmb-ink);
+  --cmb-success: #2D6A4F;
+  --cmb-error: var(--cmb-red);
+  --cmb-warning: #8A6D2F;
 
   /* shadcn compat */
   --background:           var(--cmb-bg);
@@ -91,9 +114,9 @@
   --radius-lg: calc(var(--radius) + 4px);
   --radius-xl: calc(var(--radius) + 12px);
   --radius-2xl: calc(var(--radius) + 20px);
-  --font-sans: var(--font-dm-sans);
-  --font-display: var(--font-fraunces);
-  --font-mono: var(--font-jetbrains-mono);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-inter);
+  --font-mono: var(--font-ibm-plex-mono);
 }
 
 @layer base {
@@ -101,11 +124,11 @@
   html { -webkit-text-size-adjust: 100%; touch-action: manipulation; height: 100%; }
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
     font-size: 1rem; line-height: 1.5; min-height: 100dvh;
     -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
   }
-  h1,h2,h3,h4,h5,h6 { font-family: var(--font-fraunces),"Playfair Display",Georgia,serif; line-height: 1.2; }
+  h1,h2,h3,h4,h5,h6 { font-family: var(--font-inter),"Helvetica Neue",sans-serif; line-height: 1.2; }
   :focus-visible { outline: 2px solid var(--cmb-primary); outline-offset: 2px; border-radius: 4px; }
 }
 
