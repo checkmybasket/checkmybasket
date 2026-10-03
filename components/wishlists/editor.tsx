@@ -10,7 +10,6 @@ import {
   uuidPattern,
 } from "@/lib/wishlists/types";
 import { EmailRecovery } from "@/components/email-recovery";
-import { QRCodeSvg } from "@/components/qr-code";
 import { ListForm } from "./list-form";
 import { ItemForm } from "./item-form";
 import { ItemCard } from "./item-card";
@@ -97,16 +96,19 @@ export function WishlistEditor({ id }: { id: string }) {
   }
   const shareUrl =
     list?.share_token && base ? `${base}/w/${list.share_token}` : "";
-  async function share(copy = false) {
+  async function share() {
+    if (!shareUrl) return;
+    setMessage("");
     try {
-      if (!copy && navigator.share) {
+      if (navigator.share) {
         await navigator.share({ title: list?.title, url: shareUrl });
       } else {
         await navigator.clipboard.writeText(shareUrl);
-        setMessage("Wishlist link copied.");
+        setMessage("Wishlist link copied. Paste it into a message to share it.");
       }
-    } catch {
-      setMessage("Copy the link from the box below to share it.");
+    } catch (err) {
+      if (err instanceof DOMException && err.name === "AbortError") return;
+      setMessage("Sharing isn't available here. Copy the link from the box above.");
     }
   }
   if (loading)
@@ -225,43 +227,15 @@ export function WishlistEditor({ id }: { id: string }) {
             />
           </label>
           <div className="flex flex-wrap gap-2 mt-3">
-            <button className={secondary} onClick={() => share()}>
+            <button className={secondary} onClick={share} disabled={!shareUrl}>
               Share wishlist
             </button>
-            <button className={secondary} onClick={() => share(true)}>
-              Copy link
-            </button>
-            <a
-              className={secondary}
-              target="_blank"
-              rel="noopener noreferrer"
-              href={`https://wa.me/?text=${encodeURIComponent(`Here's my wishlist: ${shareUrl}`)}`}
-            >
-              WhatsApp
-            </a>
-            <Link className={secondary} href={`/w/${list.share_token}`}>
-              View shared page
-            </Link>
-          </div>
-          {shareUrl && (
-            <div className="mt-4">
-              <QRCodeSvg value={shareUrl} />
-            </div>
-          )}
-          <div className="flex flex-wrap gap-2 mt-4">
             <button
               className={secondary}
               disabled={busy}
               onClick={() => mutate("disable")}
             >
               Stop sharing
-            </button>
-            <button
-              className={secondary}
-              disabled={busy}
-              onClick={() => setConfirm({ action: "rotate" })}
-            >
-              Replace sharing link
             </button>
           </div>
         </section>
