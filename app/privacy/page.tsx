@@ -4,12 +4,12 @@ import { InfoPage, Section } from "@/components/info-page";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "What CheckMyBasket collects (very little), why, and your rights. No ads, no tracking, no nonsense.",
+    "What CheckMyBasket collects, optional analytics cookies, and your privacy choices. No ads.",
 };
 
 export default function PrivacyPage() {
   return (
-    <InfoPage title="Privacy Policy" updated="3 October 2026">
+    <InfoPage title="Privacy Policy" updated="4 October 2026">
       <Section heading="The short version">
         <p>
           We collect the minimum needed to run your Secret Santa or personal
@@ -72,7 +72,7 @@ export default function PrivacyPage() {
         <p>
           We do <strong>not</strong> require email addresses or collect payment
           details, photos, precise location, or contacts. We use no third-party
-          advertising or tracking cookies.
+          advertising cookies. Optional analytics cookies are explained below.
         </p>
       </Section>
 
@@ -90,6 +90,27 @@ export default function PrivacyPage() {
           the service you asked for when you created a wishlist or joined a
           group (Article 6(1)(b)), and our legitimate interest in keeping the
           service safe (Article 6(1)(f)).
+        </p>
+      </Section>
+
+      <Section heading="Optional analytics cookies">
+        <p>
+          If you accept analytics, we use Google Analytics to understand visits
+          to our public pages and improve the site. Google processes cookie
+          identifiers, public page paths and device/browser information, and
+          processing may take place outside the UK/EEA. Advertising features
+          and Google signals are disabled. Private groups, shared wishlist
+          links and sign-in recovery pages are excluded from page tracking.
+          We do not send names, emails, gift details or private access links
+          as analytics event data.
+        </p>
+        <p>
+          The basis for optional analytics is your consent. Google Analytics
+          only loads after you choose Accept analytics. Rejecting it does not
+          affect the service. Use Cookie settings at the bottom of any page to
+          change your choice; rejecting stops collection and removes our
+          analytics cookies. Your choice is saved in this browser. Google
+          Analytics cookies can last up to two years unless cleared earlier.
         </p>
       </Section>
 
