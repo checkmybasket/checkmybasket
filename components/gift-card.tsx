@@ -34,7 +34,7 @@ export function GiftCard({ title, price, shop, tags, url, image, description, de
           <p className="text-xs text-[var(--cmb-text-muted)] mb-1">{deliveryNote}</p>
           <p className="text-xs text-[var(--cmb-text-muted)] mb-3">{shop}</p>
           <a href={url} target="_blank" rel="noopener noreferrer sponsored" aria-label={`Shop ${title} at ${shop} (opens in a new tab)`} className="inline-flex items-center justify-center gap-2 h-10 px-4 rounded-xl text-sm font-semibold bg-[var(--cmb-accent)] text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--cmb-primary)]">
-            Shop at Cadbury <ExternalLink size={13} strokeWidth={1.5} aria-hidden="true"/>
+            Shop at {shop} <ExternalLink size={13} strokeWidth={1.5} aria-hidden="true"/>
           </a>
         </div>
       </div>

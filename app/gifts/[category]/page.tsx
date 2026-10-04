@@ -46,7 +46,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         {products.length === 0 ? (
           <div className="rounded-2xl border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-8 text-center mb-10">
             <h2 className="font-display text-xl font-bold mb-2">More gift ideas coming soon</h2>
-            <p className="text-sm text-[var(--cmb-text-secondary)] mb-4">We’re finding gifts for this collection. In the meantime, explore our chocolate gifts by budget.</p>
+            <p className="text-sm text-[var(--cmb-text-secondary)] mb-4">We’re finding gifts for this collection. In the meantime, explore our gifts by budget.</p>
             <Link href="/gifts/under-20" className="font-semibold text-[var(--cmb-primary)] underline underline-offset-4">Browse gifts under £20</Link>
           </div>
         ) : (

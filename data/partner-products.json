@@ -1,0 +1,149 @@
+{
+  "source": "Awin",
+  "publisherId": "2918745",
+  "updatedAt": "2026-10-04T13:57:36Z",
+  "products": [
+    {
+      "id": "awin:45747:CA-31HPSALBWEB",
+      "merchantProductId": "CA-31HPSALBWEB",
+      "awinProductId": "42469054597",
+      "advertiserId": "45747",
+      "title": "Harry Potter crystal art sticker album starter pack",
+      "variantLabel": "",
+      "price": 999,
+      "currency": "GBP",
+      "shop": "Craft Buddy",
+      "tags": [
+        "Crafts",
+        "Harry Potter"
+      ],
+      "description": "An album, 6 assorted crystal art stickers and the tools to start a Harry Potter collection. More stickers are sold separately.",
+      "url": "https://www.awin1.com/pclick.php?p=42469054597&a=2918745&m=45747",
+      "merchantUrl": "https://www.craftbuddyshop.com/products/harry-potter-crystal-art-sticker-album-starter-pack",
+      "image": "https://cdn.shopify.com/s/files/1/0331/0528/1083/files/Harry-Potter-Crystal-Art-Sticker-Album-Starter-Pack-NOTOOLSNEW_0af8f07e-73ec-4de7-9424-2f0ae07b8fd9.png?v=1747157716",
+      "categories": [],
+      "inStock": true,
+      "deliveryNote": "Delivery extra. Check the retailer for charges."
+    },
+    {
+      "id": "awin:126437:50164478837064",
+      "merchantProductId": "50164478837064",
+      "awinProductId": "44566913507",
+      "advertiserId": "126437",
+      "title": "Organic Sea Salt Seaweed Snacks (multipack 20x4g)",
+      "variantLabel": "Multipack 20x4g",
+      "price": 1800,
+      "currency": "GBP",
+      "shop": "MORiSH",
+      "tags": [
+        "Snacks",
+        "Seaweed"
+      ],
+      "description": "A box of 20 individually packed savoury seaweed snacks for someone who enjoys this flavour. Check ingredients and allergens before gifting.",
+      "url": "https://www.awin1.com/pclick.php?p=44566913507&a=2918745&m=126437",
+      "merchantUrl": "https://morishsnacks.co.uk/products/organic-sea-salt-seaweed-snacks?variant=50164478837064",
+      "image": "https://cdn.shopify.com/s/files/1/0883/3587/6424/files/2_53499f93-a28c-474c-8b02-2b3a10869682.png?v=1788080088",
+      "categories": [
+        "colleague"
+      ],
+      "inStock": true,
+      "deliveryNote": "Standard UK mainland delivery \u00a33.99 below \u00a330. Check checkout."
+    },
+    {
+      "id": "awin:126437:50043261878600",
+      "merchantProductId": "50043261878600",
+      "awinProductId": "44566913511",
+      "advertiserId": "126437",
+      "title": "Organic Olive Oil Seaweed Snacks (multipack 20x4g)",
+      "variantLabel": "Multipack 20x4g",
+      "price": 1800,
+      "currency": "GBP",
+      "shop": "MORiSH",
+      "tags": [
+        "Snacks",
+        "Seaweed"
+      ],
+      "description": "A box of 20 individually packed savoury seaweed snacks for someone who enjoys this flavour. Check ingredients and allergens before gifting.",
+      "url": "https://www.awin1.com/pclick.php?p=44566913511&a=2918745&m=126437",
+      "merchantUrl": "https://morishsnacks.co.uk/products/organic-olive-oil-seaweed-snacks?variant=50043261878600",
+      "image": "https://cdn.shopify.com/s/files/1/0883/3587/6424/files/1_0a9ed748-f095-41ec-8acf-0e107b22563b.png?v=1788079984",
+      "categories": [
+        "colleague"
+      ],
+      "inStock": true,
+      "deliveryNote": "Standard UK mainland delivery \u00a33.99 below \u00a330. Check checkout."
+    },
+    {
+      "id": "awin:126437:50043262009672",
+      "merchantProductId": "50043262009672",
+      "awinProductId": "44566913515",
+      "advertiserId": "126437",
+      "title": "Crispy Avocado Oil Seaweed Snacks (multipack 20x4g)",
+      "variantLabel": "Multipack 20x4g",
+      "price": 1800,
+      "currency": "GBP",
+      "shop": "MORiSH",
+      "tags": [
+        "Snacks",
+        "Seaweed"
+      ],
+      "description": "A box of 20 individually packed savoury seaweed snacks for someone who enjoys this flavour. Check ingredients and allergens before gifting.",
+      "url": "https://www.awin1.com/pclick.php?p=44566913515&a=2918745&m=126437",
+      "merchantUrl": "https://morishsnacks.co.uk/products/crispy-avocado-oil-seaweed-snacks?variant=50043262009672",
+      "image": "https://cdn.shopify.com/s/files/1/0883/3587/6424/files/3_57d1f2a9-fe76-47c9-95c4-3fbbec576ac9.png?v=1788079855",
+      "categories": [
+        "colleague"
+      ],
+      "inStock": true,
+      "deliveryNote": "Standard UK mainland delivery \u00a33.99 below \u00a330. Check checkout."
+    },
+    {
+      "id": "awin:126437:50043262402888",
+      "merchantProductId": "50043262402888",
+      "awinProductId": "44566913519",
+      "advertiserId": "126437",
+      "title": "Crispy Shiitake Seaweed Snacks (multipack 20x4g)",
+      "variantLabel": "Multipack 20x4g",
+      "price": 1800,
+      "currency": "GBP",
+      "shop": "MORiSH",
+      "tags": [
+        "Snacks",
+        "Seaweed"
+      ],
+      "description": "A box of 20 individually packed savoury seaweed snacks for someone who enjoys this flavour. Check ingredients and allergens before gifting.",
+      "url": "https://www.awin1.com/pclick.php?p=44566913519&a=2918745&m=126437",
+      "merchantUrl": "https://morishsnacks.co.uk/products/crispy-shiitake-seaweed-snacks?variant=50043262402888",
+      "image": "https://cdn.shopify.com/s/files/1/0883/3587/6424/files/5_ad662fc3-e3bf-4ee8-b6da-bdc13b70c71f.png?v=1788079760",
+      "categories": [
+        "colleague"
+      ],
+      "inStock": true,
+      "deliveryNote": "Standard UK mainland delivery \u00a33.99 below \u00a330. Check checkout."
+    },
+    {
+      "id": "awin:126437:50164475167048",
+      "merchantProductId": "50164475167048",
+      "awinProductId": "44566913523",
+      "advertiserId": "126437",
+      "title": "Crispy Sesame Oil Seaweed Snacks (multipack 20x4g)",
+      "variantLabel": "Multipack 20x4g",
+      "price": 1800,
+      "currency": "GBP",
+      "shop": "MORiSH",
+      "tags": [
+        "Snacks",
+        "Seaweed"
+      ],
+      "description": "A box of 20 individually packed savoury seaweed snacks for someone who enjoys this flavour. Check ingredients and allergens before gifting.",
+      "url": "https://www.awin1.com/pclick.php?p=44566913523&a=2918745&m=126437",
+      "merchantUrl": "https://morishsnacks.co.uk/products/crispy-sesame-oil-seaweed-snacks?variant=50164475167048",
+      "image": "https://cdn.shopify.com/s/files/1/0883/3587/6424/files/4_9ddc68a8-bf04-4085-acb1-be40e0c1190d.png?v=1788079549",
+      "categories": [
+        "colleague"
+      ],
+      "inStock": true,
+      "deliveryNote": "Standard UK mainland delivery \u00a33.99 below \u00a330. Check checkout."
+    }
+  ]
+}

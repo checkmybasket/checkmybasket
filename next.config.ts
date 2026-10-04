@@ -33,7 +33,11 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [{ protocol: "https", hostname: "www.cadburygiftsdirect.co.uk", pathname: "/media/catalog/product/**", search: "" }],
+    remotePatterns: [
+      { protocol: "https", hostname: "www.cadburygiftsdirect.co.uk", pathname: "/media/catalog/product/**", search: "" },
+      { protocol: "https", hostname: "cdn.shopify.com", pathname: "/s/files/1/0331/0528/1083/files/**" },
+      { protocol: "https", hostname: "cdn.shopify.com", pathname: "/s/files/1/0883/3587/6424/files/**" },
+    ],
     maximumRedirects: 0,
   },
   async headers() {
