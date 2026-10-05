@@ -291,6 +291,13 @@ export function WishlistEditor({ id }: { id: string }) {
           <p className="text-sm">
             Add a link from any shop, or describe something you would love.
           </p>
+          <Button
+            type="button"
+            className="mt-4 rounded-xl min-h-11"
+            onClick={() => setEditing(null)}
+          >
+            Add a gift
+          </Button>
         </div>
       )}
       {confirm && (
