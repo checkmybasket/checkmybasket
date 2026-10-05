@@ -193,7 +193,7 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
           <div className="rounded-2xl p-6 animate-scale-in bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-lg)]">
             <div className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium mb-4 text-[var(--cmb-primary)]"
               style={{ background:"rgba(27,67,50,0.08)" }}>
-              <Gift size={12} strokeWidth={1.5}/> {group.mode.charAt(0).toUpperCase()+group.mode.slice(1)} Secret Santa
+              <Gift size={12} strokeWidth={1.5}/> Secret Santa
             </div>
             <h1 className="text-xl font-bold mb-1 font-display">{group.name}</h1>
             {group.organiser_name && <p className="text-sm mb-4 text-[var(--cmb-text-secondary)]">Created by {group.organiser_name}</p>}

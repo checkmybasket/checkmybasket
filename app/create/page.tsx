@@ -1,12 +1,11 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { Gift, Copy, MessageCircle, QrCode, ChevronLeft, Check, Heart, Briefcase, GraduationCap, Smile } from "lucide-react";
+import { Gift, Copy, MessageCircle, QrCode, ChevronLeft, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-import type { GroupMode } from "@/lib/types";
 import { toast } from "sonner";
 import { createClient } from "@/lib/supabase/client";
 import { EmailRecovery } from "@/components/email-recovery";
@@ -14,14 +13,7 @@ import { QRCodeSvg } from "@/components/qr-code";
 import { ensureSession } from "@/lib/supabase/auth";
 
 const BUDGET_PRESETS = [500, 1000, 1500, 2000, 2500] as const;
-const GROUP_MODES: { value: GroupMode; label: string; icon: React.ElementType; desc: string }[] = [
-  { value: "family",    label: "Family",    icon: Heart,          desc: "Parents, kids, extended family" },
-  { value: "friends",   label: "Friends",   icon: Smile,          desc: "Friend groups, flatmates" },
-  { value: "workplace", label: "Workplace", icon: Briefcase,      desc: "Colleagues and office teams" },
-  { value: "students",  label: "Students",  icon: GraduationCap,  desc: "Uni friends, class groups" },
-];
-
-interface FormData { groupName: string; mode: GroupMode; budget: number; customBudget: string; exchangeDate: string; location: string; yourName: string; email: string; }
+interface FormData { groupName: string; budget: number; customBudget: string; exchangeDate: string; location: string; yourName: string; email: string; }
 
 export default function CreatePage() {
   const [step, setStep]       = useState<"form"|"share">("form");
@@ -29,7 +21,7 @@ export default function CreatePage() {
   const [groupId, setGroupId] = useState("");
   const [busy, setBusy]       = useState(false);
   const [copied, setCopied]   = useState(false);
-  const [form, setForm]       = useState<FormData>({ groupName:"", mode:"friends", budget:-1, customBudget:"", exchangeDate:"", location:"", yourName:"", email:"" });
+  const [form, setForm]       = useState<FormData>({ groupName:"", budget:-1, customBudget:"", exchangeDate:"", location:"", yourName:"", email:"" });
   const [errors, setErrors]   = useState<Partial<Record<keyof FormData,string>>>({});
 
   const inviteLink = typeof window !== "undefined"
@@ -60,7 +52,8 @@ export default function CreatePage() {
       }
       const { data, error } = await supabase.rpc("create_group", {
         p_name: form.groupName,
-        p_mode: form.mode,
+        // Retain the existing default required by the group-creation API.
+        p_mode: "friends",
         p_budget_amount: budgetPence,
         p_exchange_date: form.exchangeDate || null,
         p_location: form.location || null,
@@ -153,22 +146,6 @@ export default function CreatePage() {
             onChange={e => setForm(f => ({ ...f, groupName:e.target.value }))}
             className="h-12 text-base rounded-xl" style={{ borderColor:errors.groupName?"var(--cmb-error)":"var(--cmb-border-strong)" }}/>
         </Field>
-
-        {/* Mode */}
-        <div>
-          <Label className="text-base font-medium mb-3 block">Group type</Label>
-          <div className="grid grid-cols-2 gap-3">
-            {GROUP_MODES.map(({ value, label, icon:Icon, desc }) => (
-              <button key={value} type="button" onClick={() => setForm(f => ({ ...f, mode:value }))}
-                className={cn("rounded-xl p-4 text-left border-2 transition-all duration-150", form.mode===value?"border-[var(--cmb-primary)]":"border-[var(--cmb-border)]")}
-                style={{ background:form.mode===value?"rgba(27,67,50,0.06)":"var(--cmb-surface)" }}>
-                <Icon size={20} strokeWidth={1.5} className="mb-2" style={{ color:form.mode===value?"var(--cmb-primary)":"var(--cmb-text-muted)" }}/>
-                <p className="font-semibold text-sm">{label}</p>
-                <p className="text-xs mt-0.5 text-[var(--cmb-text-muted)]">{desc}</p>
-              </button>
-            ))}
-          </div>
-        </div>
 
         {/* Budget — optional */}
         <div>
