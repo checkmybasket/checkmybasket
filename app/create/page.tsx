@@ -1,8 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
-import { Gift, Copy, MessageCircle, QrCode, ChevronLeft, Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Gift, Copy, MessageCircle, QrCode, ChevronLeft, Check, Share2, ArrowRight } from "lucide-react";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
@@ -21,6 +21,8 @@ export default function CreatePage() {
   const [groupId, setGroupId] = useState("");
   const [busy, setBusy]       = useState(false);
   const [copied, setCopied]   = useState(false);
+  const [sharing, setSharing] = useState(false);
+  const shareInProgress = useRef(false);
   const [form, setForm]       = useState<FormData>({ groupName:"", budget:-1, customBudget:"", exchangeDate:"", location:"", yourName:"", email:"" });
   const [errors, setErrors]   = useState<Partial<Record<keyof FormData,string>>>({});
 
@@ -70,9 +72,38 @@ export default function CreatePage() {
     }
   }
   async function copyLink() {
-    await navigator.clipboard.writeText(inviteLink);
-    setCopied(true); toast.success("Link copied"); setTimeout(() => setCopied(false), 2000);
+    try {
+      await navigator.clipboard.writeText(inviteLink);
+      setCopied(true); toast.success("Link copied"); setTimeout(() => setCopied(false), 2000);
+    } catch {
+      toast.error("Could not copy the link. Select the invite link below and copy it manually.");
+    }
   }
+  async function shareInvite() {
+    if (shareInProgress.current) return;
+    if (typeof navigator.share !== "function") {
+      await copyLink();
+      return;
+    }
+    shareInProgress.current = true;
+    setSharing(true);
+    try {
+      await navigator.share({
+        title: `${form.groupName} — CheckMyBasket`,
+        text: "Join our Secret Santa draw!",
+        url: inviteLink,
+      });
+    } catch (error) {
+      // Dismissing the device's share menu is a normal choice.
+      if (!(error instanceof Error && error.name === "AbortError")) {
+        toast.error("Could not open sharing. Use WhatsApp or copy the invite link below.");
+      }
+    } finally {
+      shareInProgress.current = false;
+      setSharing(false);
+    }
+  }
+
   function shareWhatsApp() {
     window.open(`https://wa.me/?text=${encodeURIComponent(`Join our Secret Santa! 🎅\n${inviteLink}`)}`, "_blank", "noopener");
   }
@@ -86,9 +117,19 @@ export default function CreatePage() {
         <h1 className="text-2xl font-bold mb-1 animate-fade-up font-display">{form.groupName} is ready</h1>
         <p className="text-sm mb-8 animate-fade-up animate-delay-100 text-[var(--cmb-text-secondary)]">Share the link below to invite your group</p>
 
+        <div className="mb-6 space-y-3 animate-fade-up animate-delay-200">
+          <Button onClick={shareInvite} disabled={sharing} size="lg" className="w-full h-14 rounded-xl font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">
+            <Share2 size={20} strokeWidth={1.5} className="mr-2" />
+            {sharing ? "Sharing…" : typeof navigator !== "undefined" && typeof navigator.share === "function" ? "Share invite" : "Copy invite link"}
+          </Button>
+          <Link href={`/g/${groupId}`} className={cn(buttonVariants({ variant: "outline", size: "lg" }), "w-full h-12 rounded-xl font-semibold border-[var(--cmb-border-strong)]")}>
+            Go to your group <ArrowRight size={18} strokeWidth={1.5} className="ml-2" />
+          </Link>
+        </div>
+
         <EmailRecovery groupId={groupId} />
 
-        {/* WhatsApp — primary */}
+        {/* Direct WhatsApp sharing remains available on every device. */}
         <Button onClick={shareWhatsApp} size="lg" className="w-full h-14 rounded-xl font-semibold mb-3 animate-fade-up animate-delay-200 text-white"
           style={{ background:"#25D366" }}>
           <MessageCircle size={20} strokeWidth={1.5} className="mr-2" /> Share via WhatsApp
@@ -113,11 +154,6 @@ export default function CreatePage() {
           </div>
         </div>
 
-        <Link href={`/g/${groupId}`} className="block mt-6 animate-fade-up animate-delay-400">
-          <Button size="lg" variant="outline" className="w-full h-12 rounded-xl font-semibold border border-[var(--cmb-border-strong)]">
-            Go to your group
-          </Button>
-        </Link>
       </div>
     </div>
   );
