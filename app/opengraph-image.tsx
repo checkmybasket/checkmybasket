@@ -18,7 +18,7 @@ async function loadInter(): Promise<ArrayBuffer | null> {
 
 export default async function Image() {
   const font = await loadInter();
-  return new ImageResponse(<div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", padding: "64px 72px", background: "#FFFFFF", color: "#141414", fontFamily: font ? "Inter" : undefined }}>
+  return new ImageResponse(<div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", padding: "64px 72px", background: "#FFFFFF", color: "#141414", fontFamily: font ? "Inter" : "sans-serif" }}>
     <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 36, fontWeight: 700, paddingBottom: 28, borderBottom: "2px solid #141414" }}><BasketMark /><span>CheckMyBasket</span></div>
     <div style={{ display: "flex", fontSize: 100, fontWeight: 700, letterSpacing: "-5px", lineHeight: .95, marginTop: 56 }}>Gifting made simple</div>
     <div style={{ display: "flex", fontSize: 30, marginTop: 32 }}>Thoughtful gifts, no matter how well you know them.</div>
