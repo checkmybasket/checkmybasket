@@ -247,10 +247,10 @@ export default function PrivacyPage() {
         <p>
           Questions about this policy:{" "}
           <a
-            href="mailto:checkmybasketuk@gmail.com"
+            href="mailto:hello@checkmybasket.co.uk"
             className="underline text-[var(--cmb-primary)]"
           >
-            checkmybasketuk@gmail.com
+            hello@checkmybasket.co.uk
           </a>
         </p>
       </Section>
