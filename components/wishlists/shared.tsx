@@ -10,17 +10,15 @@ import {
 } from "@/lib/wishlists/types";
 import { EmailRecovery } from "@/components/email-recovery";
 import { ItemCard } from "./item-card";
-import { WishlistShell, field, panel, secondary } from "./shell";
+import { WishlistShell, panel, secondary } from "./shell";
 export function SharedWishlist({ token }: { token: string }) {
   const [list, setList] = useState<PersonalList | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
-  const [priority, setPriority] = useState("");
-  const [budget, setBudget] = useState("");
-  const [currency, setCurrency] = useState("GBP");
-  const [sort, setSort] = useState("list");
+  const [view, setView] = useState<"list" | "cards">("list");
+  const [collapsed, setCollapsed] = useState<string[]>([]);
   const load = useCallback(async () => {
     if (!uuidPattern.test(token)) {
       setLoading(false);
@@ -113,27 +111,15 @@ export function SharedWishlist({ token }: { token: string }) {
         </Link>
       </WishlistShell>
     );
-  const items = list.items
-    .filter(
-      (i) =>
-        (!priority || i.priority === priority) &&
-        (!budget ||
-          (i.currency === currency &&
-            i.price !== null &&
-            i.price <= Number(budget) * 100)),
-    )
-    .sort((a, b) =>
-      sort === "price"
-        ? a.price === null
-          ? 1
-          : b.price === null
-            ? -1
-            : a.currency.localeCompare(b.currency) || a.price - b.price
-        : sort === "priority"
-          ? ["love", "like", "inspiration"].indexOf(a.priority) -
-            ["love", "like", "inspiration"].indexOf(b.priority)
-          : a.position - b.position,
-    );
+  const priorityOrder = ["love", "like", "inspiration"] as const;
+  const items = [...list.items].sort(
+    (a, b) =>
+      priorityOrder.indexOf(a.priority) - priorityOrder.indexOf(b.priority) ||
+      a.position - b.position,
+  );
+  const groups = priorityOrder.filter((priority) =>
+    items.some((item) => item.priority === priority),
+  );
   return (
     <WishlistShell>
       <p className="text-sm text-[var(--cmb-text-secondary)] mb-2">
@@ -170,64 +156,43 @@ export function SharedWishlist({ token }: { token: string }) {
           Buying happens at the shop.
         </p>
       )}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 my-6">
-        <label className="text-sm">
-          Priority
-          <select
-            className={`${field} mt-1`}
-            value={priority}
-            onChange={(e) => setPriority(e.target.value)}
-          >
-            <option value="">All wishes</option>
-            {Object.entries(priorities).map(([v, label]) => (
-              <option value={v} key={v}>
-                {label}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label className="text-sm">
-          Maximum price
-          <input
-            className={`${field} mt-1`}
-            type="number"
-            min="0"
-            step="0.01"
-            value={budget}
-            onChange={(e) => setBudget(e.target.value)}
-            placeholder="Any price"
-          />
-        </label>
-        <label className="text-sm">
-          Budget currency
-          <select
-            className={`${field} mt-1`}
-            value={currency}
-            onChange={(e) => setCurrency(e.target.value)}
-          >
-            {["GBP", "EUR", "USD", "AUD", "CAD"].map((c) => (
-              <option key={c}>{c}</option>
-            ))}
-          </select>
-        </label>
-        <label className="text-sm">
-          Sort by
-          <select
-            className={`${field} mt-1`}
-            value={sort}
-            onChange={(e) => setSort(e.target.value)}
-          >
-            <option value="list">List order</option>
-            <option value="priority">Priority</option>
-            <option value="price">Price (per currency)</option>
-          </select>
-        </label>
-      </div>
-      {budget && (
-        <p className="text-xs mb-4 text-[var(--cmb-text-muted)]">
-          Showing gifts with a known {currency} price within your budget.
+      <div className="flex flex-wrap items-center justify-between gap-3 my-5">
+        <p className="text-sm text-[var(--cmb-text-secondary)]">
+          Highest priorities first
         </p>
-      )}
+        <div className="flex flex-wrap gap-2">
+          <div className="flex gap-1" role="group" aria-label="Gift view">
+            <button
+              className={`${secondary} aria-pressed:bg-[var(--cmb-primary)] aria-pressed:text-white`}
+              aria-pressed={view === "list"}
+              onClick={() => setView("list")}
+            >
+              List view
+            </button>
+            <button
+              className={`${secondary} aria-pressed:bg-[var(--cmb-primary)] aria-pressed:text-white`}
+              aria-pressed={view === "cards"}
+              onClick={() => setView("cards")}
+            >
+              Card view
+            </button>
+          </div>
+          {groups.length > 0 && (
+            <button
+              className={secondary}
+              onClick={() =>
+                setCollapsed(
+                  collapsed.length === groups.length ? [] : [...groups],
+                )
+              }
+            >
+              {collapsed.length === groups.length
+                ? "Expand all"
+                : "Collapse all"}
+            </button>
+          )}
+        </div>
+      </div>
       {message && (
         <p role="status" className="mb-4 text-sm text-[var(--cmb-primary)]">
           {message}
@@ -239,58 +204,109 @@ export function SharedWishlist({ token }: { token: string }) {
         </p>
       )}
       {items.length ? (
-        <div className="grid sm:grid-cols-2 gap-4">
-          {items.map((item) => (
-            <ItemCard
-              key={`${item.id}:${item.image_url}`}
-              item={item}
-              shareToken={token}
-            >
-              {!list.is_owner && (
-                <div className="flex flex-wrap gap-2">
-                  {item.mine ? (
-                    <>
-                      {!item.bought && (
-                        <button
-                          className={secondary}
-                          disabled={busy}
-                          onClick={() => reserve(item.id, "bought")}
-                        >
-                          Mark bought
-                          <span className="sr-only">: {item.title}</span>
-                        </button>
-                      )}
-                      <button
-                        className={secondary}
-                        disabled={busy}
-                        onClick={() => reserve(item.id, "release")}
+        <div className="space-y-5">
+          {groups.map((priority) => (
+            <section key={priority}>
+              <h2>
+                <button
+                  className="flex w-full items-center justify-between gap-3 min-h-11 mb-2 text-base font-semibold"
+                  aria-expanded={!collapsed.includes(priority)}
+                  aria-controls={`priority-${priority}`}
+                  onClick={() =>
+                    setCollapsed((current) =>
+                      current.includes(priority)
+                        ? current.filter((value) => value !== priority)
+                        : [...current, priority],
+                    )
+                  }
+                >
+                  <span>
+                    {priorities[priority]}{" "}
+                    <span className="font-normal text-[var(--cmb-text-secondary)]">
+                      (
+                      {
+                        items.filter((item) => item.priority === priority)
+                          .length
+                      }
+                      )
+                    </span>
+                  </span>
+                  <span aria-hidden>
+                    {collapsed.includes(priority) ? "+" : "−"}
+                  </span>
+                </button>
+              </h2>
+              <div
+                id={`priority-${priority}`}
+                hidden={collapsed.includes(priority)}
+              >
+                <div
+                  className={
+                    view === "cards"
+                      ? "grid sm:grid-cols-2 gap-3"
+                      : "grid gap-3"
+                  }
+                >
+                  {items
+                    .filter((item) => item.priority === priority)
+                    .map((item) => (
+                      <ItemCard
+                        key={`${item.id}:${item.image_url}`}
+                        item={item}
+                        shareToken={token}
+                        layout={view === "list" ? "list" : "compact"}
                       >
-                        Release reservation
-                        <span className="sr-only">: {item.title}</span>
-                      </button>
-                    </>
-                  ) : (
-                    <button
-                      className={secondary}
-                      disabled={busy || item.reserved}
-                      onClick={() => reserve(item.id, "reserve")}
-                    >
-                      {item.reserved ? "Already reserved" : "Reserve gift"}
-                      <span className="sr-only">: {item.title}</span>
-                    </button>
-                  )}
+                        {!list.is_owner && (
+                          <div className="flex flex-wrap gap-2">
+                            {item.mine ? (
+                              <>
+                                {!item.bought && (
+                                  <button
+                                    className={secondary}
+                                    disabled={busy}
+                                    onClick={() => reserve(item.id, "bought")}
+                                  >
+                                    Mark bought
+                                    <span className="sr-only">
+                                      : {item.title}
+                                    </span>
+                                  </button>
+                                )}
+                                <button
+                                  className={secondary}
+                                  disabled={busy}
+                                  onClick={() => reserve(item.id, "release")}
+                                >
+                                  Unreserve gift
+                                  <span className="sr-only">
+                                    : {item.title}
+                                  </span>
+                                </button>
+                              </>
+                            ) : (
+                              <button
+                                className={secondary}
+                                disabled={busy || item.reserved}
+                                onClick={() => reserve(item.id, "reserve")}
+                              >
+                                {item.reserved
+                                  ? "Already reserved"
+                                  : "Reserve gift"}
+                                <span className="sr-only">: {item.title}</span>
+                              </button>
+                            )}
+                          </div>
+                        )}
+                      </ItemCard>
+                    ))}
                 </div>
-              )}
-            </ItemCard>
+              </div>
+            </section>
           ))}
         </div>
       ) : (
         <div className={panel}>
-          <p>
-            {list.items.length
-              ? "No gifts match these filters. Try a higher budget or another priority."
-              : "No gifts added yet. Check back soon."}
-          </p>
+          <p>No gifts added yet. Check back soon.</p>
         </div>
       )}
       {!list.is_owner && list.items.some((i) => i.mine) && (
