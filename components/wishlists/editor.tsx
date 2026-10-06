@@ -78,13 +78,15 @@ export function WishlistEditor({ id }: { id: string }) {
       }
       await load();
       setMessage(
-        action === "rotate"
-          ? "New sharing link ready. The old link no longer works."
-          : action === "disable"
-            ? "Sharing is off. Your list is private."
-            : action === "enable"
-              ? "Sharing is on. Anyone with the link can view your list."
-              : "Wishlist updated.",
+        action === "release"
+          ? "Any reservation for this gift has been cleared. The gift stays on your wishlist."
+          : action === "rotate"
+            ? "New sharing link ready. The old link no longer works."
+            : action === "disable"
+              ? "Sharing is off. Your list is private."
+              : action === "enable"
+                ? "Sharing is on. Anyone with the link can view your list."
+                : "Wishlist updated.",
       );
     } catch (err) {
       setError(
@@ -104,11 +106,15 @@ export function WishlistEditor({ id }: { id: string }) {
         await navigator.share({ title: list?.title, url: shareUrl });
       } else {
         await navigator.clipboard.writeText(shareUrl);
-        setMessage("Wishlist link copied. Paste it into a message to share it.");
+        setMessage(
+          "Wishlist link copied. Paste it into a message to share it.",
+        );
       }
     } catch (err) {
       if (err instanceof DOMException && err.name === "AbortError") return;
-      setMessage("Sharing isn't available here. Copy the link from the box above.");
+      setMessage(
+        "Sharing isn't available here. Copy the link from the box above.",
+      );
     }
   }
   if (loading)
@@ -275,6 +281,13 @@ export function WishlistEditor({ id }: { id: string }) {
                 <button
                   className={secondary}
                   disabled={busy}
+                  onClick={() => setConfirm({ action: "release", item })}
+                >
+                  Unreserve gift<span className="sr-only">: {item.title}</span>
+                </button>
+                <button
+                  className={secondary}
+                  disabled={busy}
                   onClick={() => setConfirm({ action: "delete", item })}
                 >
                   Remove<span className="sr-only"> {item.title}</span>
@@ -308,18 +321,22 @@ export function WishlistEditor({ id }: { id: string }) {
           aria-describedby="confirm-description"
         >
           <h2 id="confirm-heading" className="font-semibold text-lg">
-            {confirm.action === "rotate"
-              ? "Replace your sharing link?"
-              : confirm.item
-                ? "Remove this gift?"
-                : "Delete your wishlist?"}
+            {confirm.action === "release"
+              ? `Unreserve “${confirm.item?.title}”?`
+              : confirm.action === "rotate"
+                ? "Replace your sharing link?"
+                : confirm.item
+                  ? "Remove this gift?"
+                  : "Delete your wishlist?"}
           </h2>
           <p id="confirm-description" className="text-sm my-3">
-            {confirm.action === "rotate"
-              ? "The old link and QR code will stop working. Existing reservations stay saved."
-              : confirm.item
-                ? "This removes the gift and any reservation for it."
-                : "This permanently removes the list, its gifts and reservations."}
+            {confirm.action === "release"
+              ? "This clears any reservation, including one marked as bought, and lets someone else reserve the gift. The gift stays on your list."
+              : confirm.action === "rotate"
+                ? "The old link and QR code will stop working. Existing reservations stay saved."
+                : confirm.item
+                  ? "This removes the gift and any reservation for it."
+                  : "This permanently removes the list, its gifts and reservations."}
           </p>
           <div className="flex flex-wrap gap-3">
             <button
@@ -335,7 +352,11 @@ export function WishlistEditor({ id }: { id: string }) {
               disabled={busy}
               onClick={() => mutate(confirm.action, confirm.item)}
             >
-              {busy ? "Updating…" : "Confirm"}
+              {busy
+                ? "Updating…"
+                : confirm.action === "release"
+                  ? "Unreserve gift"
+                  : "Confirm"}
             </Button>
           </div>
         </section>

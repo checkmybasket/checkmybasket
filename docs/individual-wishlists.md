@@ -10,7 +10,7 @@ Add a public HTTP(S) link from any retailer, request editable product details, o
 
 Explicitly enable sharing to get a link, native share action, WhatsApp link and QR code. Disabling sharing revokes access; replacing the link revokes the previous capability while preserving reservations. Anyone with the link can forward it. Shared pages have generic social metadata, no indexing and no referrer disclosure.
 
-Shared lists show Love, Like, then Inspiration, keeping the owner’s order within each priority. Compact image rows are the default, with optional compact cards, collapsible priority sections and expandable gift notes. Budget, currency, priority and sort controls are removed. Visitors can reserve, mark bought and unreserve their own gift. One item accepts one reservation. Database locks and a unique constraint prevent duplicate winners. Owners cannot reserve their own wishes; owner views omit reservation details. This is surprise preservation, not absolute secrecy: the owner could use another browser identity to open their own shared link.
+Shared lists show Love, Like, then Inspiration, keeping the owner’s order within each priority. Compact image rows are the default, with optional compact cards, collapsible priority sections and expandable gift notes. Budget, currency, priority and sort controls are removed. Visitors can reserve, mark bought and unreserve their own gift. Owners also have a confirmed “Unreserve gift” backup in their editor. It clears any reservation, including bought status, without removing the gift or revealing reservation details. The owner mutation validates both list ownership and gift membership, uses the same list lock as reservation creation, and returns no reservation data. It works when sharing is disabled. One item accepts one reservation. Database locks and a unique constraint prevent duplicate winners. Owners cannot reserve their own wishes; owner views omit reservation details. This is surprise preservation, not absolute secrecy: the owner could use another browser identity to open their own shared link.
 
 The dashboard includes gifts the visitor has reserved, including a release action after sharing stops. Same-browser sessions retain access. Optional verified email recovery restores the original identity, its lists, reservations and any groups on another device. An existing verified identity is never merged into another browser identity.
 
@@ -40,6 +40,12 @@ Application routes: `/wishlists`, `/wishlists/[id]`, `/w/[token]`, `/api/wishlis
 Applied migrations: `20261003185559_individual_wishlists`, `20261003190353_personal_wishlist_image_access`, `20261003190621_personal_wishlist_recovery`. Deployed `group-recovery` version 3 retains its existing custom authentication, one-use token checks and original-ID restoration.
 
 Run local checks with `node --test tests/wishlists.test.cjs`, TypeScript, ESLint, and `npm run build`. Live scripts require the intended Supabase environment and create disposable auth identities; remove their recorded IDs after checking, in addition to the scripts' list cleanup. The recovery live script's prepare phase requires an administrator to seed test-only hashed tokens before its verification phase; do not send mail or use real addresses for that test.
+
+## Pending owner backup release — 6 October 2026
+
+Migration `20261006190147_personal_wishlist_owner_unreserve` adds `release` to the owner mutation RPC; apply it before releasing the updated editor. Not yet applied to production. The combined compact shared-view and owner backup update awaits explicit publication approval.
+
+Local PostgreSQL/PGlite tests in `tests/wishlists-owner-unreserve.cjs` verify ownership, anonymous and other-user denial, cross-list gift denial, bought reset, repeat clearing, retaining gifts and unrelated reservations, new reservations after clearing, former-reserver denial and disabled-sharing behavior. Run with PGlite installed outside the app and `PGLITE_MODULE` pointing to that package; no live credentials or production records are used. Build, TypeScript and targeted ESLint pass. Live database and browser interaction verification for this addition remain pending release.
 
 ## Deferred
 
