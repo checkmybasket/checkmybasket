@@ -60,42 +60,42 @@ export default function HomePage() {
         >
           <h2 id="faq-heading">Your Secret Santa questions, answered</h2>
           <div className="receipt-faq-list">
-            <article>
-              <h3>How many people do we need for a Secret Santa draw?</h3>
+            <details>
+              <summary><h3>How many people do we need for a Secret Santa draw?</h3></summary>
               <p>
                 At least three people need to have joined your group before you
                 can draw names. Wait until everyone who wants to take part has
                 joined, then the organiser can start the draw.
               </p>
-            </article>
-            <article>
-              <h3>Does everyone need to give an email address?</h3>
+            </details>
+            <details>
+              <summary><h3>Does everyone need to give an email address?</h3></summary>
               <p>
                 No. You can create or join a draw without an email address or
                 password. A notification email is optional. To return on another
                 device, you need to set up and verify an email for recovery
                 separately.
               </p>
-            </article>
-            <article>
-              <h3>Can we stop couples or certain people drawing each other?</h3>
+            </details>
+            <details>
+              <summary><h3>Can we stop couples or certain people drawing each other?</h3></summary>
               <p>
                 Yes. Before drawing names, the organiser can add exclusion pairs
                 so those two people will not draw each other. Too many exclusions
                 can make a valid draw impossible; if that happens, adjust the
                 pairs and try again.
               </p>
-            </article>
-            <article>
-              <h3>Who can see my Secret Santa match?</h3>
+            </details>
+            <details>
+              <summary><h3>Who can see my Secret Santa match?</h3></summary>
               <p>
                 Each participant can see their own assigned recipient. The
                 organiser does not get a list of everyone&apos;s matches. Keep
                 your match to yourself to preserve the surprise.
               </p>
-            </article>
-            <article>
-              <h3>Can I return to my group on another device?</h3>
+            </details>
+            <details>
+              <summary><h3>Can I return to my group on another device?</h3></summary>
               <p>
                 Yes, if you have verified a recovery email. In your original
                 browser, use &ldquo;Save access to your group&rdquo; and follow
@@ -105,7 +105,7 @@ export default function HomePage() {
                 recovery. Without a verified recovery email, we cannot restore
                 your original member identity on another device.
               </p>
-            </article>
+            </details>
           </div>
         </section>
         <CtaBand />

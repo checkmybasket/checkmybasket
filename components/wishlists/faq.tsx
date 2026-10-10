@@ -30,16 +30,16 @@ export function WishlistFaq() {
       <h2 id="wishlist-faq-heading" className="text-2xl font-display font-semibold mb-5">
         Your wishlist questions, answered
       </h2>
-      <div className="grid sm:grid-cols-2 gap-4">
+      <div className="grid sm:grid-cols-2 gap-4 items-start">
         {questions.map(({ question, answer }) => (
-          <article key={question} className={panel}>
-            <h3 className="text-lg font-semibold mb-2">{question}</h3>
-            <p className="text-sm leading-relaxed text-[var(--cmb-text-secondary)]">{answer}</p>
-          </article>
+          <details key={question} className={`${panel} group`}>
+            <summary className="flex min-h-11 cursor-pointer list-none items-start justify-between gap-4 rounded focus-visible:outline-2 focus-visible:outline-offset-4 [&::-webkit-details-marker]:hidden"><h3 className="text-lg font-semibold">{question}</h3><span aria-hidden="true" className="shrink-0 text-xl"><span className="group-open:hidden">+</span><span className="hidden group-open:inline">−</span></span></summary>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--cmb-text-secondary)]">{answer}</p>
+          </details>
         ))}
-        <article className={panel}>
-          <h3 className="text-lg font-semibold mb-2">Can I open my wishlists on another device?</h3>
-          <p className="text-sm leading-relaxed text-[var(--cmb-text-secondary)]">
+        <details className={`${panel} group`}>
+          <summary className="flex min-h-11 cursor-pointer list-none items-start justify-between gap-4 rounded focus-visible:outline-2 focus-visible:outline-offset-4 [&::-webkit-details-marker]:hidden"><h3 className="text-lg font-semibold">Can I open my wishlists on another device?</h3><span aria-hidden="true" className="shrink-0 text-xl"><span className="group-open:hidden">+</span><span className="hidden group-open:inline">−</span></span></summary>
+          <p className="mt-3 text-sm leading-relaxed text-[var(--cmb-text-secondary)]">
             Yes, if you verify a recovery email using &ldquo;Save your wishlist access&rdquo;
             in your original browser. On another device, use{" "}
             <Link href="/return" className="underline underline-offset-4">Return &amp; sign in</Link>{" "}
@@ -48,7 +48,7 @@ export function WishlistFaq() {
             lists and reservations. A shared wishlist link does not give you
             editing access.
           </p>
-        </article>
+        </details>
       </div>
     </section>
   );
