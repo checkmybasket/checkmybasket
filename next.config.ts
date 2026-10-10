@@ -34,6 +34,7 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
+      ...["cdn.waterstones.com", "cdn.notonthehighstreet.com", "media.johnlewiscontent.com", "thelittlebotanical.com", "www.dunelm.com", "images.dunelm.com"].map(hostname => ({ protocol: "https" as const, hostname, pathname: "/**" })),
       { protocol: "https", hostname: "www.cadburygiftsdirect.co.uk", pathname: "/media/catalog/product/**", search: "" },
       { protocol: "https", hostname: "cdn.shopify.com", pathname: "/s/files/1/0331/0528/1083/files/**" },
       { protocol: "https", hostname: "cdn.shopify.com", pathname: "/s/files/1/0883/3587/6424/files/**" },

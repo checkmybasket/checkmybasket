@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Gift } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 export interface GiftCardProps {
@@ -21,7 +21,7 @@ export function GiftCard({ title, price, shop, tags, url, image, description, de
   return (
     <article className={`rounded-2xl overflow-hidden flex flex-col transition-shadow duration-200 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)] ${lg ? "hover:shadow-lg" : "hover:shadow-md"}`}>
       <div className={`relative w-full ${lg ? "h-56" : "h-48"} bg-white`}>
-        <Image src={image} alt={title} fill sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 1023px) 50vw, 320px" className="object-contain p-4" />
+        {image ? <Image src={image} alt={title} fill sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 1023px) 50vw, 320px" className="object-contain p-4" /> : <div className="h-full flex items-center justify-center text-[var(--cmb-primary)]"><Gift size={56} strokeWidth={1} aria-label="Gift idea"/></div>}
       </div>
       <div className="p-4 flex flex-col flex-1">
         <div className="flex gap-1.5 mb-2 flex-wrap">

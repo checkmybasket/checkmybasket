@@ -1,8 +1,11 @@
+import { GiftPagination } from "@/components/gift-pagination";
 import Link from "next/link";
-import { featuredGifts } from "@/lib/gift-catalogue";
+import { getAvailableGifts } from "@/lib/gift-catalogue";
 import { GIFT_CATEGORIES } from "@/lib/gift-categories";
 import { Gift, ChevronRight, ShieldOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { GiftFiltersForm } from "@/components/gift-filters";
+import { readGiftFilters, selectGifts, londonDay } from "@/lib/gift-selection";
 import { GiftCard } from "@/components/gift-card";
 
 export const metadata = {
@@ -11,7 +14,14 @@ export const metadata = {
   description: "Explore Secret Santa gift ideas from UK shops, with collections under £10, £20, £30 and £50. Find a gift within your group's budget.",
 };
 
-export default function GiftsPage() {
+export default async function GiftsPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  const query = await searchParams;
+  const filters = readGiftFilters(query);
+  const products = selectGifts(await getAvailableGifts(), filters);
+  const day = londonDay();
+  const pages = Math.max(1, Math.ceil(products.length / 12));
+  const requestedPage = typeof query.page === "string" && /^\d+$/.test(query.page) ? Number(query.page) : 1;
+  const page = Math.max(1, Math.min(pages, requestedPage));
   return (
     <div className="min-h-dvh bg-[var(--cmb-bg)]">
       <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background:"rgba(255,248,240,0.92)", backdropFilter:"blur(12px)" }}>
@@ -39,9 +49,15 @@ export default function GiftsPage() {
             </Link>
           ))}
         </div>
+        <GiftFiltersForm filters={filters}/>
+        <h2 className="font-display text-xl font-bold mb-2">Today’s gift ideas</h2>
+        <p className="text-sm text-[var(--cmb-text-secondary)] mb-5">Picks rotate daily. Choose a budget and interest to find ideas for your recipient.</p>
+        <p className="sr-only" data-gift-day={day}>Gift selection for {day}</p>
+        {products.length === 0 ? <p className="mb-8">No matching gifts yet. Try a different interest or budget.</p> : null}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
-          {featuredGifts.map(item => <GiftCard key={item.id} {...item}/>)}
+          {products.slice((page - 1) * 12, page * 12).map(item => <GiftCard key={item.id} {...item}/>)}
         </div>
+        <GiftPagination page={page} pages={pages} filters={filters}/>
         <div className="rounded-xl p-4 flex gap-2 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]">
           <ShieldOff size={16} strokeWidth={1.5} className="text-[var(--cmb-text-muted)] shrink-0 mt-0.5"/>
           <p className="text-xs text-[var(--cmb-text-muted)]">

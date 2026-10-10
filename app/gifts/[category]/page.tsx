@@ -1,9 +1,12 @@
+import { GiftPagination } from "@/components/gift-pagination";
 import type { Metadata } from "next";
 import { getGiftsForCategory } from "@/lib/gift-catalogue";
 import { GIFT_CATEGORIES } from "@/lib/gift-categories";
 import Link from "next/link";
 import { Gift, ChevronLeft, ShieldOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { GiftFiltersForm } from "@/components/gift-filters";
+import { readGiftFilters, selectGifts, londonDay } from "@/lib/gift-selection";
 import { GiftCard } from "@/components/gift-card";
 import { notFound } from "next/navigation";
 
@@ -15,15 +18,21 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
     title: { absolute: `${cat.heading} UK | CheckMyBasket` },
     description: `${cat.desc}. Explore gift ideas from UK shops for your Secret Santa exchange.`,
     alternates: { canonical: `/gifts/${category}` },
-    robots: getGiftsForCategory(category).length === 0 ? { index: false, follow: true } : { index: true, follow: true },
+    robots: (await getGiftsForCategory(category)).length === 0 ? { index: false, follow: true } : { index: true, follow: true },
   };
 }
 
-export default async function CategoryPage({ params }: { params: Promise<{ category:string }> }) {
+export default async function CategoryPage({ params, searchParams }: { params: Promise<{ category:string }>; searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const { category } = await params;
   const cat = GIFT_CATEGORIES.find(cat => cat.slug === category);
   if (!cat) notFound();
-  const products = getGiftsForCategory(category);
+  const catalogue = await getGiftsForCategory(category);
+  const query = await searchParams;
+  const filters = readGiftFilters(query);
+  const products = selectGifts(catalogue, { ...filters, category });
+  const pages = Math.max(1, Math.ceil(products.length / 24));
+  const requestedPage = typeof query.page === "string" && /^\d+$/.test(query.page) ? Number(query.page) : 1;
+  const page = Math.max(1, Math.min(pages, requestedPage));
 
   return (
     <div className="min-h-dvh bg-[var(--cmb-bg)]">
@@ -48,17 +57,20 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
               className="flex-shrink-0 rounded-full px-4 py-2 text-sm font-medium border transition-all duration-150 bg-[var(--cmb-surface)] border-[var(--cmb-border)] text-[var(--cmb-text-secondary)]">{label}</Link>
           ))}
         </div>
+        <GiftFiltersForm filters={filters} category={category}/>
+        <p className="text-sm text-[var(--cmb-text-secondary)] mb-5" data-gift-day={londonDay()}>Gift ideas rotate daily within this collection.</p>
         {products.length === 0 ? (
           <div className="rounded-2xl border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-8 text-center mb-10">
-            <h2 className="font-display text-xl font-bold mb-2">More gift ideas coming soon</h2>
-            <p className="text-sm text-[var(--cmb-text-secondary)] mb-4">We’re finding gifts for this collection. In the meantime, explore our gifts by budget.</p>
+            <h2 className="font-display text-xl font-bold mb-2">{catalogue.length ? "No matching gifts yet" : "More gift ideas coming soon"}</h2>
+            <p className="text-sm text-[var(--cmb-text-secondary)] mb-4">{catalogue.length ? "Try another interest or a higher budget." : "We’re finding gifts for this collection. In the meantime, explore our gifts by budget."}</p>
             <Link href="/gifts/under-20" className="font-semibold text-[var(--cmb-primary)] underline underline-offset-4">Browse gifts under £20</Link>
           </div>
         ) : (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
-          {products.map(item => <GiftCard key={item.id} size="lg" {...item}/>)}
+          {products.slice((page - 1) * 24, page * 24).map(item => <GiftCard key={item.id} size="lg" {...item}/>)}
         </div>
         )}
+        <GiftPagination page={page} pages={pages} filters={filters} category={category}/>
         <div className="rounded-2xl p-8 text-center mb-8 bg-[var(--cmb-primary)] shadow-[var(--shadow-lg)]">
           <h2 className="text-2xl font-bold mb-2 font-display text-[var(--cmb-text-inverse)]">Found the perfect gift?</h2>
           <p className="mb-6" style={{ color:"rgba(255,248,240,0.75)" }}>Set up Secret Santa for your group in 30 seconds — free, no account needed.</p>
