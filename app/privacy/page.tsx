@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <InfoPage title="Privacy Policy" updated="4 October 2026">
+    <InfoPage title="Privacy Policy" updated="10 October 2026">
       <Section heading="The short version">
         <p>
           We collect the minimum needed to run your Secret Santa or personal
@@ -97,7 +97,8 @@ export default function PrivacyPage() {
       <Section heading="Optional analytics cookies">
         <p>
           If you accept analytics, we use Google Analytics to understand visits
-          to our public pages and improve the site. Google processes cookie
+          to our public pages and successful draw and personal wishlist creations
+          on those pages, and improve the site. Google processes cookie
           identifiers, public page paths and device/browser information, and
           processing may take place outside the UK/EEA. Advertising features
           and Google signals are disabled. Private groups, shared wishlist

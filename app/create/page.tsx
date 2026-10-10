@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { createClient } from "@/lib/supabase/client";
 import { EmailRecovery } from "@/components/email-recovery";
+import { trackCreation } from "@/lib/analytics";
 import { QRCodeSvg } from "@/components/qr-code";
 import { ensureSession } from "@/lib/supabase/auth";
 
@@ -62,6 +63,7 @@ export default function CreatePage() {
         p_organiser_name: form.yourName,
       });
       if (error) throw new Error(error.message);
+      trackCreation("draw_created");
       setInviteCode(data.invite_code);
       setGroupId(data.group_id);
       setStep("share");

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
 import { ensureSession } from "@/lib/supabase/auth";
+import { trackCreation } from "@/lib/analytics";
 import type { PersonalList } from "@/lib/wishlists/types";
 import { field, panel, secondary } from "./shell";
 export function ListForm({
@@ -29,6 +30,7 @@ export function ListForm({
         { p_id: list?.id ?? null, p_data: Object.fromEntries(form) },
       );
       if (error) throw error;
+      if (!list) trackCreation("wishlist_created");
       onSaved(data);
     } catch (err) {
       setError(

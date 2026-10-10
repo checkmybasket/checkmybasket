@@ -4,24 +4,7 @@ import Script from "next/script";
 import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 
-const MEASUREMENT_ID = "G-V29MEMTFL2";
-const STORAGE_KEY = "cmb-analytics-consent-v1";
-const CHANGE_EVENT = "cmb-analytics-consent-change";
-type Consent = "accepted" | "rejected" | null;
-type AnalyticsWindow = Window & {
-  dataLayer?: unknown[];
-  gtag?: (...args: unknown[]) => void;
-  "ga-disable-G-V29MEMTFL2"?: boolean;
-};
-
-function readConsent(): Consent {
-  try {
-    const value = localStorage.getItem(STORAGE_KEY);
-    return value === "accepted" || value === "rejected" ? value : null;
-  } catch {
-    return null;
-  }
-}
+import { MEASUREMENT_ID, STORAGE_KEY, CHANGE_EVENT, readConsent, isPublicPage, type Consent, type AnalyticsWindow } from "@/lib/analytics";
 
 function subscribe(callback: () => void) {
   window.addEventListener("storage", callback);
@@ -30,12 +13,6 @@ function subscribe(callback: () => void) {
     window.removeEventListener("storage", callback);
     window.removeEventListener(CHANGE_EVENT, callback);
   };
-}
-
-// Private groups, shared-list tokens and recovery URLs must never be measured.
-function isPublicPage(path: string) {
-  return ["/", "/about", "/contact", "/privacy", "/terms", "/create", "/wishlists", "/gifts"].includes(path)
-    || /^\/gifts\/[a-z0-9-]+$/.test(path);
 }
 
 export function AnalyticsConsent() {
