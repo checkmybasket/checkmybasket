@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { InfoPage, Section } from "@/components/info-page";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/contact" },
   title: "Contact",
   description: "Get in touch with CheckMyBasket — questions, problems, feedback or data requests.",
 };

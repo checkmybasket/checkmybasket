@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { InfoPage, Section } from "@/components/info-page";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/privacy" },
   title: "Privacy Policy",
   description:
     "What CheckMyBasket collects, optional analytics cookies, and your privacy choices. No ads.",

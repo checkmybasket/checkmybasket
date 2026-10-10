@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { InfoPage, Section } from "@/components/info-page";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/terms" },
   title: "Terms of Use",
   description: "The plain-English terms for using CheckMyBasket's free Secret Santa service.",
 };

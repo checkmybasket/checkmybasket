@@ -5,7 +5,11 @@ import { Gift, ChevronRight, ShieldOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GiftCard } from "@/components/gift-card";
 
-export const metadata = { title: "Secret Santa Gift Ideas UK", description: "Curated Secret Santa gift ideas from UK shops. Under £10, £20, £30 and £50, plus colleague, funny, cosy and personalised gifts. No ads." };
+export const metadata = {
+  alternates: { canonical: "/gifts" },
+  title: "Secret Santa Gift Ideas UK",
+  description: "Explore Secret Santa gift ideas from UK shops, with collections under £10, £20, £30 and £50. Find a gift within your group's budget.",
+};
 
 export default function GiftsPage() {
   return (

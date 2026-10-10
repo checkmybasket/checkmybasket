@@ -3,6 +3,7 @@ import Link from "next/link";
 import { InfoPage, Section } from "@/components/info-page";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: "About",
   description: "Why CheckMyBasket exists: Secret Santa without the ads, accounts, or awkward gifts.",
 };

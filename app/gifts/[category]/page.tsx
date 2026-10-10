@@ -11,7 +11,12 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
   const { category } = await params;
   const cat = GIFT_CATEGORIES.find(cat => cat.slug === category);
   if (!cat) return {};
-  return { title:`${cat.heading} UK`, description:`${cat.desc} Hand-picked from UK shops. No ads — curated by CheckMyBasket.` };
+  return {
+    title: { absolute: `${cat.heading} UK | CheckMyBasket` },
+    description: `${cat.desc}. Explore gift ideas from UK shops for your Secret Santa exchange.`,
+    alternates: { canonical: `/gifts/${category}` },
+    robots: getGiftsForCategory(category).length === 0 ? { index: false, follow: true } : { index: true, follow: true },
+  };
 }
 
 export default async function CategoryPage({ params }: { params: Promise<{ category:string }> }) {

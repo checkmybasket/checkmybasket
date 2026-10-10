@@ -18,7 +18,6 @@ export const metadata: Metadata = {
     type: "website", url: "https://www.checkmybasket.co.uk", siteName: "CheckMyBasket",
   },
   twitter: { card: "summary_large_image", title: "CheckMyBasket | Free Secret Santa generator", description: "Draw names, share wishlists, ask anonymous questions. No ads, ever." },
-  alternates: { canonical: "https://www.checkmybasket.co.uk" },
 };
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#FFFFFF" };
