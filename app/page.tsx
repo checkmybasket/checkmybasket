@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Header } from "@/components/receipt/header";
 import {
   Button,
@@ -53,6 +54,60 @@ export default function HomePage() {
         <StepStrip />
         <FeatureList />
         <BudgetChips />
+        <section
+          className="receipt-container receipt-faq"
+          aria-labelledby="faq-heading"
+        >
+          <h2 id="faq-heading">Your Secret Santa questions, answered</h2>
+          <div className="receipt-faq-list">
+            <article>
+              <h3>How many people do we need for a Secret Santa draw?</h3>
+              <p>
+                At least three people need to have joined your group before you
+                can draw names. Wait until everyone who wants to take part has
+                joined, then the organiser can start the draw.
+              </p>
+            </article>
+            <article>
+              <h3>Does everyone need to give an email address?</h3>
+              <p>
+                No. You can create or join a draw without an email address or
+                password. A notification email is optional. To return on another
+                device, you need to set up and verify an email for recovery
+                separately.
+              </p>
+            </article>
+            <article>
+              <h3>Can we stop couples or certain people drawing each other?</h3>
+              <p>
+                Yes. Before drawing names, the organiser can add exclusion pairs
+                so those two people will not draw each other. Too many exclusions
+                can make a valid draw impossible; if that happens, adjust the
+                pairs and try again.
+              </p>
+            </article>
+            <article>
+              <h3>Who can see my Secret Santa match?</h3>
+              <p>
+                Each participant can see their own assigned recipient. The
+                organiser does not get a list of everyone&apos;s matches. Keep
+                your match to yourself to preserve the surprise.
+              </p>
+            </article>
+            <article>
+              <h3>Can I return to my group on another device?</h3>
+              <p>
+                Yes, if you have verified a recovery email. In your original
+                browser, use &ldquo;Save access to your group&rdquo; and follow
+                the verification email. On another device, use{" "}
+                <Link href="/return">Return to your group</Link> to request a
+                sign-in link. Adding a notification email alone does not enable
+                recovery. Without a verified recovery email, we cannot restore
+                your original member identity on another device.
+              </p>
+            </article>
+          </div>
+        </section>
         <CtaBand />
       </main>
       <Footer />
