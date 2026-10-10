@@ -25,6 +25,7 @@ export default function WhatsAppGuide() {
       </p>
       <Link href="/create" className="inline-flex min-h-11 items-center rounded-xl bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Create a free Secret Santa draw</Link>
       <Section heading="1. Agree a budget, date and joining deadline">
+        <p>Planning a workplace exchange? Our <Link href="/office-secret-santa" className="underline">office Secret Santa checklist</Link> covers opt-in participation, wishlist etiquette and remote colleagues.</p>
         <p>Ask who wants to take part before you start. Agree a gift budget and when and where you will exchange gifts. Set a joining deadline so everyone has time to join before you draw names.</p>
         <p>CheckMyBasket needs at least three joined members for a draw. Wait for everyone who wants to participate before starting it.</p>
       </Section>

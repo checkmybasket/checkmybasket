@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const invitation = `Hi everyone! We're organising a Secret Santa 🎁
+const defaultInvitation = `Hi everyone! We're organising a Secret Santa 🎁
 
 Budget: [amount]
 Gift exchange: [date and location]
@@ -13,6 +13,10 @@ Join our draw here: [paste your CheckMyBasket group invitation link]
 Add your name and a few wishlist ideas. Once everyone has joined, we'll draw names and you can privately reveal who you're buying for. Please keep your match a surprise!`;
 
 export function WhatsAppInvitation() {
+  return <InvitationMessage invitation={defaultInvitation} />;
+}
+
+export function InvitationMessage({ invitation }: { invitation: string }) {
   const [message, setMessage] = useState("");
 
   async function copy() {

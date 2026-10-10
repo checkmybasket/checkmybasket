@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/create`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/gifts`,  changeFrequency: "weekly",  priority: 0.8 },
     { url: `${BASE}/secret-santa-whatsapp`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE}/office-secret-santa`, changeFrequency: "monthly", priority: 0.7 },
     ...GIFT_CATEGORIES.filter(({ slug }) => getGiftsForCategory(slug).length > 0).map(({ slug }) => ({
       url: `${BASE}/gifts/${slug}`,
       changeFrequency: "weekly" as const,
