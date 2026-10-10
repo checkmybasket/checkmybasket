@@ -40,6 +40,9 @@
 .receipt-sample-totals span:last-child { color: var(--cmb-red); }
 .receipt-sample-thanks { border-top: 2px dashed var(--cmb-ink); margin-top: 16px; padding-top: 16px; }
 .receipt-steps-section { border-block: var(--cmb-rule); }
+.receipt-guide-link { padding-top: 32px; }
+.receipt-guide-link a { text-decoration: underline; text-underline-offset: 3px; }
+.receipt-guide-link a:hover { color: var(--cmb-red); }
 .receipt-steps-section h2 { padding-top: 48px; max-width: 850px; }
 .receipt-steps { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); list-style: none; padding: 0; margin: 32px 0 0; }
 .receipt-steps li { padding: 48px 32px; border-right: var(--cmb-rule); }

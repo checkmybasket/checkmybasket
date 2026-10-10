@@ -52,6 +52,10 @@ export default function HomePage() {
           </div>
         </section>
         <StepStrip />
+        <p className="receipt-container receipt-guide-link">
+          Planning your draw in a group chat?{" "}
+          <Link href="/secret-santa-whatsapp">Read our WhatsApp Secret Santa guide</Link>.
+        </p>
         <FeatureList />
         <BudgetChips />
         <section
