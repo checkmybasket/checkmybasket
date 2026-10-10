@@ -9,6 +9,7 @@ import {
   type PersonalReservation,
 } from "@/lib/wishlists/types";
 import { EmailRecovery } from "@/components/email-recovery";
+import { WishlistFaq } from "./faq";
 import { ListForm } from "./list-form";
 import { WishlistShell, panel, secondary } from "./shell";
 export function WishlistDashboard() {
@@ -187,6 +188,7 @@ export function WishlistDashboard() {
           </button>
         </div>
       )}
+      <WishlistFaq />
     </WishlistShell>
   );
 }
