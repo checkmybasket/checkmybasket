@@ -40,7 +40,7 @@ export default async function GiftsPage({ searchParams }: { searchParams: Promis
           <h1 className="text-3xl sm:text-4xl font-bold mb-3 font-display">Gift ideas for every budget</h1>
           <p className="text-[var(--cmb-text-secondary)]">Curated picks from UK shops. No ads — some links earn us a small commission.</p>
         </div>
-        <p className="mb-6 text-sm"><Link href="/personalised-money-clip-gift-guide" className="underline font-semibold">Featured guide: personalised money clips</Link> — a closer look at UtilityNestPro, a shop owned by CheckMyBasket’s owner.</p>
+        <p className="mb-6 text-sm"><Link href="/personalised-money-clip-gift-guide" className="underline font-semibold">Featured guide: personalised money clips</Link> — a closer look at UtilityNestPro.</p>
         <details className="mb-6"><summary className="min-h-11 cursor-pointer py-2 font-semibold">Gift choosing guides</summary><nav aria-label="Gift choosing guides" className="grid sm:grid-cols-2 gap-x-6 gap-y-2">{GIFT_GUIDES.map(guide => <Link key={guide.slug} href={`/${guide.slug}`} className="inline-flex min-h-11 items-center underline text-sm">{guide.title}</Link>)}</nav></details>
         <GiftFiltersForm filters={filters}/>
         <details className="mb-6">

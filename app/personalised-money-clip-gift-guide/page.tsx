@@ -22,7 +22,6 @@ export default async function MoneyClipGuide() {
   const otherDesigns = selectGifts(owned.filter(item => item.id !== featured?.id), {}).slice(0, 4);
   return <InfoPage title={guide.title} updated="11 October 2026">
     <p className="text-lg leading-relaxed">For someone who prefers a slim accessory to a full wallet, an engraved money clip can make an everyday habit feel more personal. A wave pattern adds a design detail; their initials or name make the gift their own.</p>
-    <p className="rounded-xl border border-[var(--cmb-border)] p-4 text-sm">Shop disclosure: UtilityNestPro is owned by CheckMyBasket’s owner. This guide features our own shop. You will complete your purchase on Etsy.</p>
     <Section heading="Our featured design: Seigaiha waves and sun">
       <p>The engraved Seigaiha money clip combines a repeating Japanese wave pattern with a sun motif. It is a considered choice for someone who likes patterned metal accessories, Japanese-inspired design or a practical keepsake with their initials.</p>
       <p>Etsy displayed a “Bestseller” badge on this listing when we checked on 11 October 2026.</p>
