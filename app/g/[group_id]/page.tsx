@@ -540,13 +540,13 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
           <button key={m.user_id} onClick={() => setActiveUser(m.user_id)}
             className={cn("flex-shrink-0 flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium border-2 transition-all duration-150",
               activeUser===m.user_id?"border-[var(--cmb-primary)] bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]":"border-[var(--cmb-border)] bg-[var(--cmb-surface)]")}>
-            <Avatar name={m.name} size={20}/>{m.user_id===me?"Mine":m.name.split(" ")[0]}
+            <Avatar name={m.name} size={20}/>{m.user_id===me?"Mine":m.name}
           </button>
         ))}
       </div>
       <div className="flex items-center justify-between">
         <h2 className="font-semibold text-lg font-display">
-          {isMyList?"Your wishlist":`${activeMember?.name.split(" ")[0] ?? "Their"}'s wishlist`}
+          {isMyList?"Your wishlist":`${activeMember?.name ?? "Their"}'s wishlist`}
         </h2>
         {isMyList && <Badge className="text-xs text-[var(--cmb-primary)]" style={{ background:"rgba(27,67,50,0.1)" }}>{items.length} item{items.length===1?"":"s"}</Badge>}
       </div>
@@ -652,7 +652,7 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
       )}
       {!isMyList && activeMember?.surprise_me && (
         <div className="rounded-2xl p-4 bg-[var(--cmb-surface)] border border-[var(--cmb-gold-strong)] shadow-[var(--shadow-sm)]">
-          <p className="font-semibold text-sm">🎁 {activeMember.name.split(" ")[0]} is happy to be surprised</p>
+          <p className="font-semibold text-sm">🎁 {activeMember.name} is happy to be surprised</p>
           <p className="text-xs mt-1 mb-3 text-[var(--cmb-text-muted)]">
             No need to stick to a list — browse curated ideas{budgetTier ? " within the group budget" : ""} and pick something you think they&apos;d like.
           </p>

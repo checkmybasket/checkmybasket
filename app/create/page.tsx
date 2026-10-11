@@ -179,7 +179,7 @@ export default function CreatePage() {
         </div>
 
         {/* Group name */}
-        <Field label="Group name" error={errors.groupName} required>
+        <Field htmlFor="group-name" label="Group name" error={errors.groupName} required>
           <Input id="group-name" placeholder="e.g. Office Secret Santa 2026" value={form.groupName}
             onChange={e => setForm(f => ({ ...f, groupName:e.target.value }))}
             className="h-12 text-base rounded-xl" style={{ borderColor:errors.groupName?"var(--cmb-error)":"var(--cmb-border-strong)" }}/>
@@ -209,16 +209,16 @@ export default function CreatePage() {
           )}
         </div>
 
-        <Field label="Gift exchange day" hint="Optional">
-          <Input type="date" value={form.exchangeDate} onChange={e => setForm(f => ({ ...f, exchangeDate:e.target.value }))}
+        <Field htmlFor="exchange-date" label="Gift exchange day" hint="Optional">
+          <Input id="exchange-date" type="date" value={form.exchangeDate} onChange={e => setForm(f => ({ ...f, exchangeDate:e.target.value }))}
             className="h-12 text-base rounded-xl border border-[var(--cmb-border-strong)]"/>
         </Field>
-        <Field label="Exchange location" hint="Optional">
-          <Input placeholder="e.g. The Rose & Crown, 7pm" value={form.location} onChange={e => setForm(f => ({ ...f, location:e.target.value }))}
+        <Field htmlFor="exchange-location" label="Exchange location" hint="Optional">
+          <Input id="exchange-location" placeholder="e.g. The Rose & Crown, 7pm" value={form.location} onChange={e => setForm(f => ({ ...f, location:e.target.value }))}
             className="h-12 text-base rounded-xl border border-[var(--cmb-border-strong)]"/>
         </Field>
-        <Field label="Your name" error={errors.yourName} required>
-          <Input placeholder="What should we call you?" value={form.yourName} onChange={e => setForm(f => ({ ...f, yourName:e.target.value }))}
+        <Field htmlFor="organiser-name" label="Your name" error={errors.yourName} required>
+          <Input id="organiser-name" placeholder="What should we call you?" value={form.yourName} onChange={e => setForm(f => ({ ...f, yourName:e.target.value }))}
             className="h-12 text-base rounded-xl" style={{ borderColor:errors.yourName?"var(--cmb-error)":"var(--cmb-border-strong)" }}/>
         </Field>
         <div>
@@ -244,10 +244,10 @@ export default function CreatePage() {
   );
 }
 
-function Field({ label, children, hint, error, required }: { label:string; children:React.ReactNode; hint?:string; error?:string; required?:boolean }) {
+function Field({ htmlFor, label, children, hint, error, required }: { htmlFor:string; label:string; children:React.ReactNode; hint?:string; error?:string; required?:boolean }) {
   return (
     <div>
-      <Label className="text-base font-medium mb-1.5 flex items-center gap-1">
+      <Label htmlFor={htmlFor} className="text-base font-medium mb-1.5 flex items-center gap-1">
         {label}{required && <span className="text-[var(--cmb-accent)]">*</span>}
       </Label>
       {hint && <p className="text-sm mb-2 text-[var(--cmb-text-muted)]">{hint}</p>}

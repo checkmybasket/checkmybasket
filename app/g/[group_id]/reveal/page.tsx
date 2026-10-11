@@ -219,7 +219,7 @@ function RevealedScreen({
   match: Match;
   onToggleBought: () => void;
 }) {
-  const firstName = match.name.split(" ")[0];
+  const recipientName = match.name;
   return (
     <div className="animate-fade-in">
       {/* Name reveal */}
@@ -279,7 +279,7 @@ function RevealedScreen({
       {/* Wishlist */}
       {match.wishlist.length > 0 && (
         <div className="mb-4">
-          <p className="text-sm font-semibold mb-2">{firstName}&apos;s wishlist</p>
+          <p className="text-sm font-semibold mb-2">{recipientName}&apos;s wishlist</p>
           <div className="space-y-2">
             {match.wishlist.map((item) => (
               <div
@@ -314,7 +314,7 @@ function RevealedScreen({
             className="w-full h-12 rounded-xl font-medium border-[var(--cmb-border-strong)]"
           >
             <MessageCircle size={18} strokeWidth={1.5} className="mr-2" />
-            Ask {firstName} a question
+            Ask {recipientName} a question
           </Button>
         </Link>
         <Link href={match.budget != null ? `/gifts?budget=${match.budget}` : "/gifts"}>
