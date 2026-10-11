@@ -1,3 +1,4 @@
+import { GIFT_GUIDES } from "@/lib/gift-guides";
 import { GiftPagination } from "@/components/gift-pagination";
 import Link from "next/link";
 import { getAvailableGifts } from "@/lib/gift-catalogue";
@@ -39,7 +40,7 @@ export default async function GiftsPage({ searchParams }: { searchParams: Promis
           <h1 className="text-3xl sm:text-4xl font-bold mb-3 font-display">Gift ideas for every budget</h1>
           <p className="text-[var(--cmb-text-secondary)]">Curated picks from UK shops. No ads — some links earn us a small commission.</p>
         </div>
-        <nav aria-label="Gift choosing guides" className="mb-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm"><Link href="/secret-santa-gifts-under-10" className="inline-flex min-h-11 items-center underline">How to choose a gift under £10</Link><Link href="/secret-santa-gifts-for-colleagues" className="inline-flex min-h-11 items-center underline">Gift guide for colleagues</Link></nav>
+        <details className="mb-6"><summary className="min-h-11 cursor-pointer py-2 font-semibold">Gift choosing guides</summary><nav aria-label="Gift choosing guides" className="grid sm:grid-cols-2 gap-x-6 gap-y-2">{GIFT_GUIDES.map(guide => <Link key={guide.slug} href={`/${guide.slug}`} className="inline-flex min-h-11 items-center underline text-sm">{guide.title}</Link>)}</nav></details>
         <GiftFiltersForm filters={filters}/>
         <details className="mb-6">
           <summary className="min-h-11 cursor-pointer py-2 font-semibold text-sm">Browse gift collections</summary>

@@ -1,3 +1,4 @@
+import { GIFT_GUIDES } from "@/lib/gift-guides";
 import { GiftPagination } from "@/components/gift-pagination";
 import type { Metadata } from "next";
 import { getGiftsForCategory } from "@/lib/gift-catalogue";
@@ -27,6 +28,7 @@ export default async function CategoryPage({ params, searchParams }: { params: P
   const { category } = await params;
   const cat = GIFT_CATEGORIES.find(cat => cat.slug === category);
   if (!cat) notFound();
+  const guide = GIFT_GUIDES.find(item => item.category === category);
   const catalogue = await getGiftsForCategory(category);
   const query = await searchParams;
   const filters = readGiftFilters(query);
@@ -52,6 +54,7 @@ export default async function CategoryPage({ params, searchParams }: { params: P
           <h1 className="text-3xl sm:text-4xl font-bold mb-2 font-display">{cat.heading}</h1>
           <p className="text-[var(--cmb-text-secondary)]">{cat.desc}</p>
         </div>
+        {guide ? <Link href={`/${guide.slug}`} className="inline-flex min-h-11 items-center underline text-sm mb-4">Read our {guide.title.toLowerCase()} guide</Link> : null}
         <GiftFiltersForm filters={filters} category={category}/>
         <div className="flex gap-2 overflow-x-auto pb-2 mb-5" aria-label="Other gift collections">
           {GIFT_CATEGORIES.filter(cat => cat.slug !== category).map(({ slug, label }) => (
