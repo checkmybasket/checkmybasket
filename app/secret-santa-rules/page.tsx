@@ -49,7 +49,7 @@ export default function RulesGuide() {
     </Section>
     <Section id="set-up-your-draw" heading="Set up your draw in CheckMyBasket">
       <p>Give the group a recognisable name, choose the agreed budget and add the exchange date and location if you know them. Add your display name, then select <strong>Create your draw</strong>. You can leave the optional notification email blank.</p>
-      <GuideScreenshot src="/guides/create-draw.png" width={1280} height={1151} alt="CheckMyBasket create draw form with Friends Secret Santa and a £20 budget selected" caption="Actual setup screen, shown with an example group name and budget. The form has not been submitted. The budget field is per person; explain any delivery rule in your invitation." />
+      <GuideScreenshot src="/guides/create-draw.jpg" width={1280} height={1151} alt="CheckMyBasket create draw form with Friends Secret Santa and a £20 budget selected" caption="Actual setup screen, shown with an example group name and budget. The form has not been submitted. The budget field is per person; explain any delivery rule in your invitation." />
       <p>After creation, use the group invitation link to invite participants. Add exclusions in group settings before drawing, and wait until the member list is complete. Creating a group is separate from drawing names.</p>
     </Section>
     <Section id="your-printable-organiser-checklist" heading="Your printable organiser checklist">

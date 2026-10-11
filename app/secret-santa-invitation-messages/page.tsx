@@ -110,7 +110,7 @@ export default function InvitationGuide() {
       <p>The buttons below only copy text. Review the dates and link, then send the message yourself through WhatsApp, email or your usual chat app.</p>
     </Section>
     <Section id="create-a-group-to-get-your-invitation-link" heading="Create a group to get your invitation link">
-      <GuideScreenshot src="/guides/create-draw.png" width={1280} height={1151} alt="CheckMyBasket draw setup form showing a group name and budget" caption="Start with the create-draw form. This is the actual screen with example details; after submitting your own details, the confirmation screen provides the joining link for your message." />
+      <GuideScreenshot src="/guides/create-draw.jpg" width={1280} height={1151} alt="CheckMyBasket draw setup form showing a group name and budget" caption="Start with the create-draw form. This is the actual screen with example details; after submitting your own details, the confirmation screen provides the joining link for your message." />
     </Section>
     {allTemplates.map(template => <Section key={template.heading} id={template.heading.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")} heading={template.heading}><InvitationMessage invitation={template.text} copyLabel={template.label}/></Section>)}
     <Section id="make-the-message-fit-your-group" heading="Make the message fit your group">
