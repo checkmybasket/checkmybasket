@@ -1,3 +1,4 @@
+import { catalogueWishDraft } from "@/lib/catalogue-wishlist";
 import type { Metadata } from "next";
 import { WishlistEditor } from "@/components/wishlists/editor";
 export const metadata: Metadata = {
@@ -7,9 +8,13 @@ export const metadata: Metadata = {
 };
 export default async function Page({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { id } = await params;
-  return <WishlistEditor key={id} id={id} />;
+  const query = await searchParams;
+  const draft = await catalogueWishDraft(query.gift);
+  return <WishlistEditor key={id} id={id} draft={draft} />;
 }

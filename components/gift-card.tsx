@@ -1,9 +1,11 @@
+import Link from "next/link";
 import Image from "next/image";
 import { ExternalLink, Gift } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { giftDescriptionParts, giftInterestLabels, giftPriceCheckDate } from "@/lib/gift-presentation";
 
 export interface GiftCardProps {
+  id?: string;
   title: string;
   price: number;
   shop: string;
@@ -19,7 +21,7 @@ export interface GiftCardProps {
 
 const currency = new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" });
 
-export function GiftCard({ title, price, shop, tags, url, image, description, deliveryNote, interests, priceCheckedAt, size = "sm" }: GiftCardProps) {
+export function GiftCard({ id, title, price, shop, tags, url, image, description, deliveryNote, interests, priceCheckedAt, size = "sm" }: GiftCardProps) {
   const lg = size === "lg";
   const labels = giftInterestLabels(interests, tags);
   const checked = giftPriceCheckDate(priceCheckedAt);
@@ -47,6 +49,7 @@ export function GiftCard({ title, price, shop, tags, url, image, description, de
           <a data-gift-retailer={shop} href={url} target="_blank" rel="noopener noreferrer sponsored" aria-label={`Shop ${title} at ${shop} (opens in a new tab)`} className="inline-flex items-center justify-center gap-2 min-h-11 px-4 py-2 rounded-xl text-sm font-semibold bg-[var(--cmb-accent)] text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--cmb-primary)]">
             Shop at {shop} <ExternalLink size={13} strokeWidth={1.5} aria-hidden="true"/>
           </a>
+          {id ? <Link href={`/wishlists?gift=${encodeURIComponent(id)}`} aria-label={`Save ${title} to a wishlist`} className="flex min-h-11 items-center justify-center rounded-xl border border-[var(--cmb-border)] px-4 py-2 mt-2 text-sm font-semibold text-[var(--cmb-primary)] focus-visible:outline-2 focus-visible:outline-offset-2">Save to wishlist</Link> : null}
         </div>
       </div>
     </article>

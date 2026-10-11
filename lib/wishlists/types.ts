@@ -59,3 +59,5 @@ export function priceInPence(input: string): number | null {
 }
 export const uuidPattern =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+export type CatalogueWishDraft = Pick<PersonalWish, "title" | "url" | "image_url" | "price" | "currency" | "shop_name" | "notes"> & { giftId: string };

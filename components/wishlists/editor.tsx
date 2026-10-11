@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
 import {
+  type CatalogueWishDraft,
   type PersonalList,
   type PersonalWish,
   uuidPattern,
@@ -14,7 +15,7 @@ import { ListForm } from "./list-form";
 import { ItemForm } from "./item-form";
 import { ItemCard } from "./item-card";
 import { WishlistShell, panel, secondary } from "./shell";
-export function WishlistEditor({ id }: { id: string }) {
+export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWishDraft }) {
   const router = useRouter();
   const [list, setList] = useState<PersonalList | null>(null);
   const [loading, setLoading] = useState(true);
@@ -22,7 +23,8 @@ export function WishlistEditor({ id }: { id: string }) {
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
   const [editList, setEditList] = useState(false);
-  const [editing, setEditing] = useState<PersonalWish | null | undefined>();
+  const [editing, setEditing] = useState<PersonalWish | null | undefined>(draft ? null : undefined);
+  const [pendingDraft, setPendingDraft] = useState(!!draft);
   const [confirm, setConfirm] = useState<{
     action: string;
     item?: PersonalWish;
@@ -206,12 +208,14 @@ export function WishlistEditor({ id }: { id: string }) {
           key={editing?.id ?? "new"}
           listId={id}
           item={editing ?? undefined}
+          draft={pendingDraft && editing === null ? draft : undefined}
           onSaved={() => {
             setEditing(undefined);
+            if (pendingDraft) { setPendingDraft(false); router.replace(`/wishlists/${id}`, { scroll: false }); }
             load().catch((e) => setError(e.message));
             setMessage("Gift saved.");
           }}
-          onCancel={() => setEditing(undefined)}
+          onCancel={() => { setEditing(undefined); if (pendingDraft) { setPendingDraft(false); router.replace(`/wishlists/${id}`, { scroll: false }); } }}
         />
       )}
       {list.shared && (

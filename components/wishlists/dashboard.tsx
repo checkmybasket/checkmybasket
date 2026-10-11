@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
 import {
+  type CatalogueWishDraft,
   type PersonalList,
   type PersonalReservation,
 } from "@/lib/wishlists/types";
@@ -12,8 +13,9 @@ import { EmailRecovery } from "@/components/email-recovery";
 import { WishlistFaq } from "./faq";
 import { ListForm } from "./list-form";
 import { WishlistShell, panel, secondary } from "./shell";
-export function WishlistDashboard() {
+export function WishlistDashboard({ draft, giftUnavailable }: { draft?: CatalogueWishDraft; giftUnavailable?: boolean }) {
   const router = useRouter();
+  const giftQuery = draft ? `?gift=${encodeURIComponent(draft.giftId)}` : "";
   const [lists, setLists] = useState<PersonalList[]>([]);
   const [reservations, setReservations] = useState<PersonalReservation[]>([]);
   const [loading, setLoading] = useState(true);
@@ -73,13 +75,19 @@ export function WishlistDashboard() {
         one simple list.
       </p>
       <p className="mb-6"><Link href="/secret-santa-wishlist-ideas" className="underline">What to put on your Secret Santa wishlist</Link></p>
+      {draft ? <section className={`${panel} mb-6`} aria-labelledby="chosen-gift-heading">
+        <h2 id="chosen-gift-heading" className="font-semibold">Save {draft.title}</h2>
+        <p className="text-sm mt-2">Choose one of your wishlists below or create a new one. You can review and edit the gift before saving it.</p>
+        <Link href="/gifts" className="inline-flex min-h-11 items-center underline text-sm">Keep browsing gifts</Link>
+      </section> : null}
+      {giftUnavailable ? <p role="status" className="mb-6">This gift is no longer available in our current catalogue. <Link href="/gifts" className="underline">Browse current gift ideas</Link> or add your own product link.</p> : null}
       {loading ? (
         <p role="status">Loading your wishlists…</p>
       ) : (
         <>
           {creating ? (
             <ListForm
-              onSaved={(id) => router.push(`/wishlists/${id}`)}
+              onSaved={(id) => router.push(`/wishlists/${id}${giftQuery}`)}
               onCancel={() => setCreating(false)}
             />
           ) : (
@@ -107,7 +115,7 @@ export function WishlistDashboard() {
                 <li key={list.id} className={panel}>
                   <Link
                     className="block underline underline-offset-4 text-xl font-semibold break-words"
-                    href={`/wishlists/${list.id}`}
+                    href={`/wishlists/${list.id}${giftQuery}`}
                   >
                     {list.title}
                   </Link>

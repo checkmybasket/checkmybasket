@@ -7,28 +7,32 @@ import {
   priorities,
   priceInPence,
   type PersonalWish,
+  type CatalogueWishDraft,
 } from "@/lib/wishlists/types";
 import { webUrl } from "@/lib/wishlists/urls";
 import { field, panel, secondary } from "./shell";
 export function ItemForm({
   listId,
   item,
+  draft,
   onSaved,
   onCancel,
 }: {
   listId: string;
   item?: PersonalWish;
+  draft?: CatalogueWishDraft;
   onSaved: () => void;
   onCancel: () => void;
 }) {
+  const initial = item ?? draft;
   const [values, setValues] = useState({
-    title: item?.title ?? "",
-    url: item?.url ?? "",
-    image_url: item?.image_url ?? "",
-    price: item?.price == null ? "" : (item.price / 100).toFixed(2),
-    currency: item?.currency ?? "GBP",
-    shop_name: item?.shop_name ?? "",
-    notes: item?.notes ?? "",
+    title: initial?.title ?? "",
+    url: initial?.url ?? "",
+    image_url: initial?.image_url ?? "",
+    price: initial?.price == null ? "" : (initial.price / 100).toFixed(2),
+    currency: initial?.currency ?? "GBP",
+    shop_name: initial?.shop_name ?? "",
+    notes: initial?.notes ?? "",
     priority: item?.priority ?? "like",
   });
   const [busy, setBusy] = useState(false);
@@ -132,6 +136,7 @@ export function ItemForm({
       <h2 className="text-xl font-display font-semibold">
         {item ? "Edit gift" : "Add a gift"}
       </h2>
+      {draft && !item ? <p className="text-sm">Review this catalogue idea before saving. Prices are estimates; your wishlist stays private until you enable sharing.</p> : null}
       <label className="block text-sm font-medium">
         Paste a link from any shop
         <input
