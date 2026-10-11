@@ -16,13 +16,13 @@ export function WhatsAppInvitation() {
   return <InvitationMessage invitation={defaultInvitation} />;
 }
 
-export function InvitationMessage({ invitation }: { invitation: string }) {
+export function InvitationMessage({ invitation, copyLabel = "Copy invitation message" }: { invitation: string; copyLabel?: string }) {
   const [message, setMessage] = useState("");
 
   async function copy() {
     try {
       await navigator.clipboard.writeText(invitation);
-      setMessage("Invitation copied. Replace the placeholders before sending it.");
+      setMessage("Message copied. Replace the placeholders before sending it.");
     } catch {
       setMessage("Could not copy automatically. Select and copy the message below.");
     }
@@ -33,7 +33,7 @@ export function InvitationMessage({ invitation }: { invitation: string }) {
       <p className="mb-3 text-sm">Replace the bracketed placeholders with your details and your group invitation link.</p>
       <pre className="whitespace-pre-wrap break-words font-sans text-sm leading-relaxed select-text">{invitation}</pre>
       <button type="button" onClick={copy} className="mt-4 min-h-11 rounded-xl bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)] focus-visible:outline-2 focus-visible:outline-offset-4">
-        Copy invitation message
+        {copyLabel}
       </button>
       <p role="status" className="mt-3 text-sm">{message}</p>
     </div>

@@ -1,3 +1,4 @@
+import { OrganiserGuideLinks } from "@/components/organiser-guide-links";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { InfoPage, Section } from "@/components/info-page";
@@ -56,6 +57,7 @@ export default function WhatsAppGuide() {
         <p>For wishlists outside a Secret Santa group, you can also <Link href="/wishlists" className="underline">create a personal wishlist</Link> and choose whether to share it.</p>
       </Section>
       <p><Link href="/create" className="inline-flex min-h-11 items-center rounded-xl bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Set up your free draw</Link></p>
+      <Section heading="More Secret Santa planning guides"><OrganiserGuideLinks /></Section>
     </InfoPage>
   );
 }

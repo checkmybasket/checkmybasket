@@ -1,3 +1,4 @@
+import { OrganiserGuideLinks } from "@/components/organiser-guide-links";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/receipt/header";
@@ -57,6 +58,7 @@ export default function HomePage() {
           <Link href="/secret-santa-whatsapp">WhatsApp Secret Santa guide</Link>{" "}
           or our <Link href="/office-secret-santa">office Secret Santa checklist</Link>.
         </p>
+        <div className="receipt-container receipt-guide-link"><OrganiserGuideLinks /></div>
         <FeatureList />
         <BudgetChips />
         <section

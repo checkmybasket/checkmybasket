@@ -72,6 +72,7 @@ export function WishlistDashboard() {
         Birthday, Christmas or just because. Add gifts from anywhere and share
         one simple list.
       </p>
+      <p className="mb-6"><Link href="/secret-santa-wishlist-ideas" className="underline">What to put on your Secret Santa wishlist</Link></p>
       {loading ? (
         <p role="status">Loading your wishlists…</p>
       ) : (
