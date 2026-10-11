@@ -1,3 +1,4 @@
+import { ORGANISER_GUIDES } from "@/lib/organiser-guides";
 import { GIFT_GUIDES } from "@/lib/gift-guides";
 import { GIFT_CATEGORIES } from "@/lib/gift-categories";
 import { readGiftFilters } from "@/lib/gift-selection";
@@ -20,9 +21,10 @@ export function readConsent(): Consent {
 }
 
 export function isPublicPage(path: string) {
-  return ["/", "/about", "/contact", "/privacy", "/terms", "/create", "/wishlists", "/gifts", "/secret-santa-whatsapp", "/office-secret-santa"].includes(path)
+  return ["/", "/about", "/contact", "/privacy", "/terms", "/create", "/wishlists", "/gifts", "/guides", "/secret-santa-whatsapp", "/office-secret-santa"].includes(path)
     || GIFT_GUIDES.some(guide => path === `/${guide.slug}`)
-    || /^\/gifts\/[a-z0-9-]+$/.test(path);
+    || ORGANISER_GUIDES.some(guide => path === `/${guide.slug}`)
+    || GIFT_CATEGORIES.some(category => path === `/gifts/${category.slug}`);
 }
 
 // Only fixed event names and fixed public routes; never accept user data.
