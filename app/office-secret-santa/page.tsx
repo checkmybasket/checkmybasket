@@ -64,6 +64,7 @@ export default function OfficeGuide() {
       </Section>
       <Section heading="4. Encourage useful, considerate wishlists">
         <p>Ask each person for a few ideas within the budget, ideally with links from different shops. They can add preferences to help their giver choose. Wishlists help, but they are not required to draw names.</p>
+        <p>For choosing ideas by interest, read our <Link href="/secret-santa-gifts-for-colleagues" className="underline">gift guide for colleagues</Link> or <Link href="/secret-santa-gifts-under-10" className="underline">Secret Santa gifts under £10</Link>.</p>
         <p>Keep gifts suitable for work. Avoid jokes about appearance, relationships or personal circumstances. Do not assume someone wants alcohol, food or scented products; use their preferences or ask an anonymous question after the draw. People should only share details they are comfortable with their group seeing.</p>
       </Section>
       <Section heading="5. Check exclusions and draw names">
