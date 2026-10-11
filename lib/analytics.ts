@@ -45,7 +45,7 @@ export function trackCreation(event: keyof typeof creationPaths) {
 }
 
 // Only allowlisted aggregate catalogue values; never product titles or URLs.
-export function trackGiftInteraction(event: "gift_retailer_click" | "gift_filters_applied", input: Record<string, string>) {
+export function trackGiftInteraction(event: "gift_retailer_click" | "gift_filters_applied" | "gift_save_started", input: Record<string, string>) {
   try {
     if (typeof window === "undefined" || readConsent() !== "accepted") return;
     const analytics = window as AnalyticsWindow;
@@ -58,6 +58,9 @@ export function trackGiftInteraction(event: "gift_retailer_click" | "gift_filter
       const retailers = ["Dunelm", "Not On The High Street", "Waterstones", "John Lewis", "The Little Botanical", "Cadbury Gifts Direct", "Craft Buddy", "MORiSH", "UtilityNestPro (Etsy)"];
       if (!retailers.includes(input.retailer)) return;
       parameters = { retailer: input.retailer, gift_category: category || guide?.category || "all" };
+    } else if (event === "gift_save_started") {
+      // This records the public catalogue click, not a completed private save.
+      parameters = { gift_category: category || guide?.category || "all" };
     } else if (event === "gift_filters_applied") {
       const filters = readGiftFilters(input);
       parameters = { gift_category: category || filters.category || "all", budget_gbp: (filters.budget || 0) / 100, recipient_interest: filters.interest || "any" };

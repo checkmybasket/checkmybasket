@@ -98,7 +98,7 @@ export default function PrivacyPage() {
         <p>
           If you accept analytics, we use Google Analytics to understand visits
           to our public pages and successful draw and personal wishlist creations
-          on those pages, gift retailer clicks and selected category, budget and interest filters, and improve the site. Google processes cookie
+          on those pages, gift retailer clicks, clicks to start saving a catalogue gift, and selected category, budget and interest filters, and improve the site. Completed saves on private wishlist pages are not tracked. Google processes cookie
           identifiers, public page paths and device/browser information, and
           processing may take place outside the UK/EEA. Advertising features
           and Google signals are disabled. Private groups, shared wishlist

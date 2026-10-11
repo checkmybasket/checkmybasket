@@ -68,6 +68,8 @@ export function AnalyticsConsent() {
     function clicked(event: MouseEvent) {
       const link = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>("a[data-gift-retailer]") : null;
       if (link) trackGiftInteraction("gift_retailer_click", { retailer: link.dataset.giftRetailer || "" });
+      const saveLink = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>("a[data-gift-save]") : null;
+      if (saveLink) trackGiftInteraction("gift_save_started", {});
     }
     function submitted(event: SubmitEvent) {
       if (!(event.target instanceof HTMLFormElement) || !event.target.hasAttribute("data-gift-filters")) return;
