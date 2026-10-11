@@ -7,6 +7,9 @@ export type GiftProduct = {
 };
 export const GIFT_INTERESTS = ["food", "chocolate", "coffee", "tea", "crafts", "games", "gaming", "puzzles", "books", "reading", "technology", "stationery", "plants", "home", "travel", "accessories"];
 export type GiftFilters = { category?: string; budget?: number; interest?: string };
+export function giftInterestLabel(interest: string) {
+  return interest === "gaming" ? "Video gaming" : interest === "games" ? "Tabletop games" : interest[0].toUpperCase() + interest.slice(1);
+}
 export function giftFiltersHref(filters: GiftFilters, category?: string, page?: number) {
   const query = new URLSearchParams();
   if (!category && filters.category) query.set("category", filters.category);

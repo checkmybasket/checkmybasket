@@ -6,7 +6,7 @@ import { GIFT_CATEGORIES } from "@/lib/gift-categories";
 import { Gift, ChevronRight, ShieldOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GiftFiltersForm } from "@/components/gift-filters";
-import { readGiftFilters, selectGifts, londonDay } from "@/lib/gift-selection";
+import { giftFiltersHref, readGiftFilters, selectGifts, londonDay } from "@/lib/gift-selection";
 import { GiftResults } from "@/components/gift-results";
 import { GiftCard } from "@/components/gift-card";
 
@@ -36,19 +36,19 @@ export default async function GiftsPage({ searchParams }: { searchParams: Promis
         </div>
       </header>
       <main className="max-w-5xl mx-auto px-4 py-10">
-        <div className="mb-10 text-center">
+        <div className="mb-6 text-center">
           <h1 className="text-3xl sm:text-4xl font-bold mb-3 font-display">Gift ideas for every budget</h1>
           <p className="text-[var(--cmb-text-secondary)]">Curated picks from UK shops. No ads — some links earn us a small commission.</p>
         </div>
+        <GiftFiltersForm filters={filters}/>
         <p className="mb-6 text-sm"><Link href="/personalised-money-clip-gift-guide" className="underline font-semibold">Featured guide: personalised money clips</Link> — a closer look at UtilityNestPro.</p>
         <p className="mb-4 text-sm"><Link href="/guides" className="inline-flex min-h-11 items-center underline">Browse all gift and Secret Santa guides</Link></p>
         <details className="mb-6"><summary className="min-h-11 cursor-pointer py-2 font-semibold">Gift choosing guides</summary><nav aria-label="Gift choosing guides" className="grid sm:grid-cols-2 gap-x-6 gap-y-2">{GIFT_GUIDES.map(guide => <Link key={guide.slug} href={`/${guide.slug}`} className="inline-flex min-h-11 items-center underline text-sm">{guide.title}</Link>)}</nav></details>
-        <GiftFiltersForm filters={filters}/>
         <details className="mb-6">
           <summary className="min-h-11 cursor-pointer py-2 font-semibold text-sm">Browse gift collections</summary>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-3">
           {GIFT_CATEGORIES.map(cat => (
-            <Link key={cat.slug} href={`/gifts/${cat.slug}`} className="rounded-2xl p-4 border transition-all duration-150 hover:scale-105 group bg-[var(--cmb-surface)] border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
+            <Link key={cat.slug} href={giftFiltersHref(filters, cat.slug)} className="rounded-2xl p-4 border transition-all duration-150 hover:scale-105 group bg-[var(--cmb-surface)] border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style={{ background:"rgba(27,67,50,0.08)" }}>
                 <Gift size={20} strokeWidth={1.5} className="text-[var(--cmb-primary)]"/>
               </div>

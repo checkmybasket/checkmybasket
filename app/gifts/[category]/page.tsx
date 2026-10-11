@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Gift, ChevronLeft, ShieldOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GiftFiltersForm } from "@/components/gift-filters";
-import { readGiftFilters, selectGifts, londonDay } from "@/lib/gift-selection";
+import { giftFiltersHref, readGiftFilters, selectGifts, londonDay } from "@/lib/gift-selection";
 import { GiftResults } from "@/components/gift-results";
 import { GiftCard } from "@/components/gift-card";
 import { notFound } from "next/navigation";
@@ -41,7 +41,7 @@ export default async function CategoryPage({ params, searchParams }: { params: P
     <div className="min-h-dvh bg-[var(--cmb-bg)]">
       <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background:"rgba(255,248,240,0.92)", backdropFilter:"blur(12px)" }}>
         <div className="max-w-5xl mx-auto px-4 h-14 flex items-center gap-3">
-          <Link href="/gifts"><Button variant="ghost" size="sm" aria-label="Back to gift ideas" className="h-9 w-9 p-0 rounded-lg"><ChevronLeft size={20} strokeWidth={1.5}/></Button></Link>
+          <Link href={giftFiltersHref({ budget: filters.budget, interest: filters.interest })}><Button variant="ghost" size="sm" aria-label="Back to gift ideas" className="h-9 w-9 p-0 rounded-lg"><ChevronLeft size={20} strokeWidth={1.5}/></Button></Link>
           <div className="flex items-center gap-2 flex-1 min-w-0">
             <Gift size={18} strokeWidth={1.5} className="text-[var(--cmb-primary)] shrink-0"/>
             <span className="font-semibold truncate font-display text-[var(--cmb-primary)]">{cat.heading}</span>
@@ -58,8 +58,8 @@ export default async function CategoryPage({ params, searchParams }: { params: P
         <GiftFiltersForm filters={filters} category={category}/>
         <div className="flex gap-2 overflow-x-auto pb-2 mb-5" aria-label="Other gift collections">
           {GIFT_CATEGORIES.filter(cat => cat.slug !== category).map(({ slug, label }) => (
-            <Link key={slug} href={`/gifts/${slug}`}
-              className="flex-shrink-0 rounded-full px-4 py-2 text-sm font-medium border transition-all duration-150 bg-[var(--cmb-surface)] border-[var(--cmb-border)] text-[var(--cmb-text-secondary)]">{label}</Link>
+            <Link key={slug} href={giftFiltersHref(filters, slug)}
+              className="inline-flex min-h-11 items-center flex-shrink-0 rounded-full px-4 py-2 text-sm font-medium border transition-all duration-150 bg-[var(--cmb-surface)] border-[var(--cmb-border)] text-[var(--cmb-text-secondary)]">{label}</Link>
           ))}
         </div>
         <p className="sr-only" data-gift-day={londonDay()}>Gift ideas rotate daily within this collection.</p>
