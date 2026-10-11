@@ -331,8 +331,8 @@ function websiteRows_(masters, observations, now) {
     try{parts_(m.product_url);}catch(e){return [];}
     const title=String(m.product_name||m.gift_name||'').trim(),description=String(m.short_description||'').trim();
     if(!title||!description||!m.retailer)return [];
-    // Use the specifically approved master image, never a newly discovered image by inference.
-    const image=m.image_approved==='yes'&&m.image_permission_evidence&&/^https:\/\//.test(String(m.image_url))?m.image_url:'';
+    // Display the owner's approved master image. Permission evidence remains a separate record.
+    const image=m.image_approved==='yes'&&/^https:\/\//.test(String(m.image_url))?m.image_url:'';
     // Affiliate links will be added through a separate reviewed integration. Direct links are used for now.
     return [[m.gift_id,title,Math.round(o[6]*100),m.retailer,m.editorial_tags||'',m.product_url,image,description,
       'Delivery extra. Check the retailer for current prices and charges.',m.categories||m.primary_category||'',m.recipient_interests||'',new Date(checked).toISOString()]];

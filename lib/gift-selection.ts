@@ -5,7 +5,7 @@ export type GiftProduct = {
   image: string; description: string; deliveryNote: string; categories: string[];
   interests?: string[]; priceCheckedAt?: string;
 };
-export const GIFT_INTERESTS = ["food", "chocolate", "coffee", "tea", "crafts", "games", "puzzles", "technology", "stationery", "plants", "home", "travel"];
+export const GIFT_INTERESTS = ["food", "chocolate", "coffee", "tea", "crafts", "games", "puzzles", "books", "reading", "technology", "stationery", "plants", "home", "travel"];
 export type GiftFilters = { category?: string; budget?: number; interest?: string };
 export function londonDay(date = new Date()) {
   const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(date);

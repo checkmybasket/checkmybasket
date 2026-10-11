@@ -33,7 +33,7 @@ export function parseGiftFeed(csv: string, now = Date.now()): GiftProduct[] {
     const price = Number(rawPrice), checked = Date.parse(priceCheckedAt), url = safeUrl(rawUrl, RETAILERS);
     if (!/^CMB-GIFT-\d{4}$/.test(id) || ids.has(id) || !title.trim() || title.length > 250 || !description.trim() || description.length > 2000 || !shop || !url || !/^\d+$/.test(rawPrice) || !Number.isSafeInteger(price) || price <= 0 || !Number.isFinite(checked) || now - checked > 36 * 3600000 || checked > now + 300000) return [];
     ids.add(id);
-    const tokens = (s: string) => s.split(";").map(v => v.trim().toLowerCase()).filter(Boolean).slice(0, 20);
+    const tokens = (s: string) => [...new Set(s.split(";").map(v => v.trim().toLowerCase()).filter(Boolean))].slice(0, 20);
     return [{ id, title, price, shop, tags: tokens(tags), url, image: safeUrl(rawImage, IMAGES), description, deliveryNote, categories: tokens(categories), interests: tokens(interests), priceCheckedAt }];
   });
 }
