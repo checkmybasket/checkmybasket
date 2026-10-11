@@ -53,3 +53,9 @@ A reserve row must have publication_status=reserve, explicit approval identity/d
 Only one reserve candidate is fetched per worker batch. Failed reserve checks become needs-review; successful promotion preserves the 500 slot IDs, records the previous complete master row in **CMB Replacements**, and marks the reserve entry used. Both records are re-read after the network request so concurrent owner edits are preserved. Existing affiliate links are not transferred to another product.
 
 The reserve is finite. When no approved in-budget candidate remains, the failed gift stays hidden; replenish the private pool with verified products, complete descriptions/evidence and approvals. No whole-workbook publication, extra permissions, new triggers or web-app deployment are needed.
+
+## Adding relevant products without interrupting a daily cycle
+
+`verifyNewCatalogueProducts` checks up to six approved published rows that have no observation for their current product URL, then refreshes the generated feed. Run it again for another batch. It uses the existing configured hosts, crawl policy, fixed-GBP/stock parser and script lock; it never resets the daily queue or approves failed checks. New rows are then included in the next full daily cycle. This helper is saved in the existing Google project; no additional triggers or permissions are needed.
+
+The 11 October relevance update adds a distinct `gaming` interest for video-gaming-themed gifts. `games` remains tabletop games. Coffee picks favour a mix of brewing, storage and drinkware types while preserving daily rotation and budget filtering. Wedding save-the-date stationery was withdrawn to draft and its mistaken games tags/descriptions corrected.

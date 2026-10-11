@@ -303,7 +303,7 @@
   {
     "slug": "secret-santa-gifts-for-gamers",
     "title": "Secret Santa gifts for gamers",
-    "description": "Find Secret Santa gifts for gamers with platform and compatibility checks, complete-game advice and current games-interest ideas up to £20.",
+    "description": "Find Secret Santa gifts for gamers with platform and compatibility checks, complete-game advice and current video-gaming gifts up to £20.",
     "answer": "Ask what they play before buying. For video games, confirm the platform, edition and region; for tabletop games, check player count and what is included. When those details are unknown, choose a wishlist item rather than guessing at hardware or a game code.",
     "intro": "Gaming can mean console games, PC games, cards, board games or puzzles with friends. Those interests overlap for some people and not for others. A clear distinction prevents a well-intentioned gift from becoming an incompatible accessory or a game the recipient cannot use.",
     "sections": [
@@ -344,7 +344,7 @@
         "heading": "A worked £20 choosing example",
         "paragraphs": [
           "Your recipient likes short two-player card games and already owns UNO. Look for a standalone game with two-player support and a short playing time, then check the included cards, rules and current delivery total. A known favourite or wishlist request is a better guide than packaging that merely says “gamer”.",
-          "The picks below use the catalogue’s games interest and an item-price ceiling of £20. They may include tabletop or party games. They are not a platform-specific video-game list, so use the product details to check fit before ordering."
+          "The picks below use the catalogue’s video-gaming interest and an item-price ceiling of £20. They are themed gifts rather than games or download codes. Tabletop and party games remain available through the separate tabletop-games filter. Check the recipient’s preferences and selected options before ordering."
         ]
       },
       {
@@ -360,12 +360,19 @@
           "Platform, region and edition are confirmed for digital or console items.",
           "Selected price and delivery fit the budget."
         ]
+      },
+      {
+        "id": "gaming-or-tabletop",
+        "heading": "Video gaming or tabletop games?",
+        "paragraphs": [
+          "Ask whether they prefer video games, board games or both. Our video-gaming filter keeps gamer-themed gifts separate from tabletop games. A controller-shaped accessory is decorative; it does not imply compatibility with a console. For socks, check size; for cufflinks, check that they wear the right shirt fastening; for a poster, check the games listed and available wall space."
+        ]
       }
     ],
     "kind": "gift",
     "category": "all",
     "budget": 2000,
-    "interest": "games",
+    "interest": "gaming",
     "related": [
       "secret-santa-wishlist-ideas",
       "funny-secret-santa-gifts",
@@ -435,6 +442,18 @@
           "Mug dimensions and care instructions fit their routine.",
           "The selected option and delivery fit the agreed limit.",
           "The item can arrive before the exchange date."
+        ]
+      },
+      {
+        "id": "brewing-and-storage",
+        "heading": "Choose brewing gear they will use",
+        "paragraphs": [
+          "A cafetiere is worth considering for someone who uses ground coffee. Check capacity in millilitres: a “three cup” press usually refers to small servings, not three large mugs. For a stovetop maker, confirm the recipient’s hob compatibility and follow the manufacturer’s filling and pressure instructions. A labelled canister can suit an organised coffee corner, but check the lid and dimensions rather than assuming it guarantees freshness."
+        ],
+        "bullets": [
+          "Coffee and filters may be separate purchases; check what is included.",
+          "Glass and hot liquids need careful handling; this is an adult gift selection.",
+          "The guide budget covers the item price. Keep delivery and any extra equipment within your total spending limit."
         ]
       }
     ],

@@ -21,3 +21,15 @@ check('filter links preserve budget and interest, reset page and land on results
 check('maximum budget includes exact amount but under-category excludes boundary',()=>{const p=[{id:'ten',price:1000,categories:[],tags:[]}];assert.equal(selection.selectGifts(p,{budget:1000}).length,1);assert.equal(selection.selectGifts(p,{category:'under-10'}).length,0);});
 
 check('owned Etsy links and image hosts are restricted and rotate all designs',()=>{const rows=Array.from({length:18},(_,i)=>['CMB-GIFT-'+String(501+i).padStart(4,'0'),'Money clip',i<10?'999':'1099','UtilityNestPro (Etsy)','accessories','https://utilitynestpro.etsy.com/uk/listing/'+(4366450629+i)+'/clip','https://i.etsystatic.com/59183808/clip.jpg','A personalised money clip','Clip only; box extra','personalised','accessories',new Date().toISOString()]);const csv=[headers.join(','),...rows.map(r=>r.join(','))].join('\n');const parsed=feed.parseGiftFeed(csv);assert.equal(parsed.length,18);const day1=selection.selectGifts(parsed,{category:'personalised',interest:'accessories'},'2026-10-11'),day2=selection.selectGifts(parsed,{category:'personalised',interest:'accessories'},'2026-10-12');assert.notEqual(day1[0].id,day2[0].id);assert.equal(selection.selectGifts(parsed,{budget:1000}).length,10);assert.equal(feed.parseGiftFeed(csv.replaceAll('utilitynestpro.etsy.com','another-shop.etsy.com')).length,0);});
+
+check('video-gaming filters exclude tabletop games and preserve budget links',()=>{
+ const rows=[{id:'board',title:'Board game',price:500,categories:[],interests:['games'],tags:[]},{id:'gamer',title:'Gaming poster',price:1299,categories:[],interests:['gaming'],tags:[]},{id:'premium',title:'Gaming stand',price:4500,categories:[],interests:['gaming'],tags:[]}];
+ assert.equal(selection.readGiftFilters({interest:'gaming',budget:'2000'}).interest,'gaming');
+ assert.deepEqual(Array.from(selection.selectGuidePicks(rows,{interest:'gaming',budget:2000})).map(p=>p.id),['gamer']);
+ assert.equal(selection.giftFiltersHref({interest:'gaming',budget:2000}),'/gifts?budget=2000&interest=gaming#gift-results');
+});
+check('coffee guide mixes brewing storage and drinkware within daily relevant rotation',()=>{
+ const rows=[['a','Press one','brewing'],['b','Press two','brewing'],['c','Press three','brewing'],['d','Coffee tin','storage'],['e','Coffee mug','drinkware'],['f','Spare parts press','brewing']].map(([id,title,tag])=>({id,title,price:1000,categories:[],interests:['coffee'],tags:[tag]}));
+ const a=selection.selectGuidePicks(rows,{interest:'coffee',budget:2000},undefined,'2026-10-11'),b=selection.selectGuidePicks(rows,{interest:'coffee',budget:2000},undefined,'2026-10-12');
+ assert.ok(a.some(p=>p.id==='d')&&a.some(p=>p.id==='e'));assert.equal(a.length,4);assert.equal(new Set(a.map(p=>p.id)).size,4);assert.ok(a.every(p=>p.id!=='f'));assert.notEqual(a[0].id,b[0].id);
+});

@@ -1,15 +1,11 @@
 import Link from "next/link";
 import { GiftCard } from "@/components/gift-card";
 import { getAvailableGifts } from "@/lib/gift-catalogue";
-import { giftFiltersHref, selectGifts } from "@/lib/gift-selection";
+import { giftFiltersHref, selectGuidePicks } from "@/lib/gift-selection";
 
 export async function GiftGuidePicks({ category, budget, interest, retailer }: { category?: string; budget?: number; interest?: string; retailer?: string }) {
   const catalogue = await getAvailableGifts();
-  const matching = selectGifts(catalogue, { category, budget, interest }).filter(item => (!retailer || item.shop === retailer) && !/\b(refills?|replacement|spare parts?)\b/i.test(item.title));
-  // Prefer a range of interests; each product appears only once.
-  const picks = ["books", "stationery", "puzzles", "games"].flatMap(interest =>
-    selectGifts(matching, { interest }).slice(0, 1));
-  const unique = [...new Map([...picks, ...matching].map(item => [item.id, item])).values()].slice(0, 4);
+  const unique = selectGuidePicks(catalogue, { category, budget, interest }, retailer);
   return (
     <section aria-labelledby="guide-picks-heading">
       <h2 id="guide-picks-heading" className="text-xl font-semibold mb-3 font-display">Current catalogue ideas</h2>

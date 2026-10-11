@@ -31,11 +31,11 @@ export const TOPIC_GUIDES = [
   {
     "slug": "secret-santa-gifts-for-gamers",
     "title": "Secret Santa gifts for gamers",
-    "description": "Find Secret Santa gifts for gamers with platform and compatibility checks, complete-game advice and current games-interest ideas up to £20.",
+    "description": "Find Secret Santa gifts for gamers with platform and compatibility checks, complete-game advice and current video-gaming gifts up to £20.",
     "kind": "gift",
     "category": "all",
     "budget": 2000,
-    "interest": "games"
+    "interest": "gaming"
   },
   {
     "slug": "secret-santa-gifts-for-coffee-lovers",

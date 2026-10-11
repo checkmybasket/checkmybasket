@@ -95,3 +95,23 @@ check('owned designs are never replaced by another retailer',()=>assert.equal(ct
 check('Etsy requires explicit fixed Clip Only price and in-stock matched identity',()=>{const source='https://www.etsy.com/uk/listing/4366450629/clip';const row={product_url:'https://utilitynestpro.etsy.com/uk/listing/4366450629/clip',source_url:source,product_name:'Widget'};const html=JSON.stringify({...base,url:source,offers:{'@type':'AggregateOffer',lowPrice:'9.99',priceCurrency:'GBP',availability:'https://schema.org/InStock'}});const page='<script type="application/ld+json">'+html+'</script>UtilityNestPro<select><option>Clip Only (£9.99)</option><option>With Gift Box (£11.99)</option></select>';const o=ctx.parseUtilityNest_(page,row);assert.equal(o.status,'verified');assert.equal(o.price,9.99);assert.equal(o.isFrom,'no');assert.equal(ctx.parseUtilityNest_(page.replace('Clip Only (£9.99)','Choose a clip'),row).status,'variant-review');assert.equal(ctx.parseUtilityNest_(page.replace('InStock','OutOfStock'),row).status,'variant-review');});
 
 check('ImageObject arrays expose contentURL without changing product identity checks',()=>{const data={...base,image:[{'@type':'ImageObject',contentURL:'https://i.etsystatic.com/example.jpg'}]};const o=ctx.parseProduct_('<script type="application/ld+json">'+JSON.stringify(data)+'</script>',url,'Widget');assert.equal(o.status,'verified');assert.equal(o.image,'https://i.etsystatic.com/example.jpg');});
+
+check('new-product batch preserves daily queue and hides failed observations',()=>{
+ const fresh=vm.createContext({console:{log(){}}});vm.runInContext(fs.readFileSync(__dirname+'/Code.gs','utf8'),fresh);
+ const rows=Array.from({length:9},(_,i)=>({gift_id:'NEW'+i,product_url:url+'/'+i,publication_status:'published',approval_status:'approved'}));
+ const saved=[],runs=[];let synced=0,released=0;
+ fresh.LockService={getScriptLock:()=>({tryLock:()=>true,releaseLock(){released++;}})};
+ fresh.ensureSheets_=()=>{};fresh.managedSheet_=()=>({getDataRange:()=>({getValues:()=>[['headers'],['NEW0',url+'/0']]})});fresh.readMaster_=()=>rows;
+ fresh.Utilities={getUuid:()=> 'new-run',sleep(){}};fresh.scrapeProduct_=r=>({status:r.gift_id==='NEW2'?'blocked':'verified'});
+ fresh.saveObservation_=(r,o)=>saved.push([r.gift_id,o.status]);fresh.syncWebsiteFeed_=()=>synced++;fresh.writeRun_=(r,status)=>runs.push([r,status]);
+ fresh.PropertiesService={getScriptProperties(){throw Error('Must not read or replace daily queue');}};
+ fresh.verifyNewCatalogueProducts();assert.equal(saved.length,6);assert.equal(saved[0][0],'NEW1');assert.ok(saved.some(([id,status])=>id==='NEW2'&&status==='blocked'));assert.equal(synced,1);assert.equal(released,1);assert.equal(runs[0][0].cursor,6);
+});
+check('new-product batch refuses concurrent work and changed product URLs',()=>{
+ const fresh=vm.createContext({console:{log(){}}});vm.runInContext(fs.readFileSync(__dirname+'/Code.gs','utf8'),fresh);
+ fresh.LockService={getScriptLock:()=>({tryLock:()=>false})};assert.throws(()=>fresh.verifyNewCatalogueProducts(),/busy/);
+ fresh.LockService={getScriptLock:()=>({tryLock:()=>true,releaseLock(){}})};fresh.ensureSheets_=()=>{};fresh.managedSheet_=()=>({getDataRange:()=>({getValues:()=>[['headers']]})});
+ let current={gift_id:'NEW',product_url:url,publication_status:'published',approval_status:'approved'};fresh.readMaster_=()=>[{...current}];fresh.Utilities={getUuid:()=> 'new-run',sleep(){}};
+ fresh.scrapeProduct_=()=>{current.product_url=url+'/changed';return{status:'verified'};};fresh.saveObservation_=()=>{throw Error('Must not save stale URL observation');};fresh.syncWebsiteFeed_=()=>{};fresh.writeRun_=()=>{};fresh.verifyNewCatalogueProducts();
+});
+console.log(`${count} complete verifier checks passed`);

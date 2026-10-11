@@ -491,3 +491,30 @@ function refreshWebsiteFeed() {
   try {syncWebsiteFeed_();console.log('Approved website feed refreshed.');}
   finally {lock.releaseLock();}
 }
+
+// Verify newly added published rows without resetting the daily queue or its progress.
+function verifyNewCatalogueProducts() {
+  const lock = LockService.getScriptLock();
+  if (!lock.tryLock(1000)) throw Error('Daily verifier is busy; retry shortly.');
+  try {
+    ensureSheets_();
+    const observations = managedSheet_(CMB.current, CMB_HEADERS).getDataRange().getValues().slice(1);
+    const seen = new Set(observations.map(row => String(row[0]) + '|' + String(row[1])));
+    const rows = readMaster_().filter(row => row.publication_status === 'published'
+      && row.approval_status === 'approved' && !seen.has(row.gift_id + '|' + row.product_url)).slice(0, CMB.batchSize);
+    const run = { id: Utilities.getUuid(), started: new Date().toISOString(), ids: rows.map(row => row.gift_id), cursor: 0 };
+    for (const row of rows) {
+      let observation;
+      try { observation = scrapeProduct_(row); }
+      catch (error) { observation = { status: 'fetch-error', reasons: ['New-product check failed; retry through the daily verifier'], evidence: '' }; }
+      const fresh = readMaster_().find(item => item.gift_id === row.gift_id);
+      if (!fresh || fresh.product_url !== row.product_url) continue;
+      saveObservation_(fresh, observation, run);
+      run.cursor++;
+      Utilities.sleep(1200);
+    }
+    syncWebsiteFeed_();
+    writeRun_(run, 'complete', 'New catalogue products attempted: ' + run.cursor + '. Failed checks remain hidden. Daily queue unchanged.');
+    console.log('New catalogue products attempted: ' + run.cursor + '. Approved website feed refreshed.');
+  } finally { lock.releaseLock(); }
+}

@@ -5,7 +5,7 @@ export type GiftProduct = {
   image: string; description: string; deliveryNote: string; categories: string[];
   interests?: string[]; priceCheckedAt?: string;
 };
-export const GIFT_INTERESTS = ["food", "chocolate", "coffee", "tea", "crafts", "games", "puzzles", "books", "reading", "technology", "stationery", "plants", "home", "travel", "accessories"];
+export const GIFT_INTERESTS = ["food", "chocolate", "coffee", "tea", "crafts", "games", "gaming", "puzzles", "books", "reading", "technology", "stationery", "plants", "home", "travel", "accessories"];
 export type GiftFilters = { category?: string; budget?: number; interest?: string };
 export function giftFiltersHref(filters: GiftFilters, category?: string, page?: number) {
   const query = new URLSearchParams();
@@ -45,4 +45,16 @@ export function readGiftFilters(params: Record<string, string | string[] | undef
     budget: [500, 1000, 1500, 2000, 3000, 5000].includes(budget) ? budget : undefined,
     interest: GIFT_INTERESTS.includes(one("interest")) ? one("interest") : undefined,
   };
+}
+
+// Preserve daily rotation within each relevant product type before filling remaining places.
+export function selectGuidePicks(products: GiftProduct[], filters: GiftFilters, retailer?: string, day = londonDay()) {
+  const matching = selectGifts(products, filters, day).filter(item =>
+    (!retailer || item.shop === retailer) && !/\b(refills?|replacement|spare parts?)\b/i.test(item.title));
+  const groups = filters.interest === "coffee"
+    ? ["brewing", "storage", "drinkware", "coasters"]
+    : filters.interest === "gaming" ? ["gaming-decor", "clothing", "accessories"]
+    : ["books", "stationery", "puzzles", "games"];
+  const firstOfEach = groups.flatMap(group => selectGifts(matching, { interest: group }, day).slice(0, 1));
+  return [...new Map([...firstOfEach, ...matching].map(item => [item.id, item])).values()].slice(0, 4);
 }
