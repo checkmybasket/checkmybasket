@@ -21,7 +21,8 @@ export function InfoPage({ title, updated, children }: { title: string; updated?
         <div className="info-prose space-y-6">{children}</div>
       </main>
       <footer className="py-8 px-4 border-t border-[var(--cmb-border)] text-center text-xs text-[var(--cmb-text-muted)]">
-        <div className="flex gap-4 justify-center mb-2">
+        <div className="flex flex-wrap gap-4 justify-center mb-2">
+          <Link href="/guides" className="hover:underline">Guides</Link>
           <Link href="/about" className="hover:underline">About</Link>
           <Link href="/privacy" className="hover:underline">Privacy</Link>
           <Link href="/terms" className="hover:underline">Terms</Link>

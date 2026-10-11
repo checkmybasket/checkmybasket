@@ -7,6 +7,7 @@ import { Logo } from "./logo";
 const links = [
   ["/wishlists", "Create a wishlist"],
   ["/gifts", "Gift ideas"],
+  ["/guides", "Guides"],
   ["#how-it-works", "How it works"],
   ["/return", "Return & sign in"],
 ];
