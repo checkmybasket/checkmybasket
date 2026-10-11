@@ -13,6 +13,14 @@ import { EmailRecovery } from "@/components/email-recovery";
 import { WishlistFaq } from "./faq";
 import { ListForm } from "./list-form";
 import { WishlistShell, panel, secondary } from "./shell";
+
+function EmptyWishlist() {
+  return <div className={panel}>
+    <h2 className="text-xl font-semibold mb-2">Start with something you would love</h2>
+    <p className="text-sm text-[var(--cmb-text-secondary)]">John Lewis, Amazon, Argos, Menkind or an independent shop—paste any product link. No group or email needed.</p>
+  </div>;
+}
+
 export function WishlistDashboard({ draft, giftUnavailable }: { draft?: CatalogueWishDraft; giftUnavailable?: boolean }) {
   const router = useRouter();
   const giftQuery = draft ? `?gift=${encodeURIComponent(draft.giftId)}` : "";
@@ -81,33 +89,29 @@ export function WishlistDashboard({ draft, giftUnavailable }: { draft?: Catalogu
         <Link href="/gifts" className="inline-flex min-h-11 items-center underline text-sm">Keep browsing gifts</Link>
       </section> : null}
       {giftUnavailable ? <p role="status" className="mb-6">This gift is no longer available in our current catalogue. <Link href="/gifts" className="underline">Browse current gift ideas</Link> or add your own product link.</p> : null}
+      {creating ? (
+        <ListForm
+          onSaved={(id) => router.push(`/wishlists/${id}${giftQuery}`)}
+          onCancel={() => setCreating(false)}
+        />
+      ) : (
+        <Button
+          className="rounded-xl min-h-12 mb-6"
+          disabled={loading}
+          onClick={() => setCreating(true)}
+        >
+          Create a wishlist
+        </Button>
+      )}
       {loading ? (
-        <p role="status">Loading your wishlists…</p>
+        <div className="relative">
+          <div className="invisible" aria-hidden="true"><EmptyWishlist /></div>
+          <p role="status" className="absolute inset-0 flex items-center p-5 sm:p-6">Loading your wishlists…</p>
+        </div>
       ) : (
         <>
-          {creating ? (
-            <ListForm
-              onSaved={(id) => router.push(`/wishlists/${id}${giftQuery}`)}
-              onCancel={() => setCreating(false)}
-            />
-          ) : (
-            <Button
-              className="rounded-xl min-h-12 mb-6"
-              onClick={() => setCreating(true)}
-            >
-              Create a wishlist
-            </Button>
-          )}
           {!lists.length && !creating && (
-            <div className={panel}>
-              <h2 className="text-xl font-semibold mb-2">
-                Start with something you would love
-              </h2>
-              <p className="text-sm text-[var(--cmb-text-secondary)]">
-                John Lewis, Amazon, Argos, Menkind or an independent shop—paste
-                any product link. No group or email needed.
-              </p>
-            </div>
+            <EmptyWishlist />
           )}
           {!!lists.length && (
             <ul className="grid sm:grid-cols-2 gap-4 mt-5">
@@ -172,16 +176,16 @@ export function WishlistDashboard({ draft, giftUnavailable }: { draft?: Catalogu
           {(lists.length > 0 || reservations.length > 0) && (
             <EmailRecovery wishlist />
           )}
-          <p className="text-sm mt-6 text-[var(--cmb-text-secondary)]">
-            This browser remembers your access. Without verified email recovery,
-            clearing browser data means losing access.{" "}
-            <Link className="underline" href="/return">
-              Return on another device
-            </Link>
-            .
-          </p>
         </>
       )}
+      <p className="text-sm mt-6 text-[var(--cmb-text-secondary)]">
+        This browser remembers your access. Without verified email recovery,
+        clearing browser data means losing access.{" "}
+        <Link className="underline" href="/return">
+          Return on another device
+        </Link>
+        .
+      </p>
       {error && (
         <div role="alert" className="mt-5 text-red-700">
           <p>{error}</p>

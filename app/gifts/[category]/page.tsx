@@ -7,7 +7,6 @@ import { getGiftsForCategory } from "@/lib/gift-catalogue";
 import { GIFT_CATEGORIES } from "@/lib/gift-categories";
 import Link from "next/link";
 import { Gift, ChevronLeft, ShieldOff } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { GiftFiltersForm } from "@/components/gift-filters";
 import { giftFiltersHref, readGiftFilters, selectGifts, londonDay } from "@/lib/gift-selection";
 import { GiftResults } from "@/components/gift-results";
@@ -41,17 +40,18 @@ export default async function CategoryPage({ params, searchParams }: { params: P
 
   return (
     <div className="min-h-dvh bg-[var(--cmb-bg)]">
+      <a className="cmb-skip-link" href="#main-content">Skip to content</a>
       <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background:"rgba(255,248,240,0.92)", backdropFilter:"blur(12px)" }}>
         <div className="max-w-5xl mx-auto px-4 h-14 flex items-center gap-3">
-          <Link href={giftFiltersHref({ budget: filters.budget, interest: filters.interest })}><Button variant="ghost" size="sm" aria-label="Back to gift ideas" className="h-9 w-9 p-0 rounded-lg"><ChevronLeft size={20} strokeWidth={1.5}/></Button></Link>
+          <Link href={giftFiltersHref({ budget: filters.budget, interest: filters.interest })} aria-label="Back to gift ideas" className="inline-flex min-h-11 w-11 shrink-0 items-center justify-center rounded-lg hover:bg-[var(--cmb-surface-hover)]"><ChevronLeft size={20} strokeWidth={1.5} aria-hidden="true"/></Link>
           <div className="flex items-center gap-2 flex-1 min-w-0">
             <Gift size={18} strokeWidth={1.5} className="text-[var(--cmb-primary)] shrink-0"/>
             <span className="font-semibold truncate font-display text-[var(--cmb-primary)]">{cat.heading}</span>
           </div>
-          <Link href="/create"><Button size="sm" className="h-9 px-3 rounded-lg text-xs font-semibold flex-shrink-0 bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">Create draw</Button></Link>
+          <Link href="/create" className="inline-flex min-h-11 items-center justify-center px-3 rounded-lg text-xs font-semibold flex-shrink-0 bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">Create draw</Link>
         </div>
       </header>
-      <main className="max-w-5xl mx-auto px-4 py-10">
+      <main id="main-content" tabIndex={-1} className="max-w-5xl mx-auto px-4 py-10">
         <div className="mb-6"><ExploreNavigation /></div>
         <div className="mb-8">
           <h1 className="text-3xl sm:text-4xl font-bold mb-2 font-display">{cat.heading}</h1>
@@ -75,7 +75,7 @@ export default async function CategoryPage({ params, searchParams }: { params: P
         <div className="rounded-2xl p-8 text-center mb-8 bg-[var(--cmb-primary)] shadow-[var(--shadow-lg)]">
           <h2 className="text-2xl font-bold mb-2 font-display text-[var(--cmb-text-inverse)]">Found the perfect gift?</h2>
           <p className="mb-6" style={{ color:"rgba(255,248,240,0.75)" }}>Set up Secret Santa for your group in 30 seconds — free, no account needed.</p>
-          <Link href="/create"><Button size="lg" className="h-12 px-8 rounded-xl font-semibold bg-[var(--cmb-accent)] text-white">Create a free draw</Button></Link>
+          <Link href="/create" className="inline-flex min-h-12 items-center justify-center px-8 rounded-xl font-semibold bg-[var(--cmb-accent)] text-white">Create a free draw</Link>
         </div>
         <div className="rounded-xl p-4 flex gap-2 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]">
           <ShieldOff size={16} strokeWidth={1.5} className="text-[var(--cmb-text-muted)] shrink-0 mt-0.5"/>

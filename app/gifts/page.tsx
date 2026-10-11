@@ -5,7 +5,6 @@ import Link from "next/link";
 import { getAvailableGifts } from "@/lib/gift-catalogue";
 import { GIFT_CATEGORIES } from "@/lib/gift-categories";
 import { Gift, ChevronRight, ShieldOff } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { GiftFiltersForm } from "@/components/gift-filters";
 import { giftFiltersHref, readGiftFilters, selectGifts, londonDay } from "@/lib/gift-selection";
 import { GiftResults } from "@/components/gift-results";
@@ -28,15 +27,16 @@ export default async function GiftsPage({ searchParams }: { searchParams: Promis
   const page = Math.max(1, Math.min(pages, requestedPage));
   return (
     <div className="min-h-dvh bg-[var(--cmb-bg)]">
+      <a className="cmb-skip-link" href="#main-content">Skip to content</a>
       <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background:"rgba(255,248,240,0.92)", backdropFilter:"blur(12px)" }}>
         <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-[var(--cmb-primary)]">
+          <Link href="/" className="flex min-h-11 items-center gap-2 text-[var(--cmb-primary)]">
             <Gift strokeWidth={1.5} size={20}/><span className="font-semibold font-display">CheckMyBasket</span>
           </Link>
-          <Link href="/create"><Button size="sm" className="h-9 px-4 rounded-lg text-sm font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">Create a draw</Button></Link>
+          <Link href="/create" className="inline-flex min-h-11 items-center justify-center px-4 rounded-lg text-sm font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">Create a draw</Link>
         </div>
       </header>
-      <main className="max-w-5xl mx-auto px-4 py-10">
+      <main id="main-content" tabIndex={-1} className="max-w-5xl mx-auto px-4 py-10">
         <div className="mb-6"><ExploreNavigation current="/gifts" /></div>
         <div className="mb-6 text-center">
           <h1 className="text-3xl sm:text-4xl font-bold mb-3 font-display">Gift ideas for every budget</h1>
