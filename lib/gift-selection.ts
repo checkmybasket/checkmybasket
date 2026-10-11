@@ -55,6 +55,11 @@ export function selectGuidePicks(products: GiftProduct[], filters: GiftFilters, 
     ? ["brewing", "storage", "drinkware", "coasters"]
     : filters.interest === "gaming" ? ["gaming-decor", "clothing", "accessories"]
     : ["books", "stationery", "puzzles", "games"];
-  const firstOfEach = groups.flatMap(group => selectGifts(matching, { interest: group }, day).slice(0, 1));
+  const firstOfEach = groups.flatMap(group => {
+    const groupItems = matching.filter(item => item.tags.includes(group) ||
+      (group === "drinkware" && /\b(mugs?|cups?)\b/i.test(item.title) && !item.tags.includes("brewing")) ||
+      (group === "coasters" && /\bcoasters?\b/i.test(item.title)));
+    return selectGifts(groupItems, {}, day).slice(0, 1);
+  });
   return [...new Map([...firstOfEach, ...matching].map(item => [item.id, item])).values()].slice(0, 4);
 }

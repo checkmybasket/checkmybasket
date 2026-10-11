@@ -29,7 +29,7 @@ check('video-gaming filters exclude tabletop games and preserve budget links',()
  assert.equal(selection.giftFiltersHref({interest:'gaming',budget:2000}),'/gifts?budget=2000&interest=gaming#gift-results');
 });
 check('coffee guide mixes brewing storage and drinkware within daily relevant rotation',()=>{
- const rows=[['a','Press one','brewing'],['b','Press two','brewing'],['c','Press three','brewing'],['d','Coffee tin','storage'],['e','Coffee mug','drinkware'],['f','Spare parts press','brewing']].map(([id,title,tag])=>({id,title,price:1000,categories:[],interests:['coffee'],tags:[tag]}));
+ const rows=[['a','Press one','brewing'],['b','Press two','brewing'],['c','Press three','brewing'],['d','Coffee tin','storage'],['e','Coffee mug','coffee'],['f','Spare parts press','brewing'],['g','White coaster','coffee']].map(([id,title,tag])=>({id,title,price:1000,categories:[],interests:['coffee'],tags:[tag]}));
  const a=selection.selectGuidePicks(rows,{interest:'coffee',budget:2000},undefined,'2026-10-11'),b=selection.selectGuidePicks(rows,{interest:'coffee',budget:2000},undefined,'2026-10-12');
- assert.ok(a.some(p=>p.id==='d')&&a.some(p=>p.id==='e'));assert.equal(a.length,4);assert.equal(new Set(a.map(p=>p.id)).size,4);assert.ok(a.every(p=>p.id!=='f'));assert.notEqual(a[0].id,b[0].id);
+ assert.ok(a.some(p=>p.id==='d')&&a.some(p=>p.id==='e')&&a.some(p=>p.id==='g'));assert.equal(a.length,4);assert.equal(new Set(a.map(p=>p.id)).size,4);assert.ok(a.every(p=>p.id!=='f'));assert.notEqual(a[0].id,b[0].id);
 });
