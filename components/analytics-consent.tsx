@@ -4,7 +4,7 @@ import Script from "next/script";
 import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 
-import { MEASUREMENT_ID, STORAGE_KEY, CHANGE_EVENT, readConsent, isPublicPage, type Consent, type AnalyticsWindow } from "@/lib/analytics";
+import { trackGiftInteraction, MEASUREMENT_ID, STORAGE_KEY, CHANGE_EVENT, readConsent, isPublicPage, type Consent, type AnalyticsWindow } from "@/lib/analytics";
 
 function subscribe(callback: () => void) {
   window.addEventListener("storage", callback);
@@ -62,6 +62,23 @@ export function AnalyticsConsent() {
       lastPage.current = pathname;
     }
   }, [enabled, pathname]);
+
+  useEffect(() => {
+    if (!enabled) return;
+    function clicked(event: MouseEvent) {
+      const link = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>("a[data-gift-retailer]") : null;
+      if (link) trackGiftInteraction("gift_retailer_click", { retailer: link.dataset.giftRetailer || "" });
+    }
+    function submitted(event: SubmitEvent) {
+      if (!(event.target instanceof HTMLFormElement) || !event.target.hasAttribute("data-gift-filters")) return;
+      const form = new FormData(event.target);
+      const value = (name: string) => typeof form.get(name) === "string" ? String(form.get(name)) : "";
+      trackGiftInteraction("gift_filters_applied", { category: value("category"), budget: value("budget"), interest: value("interest") });
+    }
+    document.addEventListener("click", clicked);
+    document.addEventListener("submit", submitted);
+    return () => { document.removeEventListener("click", clicked); document.removeEventListener("submit", submitted); };
+  }, [enabled]);
 
   function choose(value: Exclude<Consent, null>) {
     const analytics = window as AnalyticsWindow;
