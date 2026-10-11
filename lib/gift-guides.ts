@@ -1,3 +1,4 @@
+import { TOPIC_GUIDES } from "@/lib/topic-guides";
 export const GIFT_GUIDES = [
   { slug: "secret-santa-gifts-under-10", title: "Secret Santa gifts under £10", description: "Choose a thoughtful Secret Santa gift under £10 with ideas for readers, stationery fans and puzzle lovers, plus tips for keeping delivery within budget.", category: "under-10", budget: 1000 },
   { slug: "secret-santa-gifts-for-colleagues", title: "Secret Santa gifts for colleagues", description: "Find considerate Secret Santa gifts for colleagues, with ideas by interest, workplace gift etiquette and a clear spending limit.", category: "colleague", budget: 2000 },
@@ -8,4 +9,5 @@ export const GIFT_GUIDES = [
   {"slug": "cosy-secret-santa-gifts", "title": "Cosy Secret Santa gifts", "description": "Find cosy Secret Santa gift ideas for quiet evenings, with advice on textures, reading gifts, fragrance preferences and care.", "category": "cosy"},
   {"slug": "personalised-secret-santa-gifts", "title": "Personalised Secret Santa gifts", "description": "Choose personalised Secret Santa gifts with checks for spelling, options, final price, dispatch time and personalised returns.", "category": "personalised"},
   { slug: "personalised-money-clip-gift-guide", title: "Personalised money clip gift guide", description: "A closer look at UtilityNestPro’s engraved Seigaiha money clip, with guidance on initials, recipient fit, clip-only pricing and gift-box options.", category: "personalised" },
+  ...TOPIC_GUIDES.filter(guide => guide.kind === "gift").map(guide => ({ slug: guide.slug, title: guide.title, description: guide.description, category: "category" in guide ? guide.category : "all" })),
 ] as const;

@@ -1,0 +1,728 @@
+[
+  {
+    "slug": "secret-santa-odd-number",
+    "title": "Can you do Secret Santa with an odd number of people?",
+    "description": "See how Secret Santa works with 3, 5 or 7 people, with clear draw examples, exclusion checks and a practical organiser checklist.",
+    "answer": "Yes. Secret Santa assigns each participant one person to buy for; it does not require pairs. With 3, 5 or 7 people, everyone can give and receive one gift. CheckMyBasket needs at least three joined members, and any exclusions must allow a valid draw.",
+    "intro": "An odd-sized group does not need a spare participant or an organiser buying two gifts. What matters is that every person has one recipient, every person receives one gift, and nobody draws themselves. Here is how to plan a fair exchange when the headcount is odd.",
+    "sections": [
+      {
+        "id": "why-an-odd-number-works",
+        "heading": "Why an odd number works",
+        "paragraphs": [
+          "Think of a chain of giving rather than couples exchanging with each other. Alex buys for Blake, Blake buys for Casey, and Casey buys for Alex. All three people give once and receive once, even though nobody forms a two-person pair.",
+          "A valid draw does not have to follow one large circle: some groups can form smaller cycles. The examples below use one circle because it makes the principle easy to see. They illustrate valid arrangements, not a prediction of your actual random draw."
+        ]
+      },
+      {
+        "id": "examples-for-3-5-and-7-participants",
+        "heading": "Examples for 3, 5 and 7 participants",
+        "paragraphs": [
+          "In each example, read one row as “this person buys for that person”. The last person buys for the first, closing the circle. Each recipient appears exactly once. These are fictional names; do not post your real assignments in a shared group chat."
+        ],
+        "tool": "odd-examples"
+      },
+      {
+        "id": "the-three-person-case-needs-care",
+        "heading": "The three-person case needs care",
+        "paragraphs": [
+          "Three people can take part in CheckMyBasket, but there is very little room for exclusions. If you prevent some participants from buying for one another, you can rule out every valid arrangement. Check the exclusions before drawing and ask the group to agree any change.",
+          "Two people exchanging gifts directly is a different arrangement. CheckMyBasket requires three joined members for its draw. If someone withdraws and only two remain, agree a simple direct exchange or cancel rather than trying to force a draw."
+        ]
+      },
+      {
+        "id": "check-everyone-has-joined-before-drawing",
+        "heading": "Check everyone has joined before drawing",
+        "paragraphs": [
+          "The number of invitations sent is not the number of joined participants. Ask everyone to use the group invitation and check the member list, including accidental duplicates, before drawing names. An absent member cannot be included just because their name was mentioned in the chat.",
+          "Set a joining deadline and give people time to add a wishlist. If someone arrives late after the draw, do not casually add them to an existing assignment chain: participants may already have revealed their match or ordered a gift. Speak privately with the organiser about a fair alternative."
+        ]
+      },
+      {
+        "id": "set-up-your-odd-sized-group",
+        "heading": "Set up your odd-sized group",
+        "paragraphs": [
+          "Use the same create-draw form as any other group. Choose an agreed budget and exchange arrangements, share the invitation, then wait until at least three members have joined. Group size is checked before the draw; there is no need to create a dummy participant."
+        ],
+        "tool": "setup"
+      },
+      {
+        "id": "a-final-fairness-check",
+        "heading": "A final fairness check",
+        "paragraphs": [
+          "Before drawing, confirm that the real participants and exclusions are correct. Afterwards, each person should privately reveal their own match. Keep troubleshooting out of a group thread when it would reveal assignments."
+        ],
+        "bullets": [
+          "Participation is optional and the budget is comfortable for everyone.",
+          "The joined member list is complete, with no duplicate identities.",
+          "Exclusions leave at least one valid draw.",
+          "Everyone has time to buy and deliver one gift.",
+          "Withdrawals and late joins are discussed before changing arrangements."
+        ]
+      }
+    ],
+    "kind": "organiser",
+    "related": [
+      "secret-santa-rules",
+      "secret-santa-invitation-messages",
+      "remote-team-secret-santa"
+    ]
+  },
+  {
+    "slug": "remote-team-secret-santa",
+    "title": "How to organise Secret Santa for a remote team",
+    "description": "Plan a remote team Secret Santa with optional participation, delivery deadlines, private address handling, a video-call reveal and a printable plan.",
+    "answer": "Agree an optional exchange, a budget that explains delivery costs, and an arrival deadline. Invite the team, collect wishlist ideas and draw names privately. Arrange delivery details through an approved private channel, then use a video call or flexible handover for the reveal.",
+    "intro": "A remote exchange needs two plans: one for the gift and one for getting it to the recipient. A shared office location cannot solve delivery, time zones or someone being away. Keep the process clear enough that colleagues can take part without sharing personal details with the whole team.",
+    "sections": [
+      {
+        "id": "agree-who-can-take-part-and-where",
+        "heading": "Agree who can take part and where",
+        "paragraphs": [
+          "Invite people to opt in. Ask the organiser to confirm participating locations before choosing a budget: a gift that works for a UK-only team may not be practical for colleagues in several countries. Use the recipient’s local retailer where possible rather than assuming cross-border postage is straightforward.",
+          "For international exchanges, confirm currencies, retailer delivery coverage and any extra costs before the draw. Do not ask someone to cover unexpected postage or charges after they have agreed a spending limit. If delivery is impractical, offer a local handover or a separately agreed alternative."
+        ]
+      },
+      {
+        "id": "set-a-delivered-budget-and-realistic-deadlines",
+        "heading": "Set a delivered budget and realistic deadlines",
+        "paragraphs": [
+          "Choose a total limit and say whether it includes postage and wrapping. For example, a £20 delivered budget means a £19.99 item with paid postage will not fit. CheckMyBasket catalogue filters use item prices, so buyers still need to check the final checkout total.",
+          "Use a joining deadline, a draw date, an arrival deadline and a reveal date. Leave room for a missed delivery or an item made to order. Check the retailer’s current dispatch estimate for the chosen option; do not assume a personalised gift travels as quickly as a ready-made one."
+        ]
+      },
+      {
+        "id": "keep-delivery-details-out-of-the-group-chat",
+        "heading": "Keep delivery details out of the group chat",
+        "paragraphs": [
+          "Do not collect home addresses in a public wishlist, invitation message or broadly shared spreadsheet. Agree a private method with your team, such as an approved one-to-one channel or an existing workplace delivery process. Give people a choice if they would rather use a pickup point or work address, where available.",
+          "CheckMyBasket does not arrange shipping or collect delivery addresses for you. Keep addresses outside the product’s shared viewing links, and share only what the buyer needs. Ask your workplace about its own privacy and retention rules instead of leaving an address list accessible indefinitely."
+        ]
+      },
+      {
+        "id": "create-the-group-and-send-a-clear-invitation",
+        "heading": "Create the group and send a clear invitation",
+        "paragraphs": [
+          "Create your draw with a recognisable team name, budget and the reveal date if known. Use the exchange location field to describe the agreed remote plan, such as “video call; delivery by 10 December”. Explain the arrival deadline separately in the invitation."
+        ],
+        "tool": "setup"
+      },
+      {
+        "id": "a-remote-team-invitation-you-can-copy",
+        "heading": "A remote-team invitation you can copy",
+        "paragraphs": [
+          "Replace the placeholders, check that the team agrees the private delivery process, and send it through your usual work channel. The joining link belongs in the invitation; home addresses and private matches do not."
+        ],
+        "tool": "remote-message"
+      },
+      {
+        "id": "make-the-reveal-work-across-time-zones",
+        "heading": "Make the reveal work across time zones",
+        "paragraphs": [
+          "Choose a short call that people can reasonably attend, or let people open their gifts independently and post a thank-you later. Say whether givers reveal themselves after opening. A camera or a public photo should be optional; do not put colleagues on the spot.",
+          "If a parcel has not arrived, let that participant join the conversation without announcing who their Santa is. Follow up privately about the order and delivery estimate. A late parcel is easier to handle when there is a named organiser and a fallback handover plan."
+        ]
+      },
+      {
+        "id": "use-a-simple-remote-organiser-plan",
+        "heading": "Use a simple remote organiser plan",
+        "paragraphs": [
+          "Keep deadlines and general arrangements on the printable plan. It has no address or assignment fields, so you can share the planning details without turning it into a list of private matches."
+        ],
+        "bullets": [
+          "Participation and location coverage agreed before the draw.",
+          "Delivered budget, arrival deadline and reveal arrangements explained.",
+          "Private delivery channel agreed; no addresses in shared wishlists.",
+          "Member list and exclusions checked before names are drawn.",
+          "Alternative handovers available for absence or delayed parcels."
+        ]
+      }
+    ],
+    "kind": "organiser",
+    "download": {
+      "path": "/remote-secret-santa-planner.pdf",
+      "label": "Download the remote-team planner (PDF)"
+    },
+    "related": [
+      "office-secret-santa",
+      "secret-santa-invitation-messages",
+      "secret-santa-wishlist-ideas"
+    ]
+  },
+  {
+    "slug": "secret-santa-gifts-someone-you-dont-know",
+    "title": "Secret Santa gifts for someone you don’t know well",
+    "description": "Choose a considerate Secret Santa gift for someone you do not know well, with three useful questions, a £20 example and current catalogue ideas.",
+    "answer": "Start with their wishlist or one small, appropriate question about interests. Choose a complete, useful gift within the agreed budget, offer an alternative when you are unsure, and avoid intimate, size-dependent or strongly scented gifts unless they have asked for them.",
+    "intro": "Buying for an unfamiliar colleague or a friend’s partner does not have to mean buying a novelty item at random. You need a small amount of relevant information, not their life story. A gift can be thoughtful when it fits one everyday interest and respects the exchange’s spending limit.",
+    "sections": [
+      {
+        "id": "ask-three-easy-questions",
+        "heading": "Ask three easy questions",
+        "paragraphs": [
+          "Use the wishlist first. If it is empty, ask the organiser to invite everyone to add ideas, so one recipient does not feel singled out. A short question about a hobby is usually more useful than guessing from age, gender or job title."
+        ],
+        "bullets": [
+          "What do you enjoy doing in your spare time: reading, puzzles, cooking or something else?",
+          "Is there a small thing you would actually use, or a shop you like?",
+          "Is there anything you would prefer us to avoid? No explanation needed."
+        ]
+      },
+      {
+        "id": "choose-something-with-few-hidden-requirements",
+        "heading": "Choose something with few hidden requirements",
+        "paragraphs": [
+          "An A5 notebook, a standalone puzzle book or a small complete game can work when you know the person likes those activities. They still need to fit the recipient: a notebook is not automatically useful to everyone, and a game needs the right player count and difficulty.",
+          "Look for a complete gift rather than a refill, a specialist tool needing other equipment, or an accessory for an unknown device. Check what is included and whether batteries or consumables are required. A lower-priced complete item can be more useful than a costly component."
+        ]
+      },
+      {
+        "id": "avoid-gifts-that-ask-the-recipient-to-explain-themselves",
+        "heading": "Avoid gifts that ask the recipient to explain themselves",
+        "paragraphs": [
+          "Clothing needs sizes, fragrances depend on preference, and food may involve dietary requirements. Do not make assumptions. If the person has not requested one of these, choose another route or let them give a simple preference privately.",
+          "Keep workplace humour kind. Avoid intimate jokes, political or religious statements, and items that comment on appearance, health or personal habits. Alcohol is not a default choice. The aim is something pleasant to receive in the setting where it will be opened."
+        ]
+      },
+      {
+        "id": "a-worked-example-with-a-20-total-limit",
+        "heading": "A worked example with a £20 total limit",
+        "paragraphs": [
+          "Your recipient says they enjoy crosswords and taking handwritten notes. You decide on one medium-difficulty crossword book or an A5 lined notebook, rather than an unrelated joke gift. You check the exact format and current delivery cost before choosing.",
+          "If the item and postage fit under £20, add a short note such as “For your next puzzle break”. If delivery takes the total over the limit, use a lower-priced option or a permitted local collection. These are choosing examples, not fixed product offers; nobody needs to spend the entire limit."
+        ]
+      },
+      {
+        "id": "let-their-wishlist-do-the-explaining",
+        "heading": "Let their wishlist do the explaining",
+        "paragraphs": [
+          "A wishlist can list specific gifts or simply interests and preferences. Ask for a few options at different prices within the group limit. The buyer can then select one without asking intrusive questions or promising a particular product."
+        ],
+        "tool": "wishlist"
+      },
+      {
+        "id": "check-before-you-buy",
+        "heading": "Check before you buy",
+        "paragraphs": [
+          "Our picks below are colleague-category ideas with item prices up to £20. They are starting points, not guarantees that a stranger will like them. Use the actual group limit and delivery costs to make your final choice."
+        ],
+        "bullets": [
+          "One known interest connects the gift to the person.",
+          "The gift is complete and suitable for the exchange setting.",
+          "The selected option and delivery fit the total spending limit.",
+          "The current retailer page confirms stock and arrival timing.",
+          "The note is friendly and does not reveal private information."
+        ]
+      }
+    ],
+    "kind": "gift",
+    "category": "colleague",
+    "budget": 2000,
+    "related": [
+      "secret-santa-gifts-for-colleagues",
+      "secret-santa-wishlist-ideas",
+      "secret-santa-gifts-under-20"
+    ]
+  },
+  {
+    "slug": "secret-santa-gifts-for-book-lovers",
+    "title": "Secret Santa gifts for book lovers",
+    "description": "Choose book-lover Secret Santa gifts with checks for editions, duplicate titles, reading accessories and a £20 item-price catalogue selection.",
+    "answer": "Find out what they read and what they already own. Choose a requested title in the right format or a useful reading accessory. Stay within the group budget, and check postage before choosing a book, bookmark or reading-related gift.",
+    "intro": "Someone who loves books may already own the obvious bestseller. The best starting point is their reading taste and a missing item on their wishlist, rather than a list of supposedly universal titles. You can still keep the surprise by offering a choice of formats or useful accessories.",
+    "sections": [
+      {
+        "id": "start-with-genre-and-format",
+        "heading": "Start with genre and format",
+        "paragraphs": [
+          "Ask whether they enjoy fiction, nature writing, history or another subject. Then check paperback, hardback, large-print or another preferred format. A beautiful edition is not helpful if it is too heavy for their commute or difficult for them to read.",
+          "If they use ebooks, do not assume a physical book or an account-specific digital purchase is suitable. Check what they actually want. A wishlist should include title, author and format; an exact retailer link can help distinguish editions."
+        ]
+      },
+      {
+        "id": "avoid-buying-a-book-they-already-own",
+        "heading": "Avoid buying a book they already own",
+        "paragraphs": [
+          "A series reader may have volumes one to three and need volume four. Ask for the missing title rather than buying the first book again. Check whether a collected edition includes material they already have, especially when editions share a similar cover.",
+          "Do not confuse popularity with recipient fit. A prize-winning novel may be an excellent book and still be outside their taste. We do not describe these catalogue ideas as books we have personally reviewed or as measured bestsellers."
+        ]
+      },
+      {
+        "id": "consider-a-reading-accessory",
+        "heading": "Consider a reading accessory",
+        "paragraphs": [
+          "A slim bookmark can suit someone who reads paper books. A book light needs checks for weight, charging, brightness controls and how it attaches; the recipient may already have one. A notebook can be useful for reading notes if they enjoy that habit.",
+          "Avoid decorative items that require lots of shelf space unless you know they would welcome them. “Book lover” is an interest, not a promise that they want every book-themed object. A small practical choice with a thoughtful note can be enough."
+        ]
+      },
+      {
+        "id": "three-useful-wishlist-entries",
+        "heading": "Three useful wishlist entries",
+        "paragraphs": [
+          "These examples describe what the buyer needs to know without claiming a current price. Add a real product link only after checking the edition and final delivery total."
+        ],
+        "bullets": [
+          "A paperback from my listed reading wishlist; please check the exact author and title because I own the earlier books.",
+          "A slim bookmark in a plain green or navy design. I use paper books and do not need personalisation.",
+          "An A5 lined notebook for reading notes; I already have pens and prefer a soft cover."
+        ]
+      },
+      {
+        "id": "a-20-example-without-pressure-to-overspend",
+        "heading": "A £20 example without pressure to overspend",
+        "paragraphs": [
+          "For a £20 exchange including postage, choose one requested paperback or a simpler accessory comfortably below the cap. Confirm the selected edition’s current price and delivery, then add a note about why you chose it. Two cheap but unrelated items are not automatically more thoughtful than one relevant gift.",
+          "Our current picks use the books interest and an item-price ceiling of £20. That filter does not include delivery and does not guarantee the exact title the recipient wants. If no matching products are available, use their wishlist or the broader gift finder."
+        ]
+      },
+      {
+        "id": "before-ordering-a-book-gift",
+        "heading": "Before ordering a book gift",
+        "paragraphs": [
+          "Make the final checks on the retailer’s page, including dispatch and whether the item is a book, an accessory or another reading-related product."
+        ],
+        "bullets": [
+          "Title, author and format match the wishlist.",
+          "The recipient does not already own it.",
+          "An accessory fits how they read and needs no missing equipment.",
+          "Postage and selected options fit the agreed total.",
+          "The gift can arrive before the exchange."
+        ]
+      }
+    ],
+    "kind": "gift",
+    "category": "all",
+    "budget": 2000,
+    "interest": "books",
+    "related": [
+      "secret-santa-wishlist-ideas",
+      "secret-santa-gifts-under-20",
+      "cosy-secret-santa-gifts"
+    ]
+  },
+  {
+    "slug": "secret-santa-gifts-for-gamers",
+    "title": "Secret Santa gifts for gamers",
+    "description": "Find Secret Santa gifts for gamers with platform and compatibility checks, complete-game advice and current games-interest ideas up to £20.",
+    "answer": "Ask what they play before buying. For video games, confirm the platform, edition and region; for tabletop games, check player count and what is included. When those details are unknown, choose a wishlist item rather than guessing at hardware or a game code.",
+    "intro": "Gaming can mean console games, PC games, cards, board games or puzzles with friends. Those interests overlap for some people and not for others. A clear distinction prevents a well-intentioned gift from becoming an incompatible accessory or a game the recipient cannot use.",
+    "sections": [
+      {
+        "id": "find-out-what-kind-of-gamer-they-are",
+        "heading": "Find out what kind of gamer they are",
+        "paragraphs": [
+          "One question can narrow the choice: “Do you prefer video games, tabletop games, or both?” If they mention a favourite game, ask what they already own. A gift based on an interest they volunteered is more useful than an assumption about expensive equipment.",
+          "For tabletop players, ask whether they usually play alone, as a pair or with a larger group. A two-player game is not an automatic fit for someone organising six-person evenings. Check typical session length and whether the rules suit their experience."
+        ]
+      },
+      {
+        "id": "do-not-guess-at-platform-compatibility",
+        "heading": "Do not guess at platform compatibility",
+        "paragraphs": [
+          "Before buying a digital game, physical disc or controller accessory, verify the specific device, platform, edition and compatibility on the retailer’s page. A similarly named console or different generation can change what works. Check any region or account restrictions shown for codes.",
+          "If you cannot confirm those details, use the exact wishlist link or choose something else. Do not buy a generic code because it looks inexpensive. This guide does not claim that every games-tagged product works with a console or gaming PC."
+        ]
+      },
+      {
+        "id": "look-for-a-complete-game",
+        "heading": "Look for a complete game",
+        "paragraphs": [
+          "Some boxes contain expansions, add-on packs, replacement pieces or only part of a game. Read the contents and confirm whether a base game is required. A compact standalone game can make a good budget gift when its player count and style suit the recipient.",
+          "Think about where they will play. Large boards may not suit a small table; tiny pieces may be inconvenient when travelling. Check the product’s age guidance and any safety information when children are likely to join, rather than treating every adult gift as a family game."
+        ]
+      },
+      {
+        "id": "useful-alternatives-to-uncertain-hardware",
+        "heading": "Useful alternatives to uncertain hardware",
+        "paragraphs": [
+          "A small tabletop game can suit a video-game fan who also enjoys playing with friends. A notebook may suit someone who keeps campaign notes. A puzzle is a different interest and should be chosen only if they actually enjoy it.",
+          "Avoid pretending that any desk accessory is a gaming essential. Ask what they would use. Gifts with batteries, specialist cables or recurring purchases deserve an extra check so the recipient does not have to buy missing parts to enjoy the present."
+        ]
+      },
+      {
+        "id": "a-worked-20-choosing-example",
+        "heading": "A worked £20 choosing example",
+        "paragraphs": [
+          "Your recipient likes short two-player card games and already owns UNO. Look for a standalone game with two-player support and a short playing time, then check the included cards, rules and current delivery total. A known favourite or wishlist request is a better guide than packaging that merely says “gamer”.",
+          "The picks below use the catalogue’s games interest and an item-price ceiling of £20. They may include tabletop or party games. They are not a platform-specific video-game list, so use the product details to check fit before ordering."
+        ]
+      },
+      {
+        "id": "the-compatibility-checklist",
+        "heading": "The compatibility checklist",
+        "paragraphs": [
+          "A gift is ready to order only when the uncertain details are resolved. If the budget cannot cover a requested product, choose another agreed idea rather than exceeding the limit."
+        ],
+        "bullets": [
+          "The recipient enjoys this type of game.",
+          "Player count, play time and difficulty suit them.",
+          "The product is standalone, or they own the required base game.",
+          "Platform, region and edition are confirmed for digital or console items.",
+          "Selected price and delivery fit the budget."
+        ]
+      }
+    ],
+    "kind": "gift",
+    "category": "all",
+    "budget": 2000,
+    "interest": "games",
+    "related": [
+      "secret-santa-wishlist-ideas",
+      "funny-secret-santa-gifts",
+      "secret-santa-gifts-under-20"
+    ]
+  },
+  {
+    "slug": "secret-santa-gifts-for-coffee-lovers",
+    "title": "Secret Santa gifts for coffee lovers",
+    "description": "Choose coffee-lover Secret Santa gifts by brewing method, flavour preferences and useful accessories, with current coffee-interest ideas up to £20.",
+    "answer": "Check how they make coffee and what they already use. Beans, ground coffee and capsules are not interchangeable. Choose their preferred format or a useful accessory, then check ingredients where relevant, compatibility and the full delivered price.",
+    "intro": "A coffee gift is more thoughtful when it fits a daily routine. Someone using a cafetière needs a different choice from someone using a capsule machine, and a person who enjoys plain coffee may not want sweet syrups. Start with the routine, then choose one useful gift within the limit.",
+    "sections": [
+      {
+        "id": "ask-about-their-brewing-method",
+        "heading": "Ask about their brewing method",
+        "paragraphs": [
+          "Do they use a cafetière, filter brewer, espresso setup or capsule machine? If you are considering coffee itself, ask whether they need whole beans or ground coffee and whether they have a grinder. Do not assume that a premium-looking bag will work with their equipment.",
+          "For capsules, the machine system matters. Confirm compatibility on the exact retailer listing; similar names and packaging can be misleading. If the recipient has not shared the machine details, a requested non-machine accessory may be an easier option."
+        ]
+      },
+      {
+        "id": "choose-flavours-they-actually-enjoy",
+        "heading": "Choose flavours they actually enjoy",
+        "paragraphs": [
+          "Ask about plain versus flavoured coffee and whether they prefer decaffeinated. A strong roast is not automatically a better gift. If a set includes snacks, chocolate or syrups, check the contents and relevant preferences rather than treating it as coffee alone.",
+          "For dietary requirements, use the current ingredient and allergen information on the product, not a gift category or photograph. Keep sensitive health details out of a shared wishlist. The recipient can name suitable choices without explaining private information."
+        ]
+      },
+      {
+        "id": "a-mug-is-useful-only-when-the-details-fit",
+        "heading": "A mug is useful only when the details fit",
+        "paragraphs": [
+          "Consider capacity, handle shape and how they use it. A large desk mug may be unsuitable for a small coffee machine. A travel mug needs checks for dimensions, lid design, cleaning instructions and whether the seller describes it as leakproof; do not infer that from a photo.",
+          "Avoid presenting fragile or decorative drinkware as suitable for every dishwasher or microwave. Follow the actual care instructions. If they already have a favourite mug, a different wishlist item may be more welcome than another one."
+        ]
+      },
+      {
+        "id": "three-clear-wishlist-examples",
+        "heading": "Three clear wishlist examples",
+        "paragraphs": [
+          "Useful wording tells the buyer what to look for and what to avoid. These are example preferences, not current price offers."
+        ],
+        "bullets": [
+          "Ground coffee suitable for a cafetière. Plain rather than flavoured; decaf is welcome. Please check the brewing guidance on the packet.",
+          "A small ceramic mug with a comfortable handle. I prefer a simple green design and already own a travel cup.",
+          "A coffee-related notebook or coaster set for my desk, if it fits the exchange limit. No machine accessories needed."
+        ]
+      },
+      {
+        "id": "keep-the-whole-gift-within-budget",
+        "heading": "Keep the whole gift within budget",
+        "paragraphs": [
+          "For a £20 total exchange, check whether a gift set adds presentation charges or paid postage. A simpler coffee item may leave room for delivery. Consider the recipient’s needs before choosing several small products that make the package look larger.",
+          "The current cards below match the coffee interest and cost no more than £20 per item in our catalogue. Matching a tag does not establish machine compatibility or ingredients. Retailer stock, delivery and selected options still need checking at purchase."
+        ]
+      },
+      {
+        "id": "before-you-buy",
+        "heading": "Before you buy",
+        "paragraphs": [
+          "Check what the gift includes, especially sets with multiple components. Do not add equipment the recipient will have to buy before using it."
+        ],
+        "bullets": [
+          "Beans, grind or capsule format suits their setup.",
+          "Ingredients and flavour preferences are checked where relevant.",
+          "Mug dimensions and care instructions fit their routine.",
+          "The selected option and delivery fit the agreed limit.",
+          "The item can arrive before the exchange date."
+        ]
+      }
+    ],
+    "kind": "gift",
+    "category": "all",
+    "budget": 2000,
+    "interest": "coffee",
+    "related": [
+      "secret-santa-wishlist-ideas",
+      "secret-santa-gifts-under-20",
+      "secret-santa-gifts-someone-you-dont-know"
+    ]
+  },
+  {
+    "slug": "money-clip-engraving-ideas",
+    "title": "Money clip engraving ideas: initials, names and short messages",
+    "description": "Explore original money clip engraving wording for initials, names and short messages, with a text preview, character count and printable ordering checklist.",
+    "answer": "Keep the wording short and meaningful: initials, a preferred name or a brief message. Check spelling, punctuation, engraving position and the seller’s actual space limit before ordering. A character count helps you prepare, but it does not prove the wording fits a particular clip.",
+    "intro": "A money clip has limited space, so a small detail can carry the meaning. Choose words the recipient would be comfortable seeing on an everyday accessory. The examples here are starting points for your own wording, followed by a preview tool and the checks that make an order clear.",
+    "sections": [
+      {
+        "id": "initials-and-names-for-a-subtle-finish",
+        "heading": "Initials and names for a subtle finish",
+        "paragraphs": [
+          "Initials are a useful choice for someone who prefers understated accessories. Confirm whether they use a middle initial and whether they want dots between letters. A full name or nickname can work when the recipient actually uses it."
+        ],
+        "bullets": [
+          "AJ - two initials without punctuation.",
+          "A.J. - the same initials with dots; check whether punctuation is supported.",
+          "Alex - a preferred first name.",
+          "A. James - first initial and surname.",
+          "Jamie - a nickname only if the recipient uses it."
+        ]
+      },
+      {
+        "id": "short-messages-with-a-personal-connection",
+        "heading": "Short messages with a personal connection",
+        "paragraphs": [
+          "Choose a line that reflects a shared moment rather than a generic claim about the recipient. A brief message gives the seller more room to keep it legible, but the physical fit still depends on the surface, font and engraving position."
+        ],
+        "bullets": [
+          "Always in your corner",
+          "For the next adventure",
+          "A little everyday luck",
+          "Keep going, Dad",
+          "Small clip, big thanks",
+          "Our next chapter",
+          "Made for your journey",
+          "With you, always"
+        ]
+      },
+      {
+        "id": "dates-and-wedding-party-wording",
+        "heading": "Dates and wedding-party wording",
+        "paragraphs": [
+          "Dates can be meaningful for a birthday or a wedding. Write the month in words if an all-numeric date could be misunderstood. Ask whether the date is wanted before putting it on an accessory that will be used beyond the occasion."
+        ],
+        "bullets": [
+          "Alex · 12 June 2027",
+          "Best man · Sam",
+          "Thank you, Jamie",
+          "To our next adventure",
+          "Dad · Love, Alex"
+        ]
+      },
+      {
+        "id": "preview-your-wording-before-ordering",
+        "heading": "Preview your wording before ordering",
+        "paragraphs": [
+          "Type your proposed engraving below. Count spaces and punctuation as part of the wording, and review capitalisation. This plain text preview is a planning aid, not a reproduction of a seller’s font, pattern or engraving area."
+        ],
+        "tool": "engraving"
+      },
+      {
+        "id": "ask-the-seller-the-questions-that-affect-the-result",
+        "heading": "Ask the seller the questions that affect the result",
+        "paragraphs": [
+          "Check the current listing’s personalisation instructions. Confirm character or line limits, supported symbols, position and whether a patterned surface affects placement. A note in a preview does not submit an Etsy order, and we do not promise a production proof unless the seller offers one.",
+          "If you want a font preference, ask whether it is supported before ordering. Copy the final wording exactly, including any dots or date format. Avoid telephone numbers, addresses or sensitive details on an item that might be used or lost in public."
+        ]
+      },
+      {
+        "id": "choose-the-right-clip-and-presentation-option",
+        "heading": "Choose the right clip and presentation option",
+        "paragraphs": [
+          "A clip suits someone who carries folded notes and would use a compact accessory. It does not provide coin storage or automatically replace a wallet with several card compartments. Choose the pattern around a known interest rather than guessing at religious or national motifs.",
+          "The current products below are verified available UtilityNestPro catalogue designs. Catalogue prices refer to the recorded product option; a box, engraving choice or postage can change the checkout total. Check the current Etsy listing for making time and the selected option before ordering."
+        ]
+      },
+      {
+        "id": "your-final-engraving-order-check",
+        "heading": "Your final engraving order check",
+        "paragraphs": [
+          "Print the checklist and write the wording clearly before copying it into the order. Check the shop’s current personalisation and returns information, and allow enough time for making and delivery."
+        ],
+        "bullets": [
+          "Preferred name, initials and date checked with the right person.",
+          "Exact capitals, spaces and punctuation reviewed.",
+          "Seller confirms the wording fits the chosen engraving area.",
+          "Pattern, presentation option and final delivered price checked.",
+          "Current making time and delivery estimate fit the occasion."
+        ]
+      }
+    ],
+    "kind": "gift",
+    "category": "personalised",
+    "budget": 3000,
+    "interest": "accessories",
+    "retailer": "UtilityNestPro (Etsy)",
+    "download": {
+      "path": "/engraving-order-checklist.pdf",
+      "label": "Download the engraving order checklist (PDF)"
+    },
+    "related": [
+      "personalised-money-clip-gift-guide",
+      "personalised-gifts-for-dads",
+      "personalised-groomsmen-gifts"
+    ]
+  },
+  {
+    "slug": "personalised-gifts-for-dads",
+    "title": "Personalised gifts for dads: choosing something he will use",
+    "description": "Choose a personalised gift for Dad by everyday habits, meaningful wording and practical details, with current money clip designs and delivery checks.",
+    "answer": "Start with something your dad would use, then add a name, initials or a short message that feels natural to him. Confirm the exact wording, selected product option and arrival timing. Personalisation adds meaning when the underlying gift fits his routine.",
+    "intro": "“For Dad” can describe very different people. One might value a small keepsake, another a useful everyday accessory, and another an experience together. Rather than assuming every dad likes the same hobbies, build the choice around a habit or interest you know.",
+    "sections": [
+      {
+        "id": "choose-the-gift-before-choosing-the-engraving",
+        "heading": "Choose the gift before choosing the engraving",
+        "paragraphs": [
+          "Notice what he actually carries, wears or uses. If he likes compact accessories and folded banknotes, a money clip could fit. If he needs coin storage and many cards, a clip on its own may not be useful. Do not let the availability of engraving decide the whole gift.",
+          "Other ideas might include a notebook for someone who writes, a keyring for someone who likes simple accessories, or a practical hobby item. These are types to explore, not promises that they are all stocked here. A wishlist or a small question can narrow the choice."
+        ]
+      },
+      {
+        "id": "make-the-wording-personal-to-your-relationship",
+        "heading": "Make the wording personal to your relationship",
+        "paragraphs": [
+          "A preferred name or initials keep the detail understated. “Dad” can be meaningful, but a name may be more natural if that is how he likes his accessories marked. Think about who the gift is from and whether a message should represent one person or several."
+        ],
+        "bullets": [
+          "Dad · Love, Alex",
+          "Keep going, Dad",
+          "Always in your corner",
+          "For the next adventure",
+          "AJ - confirmed initials rather than guessed ones."
+        ]
+      },
+      {
+        "id": "match-the-occasion-without-dating-every-gift",
+        "heading": "Match the occasion without dating every gift",
+        "paragraphs": [
+          "For a birthday, choose wording that will still feel welcome next year. For a new dad, ask whether he would prefer a family keepsake or something for his own everyday use. A Father’s Day message can be personal without needing the occasion permanently engraved.",
+          "A commemorative date is optional. Check the exact date and how it should be written; avoid a format that might be read differently. If you are buying on behalf of children or siblings, agree spelling and the sender names before ordering."
+        ]
+      },
+      {
+        "id": "consider-practical-details-and-taste",
+        "heading": "Consider practical details and taste",
+        "paragraphs": [
+          "Pattern, colour, weight and presentation matter alongside wording. A neutral design may suit someone who prefers simple accessories; an animal or geometric motif can reflect a known preference. Do not assume a religious or national symbol is appropriate just because it is available.",
+          "Read the product’s actual dimensions and contents. Photos can make an item look larger, and a gift-box image may show an optional presentation choice. Confirm what the selected option includes before judging value."
+        ]
+      },
+      {
+        "id": "a-worked-example-for-a-practical-gift",
+        "heading": "A worked example for a practical gift",
+        "paragraphs": [
+          "Dad already uses a money clip and likes understated patterns. Choose a design he would carry, use the initials he normally writes, and decide whether a gift box is worth the extra cost. Check the delivered total against your own budget instead of buying a larger bundle by default.",
+          "Our current selection below shows personalised UtilityNestPro accessories with recorded item prices up to £30. That is a browsing ceiling, not a suggested amount everyone should spend. Engraving choices, presentation and postage must still be checked at checkout."
+        ]
+      },
+      {
+        "id": "allow-time-for-the-personalisation",
+        "heading": "Allow time for the personalisation",
+        "paragraphs": [
+          "Check the listing’s current making time and delivery estimate for your destination. If the occasion is close, contact the shop about the chosen option before paying. Do not assume the date shown for a ready-made item also applies to a bespoke order."
+        ],
+        "bullets": [
+          "The gift fits a real habit or interest.",
+          "Wording reflects the recipient’s preferred name and style.",
+          "Sender names and any dates are agreed.",
+          "The selected option includes what you expect.",
+          "Personalisation and delivery can finish before the occasion."
+        ]
+      }
+    ],
+    "kind": "gift",
+    "category": "personalised",
+    "budget": 3000,
+    "interest": "accessories",
+    "retailer": "UtilityNestPro (Etsy)",
+    "related": [
+      "money-clip-engraving-ideas",
+      "personalised-money-clip-gift-guide",
+      "personalised-groomsmen-gifts"
+    ]
+  },
+  {
+    "slug": "personalised-groomsmen-gifts",
+    "title": "Personalised groomsmen gifts: a practical ordering guide",
+    "description": "Plan personalised groomsmen gifts with names, wedding-party wording, consistent budgets, individual designs and a clear batch-order checklist.",
+    "answer": "Choose a useful gift, set a per-person budget, confirm each recipient’s name and wording, then check production and delivery for the full order. Keep the meaning consistent across the wedding party without assuming everyone wants the same design.",
+    "intro": "A wedding-party gift is a thank-you for someone’s involvement, not another obligation for them. Personalisation can acknowledge that relationship, while the product still needs to be useful after the wedding. A careful list makes a multi-person order easier to check.",
+    "sections": [
+      {
+        "id": "set-one-clear-per-person-budget",
+        "heading": "Set one clear per-person budget",
+        "paragraphs": [
+          "Decide whether the budget includes engraving, presentation and delivery. For several gifts, calculate the total before choosing an option: an extra charge repeated five times can change the order substantially. Ask the shop about the actual selected quantities and options rather than assuming a bulk discount.",
+          "If a best man receives different wording or presentation, plan that separately so it is deliberate. There is no requirement to spend more to show appreciation. Consistency can come from the message and care, not from everyone receiving an identical object."
+        ]
+      },
+      {
+        "id": "choose-something-useful-after-the-wedding",
+        "heading": "Choose something useful after the wedding",
+        "paragraphs": [
+          "A compact money clip can suit someone who carries notes and likes that style of accessory. It will not suit everyone. Another recipient might prefer a notebook or keyring; check their habits instead of treating a wedding role as a product preference.",
+          "Consider discreet initials if they would not want a role and date on everyday accessories. Some people enjoy a commemorative message; others prefer a subtle name. Ask the question early enough that choosing a different item does not disrupt the order."
+        ]
+      },
+      {
+        "id": "wording-examples-for-different-roles",
+        "heading": "Wording examples for different roles",
+        "paragraphs": [
+          "These are starting points. Check each name and whether a role is wanted on the product. A message does not have to include the wedding date to feel personal."
+        ],
+        "bullets": [
+          "Sam · Best man",
+          "Alex · Thank you for being there",
+          "Jamie · Our next adventure",
+          "For the memories ahead",
+          "12 June 2027 - an example date; replace it with the confirmed date."
+        ]
+      },
+      {
+        "id": "build-a-batch-list-that-prevents-mix-ups",
+        "heading": "Build a batch list that prevents mix-ups",
+        "paragraphs": [
+          "Write one row per recipient: preferred name, exact engraving, design, presentation option and quantity. Review it with someone who knows the wedding party. Do not send a single ambiguous note such as “same for everyone, with their names” when designs or roles differ.",
+          "For example: Alex gets initials AJ on a geometric clip; Sam gets “Best man · Sam” on another agreed design. Confirm with the seller that each line is possible. A wedding role, name or date should never be inferred from an incomplete recipient list."
+        ]
+      },
+      {
+        "id": "check-the-full-order-with-the-seller",
+        "heading": "Check the full order with the seller",
+        "paragraphs": [
+          "Ask whether the current production estimate covers the full quantity and whether separate personalisation instructions are needed for each item. Confirm how the items will be identified and packaged so the right gift reaches the right recipient.",
+          "Verify the current price for each selected design, engraving choice and presentation option, then check the combined delivery cost. Do not promise the wedding party a completion date based solely on a general listing estimate; confirm the order details first."
+        ]
+      },
+      {
+        "id": "plan-a-handover-before-the-ceremony",
+        "heading": "Plan a handover before the ceremony",
+        "paragraphs": [
+          "Aim for delivery with time to inspect spelling, quantities and packaging before the wedding. Keep the written order confirmation available so any discrepancy can be discussed with the shop. Read the shop’s current personalised-item returns information before placing the order.",
+          "Hand gifts over at a relaxed point rather than during a rushed departure or ceremony setup. If travel is involved, think about safe packaging. The current personalised accessories below rotate daily and have item prices up to £30; confirm individual fit and the final batch total."
+        ]
+      },
+      {
+        "id": "your-batch-order-checklist",
+        "heading": "Your batch-order checklist",
+        "paragraphs": [
+          "Use the engraving checklist for exact wording, and keep a separate recipient list for the batch. Review that list privately rather than exposing names and wedding arrangements in a public gift wishlist."
+        ],
+        "bullets": [
+          "Each person’s preferred spelling and role are confirmed.",
+          "Exact wording, pattern and presentation recorded per recipient.",
+          "Quantity and per-person budget agreed.",
+          "Shop confirms engraving fit and full-order timing.",
+          "Final combined price and delivery reviewed before payment.",
+          "Gifts arrive early enough to check and hand over calmly."
+        ]
+      }
+    ],
+    "kind": "gift",
+    "category": "personalised",
+    "budget": 3000,
+    "interest": "accessories",
+    "retailer": "UtilityNestPro (Etsy)",
+    "download": {
+      "path": "/engraving-order-checklist.pdf",
+      "label": "Download the engraving order checklist (PDF)"
+    },
+    "related": [
+      "money-clip-engraving-ideas",
+      "personalised-money-clip-gift-guide",
+      "personalised-gifts-for-dads"
+    ]
+  }
+]

@@ -45,6 +45,7 @@ export default async function MoneyClipGuide() {
       {otherDesigns.length ? <div className="grid sm:grid-cols-2 gap-4">{otherDesigns.map(item => <GiftCard key={item.id} {...item}/>)}</div> : <p>Other designs are awaiting fresh checks. <a className="underline" href="https://utilitynestpro.etsy.com" target="_blank" rel="noopener noreferrer sponsored">Browse UtilityNestPro on Etsy</a>.</p>}
     </Section>
     <Section heading="More personalised gift ideas">
+      <p><Link href="/money-clip-engraving-ideas" className="underline">Engraving wording and preview</Link> · <Link href="/personalised-gifts-for-dads" className="underline">Personalised gifts for dads</Link> · <Link href="/personalised-groomsmen-gifts" className="underline">Groomsmen gift planning</Link></p>
       <p><Link className="underline" href="/personalised-secret-santa-gifts">Read our personalised Secret Santa choosing guide</Link> · <Link className="underline" href="/gifts/personalised">Browse personalised gifts</Link> · <Link className="underline" href="/wishlists">Create a wishlist</Link></p>
     </Section>
   </InfoPage>;
