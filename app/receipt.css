@@ -43,6 +43,13 @@
 .receipt-guide-link { padding-top: 32px; }
 .receipt-guide-link a { text-decoration: underline; text-underline-offset: 3px; }
 .receipt-guide-link a:hover { color: var(--cmb-red); }
+.receipt-guide-starts { padding-block: 48px; }
+.receipt-guide-starts h2 { font-size: clamp(2rem,4vw,3rem); }
+.receipt-guide-cards { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,260px),1fr)); gap: 24px; margin-top: 28px; }
+.receipt-guide-card { display: block; border: var(--cmb-rule); padding: 24px; }
+.receipt-guide-card:hover { background: var(--cmb-receipt); }
+.receipt-guide-read { display: inline-flex; align-items: center; min-height: 44px; margin-top: 12px; text-decoration: underline; }
+.receipt-guide-all { display: inline-flex; align-items: center; min-height: 44px; margin-top: 20px; text-decoration: underline; }
 .receipt-steps-section h2 { padding-top: 48px; max-width: 850px; }
 .receipt-steps { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); list-style: none; padding: 0; margin: 32px 0 0; }
 .receipt-steps li { padding: 48px 32px; border-right: var(--cmb-rule); }

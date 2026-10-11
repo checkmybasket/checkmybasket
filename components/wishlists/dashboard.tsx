@@ -198,6 +198,14 @@ export function WishlistDashboard({ draft, giftUnavailable }: { draft?: Catalogu
         </div>
       )}
       <WishlistFaq />
+      <section className={`${panel} mt-8`} aria-labelledby="wishlist-ideas-heading">
+        <h2 id="wishlist-ideas-heading" className="font-display text-xl font-semibold">Need gift ideas?</h2>
+        <p className="text-sm mt-2 text-[var(--cmb-text-secondary)]">Browse by budget and interest, then use Save to wishlist on any catalogue gift to review it before adding.</p>
+        <nav aria-label="Wishlist inspiration" className="flex flex-wrap gap-x-5 mt-2 text-sm">
+          <Link href="/gifts" className="inline-flex min-h-11 items-center underline">Find gifts by budget and interest</Link>
+          <Link href="/guides" className="inline-flex min-h-11 items-center underline">Browse gift choosing guides</Link>
+        </nav>
+      </section>
     </WishlistShell>
   );
 }

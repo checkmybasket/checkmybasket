@@ -1,4 +1,5 @@
 import { GIFT_GUIDES } from "@/lib/gift-guides";
+import { ExploreNavigation } from "@/components/explore-navigation";
 import { GiftPagination } from "@/components/gift-pagination";
 import Link from "next/link";
 import { getAvailableGifts } from "@/lib/gift-catalogue";
@@ -36,6 +37,7 @@ export default async function GiftsPage({ searchParams }: { searchParams: Promis
         </div>
       </header>
       <main className="max-w-5xl mx-auto px-4 py-10">
+        <div className="mb-6"><ExploreNavigation current="/gifts" /></div>
         <div className="mb-6 text-center">
           <h1 className="text-3xl sm:text-4xl font-bold mb-3 font-display">Gift ideas for every budget</h1>
           <p className="text-[var(--cmb-text-secondary)]">Curated picks from UK shops. No ads — some links earn us a small commission.</p>

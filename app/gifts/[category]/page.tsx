@@ -1,4 +1,6 @@
 import { GIFT_GUIDES } from "@/lib/gift-guides";
+import { ExploreNavigation } from "@/components/explore-navigation";
+import { CategoryGuideLinks } from "@/components/category-guide-links";
 import { GiftPagination } from "@/components/gift-pagination";
 import type { Metadata } from "next";
 import { getGiftsForCategory } from "@/lib/gift-catalogue";
@@ -50,6 +52,7 @@ export default async function CategoryPage({ params, searchParams }: { params: P
         </div>
       </header>
       <main className="max-w-5xl mx-auto px-4 py-10">
+        <div className="mb-6"><ExploreNavigation /></div>
         <div className="mb-8">
           <h1 className="text-3xl sm:text-4xl font-bold mb-2 font-display">{cat.heading}</h1>
           <p className="text-[var(--cmb-text-secondary)]">{cat.desc}</p>
@@ -68,6 +71,7 @@ export default async function CategoryPage({ params, searchParams }: { params: P
           {products.slice((page - 1) * 24, page * 24).map(item => <GiftCard key={item.id} size="lg" {...item}/>)}
         </div>
         <GiftPagination page={page} pages={pages} filters={filters} category={category}/>
+        <CategoryGuideLinks category={category} />
         <div className="rounded-2xl p-8 text-center mb-8 bg-[var(--cmb-primary)] shadow-[var(--shadow-lg)]">
           <h2 className="text-2xl font-bold mb-2 font-display text-[var(--cmb-text-inverse)]">Found the perfect gift?</h2>
           <p className="mb-6" style={{ color:"rgba(255,248,240,0.75)" }}>Set up Secret Santa for your group in 30 seconds — free, no account needed.</p>

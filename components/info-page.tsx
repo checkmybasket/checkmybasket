@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ExploreNavigation } from "@/components/explore-navigation";
 import { Gift, ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -16,6 +17,7 @@ export function InfoPage({ title, updated, children }: { title: string; updated?
         </div>
       </header>
       <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-10">
+        <div className="mb-6"><ExploreNavigation /></div>
         <h1 className="text-3xl font-bold mb-2 font-display">{title}</h1>
         {updated && <p className="text-sm mb-8 text-[var(--cmb-text-muted)]">Last updated: {updated}</p>}
         <div className="info-prose space-y-6">{children}</div>

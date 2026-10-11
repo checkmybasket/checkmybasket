@@ -1,4 +1,3 @@
-import { OrganiserGuideLinks } from "@/components/organiser-guide-links";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/receipt/header";
@@ -58,7 +57,17 @@ export default function HomePage() {
           <Link href="/secret-santa-whatsapp">WhatsApp Secret Santa guide</Link>{" "}
           or our <Link href="/office-secret-santa">office Secret Santa checklist</Link>.
         </p>
-        <div className="receipt-container receipt-guide-link"><OrganiserGuideLinks /></div>
+        <section className="receipt-container receipt-guide-starts" aria-labelledby="guide-starts-heading">
+          <h2 id="guide-starts-heading">A little help with gifting</h2>
+          <div className="receipt-guide-cards">
+            {[
+              { href: "/secret-santa-rules", title: "Plan your Secret Santa", description: "Agree the budget, set deadlines and use the organiser checklist." },
+              { href: "/secret-santa-gifts-under-10", title: "Choose a gift under £10", description: "Start with affordable ideas and allow for delivery and wrapping." },
+              { href: "/secret-santa-wishlist-ideas", title: "Build a useful wishlist", description: "Give your Santa ideas with sizes, colours and helpful notes." },
+            ].map(guide => <Link key={guide.href} href={guide.href} className="receipt-guide-card"><h3>{guide.title}</h3><p>{guide.description}</p><span className="receipt-guide-read">Read the guide →</span></Link>)}
+          </div>
+          <Link href="/guides" className="receipt-guide-all">Browse all Secret Santa and gift guides →</Link>
+        </section>
         <FeatureList />
         <BudgetChips />
         <section
