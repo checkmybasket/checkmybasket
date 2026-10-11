@@ -7,4 +7,5 @@ export const GIFT_GUIDES = [
   {"slug": "funny-secret-santa-gifts", "title": "Funny Secret Santa gifts", "description": "Choose funny Secret Santa gifts that suit the recipient, with tips for kind humour, novelty products and workplace exchanges.", "category": "funny"},
   {"slug": "cosy-secret-santa-gifts", "title": "Cosy Secret Santa gifts", "description": "Find cosy Secret Santa gift ideas for quiet evenings, with advice on textures, reading gifts, fragrance preferences and care.", "category": "cosy"},
   {"slug": "personalised-secret-santa-gifts", "title": "Personalised Secret Santa gifts", "description": "Choose personalised Secret Santa gifts with checks for spelling, options, final price, dispatch time and personalised returns.", "category": "personalised"},
+  { slug: "personalised-money-clip-gift-guide", title: "Personalised money clip gift guide", description: "A closer look at UtilityNestPro’s engraved Seigaiha money clip, with guidance on initials, recipient fit, clip-only pricing and gift-box options.", category: "personalised" },
 ] as const;

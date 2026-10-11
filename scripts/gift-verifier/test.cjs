@@ -71,7 +71,7 @@ check('owner-approved HTTPS image publishes without altering permission evidence
 
 check('interrupted fetch advances and pauses slow host for cycle',()=>{const run={id:'interrupted',started:new Date().toISOString(),ids:['ID0','ID1'],cursor:0,inflight:'ID0'};properties.set('CMB_QUEUE',ctx.encodeRun_(run));ctx.continueVerification();const current=sheets.find(s=>s.name==='CMB Verification');assert.equal(current.data.find(r=>r[0]==='ID0')[3],'fetch-timeout');assert.equal(current.data.find(r=>r[0]==='ID1')[3],'host-timeout');assert.equal(properties.has('CMB_QUEUE'),false);});
 console.log(`${count} total verifier checks passed`);
-check('500 source rows accepted and 501 rejected',()=>{const saved=master.data;master.data=[masterHeaders,...Array.from({length:500},(_,i)=>['ID'+i,url,'Widget',20,'draft','awaiting-approval','no','','in-stock','',''])];assert.equal(ctx.readMaster_().length,500);master.data.push(['extra',url]);assert.throws(()=>ctx.readMaster_(),/row limit/);master.data=saved;});
+check('1000 source rows accepted and 1001 rejected',()=>{const saved=master.data;master.data=[masterHeaders,...Array.from({length:1000},(_,i)=>['ID'+i,url,'Widget',20,'draft','awaiting-approval','no','','in-stock','',''])];assert.equal(ctx.readMaster_().length,1000);master.data.push(['extra',url]);assert.throws(()=>ctx.readMaster_(),/row limit/);master.data=saved;});
 console.log(`${count} verifier checks passed`);
 check('new gifts need description evidence before publication',()=>assert.equal(ctx.websiteRows_([{...publishMaster,description_basis:''}],[publishObservation],Date.now()).length,0));
 check('replacement respects original strict budget band',()=>{assert.equal(ctx.replacementCeiling_({budget_band:'under-10'}),10);assert.equal(ctx.replacementCeiling_({observed_price_gbp:10}),20);});
@@ -88,3 +88,10 @@ check('failed slot is replaced with fresh approved copy and audit trail',()=>{
  sheets.splice(sheets.indexOf(pool),1);master.data=saved;
 });
 console.log(`${count} complete verifier checks passed`);
+
+check('1000 gift queue compactly round trips',()=>{const ids=Array.from({length:1000},(_,i)=>'CMB-GIFT-'+String(i+1).padStart(4,'0'));const encoded=ctx.encodeRun_({ids});assert.ok(encoded.length<8000);assert.equal(JSON.stringify(ctx.decodeRun_(encoded).ids),JSON.stringify(ids));});
+check('owned designs are never replaced by another retailer',()=>assert.equal(ctx.tryReplace_({product_url:'https://utilitynestpro.etsy.com/uk/listing/4366450629/clip'}, {status:'blocked'}, {}),null));
+
+check('Etsy requires explicit fixed Clip Only price and in-stock matched identity',()=>{const source='https://www.etsy.com/uk/listing/4366450629/clip';const row={product_url:'https://utilitynestpro.etsy.com/uk/listing/4366450629/clip',source_url:source,product_name:'Widget'};const html=JSON.stringify({...base,url:source,offers:{'@type':'AggregateOffer',lowPrice:'9.99',priceCurrency:'GBP',availability:'https://schema.org/InStock'}});const page='<script type="application/ld+json">'+html+'</script>UtilityNestPro<select><option>Clip Only (£9.99)</option><option>With Gift Box (£11.99)</option></select>';const o=ctx.parseUtilityNest_(page,row);assert.equal(o.status,'verified');assert.equal(o.price,9.99);assert.equal(o.isFrom,'no');assert.equal(ctx.parseUtilityNest_(page.replace('Clip Only (£9.99)','Choose a clip'),row).status,'variant-review');assert.equal(ctx.parseUtilityNest_(page.replace('InStock','OutOfStock'),row).status,'variant-review');});
+
+check('ImageObject arrays expose contentURL without changing product identity checks',()=>{const data={...base,image:[{'@type':'ImageObject',contentURL:'https://i.etsystatic.com/example.jpg'}]};const o=ctx.parseProduct_('<script type="application/ld+json">'+JSON.stringify(data)+'</script>',url,'Widget');assert.equal(o.status,'verified');assert.equal(o.image,'https://i.etsystatic.com/example.jpg');});

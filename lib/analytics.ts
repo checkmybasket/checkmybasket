@@ -53,7 +53,7 @@ export function trackGiftInteraction(event: "gift_retailer_click" | "gift_filter
     if ((path !== "/gifts" && !category && !guide) || analytics[`ga-disable-${MEASUREMENT_ID}`] || !analytics.gtag) return;
     let parameters: Record<string, string | number>;
     if (event === "gift_retailer_click") {
-      const retailers = ["Dunelm", "Not On The High Street", "Waterstones", "John Lewis", "The Little Botanical", "Cadbury Gifts Direct", "Craft Buddy", "MORiSH"];
+      const retailers = ["Dunelm", "Not On The High Street", "Waterstones", "John Lewis", "The Little Botanical", "Cadbury Gifts Direct", "Craft Buddy", "MORiSH", "UtilityNestPro (Etsy)"];
       if (!retailers.includes(input.retailer)) return;
       parameters = { retailer: input.retailer, gift_category: category || guide?.category || "all" };
     } else if (event === "gift_filters_applied") {

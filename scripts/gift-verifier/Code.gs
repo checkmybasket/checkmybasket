@@ -3,8 +3,8 @@
 const CMB = Object.freeze({
   spreadsheetId: '1nTrzLmCH7chbSbhi_SAQx2tP8i2sNFckIWzGLkL3Esw',
   masterSheetId: 825244673,
-  version: '1.2.0', batchSize: 6, maxRows: 500,
-  hosts: ['www.waterstones.com', 'www.notonthehighstreet.com', 'www.johnlewis.com', 'thelittlebotanical.com', 'www.dunelm.com'],
+  version: '1.3.0', batchSize: 6, maxRows: 1000,
+  hosts: ['www.waterstones.com', 'www.notonthehighstreet.com', 'www.johnlewis.com', 'thelittlebotanical.com', 'www.dunelm.com', 'utilitynestpro.etsy.com', 'www.etsy.com'],
   current: 'CMB Verification', history: 'CMB History', runs: 'CMB Runs', guide: 'CMB Instructions', website: 'CMB Website Feed', reserve: 'CMB Replacement Pool', replacements: 'CMB Replacements'
 });
 const CMB_HEADERS = ['gift_id','product_url','attempted_at_utc','status','http_status','scraped_name','scraped_price_gbp','price_is_from','stock','scraped_image_url','evidence','changes_from_master','review_reasons','last_verified_price_gbp','last_verified_price_at_utc','run_id','scraper_version'];
@@ -112,8 +112,11 @@ function continueVerification() {
   } finally { lock.releaseLock(); }
 }
 
-function encodeRun_(run) { return JSON.stringify({...run, ids:run.ids.join('|')}); }
-function decodeRun_(raw) { const run=JSON.parse(raw); if(typeof run.ids==='string')run.ids=run.ids?run.ids.split('|'):[]; return run; }
+function encodeRun_(run) {
+  const compact=run.ids.every(id=>/^CMB-GIFT-\d{4}$/.test(id));
+  return JSON.stringify({...run,compactIds:compact,ids:run.ids.map(id=>compact?id.slice(9):id).join('|')});
+}
+function decodeRun_(raw) { const run=JSON.parse(raw); if(typeof run.ids==='string')run.ids=run.ids?run.ids.split('|'):[]; if(run.compactIds)run.ids=run.ids.map(id=>'CMB-GIFT-'+id); delete run.compactIds; return run; }
 
 function book_() {
   const ss = SpreadsheetApp.openById(CMB.spreadsheetId);
@@ -256,6 +259,11 @@ function robotsStatus_(url) {
 function scrapeProduct_(row) {
   const fail=(status,http,reason)=>({status,http,reasons:[reason],evidence:''});
   let url=row.product_url;parts_(url);
+  if(isUtilityNest_(row)) {
+    const source=String(row.source_url||'');
+    if(!source.startsWith('https://www.etsy.com/uk/listing/') || listingId_(source)!==listingId_(url))return fail('identity-mismatch','','Owned listing source does not match its Share & Save URL');
+    url=source;
+  }
   for(let n=0;n<4;n++) {
     const robots=robotsStatus_(url);if(robots!=='allowed')return fail(robots,'','Crawl policy does not permit this fetch');
     const response=rawFetch_(url),code=response.getResponseCode();
@@ -269,9 +277,54 @@ function scrapeProduct_(row) {
     if(code!==200)return fail('http-error',code,'Retailer did not return a successful page');
     const html=response.getContentText();
     if(html.length>3000000)return fail('response-too-large',code,'Page exceeds parser size limit');
-    return {...applyMasterContext_(parseProduct_(html,row.product_url,row.product_name),row),http:code};
+    return {...applyMasterContext_(isUtilityNest_(row)?parseUtilityNest_(html,row):parseProduct_(html,row.product_url,row.product_name),row),http:code};
   }
   return fail('redirect-error','','Too many redirects');
+}
+
+function listingId_(url) {return (String(url).match(/\/listing\/(\d+)(?:\/|$)/)||[])[1]||'';}
+function isUtilityNest_(row) {return /^https:\/\/utilitynestpro\.etsy\.com\/uk\/listing\/\d+\//.test(String(row.product_url));}
+function parseUtilityNest_(html,row) {
+  const fail=reason=>({status:'variant-review',stock:'unknown',reasons:[reason],evidence:''});
+  if(!listingId_(row.product_url)||!html.includes(listingId_(row.product_url))||!/UtilityNestPro/i.test(html))return fail('Owned Etsy listing identity not confirmed');
+  // A minimum AggregateOffer is insufficient. Require the explicit Clip Only option and a matching in-stock Product.
+  const canonical=(html.match(/<link\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["']/i)||[])[1];
+  const identity=canonical&&listingId_(canonical)===listingId_(row.product_url)?canonical:row.source_url;
+  const base=parseProduct_(html,identity,row.product_name);
+  if(base.stock!=='in-stock'||!base.image||base.currency!=='GBP')return fail('Etsy stock, GBP currency or product image not confirmed');
+  const options=[...html.matchAll(/<option\b[^>]*>([\s\S]*?)<\/option>/gi)].map(m=>text_(m[1]));
+  const prices=options.map(t=>t.match(/^Clip Only\s*\(£(\d+\.\d{2})\)$/i)).filter(Boolean).map(m=>Number(m[1]));
+  if(prices.length!==1||!Number.isFinite(prices[0])||prices[0]<=0)return fail('Exact Clip Only option price not available; do not infer from a starting price');
+  return {...base,status:'verified',price:prices[0],isFrom:'no',reasons:[],evidence:JSON.stringify({method:'Matched Etsy Product plus explicit Clip Only GBP option',listing:listingId_(row.product_url),price:prices[0],stock:base.stock})};
+}
+// Read-only smoke check; never changes approved rows or pretends a blocked fetch succeeded.
+function testUtilityNestFetch() {
+  const row=readMaster_().find(isUtilityNest_);
+  if(!row)throw Error('No UtilityNestPro row exists');
+  console.log(JSON.stringify(scrapeProduct_(row)));
+
+}
+
+// Explicit owner-shop refresh uses the same scraper and freshness rules as the daily cycle.
+function verifyUtilityNestProducts() {
+  const lock=LockService.getScriptLock();
+  if(!lock.tryLock(1000))throw Error('Verifier busy; retry shortly.');
+  try {
+    const rows=readMaster_().filter(isUtilityNest_);
+    const run={id:Utilities.getUuid(),started:new Date().toISOString(),ids:rows.map(r=>r.gift_id),cursor:0};
+    let verified=0;
+    for(const row of rows){
+      let o;try{o=scrapeProduct_(row);}catch(e){o={status:'fetch-error',reasons:['Owned listing fetch failed; no guessed values'],evidence:''};}
+      const fresh=readMaster_().find(r=>r.gift_id===row.gift_id);
+      if(!fresh||fresh.product_url!==row.product_url)continue;
+      saveObservation_(fresh,o,run);run.cursor++;
+      if(o.status==='verified')verified++;
+      console.log(JSON.stringify({id:row.gift_id,status:o.status,price:o.price,stock:o.stock}));
+      Utilities.sleep(1200);
+    }
+    syncWebsiteFeed_();writeRun_(run,'complete',verified+' of '+rows.length+' owned listings freshly verified');
+    console.log('UtilityNestPro refresh: '+verified+' / '+rows.length+' verified.');
+  } finally {lock.releaseLock();}
 }
 function applyMasterContext_(o,row) {
   if (o.price!==undefined && /\bfrom\b/i.test(String(row.price_notes||''))) {
@@ -315,7 +368,8 @@ function parseProduct_(html,url,expectedName) {
   const stocks={InStock:'in-stock',OutOfStock:'out-of-stock',SoldOut:'out-of-stock',Discontinued:'discontinued',PreOrder:'preorder',BackOrder:'backorder',MadeToOrder:'made-to-order',LimitedAvailability:'limited-availability'};
   const stock=stocks[o.stock.split('/').pop()]||'unknown';if(stock==='unknown')reasons.push('Stock not stated in structured offer');
   if(o.isFrom)reasons.push('Starting price; selected variant requires review');
-  const image=typeof p.image==='string'?p.image:Array.isArray(p.image)?p.image[0]:p.image?.url;
+  const firstImage=Array.isArray(p.image)?p.image[0]:p.image;
+  const image=typeof firstImage==='string'?firstImage:firstImage?.url||firstImage?.contentURL;
   const safeImage=typeof image==='string'&&/^https:\/\//i.test(image)?image:'';
   if(!safeImage)reasons.push('Image URL not found');
   return {status:reasons.length?'partial':'verified',name:text_(p.name),price:goodPrice?price:undefined,currency:o.currency,isFrom:o.isFrom?'yes':'no',stock,image:safeImage,
@@ -345,6 +399,8 @@ function replacementFailure_(o) {
     ||(o.status==='blocked'&&Number(o.http)!==429);
 }
 function tryReplace_(master,o,run) {
+  // Owned shop designs must remain their own rows; failed checks hide them, never substitute another seller.
+  if(isUtilityNest_(master))return null;
   if (master.publication_status!=='published'||master.approval_status!=='approved') return null;
   const props=PropertiesService.getScriptProperties(),key='CMB_FAILED_'+master.gift_id;
   if(o.status==='verified'&&o.stock==='in-stock'&&o.isFrom==='no'){props.deleteProperty(key);return null;}
@@ -418,7 +474,7 @@ function websiteRows_(masters, observations, now) {
     const image=m.image_approved==='yes'&&/^https:\/\//.test(String(m.image_url))?m.image_url:'';
     // Affiliate links will be added through a separate reviewed integration. Direct links are used for now.
     return [[m.gift_id,title,Math.round(o[6]*100),m.retailer,m.editorial_tags||'',m.product_url,image,description,
-      'Delivery extra. Check the retailer for current prices and charges.',m.categories||m.primary_category||'',m.recipient_interests||'',new Date(checked).toISOString()]];
+      isUtilityNest_(m)?'Clip only. Gift box costs extra; confirm personalisation, delivery and total on Etsy.':'Delivery extra. Check the retailer for current prices and charges.',m.categories||m.primary_category||'',m.recipient_interests||'',new Date(checked).toISOString()]];
   });
 }
 function syncWebsiteFeed_() {

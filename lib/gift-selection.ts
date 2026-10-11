@@ -5,7 +5,7 @@ export type GiftProduct = {
   image: string; description: string; deliveryNote: string; categories: string[];
   interests?: string[]; priceCheckedAt?: string;
 };
-export const GIFT_INTERESTS = ["food", "chocolate", "coffee", "tea", "crafts", "games", "puzzles", "books", "reading", "technology", "stationery", "plants", "home", "travel"];
+export const GIFT_INTERESTS = ["food", "chocolate", "coffee", "tea", "crafts", "games", "puzzles", "books", "reading", "technology", "stationery", "plants", "home", "travel", "accessories"];
 export type GiftFilters = { category?: string; budget?: number; interest?: string };
 export function giftFiltersHref(filters: GiftFilters, category?: string, page?: number) {
   const query = new URLSearchParams();
