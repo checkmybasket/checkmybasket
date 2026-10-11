@@ -6,6 +6,7 @@ import { Gift, ChevronRight, ShieldOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GiftFiltersForm } from "@/components/gift-filters";
 import { readGiftFilters, selectGifts, londonDay } from "@/lib/gift-selection";
+import { GiftResults } from "@/components/gift-results";
 import { GiftCard } from "@/components/gift-card";
 
 export const metadata = {
@@ -17,7 +18,8 @@ export const metadata = {
 export default async function GiftsPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const query = await searchParams;
   const filters = readGiftFilters(query);
-  const products = selectGifts(await getAvailableGifts(), filters);
+  const catalogue = await getAvailableGifts();
+  const products = selectGifts(catalogue, filters);
   const day = londonDay();
   const pages = Math.max(1, Math.ceil(products.length / 12));
   const requestedPage = typeof query.page === "string" && /^\d+$/.test(query.page) ? Number(query.page) : 1;
@@ -37,7 +39,10 @@ export default async function GiftsPage({ searchParams }: { searchParams: Promis
           <h1 className="text-3xl sm:text-4xl font-bold mb-3 font-display">Gift ideas for every budget</h1>
           <p className="text-[var(--cmb-text-secondary)]">Curated picks from UK shops. No ads — some links earn us a small commission.</p>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
+        <GiftFiltersForm filters={filters}/>
+        <details className="mb-6">
+          <summary className="min-h-11 cursor-pointer py-2 font-semibold text-sm">Browse gift collections</summary>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-3">
           {GIFT_CATEGORIES.map(cat => (
             <Link key={cat.slug} href={`/gifts/${cat.slug}`} className="rounded-2xl p-4 border transition-all duration-150 hover:scale-105 group bg-[var(--cmb-surface)] border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style={{ background:"rgba(27,67,50,0.08)" }}>
@@ -49,11 +54,9 @@ export default async function GiftsPage({ searchParams }: { searchParams: Promis
             </Link>
           ))}
         </div>
-        <GiftFiltersForm filters={filters}/>
-        <h2 className="font-display text-xl font-bold mb-2">Today’s gift ideas</h2>
-        <p className="text-sm text-[var(--cmb-text-secondary)] mb-5">Picks rotate daily. Choose a budget and interest to find ideas for your recipient.</p>
+        </details>
+        <GiftResults products={products} catalogue={catalogue} filters={filters} page={page} pageSize={12}/>
         <p className="sr-only" data-gift-day={day}>Gift selection for {day}</p>
-        {products.length === 0 ? <p className="mb-8">No matching gifts yet. Try a different interest or budget.</p> : null}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
           {products.slice((page - 1) * 12, page * 12).map(item => <GiftCard key={item.id} {...item}/>)}
         </div>

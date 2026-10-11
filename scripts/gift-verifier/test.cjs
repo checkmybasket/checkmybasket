@@ -38,13 +38,13 @@ class Sheet {
  constructor(name,id,data=[]){this.name=name;this.id=id;this.data=data;}
  getSheetId(){return this.id;}getId(){return this.id;}
  getLastRow(){return this.data.length;}getDataRange(){return this.getRange(1,1,Math.max(1,this.data.length),Math.max(1,this.data[0]?.length||1));}
- getRange(row,col,n=1,m=1){const s=this;return {getValues(){return Array.from({length:n},(_,i)=>Array.from({length:m},(_,j)=>s.data[row+i-1]?.[col+j-1]??''));},setValues(a){a.forEach((r,i)=>{s.data[row+i-1]??=[];r.forEach((v,j)=>s.data[row+i-1][col+j-1]=v);});return this;},clearContent(){for(let i=0;i<n;i++)for(let j=0;j<m;j++)if(s.data[row+i-1])s.data[row+i-1][col+j-1]='';return this;},setBackground(){return this;},setFontColor(){return this;},setFontWeight(){return this;},setWrap(){return this;},setVerticalAlignment(){return this;}};}
+ getRange(row,col,n=1,m=1){const s=this;return {getValues(){return Array.from({length:n},(_,i)=>Array.from({length:m},(_,j)=>s.data[row+i-1]?.[col+j-1]??''));},setValues(a){a.forEach((r,i)=>{s.data[row+i-1]??=[];r.forEach((v,j)=>s.data[row+i-1][col+j-1]=v);});return this;},setRichTextValue(v){s.data[row-1]??=[];s.data[row-1][col-1]=v.text;return this;},clearContent(){for(let i=0;i<n;i++)for(let j=0;j<m;j++)if(s.data[row+i-1])s.data[row+i-1][col+j-1]='';return this;},setBackground(){return this;},setFontColor(){return this;},setFontWeight(){return this;},setWrap(){return this;},setVerticalAlignment(){return this;}};}
  getMaxRows(){return 1000;}insertRowsAfter(){}setFrozenRows(){}setHiddenGridlines(){}setColumnWidths(){}setColumnWidth(){}setRowHeight(){}setRowHeights(){}appendRow(r){this.data.push(r);}
 }
 const masterHeaders=['gift_id','product_url','product_name','observed_price_gbp','publication_status','approval_status','image_approved','price_notes','availability','image_url','issues_for_approval'];
 const master=new Sheet('master',825244673,[masterHeaders,...Array.from({length:8},(_,i)=>['ID'+i,url,'Widget',20,'draft','awaiting-approval','no','','in-stock','',''])]);
 const originalMaster=JSON.stringify(master.data);const sheets=[master],properties=new Map(),triggers=[];
-ctx.SpreadsheetApp={openById(id){assert.equal(id,'1nTrzLmCH7chbSbhi_SAQx2tP8i2sNFckIWzGLkL3Esw');return {getId:()=>id,getSheets:()=>sheets,getSheetByName:n=>sheets.find(s=>s.name===n),insertSheet(n){const s=new Sheet(n,100+sheets.length);sheets.push(s);return s;}};}};
+ctx.SpreadsheetApp={newRichTextValue(){return {setText(t){this.text=t;return this;},setLinkUrl(u){this.url=u;return this;},build(){return this;}};},openById(id){assert.equal(id,'1nTrzLmCH7chbSbhi_SAQx2tP8i2sNFckIWzGLkL3Esw');return {getId:()=>id,getSheets:()=>sheets,getSheetByName:n=>sheets.find(s=>s.name===n),insertSheet(n){const s=new Sheet(n,100+sheets.length);sheets.push(s);return s;}};}};
 ctx.LockService={getScriptLock:()=>({waitLock(){},tryLock(){return true;},releaseLock(){}})};
 ctx.PropertiesService={getScriptProperties:()=>({getProperty:k=>properties.get(k)||null,setProperty(k,v){properties.set(k,v);},deleteProperty(k){properties.delete(k);}})};
 let uuid=0;ctx.Utilities={getUuid:()=>`run-${++uuid}`,sleep(){}};
@@ -62,7 +62,7 @@ check('stop removes only verifier triggers',()=>{const other={getHandlerFunction
 console.log(`${count} parser, scheduling and data-preservation checks passed`);
 
 check('500-row queue fits property and round trips',()=>{const run={id:'test',ids:Array.from({length:500},(_,i)=>'CMB-GIFT-'+String(i).padStart(4,'0')),cursor:0};const encoded=ctx.encodeRun_(run);assert.ok(encoded.length<8000);assert.equal(ctx.decodeRun_(encoded).ids.length,500);});
-const publishMaster={gift_id:'P',publication_status:'published',approval_status:'approved',approved_by:'Owner',approved_date:'2026-10-10',product_url:url,product_name:'Widget',short_description:'A widget',retailer:'Shop',image_approved:'no',categories:'colleague',recipient_interests:'technology'};
+const publishMaster={gift_id:'P',publication_status:'published',approval_status:'approved',approved_by:'Owner',approved_date:'2026-10-10',product_url:url,product_name:'Widget',short_description:'A widget',description_basis:'Editorial product facts',retailer:'Shop',image_approved:'no',categories:'colleague',recipient_interests:'technology'};
 const publishObservation=['P',url,new Date().toISOString(),'verified',200,'Widget',19.99,'no','in-stock'];
 check('publication requires explicit approval and live status',()=>{assert.equal(ctx.websiteRows_([{...publishMaster,approval_status:'awaiting-approval'}],[publishObservation],Date.now()).length,0);assert.equal(ctx.websiteRows_([{...publishMaster,publication_status:'draft'}],[publishObservation],Date.now()).length,0);});
 check('publication requires fresh exact price and stock',()=>{const stale=[...publishObservation];stale[2]='2020-01-01';assert.equal(ctx.websiteRows_([publishMaster],[stale],Date.now()).length,0);const blocked=[...publishObservation];blocked[3]='blocked';assert.equal(ctx.websiteRows_([publishMaster],[blocked],Date.now()).length,0);});
@@ -73,3 +73,18 @@ check('interrupted fetch advances and pauses slow host for cycle',()=>{const run
 console.log(`${count} total verifier checks passed`);
 check('500 source rows accepted and 501 rejected',()=>{const saved=master.data;master.data=[masterHeaders,...Array.from({length:500},(_,i)=>['ID'+i,url,'Widget',20,'draft','awaiting-approval','no','','in-stock','',''])];assert.equal(ctx.readMaster_().length,500);master.data.push(['extra',url]);assert.throws(()=>ctx.readMaster_(),/row limit/);master.data=saved;});
 console.log(`${count} verifier checks passed`);
+check('new gifts need description evidence before publication',()=>assert.equal(ctx.websiteRows_([{...publishMaster,description_basis:''}],[publishObservation],Date.now()).length,0));
+check('replacement respects original strict budget band',()=>{assert.equal(ctx.replacementCeiling_({budget_band:'under-10'}),10);assert.equal(ctx.replacementCeiling_({observed_price_gbp:10}),20);});
+const reserveFixture={...publishMaster,publication_status:'reserve',short_description:'A thoughtfully selected useful gift for a recipient who enjoys practical accessories.',categories:'colleague',recipient_interests:'stationery',safety_notes:'Review retailer instructions',observed_price_gbp:9.99};
+check('replacement excludes missing copy, unapproved, used and over-budget products',()=>{assert.equal(ctx.replacementEligible_(reserveFixture,new Set(),10),true);for(const r of [{...reserveFixture,description_basis:''},{...reserveFixture,short_description:''},{...reserveFixture,approval_status:'awaiting-approval'},{...reserveFixture,observed_price_gbp:10}])assert.equal(ctx.replacementEligible_(r,new Set(),10),false);assert.equal(ctx.replacementEligible_(reserveFixture,new Set([ctx.normalUrl_(url)]),10),false);});
+check('temporary timeout and rate-limit differ from confirmed blocked or missing products',()=>{assert.equal(ctx.replacementFailure_({status:'host-timeout'}),false);assert.equal(ctx.replacementFailure_({status:'blocked',http:429}),false);assert.equal(ctx.replacementFailure_({status:'blocked',http:403}),true);assert.equal(ctx.replacementFailure_({status:'missing-page'}),true);});
+check('failed slot is replaced with fresh approved copy and audit trail',()=>{
+ const saved=master.data; const h=Object.keys({...reserveFixture,gift_id:'R',gift_name:'Reserve widget'});
+ const old={...reserveFixture,gift_id:'slot',observed_price_gbp:19.99,budget_band:'under-20',publication_status:'published',product_url:'https://www.johnlewis.com/old',gift_name:'Old',product_name:'Old'};
+ master.data=[h,h.map(k=>old[k]??'')];
+ const pool=new Sheet('CMB Replacement Pool',999,[h,h.map(k=>({...reserveFixture,gift_id:'R',gift_name:'Reserve widget'})[k]??'')]);sheets.push(pool);
+ const r=ctx.tryReplace_(ctx.readMaster_()[0],{status:'blocked',http:403},{started:'2026-10-11T08:00:00Z'});
+ assert.equal(r.master.gift_id,'slot');assert.equal(r.master.product_url,url);assert.equal(r.master.short_description,reserveFixture.short_description);assert.equal(pool.data[1][h.indexOf('publication_status')],'used');assert.equal(sheets.find(s=>s.name==='CMB Replacements').data[1][2],old.product_url);
+ sheets.splice(sheets.indexOf(pool),1);master.data=saved;
+});
+console.log(`${count} complete verifier checks passed`);

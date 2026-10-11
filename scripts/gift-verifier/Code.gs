@@ -1,11 +1,11 @@
 // Standalone Google-hosted verifier, pinned to one spreadsheet.
-// Publishes only the approved public product feed. No emails, secrets or affiliate changes.
+// Publishes the approved public feed and replaces failed products only from an approved reserve.
 const CMB = Object.freeze({
   spreadsheetId: '1nTrzLmCH7chbSbhi_SAQx2tP8i2sNFckIWzGLkL3Esw',
   masterSheetId: 825244673,
-  version: '1.1.0', batchSize: 6, maxRows: 500,
+  version: '1.2.0', batchSize: 6, maxRows: 500,
   hosts: ['www.waterstones.com', 'www.notonthehighstreet.com', 'www.johnlewis.com', 'thelittlebotanical.com', 'www.dunelm.com'],
-  current: 'CMB Verification', history: 'CMB History', runs: 'CMB Runs', guide: 'CMB Instructions', website: 'CMB Website Feed'
+  current: 'CMB Verification', history: 'CMB History', runs: 'CMB Runs', guide: 'CMB Instructions', website: 'CMB Website Feed', reserve: 'CMB Replacement Pool', replacements: 'CMB Replacements'
 });
 const CMB_HEADERS = ['gift_id','product_url','attempted_at_utc','status','http_status','scraped_name','scraped_price_gbp','price_is_from','stock','scraped_image_url','evidence','changes_from_master','review_reasons','last_verified_price_gbp','last_verified_price_at_utc','run_id','scraper_version'];
 
@@ -56,7 +56,7 @@ function continueVerification() {
   let run;
   try {
     const raw = props.getProperty('CMB_QUEUE'); if (!raw) { syncWebsiteFeed_(); return; }
-    run = decodeRun_(raw); ensureSheets_();
+    run = decodeRun_(raw); delete run.replacementAttempted; ensureSheets_();
     const liveRows = readMaster_();
     const byId = Object.fromEntries(liveRows.map(r => [r.gift_id,r]));
     const started=Date.now();
@@ -86,6 +86,10 @@ function continueVerification() {
       if (!fresh || fresh.product_url !== row.product_url) {
         observation = {status:'master-changed',http:'',reasons:['Product URL changed during fetch; check next cycle'],evidence:''};
         if (fresh) row.product_url = fresh.product_url;
+      }
+      if (fresh && fresh.product_url === row.product_url && observation.status !== 'master-changed') {
+        const replacement = tryReplace_(fresh, observation, run);
+        if (replacement) { Object.assign(row, replacement.master); observation = replacement.observation; }
       }
       saveObservation_(row, observation, run);
       // Checkpoint every row. Retried history writes are deduplicated by run+gift ID.
@@ -320,6 +324,85 @@ function parseProduct_(html,url,expectedName) {
 
 
 const WEBSITE_HEADERS=['id','title','price','shop','tags','url','image','description','deliveryNote','categories','interests','priceCheckedAt'];
+const REPLACEMENT_HEADERS=['replaced_at_utc','gift_id','old_product_url','new_product_url','failure_reason','old_master_json','reserve_id','policy_version'];
+function replacementCeiling_(m) {
+  const ceilings={'under-10':10,'under-20':20,'under-30':30,'under-50':50};
+  if (ceilings[m.budget_band]) return ceilings[m.budget_band];
+  const price=Number(m.observed_price_gbp);
+  return price>0&&price<50 ? [10,20,30,50].find(p=>price<p) : 50;
+}
+function replacementEligible_(m, usedUrls, ceiling) {
+  const price=Number(m.observed_price_gbp);
+  return m.publication_status==='reserve'&&m.approval_status==='approved'&&!!m.approved_by&&!!m.approved_date
+    &&String(m.short_description||'').trim().length>=40&&!!String(m.description_basis||'').trim()
+    &&!!m.categories&&!!m.recipient_interests&&!!m.safety_notes
+    &&price>0&&price<ceiling&&!usedUrls.has(normalUrl_(m.product_url));
+}
+function replacementFailure_(o) {
+  // Timeouts/rate limiting are transient: require failure in two separate daily cycles.
+  const confirmed=['robots-unavailable','robots-disallowed','missing-page','identity-mismatch','variant-review','unverified','partial'];
+  return confirmed.includes(o.status)||['out-of-stock','discontinued'].includes(o.stock)
+    ||(o.status==='blocked'&&Number(o.http)!==429);
+}
+function tryReplace_(master,o,run) {
+  if (master.publication_status!=='published'||master.approval_status!=='approved') return null;
+  const props=PropertiesService.getScriptProperties(),key='CMB_FAILED_'+master.gift_id;
+  if(o.status==='verified'&&o.stock==='in-stock'&&o.isFrom==='no'){props.deleteProperty(key);return null;}
+  const previous=props.getProperty(key),day=run.started.slice(0,10);
+  if(!replacementFailure_(o)) {
+    if(!['fetch-timeout','host-timeout','fetch-error','http-error','blocked'].includes(o.status))return null;
+    if(!previous){props.setProperty(key,day);return null;}
+    if(previous===day)return null;
+  }
+  const ss=book_(),reserve=ss.getSheetByName(CMB.reserve);if(!reserve)return null;
+  const grid=reserve.getDataRange().getValues(),headers=grid.shift().map(String);
+  const mainSheet=ss.getSheets().find(s=>s.getSheetId()===CMB.masterSheetId);
+  const mainHeaders=mainSheet.getRange(1,1,1,headers.length).getValues()[0].map(String);
+  if(JSON.stringify(headers)!==JSON.stringify(mainHeaders))throw Error('Reserve schema differs from master');
+  const live=readMaster_(),current=live.find(m=>m.gift_id===master.gift_id);
+  if(!current||current.product_url!==master.product_url||current.approval_status!=='approved'||current.publication_status!=='published')return null;
+  const used=new Set(live.map(m=>normalUrl_(m.product_url))),ceiling=replacementCeiling_(current);
+  const interests=String(current.recipient_interests||'').split(';');
+  const candidates=grid.map((values,index)=>({index,master:Object.fromEntries(headers.map((h,i)=>[h,values[i]??'']))}))
+    .filter(c=>replacementEligible_(c.master,used,ceiling))
+    .sort((a,b)=>score(b.master)-score(a.master));
+  function score(m){return (m.primary_category===current.primary_category?100:0)+String(m.recipient_interests).split(';').filter(i=>interests.includes(i)).length*10;}
+  // One candidate per worker batch: retailer failure cannot cause a request burst.
+  const candidate=candidates[0];if(!candidate||run.replacementAttempted)return null;
+  run.replacementAttempted=true;
+  function flagReserve() {
+    const freshValues=reserve.getRange(candidate.index+2,1,1,headers.length).getValues()[0];
+    if(JSON.stringify(freshValues)===JSON.stringify(grid[candidate.index]))reserve.getRange(candidate.index+2,headers.indexOf('publication_status')+1).setValues([['needs-review']]);
+  }
+  let checked;try{checked=scrapeProduct_(candidate.master);}catch(e){flagReserve();return null;}
+  if(checked.status!=='verified'||checked.stock!=='in-stock'||checked.isFrom!=='no'||checked.currency!=='GBP'||!(checked.price>0&&checked.price<ceiling)) {
+    flagReserve();return null;
+  }
+  // Re-read both records after I/O. A user's changed description/approval must not be overwritten.
+  const latest=readMaster_().find(m=>m.gift_id===master.gift_id);
+  const poolValues=reserve.getRange(candidate.index+2,1,1,headers.length).getValues()[0];
+  if(JSON.stringify(latest)!==JSON.stringify(current)||JSON.stringify(poolValues)!==JSON.stringify(grid[candidate.index]))return null;
+  const band=checked.price<10?'under-10':checked.price<20?'under-20':checked.price<30?'under-30':'under-50';
+  const categories=String(candidate.master.categories).split(';').filter(c=>!/^under-\d+$/.test(c));categories.push(band);
+  const replacement={...candidate.master,gift_id:current.gift_id,publication_status:'published',observed_price_gbp:checked.price,budget_band:band,categories:categories.join(';'),
+    primary_category:/^under-\d+$/.test(String(candidate.master.primary_category))?band:candidate.master.primary_category,
+    estimated_price_min_gbp:checked.price,estimated_price_max_gbp:checked.price,date_checked:day,source_checked_date:day,last_updated:day,
+    checked_by:'Daily verifier; owner-authorised replacement policy. Fresh exact GBP price and stock check.'};
+  const log=managedSheet_(CMB.replacements,REPLACEMENT_HEADERS);
+  log.appendRow([new Date().toISOString(),current.gift_id,current.product_url,replacement.product_url,o.status,
+    JSON.stringify(current),candidate.master.gift_id,CMB.version].map(safeCell_));
+  const row=mainSheet.getDataRange().getValues().findIndex((r,i)=>i>0&&String(r[0])===current.gift_id)+1;
+  if(row<2)throw Error('Replacement slot disappeared');
+  mainSheet.getRange(row,1,1,headers.length).setValues([headers.map(h=>safeCell_(replacement[h]))]);
+  // Replace any old explicit hyperlink target together with the new product value.
+  ['product_url','source_url','image_url'].forEach(h=>{
+    const value=String(replacement[h]||''),column=headers.indexOf(h)+1;
+    if(column>0&&/^https:\/\//.test(value))mainSheet.getRange(row,column).setRichTextValue(SpreadsheetApp.newRichTextValue().setText(value).setLinkUrl(value).build());
+  });
+  reserve.getRange(candidate.index+2,headers.indexOf('publication_status')+1).setValues([['used']]);
+  props.deleteProperty(key);
+  return {master:replacement,observation:checked};
+}
 function websiteRows_(masters, observations, now) {
   const byId=Object.fromEntries(observations.map(r=>[r[0],r]));
   return masters.flatMap(m=>{
@@ -330,7 +413,7 @@ function websiteRows_(masters, observations, now) {
     if(typeof o[6]!=='number'||o[6]<=0||Math.abs(o[6]*100-Math.round(o[6]*100))>0.00001)return [];
     try{parts_(m.product_url);}catch(e){return [];}
     const title=String(m.product_name||m.gift_name||'').trim(),description=String(m.short_description||'').trim();
-    if(!title||!description||!m.retailer)return [];
+    if(!title||!description||!String(m.description_basis||'').trim()||!m.retailer)return [];
     // Display the owner's approved master image. Permission evidence remains a separate record.
     const image=m.image_approved==='yes'&&/^https:\/\//.test(String(m.image_url))?m.image_url:'';
     // Affiliate links will be added through a separate reviewed integration. Direct links are used for now.
@@ -341,6 +424,14 @@ function websiteRows_(masters, observations, now) {
 function syncWebsiteFeed_() {
   const sheet=managedSheet_(CMB.website,WEBSITE_HEADERS);
   const rows=websiteRows_(readMaster_(),managedSheet_(CMB.current,CMB_HEADERS).getDataRange().getValues().slice(1),Date.now());
-  const old=sheet.getLastRow();if(old>1)sheet.getRange(2,1,old-1,WEBSITE_HEADERS.length).clearContent();
-  if(rows.length)sheet.getRange(2,1,rows.length,WEBSITE_HEADERS.length).setValues(rows.map(r=>r.map(safeCell_))).setWrap(true).setVerticalAlignment('top');
+  // One values write avoids exposing an empty intermediate feed while Google republishes.
+  const height=Math.max(rows.length,sheet.getLastRow()-1);
+  if(height)sheet.getRange(2,1,height,WEBSITE_HEADERS.length).setValues(Array.from({length:height},(_,i)=>
+    i<rows.length?rows[i].map(safeCell_):WEBSITE_HEADERS.map(()=>''))).setWrap(true).setVerticalAlignment('top');
+}
+function refreshWebsiteFeed() {
+  const lock=LockService.getScriptLock();
+  if(!lock.tryLock(1000))throw Error('Daily verifier is busy; retry the feed refresh shortly.');
+  try {syncWebsiteFeed_();console.log('Approved website feed refreshed.');}
+  finally {lock.releaseLock();}
 }

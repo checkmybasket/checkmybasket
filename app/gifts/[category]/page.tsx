@@ -7,6 +7,7 @@ import { Gift, ChevronLeft, ShieldOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GiftFiltersForm } from "@/components/gift-filters";
 import { readGiftFilters, selectGifts, londonDay } from "@/lib/gift-selection";
+import { GiftResults } from "@/components/gift-results";
 import { GiftCard } from "@/components/gift-card";
 import { notFound } from "next/navigation";
 
@@ -51,25 +52,18 @@ export default async function CategoryPage({ params, searchParams }: { params: P
           <h1 className="text-3xl sm:text-4xl font-bold mb-2 font-display">{cat.heading}</h1>
           <p className="text-[var(--cmb-text-secondary)]">{cat.desc}</p>
         </div>
-        <div className="flex gap-2 overflow-x-auto pb-2 mb-8">
+        <GiftFiltersForm filters={filters} category={category}/>
+        <div className="flex gap-2 overflow-x-auto pb-2 mb-5" aria-label="Other gift collections">
           {GIFT_CATEGORIES.filter(cat => cat.slug !== category).map(({ slug, label }) => (
             <Link key={slug} href={`/gifts/${slug}`}
               className="flex-shrink-0 rounded-full px-4 py-2 text-sm font-medium border transition-all duration-150 bg-[var(--cmb-surface)] border-[var(--cmb-border)] text-[var(--cmb-text-secondary)]">{label}</Link>
           ))}
         </div>
-        <GiftFiltersForm filters={filters} category={category}/>
-        <p className="text-sm text-[var(--cmb-text-secondary)] mb-5" data-gift-day={londonDay()}>Gift ideas rotate daily within this collection.</p>
-        {products.length === 0 ? (
-          <div className="rounded-2xl border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-8 text-center mb-10">
-            <h2 className="font-display text-xl font-bold mb-2">{catalogue.length ? "No matching gifts yet" : "More gift ideas coming soon"}</h2>
-            <p className="text-sm text-[var(--cmb-text-secondary)] mb-4">{catalogue.length ? "Try another interest or a higher budget." : "We’re finding gifts for this collection. In the meantime, explore our gifts by budget."}</p>
-            <Link href="/gifts/under-20" className="font-semibold text-[var(--cmb-primary)] underline underline-offset-4">Browse gifts under £20</Link>
-          </div>
-        ) : (
+        <p className="sr-only" data-gift-day={londonDay()}>Gift ideas rotate daily within this collection.</p>
+        <GiftResults products={products} catalogue={catalogue} filters={filters} category={category} page={page} pageSize={24}/>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
           {products.slice((page - 1) * 24, page * 24).map(item => <GiftCard key={item.id} size="lg" {...item}/>)}
         </div>
-        )}
         <GiftPagination page={page} pages={pages} filters={filters} category={category}/>
         <div className="rounded-2xl p-8 text-center mb-8 bg-[var(--cmb-primary)] shadow-[var(--shadow-lg)]">
           <h2 className="text-2xl font-bold mb-2 font-display text-[var(--cmb-text-inverse)]">Found the perfect gift?</h2>

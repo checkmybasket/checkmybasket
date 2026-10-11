@@ -7,6 +7,14 @@ export type GiftProduct = {
 };
 export const GIFT_INTERESTS = ["food", "chocolate", "coffee", "tea", "crafts", "games", "puzzles", "books", "reading", "technology", "stationery", "plants", "home", "travel"];
 export type GiftFilters = { category?: string; budget?: number; interest?: string };
+export function giftFiltersHref(filters: GiftFilters, category?: string, page?: number) {
+  const query = new URLSearchParams();
+  if (!category && filters.category) query.set("category", filters.category);
+  if (filters.budget) query.set("budget", String(filters.budget));
+  if (filters.interest) query.set("interest", filters.interest);
+  if (page && page > 1) query.set("page", String(page));
+  return `${category ? `/gifts/${category}` : "/gifts"}${query.size ? `?${query}` : ""}#gift-results`;
+}
 export function londonDay(date = new Date()) {
   const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(date);
   const value = (key: string) => parts.find(p => p.type === key)?.value;
