@@ -30,7 +30,7 @@ export function InvitationMessage({ invitation, copyLabel = "Copy invitation mes
 
   return (
     <div className="rounded-2xl border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-5">
-      <p className="mb-3 text-sm">Replace the bracketed placeholders with your details and your group invitation link.</p>
+      <p className="mb-3 text-sm">Replace each bracketed placeholder with your own details. For invitations, use your group invitation link.</p>
       <pre className="whitespace-pre-wrap break-words font-sans text-sm leading-relaxed select-text">{invitation}</pre>
       <button type="button" onClick={copy} className="mt-4 min-h-11 rounded-xl bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)] focus-visible:outline-2 focus-visible:outline-offset-4">
         {copyLabel}

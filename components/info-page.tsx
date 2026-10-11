@@ -33,9 +33,9 @@ export function InfoPage({ title, updated, children }: { title: string; updated?
   );
 }
 
-export function Section({ heading, children }: { heading: string; children: React.ReactNode }) {
+export function Section({ heading, id, children }: { heading: string; id?: string; children: React.ReactNode }) {
   return (
-    <section>
+    <section id={id} className={id ? "scroll-mt-20" : undefined}>
       <h2 className="text-lg font-semibold mb-2 font-display">{heading}</h2>
       <div className="space-y-3 text-sm leading-relaxed text-[var(--cmb-text-secondary)]">{children}</div>
     </section>
