@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { PGlite } = require(process.argv[2] || '@electric-sql/pglite');
 const migration = fs.readFileSync(path.join(__dirname,
-  '../supabase/migrations/20261012094655_draw_email_delivery_guards.sql'), 'utf8');
+  '../supabase/migrations/20261012100146_draw_email_delivery_guards.sql'), 'utf8');
 const id = n => 'e0000000-0000-4000-8000-'+String(n).padStart(12,'0');
 const hash = 'a'.repeat(64);
 (async()=>{
