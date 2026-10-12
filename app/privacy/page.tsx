@@ -183,7 +183,14 @@ export default function PrivacyPage() {
           than storing the raw IP address in the preview rate-limit table.
           Records older than one hour are removed on requests and by an hourly
           cleanup job; normally a record therefore remains for less than two hours.
-          This applies to that table, not provider network or security logs.
+          This applies to that table, not provider network or security logs. We also
+          keep private creation-allowance records containing your service identity,
+          creation times and whether you created a group or personal wishlist.
+          These enforce separate limits of 10 new creations per hour and 25 per
+          24 hours; edits do not count. They contain no names, emails or wishlist
+          content. Inactive records older than 48 hours are removed hourly,
+          normally within 49 hours. These necessary abuse controls are separate
+          from optional analytics and are not sent to Google Analytics.
           Delivery receipts contain status, attempts and timing, not participant
           names, recipient email addresses or message bodies, and are removed
           with their draw. Recovery retention is described below.
