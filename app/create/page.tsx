@@ -228,7 +228,7 @@ export default function CreatePage() {
             onChange={e => setForm(f => ({ ...f, email:e.target.value }))} aria-describedby={errors.email ? "email-hint email-error" : "email-hint"} aria-invalid={!!errors.email}
             className="h-12 text-base rounded-xl border border-[var(--cmb-border-strong)]"/>
           {errors.email && <p id="email-error" role="alert" className="mt-1 text-sm text-[var(--cmb-error)]">{errors.email}</p>}
-          <p className="text-xs mt-2 text-[var(--cmb-text-muted)]">This updates your notification email across your groups; leaving it blank turns notifications off. Sign-in recovery is enabled separately after joining. <Link href="/privacy" className="underline">Privacy policy</Link></p>
+          <p className="text-xs mt-2 text-[var(--cmb-text-muted)]">This updates your notification email across your groups; leaving it blank turns notifications off. Notifications require email verification after joining; creating and using your group does not require email. <Link href="/privacy" className="underline">Privacy policy</Link></p>
         </div>
       </main>
 

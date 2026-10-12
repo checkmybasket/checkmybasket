@@ -10,6 +10,7 @@ import { Progress } from "@/components/ui/progress";
 import { cn, formatBudget, getInitials, timeAgo } from "@/lib/utils";
 import Link from "next/link";
 import { toast } from "sonner";
+import { NotificationEmail } from "@/components/notification-email";
 import { EmailRecovery } from "@/components/email-recovery";
 import { createClient } from "@/lib/supabase/client";
 import type { DrawStatus, GiftCategory, MemberRole, PredictionRoundStatus, WishlistPriority } from "@/lib/types";
@@ -166,7 +167,7 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
       </header>
 
       <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-6 pb-28">
-        {tab==="draw"      && <><DrawTab data={data} isOrganiser={isOrganiser} refresh={refresh}/><EmailRecovery groupId={group.id} /></>}
+        {tab==="draw"      && <><DrawTab data={data} isOrganiser={isOrganiser} refresh={refresh}/><NotificationEmail groupId={group.id} /><EmailRecovery groupId={group.id} /></>}
         {tab==="wishlists" && <WishlistsTab data={data} refresh={refresh}/>}
         {tab==="messages"  && <MessagesTab data={data} refresh={refresh}/>}
         {tab==="games"     && <GamesTab data={data} refresh={refresh}/>}

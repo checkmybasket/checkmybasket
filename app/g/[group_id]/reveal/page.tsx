@@ -2,10 +2,11 @@
 
 import { use, useEffect, useState } from "react";
 import Link from "next/link";
-import { Gift, MessageCircle, ShoppingBag, CheckCircle2, Lock, ChevronLeft, ArrowRight, Mail, Check } from "lucide-react";
+import { Gift, MessageCircle, ShoppingBag, CheckCircle2, Lock, ChevronLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { formatBudget } from "@/lib/utils";
 import { toast } from "sonner";
+import { NotificationEmail } from "@/components/notification-email";
 import { EmailRecovery } from "@/components/email-recovery";
 import { createClient } from "@/lib/supabase/client";
 
@@ -341,69 +342,8 @@ function RevealedScreen({
       </div>
 
       {/* Manage the optional email saved before the draw */}
-      <EmailCapture />
+      <NotificationEmail groupId={groupId} />
       <EmailRecovery groupId={groupId} />
-    </div>
-  );
-}
-
-function EmailCapture() {
-  const [email, setEmail]   = useState("");
-  const [status, setStatus] = useState<"loading" | "idle" | "saving" | "saved">("loading");
-
-  useEffect(() => {
-    (async () => {
-      const supabase = createClient();
-      const { data } = await supabase.rpc("get_my_email");
-      if (typeof data === "string" && data) { setEmail(data); setStatus("saved"); }
-      else { setStatus("idle"); }
-    })();
-  }, []);
-
-  async function save() {
-    const trimmed = email.trim();
-    setStatus("saving");
-    const supabase = createClient();
-    const { error } = await supabase.rpc("set_my_email", { p_email: trimmed });
-    if (error) { toast.error(error.message || "Couldn't save your email"); setStatus("idle"); return; }
-    setStatus("saved");
-    toast.success(trimmed ? "Email saved for future draw notifications" : "Email removed — draw notifications turned off");
-  }
-
-  if (status === "loading") return null;
-
-  return (
-    <div className="rounded-2xl p-5 mt-6 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
-      <div className="flex items-center gap-2 mb-1">
-        <Mail size={16} strokeWidth={1.5} className="text-[var(--cmb-primary)]" />
-        <p className="font-semibold text-sm">Draw notification email</p>
-      </div>
-      <p className="text-xs mb-3 text-[var(--cmb-text-secondary)]">
-        Manage your optional notification email for future draws across your groups. Saving it here does not send an email for this draw. Clear the field and save to stop notifications. Your verified sign-in email is managed separately below.
-      </p>
-      <div className="flex gap-2">
-        <input
-          type="email"
-          inputMode="email"
-          autoComplete="email"
-          value={email}
-          onChange={(e) => { setEmail(e.target.value); if (status === "saved") setStatus("idle"); }}
-          onKeyDown={(e) => { if (e.key === "Enter") save(); }}
-          placeholder="you@example.com"
-          aria-label="Your email address"
-          className="flex-1 h-11 rounded-xl px-3 text-sm outline-none bg-[var(--cmb-bg)] border border-[var(--cmb-border-strong)] text-[var(--cmb-text-primary)]"
-        />
-        <Button
-          onClick={save}
-          disabled={status === "saving"}
-          className="h-11 px-4 rounded-xl font-medium text-[var(--cmb-text-inverse)]"
-          style={{ background: status === "saved" ? "var(--cmb-success)" : "var(--cmb-primary)" }}
-        >
-          {status === "saved"
-            ? <><Check size={16} strokeWidth={2} className="mr-1" />Saved</>
-            : status === "saving" ? "Saving…" : "Save"}
-        </Button>
-      </div>
     </div>
   );
 }

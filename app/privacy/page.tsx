@@ -175,6 +175,21 @@ export default function PrivacyPage() {
         </p>
       </Section>
 
+      <Section heading="Verified optional draw notifications">
+        <p>
+          Saving a notification address requests optional draw emails across your
+          groups. We send only when that address matches the verified recovery
+          email and confirmed sign-in address for your own service identity.
+          Recovery verification does not turn notifications on by itself.
+          Changing the saved address stops new delivery claims until it matches
+          a verified address; clearing it turns notifications off. These changes
+          cannot recall emails already handed to the delivery provider. You can
+          create, join and use groups and view matches without an email address.
+          Verification does not automatically send a notification for an earlier
+          draw. Your recovery email is managed separately from notification opt-out.
+        </p>
+      </Section>
+
       <Section heading="Service security records">
         <p>
           We use request limits to protect invitation previews and recovery, and

@@ -223,13 +223,13 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
                 </div>
                 <div className="mb-5">
                   <Label htmlFor="email" className="text-base font-medium mb-1.5 block">Email (optional)</Label>
-                  <p id="email-hint" className="text-sm mb-2 text-[var(--cmb-text-muted)]">Get an email when names are drawn. Private from your group. Leave blank to skip.</p>
+                  <p id="email-hint" className="text-sm mb-2 text-[var(--cmb-text-muted)]">Verify an optional email after joining to receive future draw notifications. Private from your group. Leave blank to skip.</p>
                   <Input id="email" type="email" inputMode="email" autoComplete="email" placeholder="you@example.com" value={email}
                     onChange={e => setEmail(e.target.value)} onKeyDown={e => e.key === "Enter" && handleJoin()}
                     aria-describedby={emailError ? "email-hint email-error" : "email-hint"} aria-invalid={!!emailError}
                     className="h-12 text-base rounded-xl border border-[var(--cmb-border-strong)]"/>
                   {emailError && <p id="email-error" role="alert" className="mt-1 text-sm text-[var(--cmb-error)]">{emailError}</p>}
-                  <p className="text-xs mt-2 text-[var(--cmb-text-muted)]">This updates your notification email across your groups; leaving it blank turns notifications off. Sign-in recovery is enabled separately after joining. <Link href="/privacy" className="underline">Privacy policy</Link></p>
+                  <p className="text-xs mt-2 text-[var(--cmb-text-muted)]">This updates your notification email across your groups; leaving it blank turns notifications off. Notifications require ownership verification after joining; group features do not require email. <Link href="/privacy" className="underline">Privacy policy</Link></p>
                 </div>
                 <Button onClick={handleJoin} disabled={busy} size="lg" className="w-full h-12 text-base rounded-xl font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">
                   {busy ? "Joining…" : <>Join this Secret Santa <ArrowRight size={18} strokeWidth={1.5} className="ml-2"/></>}
