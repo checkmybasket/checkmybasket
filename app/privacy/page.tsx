@@ -19,8 +19,8 @@ export default function PrivacyPage() {
           required, so we don&apos;t ask for a phone number or password. Email
           is optional, for draw notifications and, if you verify it,
           password-free access on another device. We show no ads and use no
-          advertising trackers. When you leave a group or a group is deleted,
-          its group data goes with it. A notification email stays on your
+          advertising trackers. Leaving removes your membership and group wishlist; existing
+          matches, messages and game records remain until the group is deleted. A notification email stays on your
           profile until you remove it. A verified sign-in email is retained
           separately so you can return to your groups.
         </p>
@@ -97,7 +97,7 @@ export default function PrivacyPage() {
       <Section heading="Optional analytics cookies">
         <p>
           If you accept analytics, we use Google Analytics to understand visits
-          to our public pages and successful draw and personal wishlist creations
+          to our public pages and successful Secret Santa group and personal wishlist creations
           on those pages, gift retailer clicks, clicks to start saving a catalogue gift, and selected category, budget and interest filters, and improve the site. Completed saves on private wishlist pages are not tracked. Google processes cookie
           identifiers, public page paths and device/browser information, and
           processing may take place outside the UK/EEA. Advertising features
@@ -175,11 +175,26 @@ export default function PrivacyPage() {
         </p>
       </Section>
 
+      <Section heading="Service security records">
+        <p>
+          We use request limits to protect invitation previews and recovery, and
+          delivery receipts to prevent repeated draw emails. Preview requests use
+          a keyed identifier derived from an IP address and the UTC day, rather
+          than storing the raw IP address in the preview rate-limit table.
+          Records older than one hour are removed on requests and by an hourly
+          cleanup job; normally a record therefore remains for less than two hours.
+          This applies to that table, not provider network or security logs.
+          Delivery receipts contain status, attempts and timing, not participant
+          names, recipient email addresses or message bodies, and are removed
+          with their draw. Recovery retention is described below.
+        </p>
+      </Section>
+
       <Section heading="Where it lives">
         <p>
           Data is stored with Supabase in their London (eu-west-2) region and
-          the site is hosted by Vercel. Both act as our processors under their
-          standard data processing terms. Optional email notifications are
+          the site is hosted by Vercel. Hosting and other providers may process information outside the UK/EEA;
+          the London database region does not mean all processing stays in the UK. Optional email notifications are
           processed by Resend and its delivery providers; delivery may involve
           processing outside the UK/EEA.
         </p>
@@ -189,11 +204,15 @@ export default function PrivacyPage() {
         <ul className="list-disc pl-5 space-y-1">
           <li>
             Leave a group → your membership and wishlist for that group are
-            deleted immediately.
+            removed from the live service together. Existing matches, messages and
+            game records remain until the organiser deletes the group.
           </li>
           <li>
             An organiser deletes a group → everything in it (members, wishlists,
-            messages, draws, game data) is deleted immediately.
+            messages, draws, game data) is removed from the live service.
+            Your service identity and personal wishlists remain separate.
+            Backups, provider logs and already delivered emails may retain records
+            after live deletion; contact us about your data rights.
           </li>
           <li>
             You can remove your saved email on the match reveal screen to stop
@@ -241,7 +260,10 @@ export default function PrivacyPage() {
         <p>
           Some gift links may earn us a small commission at no extra cost to you
           — this is how we keep CheckMyBasket free and ad-free. Affiliate
-          partners do not receive any of your personal data from us.
+          links do not include participant names, emails, private matches or
+          membership access tokens added by us. Retailers and affiliate services
+          receive your network request and may process IP addresses, browser
+          details and their own cookies under their privacy policies.
         </p>
       </Section>
 

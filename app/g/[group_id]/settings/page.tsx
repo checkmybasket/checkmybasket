@@ -74,9 +74,7 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
     if (!group || busy) return;
     setBusy(true);
     const supabase = createClient();
-    // Wishlist first, then membership — both are own-row RLS deletes.
-    await supabase.from("wishlist_items").delete().eq("group_id", group.id).eq("user_id", me!);
-    const { error } = await supabase.from("group_members").delete().eq("group_id", group.id).eq("user_id", me!);
+    const { error } = await supabase.rpc("leave_group", { p_group_id: group.id });
     if (error) { toast.error(error.message); setBusy(false); return; }
     toast.success("You've left the group");
     router.push("/");
@@ -174,7 +172,7 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
                 <div className="space-y-3">
                   <div className="rounded-xl p-4 flex gap-2" style={{ background:"rgba(193,18,31,0.06)", border:"1px solid rgba(193,18,31,0.2)" }}>
                     <AlertTriangle size={16} strokeWidth={1.5} className="text-[var(--cmb-error)] shrink-0"/>
-                    <p className="text-sm text-[var(--cmb-error)]">You&apos;ll be removed and your wishlist deleted. This can&apos;t be undone.</p>
+                    <p className="text-sm text-[var(--cmb-error)]">Your membership and group wishlist will be removed. Existing matches, messages and game records remain until the organiser deletes the group.</p>
                   </div>
                   <div className="flex gap-3">
                     <Button variant="outline" className="flex-1 rounded-xl" disabled={busy} onClick={()=>setShowLeaveConfirm(false)}>Cancel</Button>
@@ -202,7 +200,7 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
                 <div className="space-y-4">
                   <div className="rounded-xl p-4 flex gap-2" style={{ background:"rgba(193,18,31,0.06)", border:"1px solid rgba(193,18,31,0.2)" }}>
                     <AlertTriangle size={16} strokeWidth={1.5} className="text-[var(--cmb-error)] shrink-0"/>
-                    <p className="text-sm text-[var(--cmb-error)]">This permanently deletes all data for all members. Cannot be undone.</p>
+                    <p className="text-sm text-[var(--cmb-error)]">This permanently deletes this group and its group records. Saved profile and recovery emails are separate. Cannot be undone.</p>
                   </div>
                   <div>
                     <Label htmlFor="delete-confirm" className="text-sm font-medium mb-2 block">Type <strong>{group.name}</strong> to confirm</Label>
