@@ -714,15 +714,15 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: DONE
 - Completion note: Named Setup progress and Gifts bought indicators. Loaded pending/drawn browser states expose those names and correct numeric values (17 and 25 in fixtures); build/lint/TypeScript and local regressions pass.
 
-### [ ] A11Y 21 — P1
+### [x] A11Y 21 — P1
 
 - Severity: P1
 - Location: components/ui/input.tsx styling via app/globals.css; private recovery/notification forms
 - Evidence: Loaded pending/drawn groups at 320, 375 and 414px: both email inputs are 32px high, below the requested 44px mobile target.
 - Fix: Apply a mobile minimum height to the existing shared text-input primitive; preserve compact desktop sizes and larger explicit input sizes.
 - Acceptance criteria: Every displayed email input measures at least 44px at mobile widths without new overflow; build/lint/TypeScript pass.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Shared text inputs now have a mobile-only 44px minimum. Loaded pending-group measurements at 320/375/414px show 44px inputs and no overflow; larger explicit and compact desktop sizing remain intact. Build/lint/TypeScript and local regressions pass.
 
 ### [ ] UI 09 — P1
 

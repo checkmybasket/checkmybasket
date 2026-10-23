@@ -177,6 +177,7 @@
 
 /* Keep compact desktop controls comfortable to tap on narrow screens. */
 @media (max-width: 767px) {
+  input[data-slot="input"] { min-height: 44px; }
   button, [role="button"] {
     min-height: 44px;
     min-width: 44px;
