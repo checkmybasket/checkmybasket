@@ -997,7 +997,7 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
             <div className="px-5 py-4 border-b border-[var(--cmb-primary-dark)]">
               <div className="flex items-center gap-2">
                 <Trophy size={18} strokeWidth={1.5} className="text-[var(--cmb-warm)]"/>
-                <h2 className="font-bold text-[var(--cmb-text-inverse)] font-display">🏆 Gift Prediction Awards</h2>
+                <h2 className="font-bold text-[var(--cmb-text-inverse)] font-display"><Trophy size={18} strokeWidth={1.5} aria-hidden="true" className="inline-block mr-2" />Gift Prediction Awards</h2>
               </div>
             </div>
             <div className="p-5 space-y-4">

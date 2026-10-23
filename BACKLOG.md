@@ -317,15 +317,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Render copyright from a shared server-side year. Both footer renders use the current year without client hydration changes; build/lint/TypeScript pass.
 
-### [ ] CONTENT 02 — P2
+### [x] CONTENT 02 — P2
 
 - Severity: P2
 - Location: app/g/[group_id]/page.tsx:994; group awards view
 - Evidence: Heading contains a decorative trophy emoji: '🏆 Gift Prediction Awards'.
 - Fix: Use the established icon system if decoration is useful; retain the heading meaning.
 - Acceptance criteria: No decorative heading emoji remains and decorative icon is hidden from assistive technology.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Use the existing Lucide trophy icon for the awards heading. Meaning is preserved and the decorative icon is aria-hidden; build/lint/TypeScript pass.
 
 ### [ ] HYGIENE 01 — P2
 
