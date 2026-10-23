@@ -516,3 +516,13 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Acceptance criteria: obsolete styling references are absent; current tokens/marks render consistently; build/lint/TypeScript and final responsive/contrast checks pass.
 - Status: DONE
 - Completion note: Align rectangular controls and panels with the shared brand radius. Intentional avatar/status pills remain round; build/lint/TypeScript pass.
+
+### [x] A11Y 12 — P1
+
+- Severity: P1
+- Location: app/create/page.tsx; /create budget presets
+- Evidence: preset selection is communicated by color only; buttons have no aria-pressed state and the Budget per person label has no group association.
+- Fix: name and describe the budget button group and expose each preset's pressed state, preserving existing clicks, tab order and validation.
+- Acceptance criteria: exactly one preset is announced selected, including after choosing Custom; generated markup and browser checks plus build/lint/TypeScript pass.
+- Status: DONE
+- Completion note: Named and described the budget group and added aria-pressed to presets. Production browser confirms exactly one selected Custom preset and its labelled amount field; build/lint/TypeScript pass.

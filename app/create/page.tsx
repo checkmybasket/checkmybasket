@@ -199,12 +199,12 @@ export default function CreatePage() {
         </Field>
 
         {/* Budget — optional */}
-        <div>
-          <Label className="text-base font-medium mb-1 block">Budget per person</Label>
-          <p className="text-sm mb-3 text-[var(--cmb-text-muted)]">Optional — this is per person, everyone buys one gift</p>
+        <div role="group" aria-labelledby="budget-label" aria-describedby="budget-hint">
+          <p id="budget-label" className="text-base font-medium mb-1 block">Budget per person</p>
+          <p id="budget-hint" className="text-sm mb-3 text-[var(--cmb-text-muted)]">Optional — this is per person, everyone buys one gift</p>
           <div className="flex gap-2 flex-wrap">
             {([[-1,"No budget"],...BUDGET_PRESETS.map(p=>[p,`£${p/100}`]),[0,"Custom"]] as [number,string][]).map(([val,label]) => (
-              <button key={val} type="button" onClick={() => setForm(f => ({ ...f, budget:val, customBudget:"" }))}
+              <button key={val} type="button" aria-pressed={form.budget === val} onClick={() => setForm(f => ({ ...f, budget:val, customBudget:"" }))}
                 className={cn("rounded-full px-4 py-2 text-sm font-medium border-2 transition-all duration-150",
                   form.budget===val?"border-[var(--cmb-primary)] bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]":"border-[var(--cmb-border)] bg-[var(--cmb-surface)]")}>
                 {label}
