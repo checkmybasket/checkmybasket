@@ -97,7 +97,7 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
         <div className="max-w-xl mx-auto px-4 h-14 flex items-center gap-3">
           <Link href={`/g/${group_id}`} className={buttonVariants({ variant: "ghost", size: "sm", className: "h-11 w-11 p-0 rounded-lg" })}><ChevronLeft size={20} strokeWidth={1.5}/></Link>
           <div className="flex items-center gap-2 text-[var(--cmb-primary)]">
-            <Gift size={18} strokeWidth={1.5}/><span className="font-semibold font-display">Group settings</span>
+            <Gift size={18} strokeWidth={1.5}/><h1 className="font-semibold font-display">Group settings</h1>
           </div>
         </div>
       </header>

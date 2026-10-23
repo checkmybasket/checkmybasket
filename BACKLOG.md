@@ -127,15 +127,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Loaded dashboard group name is now the single h1 above all tabs; source branch review and build/lint/TypeScript pass. Private browser QA remains in OWNER 02.
 
-### [ ] A11Y 07 — P1
+### [x] A11Y 07 — P1
 
 - Severity: P1
 - Location: app/g/[group_id]/settings/page.tsx:98; /g/[group_id]/settings
 - Evidence: Group settings is a span; section headings are h2 and no h1 exists in the route source.
 - Fix: Make the visible page title an h1.
 - Acceptance criteria: Loaded settings has exactly one h1 and a logical heading hierarchy.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Visible settings title is now h1 above the h2 sections; source hierarchy and build/lint/TypeScript pass. Private browser QA remains in OWNER 02.
 
 ### [ ] A11Y 08 — P1
 
