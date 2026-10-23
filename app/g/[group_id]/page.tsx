@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { cn, formatBudget, getInitials, timeAgo } from "@/lib/utils";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { NotificationEmail } from "@/components/notification-email";
 import { EmailRecovery } from "@/components/email-recovery";
@@ -66,7 +66,10 @@ type Tab = "draw"|"wishlists"|"messages"|"games";
 export default function GroupDashboard({ params }: { params: Promise<{ group_id: string }> }) {
   const { group_id } = use(params);
   const searchParams = useSearchParams();
-  const [tab, setTab] = useState<Tab>(() => searchParams.get("tab") === "messages" ? "messages" : "draw");
+  const router = useRouter();
+  const requestedTab = searchParams.get("tab");
+  const tab: Tab = requestedTab === "wishlists" || requestedTab === "messages" || requestedTab === "games" ? requestedTab : "draw";
+  const selectTab = (next: Tab) => router.replace(`/g/${group_id}${next === "draw" ? "" : `?tab=${next}`}`, { scroll: false });
   const [data, setData] = useState<DashData | null>(null);
   const [loadState, setLoadState] = useState<"loading"|"ready"|"noaccess"|"error">("loading");
 
@@ -193,7 +196,7 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
             { key:"messages",  icon:MessageCircle, label:"Messages",  dot:unreadMessages },
             { key:"games",     icon:Gamepad2,      label:"Games",     dot:false },
           ] as const).map(({ key, icon:Icon, label, dot }) => (
-            <button key={key} aria-pressed={tab===key} onClick={() => setTab(key)} className="flex-1 flex flex-col items-center pt-2 pb-1 gap-1 relative min-h-[56px]"
+            <button key={key} aria-pressed={tab===key} onClick={() => selectTab(key)} className="flex-1 flex flex-col items-center pt-2 pb-1 gap-1 relative min-h-[56px]"
               style={{ color:tab===key?"var(--cmb-primary)":"var(--cmb-text-muted)" }} aria-label={label}>
               <Icon size={22} strokeWidth={1.5}/>
               <span className="text-xs font-medium">{label}</span>
