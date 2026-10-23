@@ -477,15 +477,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: OPEN
 - Completion note: Pending.
 
-### [ ] UI 03 — P2
+### [x] UI 03 — P2
 
 - Severity: P2
 - Location: app/ and components/ shared theme; public and functional routes
 - Evidence: Brand marks differ across public and functional headers. App-name headers in create, gifts, join, InfoPage and WishlistShell still use a generic Gift icon; the current homepage, favicon and OG use the basket mark.
 - Fix: Reuse the existing BasketMark at compact header size; keep Gift icons where they describe gifts or group sections.
 - Acceptance criteria: obsolete styling references are absent; current tokens/marks render consistently; build/lint/TypeScript and final responsive/contrast checks pass.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Reuse the basket mark for every app-name header. Gift/category icons remain meaningful content icons; build/lint/TypeScript pass.
 
 ### [ ] UI 04 — P2
 

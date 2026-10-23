@@ -1,4 +1,5 @@
 "use client";
+import { BasketMark } from "@/components/receipt/logo";
 import { PageRecovery } from "@/components/page-recovery";
 import { userError } from "@/lib/user-errors";
 import { use, useEffect, useState } from "react";
@@ -189,7 +190,7 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
         <div className="max-w-md mx-auto px-4 h-14 flex items-center gap-3">
           <Link href="/" aria-label="Back to home" className={buttonVariants({ variant: "ghost", size: "sm", className: "h-11 w-11 p-0 rounded-lg" })}><ChevronLeft size={20} strokeWidth={1.5}/></Link>
           <div className="flex items-center gap-2 text-[var(--cmb-primary)]">
-            <Gift size={20} strokeWidth={1.5}/><span className="font-semibold font-display">CheckMyBasket</span>
+            <BasketMark size={20} /><span className="font-semibold font-display">CheckMyBasket</span>
           </div>
         </div>
       </header>

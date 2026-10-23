@@ -1,5 +1,5 @@
+import { BasketMark } from "@/components/receipt/logo";
 import Link from "next/link";
-import { Gift } from "lucide-react";
 export function WishlistShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-dvh bg-[var(--cmb-bg)] text-[var(--cmb-text-primary)] px-4 py-6 sm:py-10">
@@ -10,7 +10,7 @@ export function WishlistShell({ children }: { children: React.ReactNode }) {
             href="/"
             className="inline-flex min-h-11 items-center gap-2 font-semibold text-[var(--cmb-primary)]"
           >
-            <Gift size={20} aria-hidden />
+            <BasketMark size={20} />
             CheckMyBasket
           </Link>
           <nav className="flex flex-wrap gap-x-4 text-sm" aria-label="Wishlist navigation">

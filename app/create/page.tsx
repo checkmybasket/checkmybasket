@@ -1,4 +1,5 @@
 "use client";
+import { BasketMark } from "@/components/receipt/logo";
 import { SITE_ORIGIN } from "@/lib/site";
 
 import { userError } from "@/lib/user-errors";
@@ -178,7 +179,7 @@ export default function CreatePage() {
         <div className="max-w-xl mx-auto px-4 h-14 flex items-center gap-3">
           <Link href="/" aria-label="Back to home" className={buttonVariants({ variant: "ghost", size: "sm", className: "h-11 w-11 p-0 rounded-lg" })}><ChevronLeft size={20} strokeWidth={1.5}/></Link>
           <div className="flex items-center gap-2 text-[var(--cmb-primary)]">
-            <Gift size={20} strokeWidth={1.5}/>
+            <BasketMark size={20} />
             <span className="font-semibold font-display">CheckMyBasket</span>
           </div>
         </div>

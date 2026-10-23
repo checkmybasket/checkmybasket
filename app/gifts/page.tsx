@@ -1,3 +1,4 @@
+import { BasketMark } from "@/components/receipt/logo";
 import { socialMetadata } from "@/lib/page-metadata";
 import { GIFT_GUIDES } from "@/lib/gift-guides";
 import { ExploreNavigation } from "@/components/explore-navigation";
@@ -33,7 +34,7 @@ export default async function GiftsPage({ searchParams }: { searchParams: Promis
       <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background:"var(--cmb-header-bg)" }}>
         <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
           <Link href="/" className="flex min-h-11 items-center gap-2 text-[var(--cmb-primary)]">
-            <Gift strokeWidth={1.5} size={20}/><span className="font-semibold font-display">CheckMyBasket</span>
+            <BasketMark size={20} /><span className="font-semibold font-display">CheckMyBasket</span>
           </Link>
           <Link href="/create" className="inline-flex min-h-11 items-center justify-center px-4 rounded-lg text-sm font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">Create a draw</Link>
         </div>
