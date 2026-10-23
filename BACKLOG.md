@@ -187,15 +187,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Declare the repository as the tracing and Turbopack root. Build/lint/TypeScript pass and the build no longer emits an ignored external-lockfile warning.
 
-### [ ] DEPLOY 01 — P1
+### [x] DEPLOY 01 — P1
 
 - Severity: P1
 - Location: app/robots.ts:5; app/layout.tsx; preview deployments
 - Evidence: robots always allows / and root metadata has no environment-dependent indexing rule.
 - Fix: Disable indexing on non-production deployments using a verified environment signal and response/meta directives.
 - Acceptance criteria: Production public pages remain indexable; preview responses and robots disallow indexing. Owner verifies hosting environment values.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Added environment-aware noindex response headers, root metadata and robots. Local/production retain existing indexing; preview/development/custom environments deny indexing. Five environment cases plus build/lint/TypeScript pass; deployed host confirmation stays in final owner checklist.
 
 ### [ ] OWNER 02 — P1
 

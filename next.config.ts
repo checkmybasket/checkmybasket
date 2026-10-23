@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import path from "node:path";
+import { shouldPreventIndexing } from "./lib/deployment";
 
 // Supabase project origin the browser must be allowed to reach (REST + Realtime).
 const SUPABASE_ORIGIN = "https://nejkvrzabdetsnhpeqtl.supabase.co";
@@ -45,7 +46,7 @@ const nextConfig: NextConfig = {
     maximumRedirects: 0,
   },
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    return [{ source: "/:path*", headers: [...securityHeaders, ...(shouldPreventIndexing() ? [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] : [])] }];
   },
 };
 

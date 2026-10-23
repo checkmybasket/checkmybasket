@@ -1,3 +1,4 @@
+import { shouldPreventIndexing } from "@/lib/deployment";
 import type { Metadata, Viewport } from "next";
 import { Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
@@ -8,6 +9,7 @@ const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "700"], variabl
 const ibmPlexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "600"], variable: "--font-ibm-plex-mono", display: "swap" });
 
 export const metadata: Metadata = {
+  robots: shouldPreventIndexing() ? { index: false, follow: false } : undefined,
   title: { default: "CheckMyBasket | Free Secret Santa generator with wishlists", template: "%s | CheckMyBasket" },
   description: "Draw names, share wishlists from any shop and ask anonymous questions. Organise a free Secret Santa draw and find UK gift ideas. No ads, ever.",
   keywords: ["Secret Santa","wishlist","gift exchange","Christmas","UK","free Secret Santa generator","Secret Santa gifts UK"],
