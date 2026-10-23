@@ -565,7 +565,7 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
         {isMyList && <Badge className="text-xs text-[var(--cmb-primary)]" style={{ background:"color-mix(in srgb, var(--cmb-primary) 10%, transparent)" }}>{items.length} item{items.length===1?"":"s"}</Badge>}
       </div>
       {items.length===0 ? (
-        <EmptyState title="No wishlist items yet"
+        <EmptyState level={3} title="No wishlist items yet"
           body={isMyList?"Add gift ideas from any shop — Etsy, John Lewis, Amazon, anywhere.":"They haven't added anything yet — try asking them a question in Messages after the draw."}
           icon={Gift}/>
       ) : (
@@ -1171,11 +1171,12 @@ function Avatar({ name, size=36 }: { name:string; size?:number }) {
   );
 }
 
-function EmptyState({ title, body, icon:Icon }: { title:string; body:string; icon:React.ElementType }) {
+function EmptyState({ title, body, icon:Icon, level = 2 }: { title:string; body:string; icon:React.ElementType; level?:2|3 }) {
+  const Heading = level === 3 ? "h3" : "h2";
   return (
     <div className="rounded-[var(--cmb-radius)] p-10 text-center bg-[var(--cmb-surface)] border-2 border-dashed border-[var(--cmb-border)]">
       <Icon size={32} strokeWidth={1.5} className="mx-auto mb-3 text-[var(--cmb-text-muted)]"/>
-      <h3 className="font-semibold mb-2">{title}</h3>
+      <Heading className="font-semibold mb-2">{title}</Heading>
       <p className="text-sm max-w-xs mx-auto text-[var(--cmb-text-secondary)]">{body}</p>
     </div>
   );

@@ -684,15 +684,15 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: DONE
 - Completion note: Added persistent message/reply labels and linked the character-limit hint. Browser confirms one associated label, label-click focus and successful Enter submission; a separate local recipient received/replied while sender identity remained protected. Build/lint/TypeScript and local regressions pass.
 
-### [ ] A11Y 18 — P1
+### [x] A11Y 18 — P1
 
 - Severity: P1
 - Location: app/g/[group_id]/page.tsx; loaded private group views — Empty-state heading hierarchy
 - Evidence: Loaded Messages empty state goes directly from the group h1 to Break the ice h3. Games pending has the same root empty-state helper.
 - Fix: Allow the empty-state helper to render h2 by default and h3 explicitly when nested under the wishlist h2.
 - Acceptance criteria: No heading level is skipped in loaded empty Messages/Games/Wishlists views. Browser/build/lint/TypeScript checks pass.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Empty states now default to h2, with wishlist-nested content explicitly h3. Loaded browser verifies root Messages and pending Games h1→h2, and wishlist h1→h2→h3. Build/lint/TypeScript and local regressions pass.
 
 ### [ ] A11Y 19 — P1
 
