@@ -1,0 +1,232 @@
+[
+  {
+    "route": "/manifest.webmanifest",
+    "status": 200,
+    "type": "application/manifest+json",
+    "bytes": 395,
+    "manifest": {
+      "id": "/",
+      "name": "CheckMyBasket",
+      "short_name": "CheckMyBasket",
+      "description": "Secret Santa draws, wishlists and UK gift ideas.",
+      "start_url": "/",
+      "scope": "/",
+      "display": "standalone",
+      "background_color": "#FFFFFF",
+      "theme_color": "#FFFFFF",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png",
+          "purpose": "any"
+        },
+        {
+          "src": "/icon-512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "any"
+        }
+      ]
+    }
+  },
+  {
+    "route": "/apple-icon",
+    "status": 200,
+    "type": "image/png",
+    "bytes": 2225,
+    "dimensions": [
+      180,
+      180
+    ]
+  },
+  {
+    "route": "/icon",
+    "status": 200,
+    "type": "image/png",
+    "bytes": 693,
+    "dimensions": [
+      64,
+      64
+    ]
+  },
+  {
+    "route": "/icon-192.png",
+    "status": 200,
+    "type": "image/png",
+    "bytes": 2406,
+    "dimensions": [
+      192,
+      192
+    ]
+  },
+  {
+    "route": "/icon-512.png",
+    "status": 200,
+    "type": "image/png",
+    "bytes": 8453,
+    "dimensions": [
+      512,
+      512
+    ]
+  },
+  {
+    "route": "/opengraph-image",
+    "status": 200,
+    "type": "image/png",
+    "bytes": 36320,
+    "dimensions": [
+      1200,
+      630
+    ]
+  },
+  {
+    "route": "/favicon.ico",
+    "status": 404,
+    "type": "text/html; charset=utf-8",
+    "bytes": 24601
+  },
+  {
+    "route": "/robots.txt",
+    "status": 200,
+    "type": "text/plain",
+    "bytes": 108,
+    "text": "User-Agent: *\nAllow: /\nDisallow: /g/\nDisallow: /join/\n\nSitemap: https://www.checkmybasket.co.uk/sitemap.xml\n"
+  },
+  {
+    "route": "/sitemap.xml",
+    "status": 200,
+    "type": "application/xml",
+    "bytes": 5349,
+    "urls": [
+      "https://www.checkmybasket.co.uk",
+      "https://www.checkmybasket.co.uk/create",
+      "https://www.checkmybasket.co.uk/guides",
+      "https://www.checkmybasket.co.uk/gifts",
+      "https://www.checkmybasket.co.uk/secret-santa-whatsapp",
+      "https://www.checkmybasket.co.uk/office-secret-santa",
+      "https://www.checkmybasket.co.uk/secret-santa-rules",
+      "https://www.checkmybasket.co.uk/secret-santa-invitation-messages",
+      "https://www.checkmybasket.co.uk/secret-santa-wishlist-ideas",
+      "https://www.checkmybasket.co.uk/secret-santa-odd-number",
+      "https://www.checkmybasket.co.uk/remote-team-secret-santa",
+      "https://www.checkmybasket.co.uk/secret-santa-gifts-under-10",
+      "https://www.checkmybasket.co.uk/secret-santa-gifts-for-colleagues",
+      "https://www.checkmybasket.co.uk/secret-santa-gifts-under-20",
+      "https://www.checkmybasket.co.uk/secret-santa-gifts-under-30",
+      "https://www.checkmybasket.co.uk/secret-santa-gifts-under-50",
+      "https://www.checkmybasket.co.uk/funny-secret-santa-gifts",
+      "https://www.checkmybasket.co.uk/cosy-secret-santa-gifts",
+      "https://www.checkmybasket.co.uk/personalised-secret-santa-gifts",
+      "https://www.checkmybasket.co.uk/personalised-money-clip-gift-guide",
+      "https://www.checkmybasket.co.uk/secret-santa-gifts-someone-you-dont-know",
+      "https://www.checkmybasket.co.uk/secret-santa-gifts-for-book-lovers",
+      "https://www.checkmybasket.co.uk/secret-santa-gifts-for-gamers",
+      "https://www.checkmybasket.co.uk/secret-santa-gifts-for-coffee-lovers",
+      "https://www.checkmybasket.co.uk/money-clip-engraving-ideas",
+      "https://www.checkmybasket.co.uk/personalised-gifts-for-dads",
+      "https://www.checkmybasket.co.uk/personalised-groomsmen-gifts",
+      "https://www.checkmybasket.co.uk/gifts/under-10",
+      "https://www.checkmybasket.co.uk/gifts/under-20",
+      "https://www.checkmybasket.co.uk/gifts/under-30",
+      "https://www.checkmybasket.co.uk/gifts/under-50",
+      "https://www.checkmybasket.co.uk/gifts/colleague",
+      "https://www.checkmybasket.co.uk/gifts/funny",
+      "https://www.checkmybasket.co.uk/gifts/cosy",
+      "https://www.checkmybasket.co.uk/gifts/personalised",
+      "https://www.checkmybasket.co.uk/about",
+      "https://www.checkmybasket.co.uk/privacy",
+      "https://www.checkmybasket.co.uk/terms",
+      "https://www.checkmybasket.co.uk/contact"
+    ],
+    "missing": [],
+    "unexpected": []
+  },
+  {
+    "route": "/.env",
+    "status": 404,
+    "type": "text/html; charset=utf-8",
+    "bytes": 24601
+  },
+  {
+    "route": "/.env.local",
+    "status": 404,
+    "type": "text/html; charset=utf-8",
+    "bytes": 24601
+  },
+  {
+    "route": "/.env.production.local",
+    "status": 404,
+    "type": "text/html; charset=utf-8",
+    "bytes": 24601
+  },
+  {
+    "route": "/.git/config",
+    "status": 404,
+    "type": "text/html; charset=utf-8",
+    "bytes": 24601
+  },
+  {
+    "route": "/admin",
+    "status": 404,
+    "type": "text/html; charset=utf-8",
+    "bytes": 24601
+  },
+  {
+    "route": "/debug",
+    "status": 404,
+    "type": "text/html; charset=utf-8",
+    "bytes": 24601
+  },
+  {
+    "route": "/test",
+    "status": 404,
+    "type": "text/html; charset=utf-8",
+    "bytes": 24601
+  },
+  {
+    "route": "/polish-audit-error",
+    "status": 404,
+    "type": "text/html; charset=utf-8",
+    "bytes": 24601
+  },
+  {
+    "route": "/polish-audit-text",
+    "status": 404,
+    "type": "text/html; charset=utf-8",
+    "bytes": 24601
+  },
+  {
+    "route": "/_next/static/chunks/06l_pd3ozeo6z.js.map",
+    "status": 404,
+    "type": "text/plain; charset=utf-8",
+    "bytes": 9
+  },
+  {
+    "route": "/secret-santa-organiser-checklist.pdf",
+    "status": 200,
+    "type": "application/pdf",
+    "bytes": 3274,
+    "pdfHeader": true
+  },
+  {
+    "route": "/secret-santa-organiser-checklist.txt",
+    "status": 200,
+    "type": "text/plain; charset=UTF-8",
+    "bytes": 1461
+  },
+  {
+    "route": "/remote-secret-santa-planner.pdf",
+    "status": 200,
+    "type": "application/pdf",
+    "bytes": 3169,
+    "pdfHeader": true
+  },
+  {
+    "route": "/engraving-order-checklist.pdf",
+    "status": 200,
+    "type": "application/pdf",
+    "bytes": 3180,
+    "pdfHeader": true
+  }
+]

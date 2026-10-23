@@ -1,0 +1,3454 @@
+{
+  "routes": [
+    {
+      "route": "/",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk",
+      "deadLinks": 0,
+      "description": "Organise a free Secret Santa draw. Share your invite on WhatsApp, draw names privately, add wishlists from any shop and ask anonymous questions. No ads.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Free Secret Santa Generator & Organiser | CheckMyBasket",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Free Secret Santa Generator & Organiser | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/personalised-groomsmen-gifts",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/personalised-groomsmen-gifts",
+      "deadLinks": 0,
+      "description": "Plan personalised groomsmen gifts with names, wedding-party wording, consistent budgets, individual designs and a clear batch-order checklist.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Personalised groomsmen gifts: a practical ordering guide",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/personalised-groomsmen-gifts",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Personalised groomsmen gifts: a practical ordering guide | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/contact",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/contact",
+      "deadLinks": 0,
+      "description": "Get in touch with CheckMyBasket — questions, problems, feedback or data requests.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Contact | CheckMyBasket",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/contact",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Contact | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/privacy",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/privacy",
+      "deadLinks": 0,
+      "description": "What CheckMyBasket collects, optional analytics cookies, and your privacy choices. No ads.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Privacy Policy | CheckMyBasket",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/privacy",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Privacy Policy | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/personalised-gifts-for-dads",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/personalised-gifts-for-dads",
+      "deadLinks": 0,
+      "description": "Choose a personalised gift for Dad by everyday habits, meaningful wording and practical details, with current money clip designs and delivery checks.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Personalised gifts for dads: choosing something he will use",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/personalised-gifts-for-dads",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Personalised gifts for dads: choosing something he will use | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/secret-santa-gifts-under-50",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-under-50",
+      "deadLinks": 0,
+      "description": "Choose Secret Santa gifts under £50 with a focus on recipient fit, complete products, delivery and a comfortable group budget.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Secret Santa gifts under £50",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/secret-santa-gifts-under-50",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Secret Santa gifts under £50 | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/secret-santa-gifts-under-10",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-under-10",
+      "deadLinks": 0,
+      "description": "Choose a thoughtful Secret Santa gift under £10 with ideas for readers, stationery fans and puzzle lovers, plus tips for keeping delivery within budget.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Secret Santa gifts under £10",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/secret-santa-gifts-under-10",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Secret Santa gifts under £10 | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/cosy-secret-santa-gifts",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/cosy-secret-santa-gifts",
+      "deadLinks": 0,
+      "description": "Find cosy Secret Santa gift ideas for quiet evenings, with advice on textures, reading gifts, fragrance preferences and care.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Cosy Secret Santa gifts",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/cosy-secret-santa-gifts",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Cosy Secret Santa gifts | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/secret-santa-gifts-under-20",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-under-20",
+      "deadLinks": 0,
+      "description": "Choose a Secret Santa gift under £20 by interest, with tips for complete gifts, delivery costs and thoughtful presentation.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Secret Santa gifts under £20",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/secret-santa-gifts-under-20",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Secret Santa gifts under £20 | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/terms",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/terms",
+      "deadLinks": 0,
+      "description": "The plain-English terms for using CheckMyBasket's free Secret Santa service.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Terms of Use | CheckMyBasket",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/terms",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Terms of Use | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/funny-secret-santa-gifts",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/funny-secret-santa-gifts",
+      "deadLinks": 0,
+      "description": "Choose funny Secret Santa gifts that suit the recipient, with tips for kind humour, novelty products and workplace exchanges.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Funny Secret Santa gifts",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/funny-secret-santa-gifts",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Funny Secret Santa gifts | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/return",
+      "appleIcon": true,
+      "deadLinks": 0,
+      "description": "Return to your groups and wishlists using a verified recovery email on this device.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Return to CheckMyBasket",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/return",
+      "robots": "noindex, nofollow",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Return to CheckMyBasket | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/about",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/about",
+      "deadLinks": 0,
+      "description": "Why CheckMyBasket exists: Secret Santa without the ads, accounts, or awkward gifts.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "About | CheckMyBasket",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/about",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "About | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/secret-santa-gifts-for-gamers",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-for-gamers",
+      "deadLinks": 0,
+      "description": "Find Secret Santa gifts for gamers with platform and compatibility checks, complete-game advice and current video-gaming gifts up to £20.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Secret Santa gifts for gamers",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/secret-santa-gifts-for-gamers",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Secret Santa gifts for gamers | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/secret-santa-gifts-someone-you-dont-know",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-someone-you-dont-know",
+      "deadLinks": 0,
+      "description": "Choose a considerate Secret Santa gift for someone you do not know well, with three useful questions, a £20 example and current catalogue ideas.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Secret Santa gifts for someone you don’t know well",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/secret-santa-gifts-someone-you-dont-know",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Secret Santa gifts for someone you don’t know well | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/secret-santa-gifts-for-book-lovers",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-for-book-lovers",
+      "deadLinks": 0,
+      "description": "Choose book-lover Secret Santa gifts with checks for editions, duplicate titles, reading accessories and a £20 item-price catalogue selection.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Secret Santa gifts for book lovers",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/secret-santa-gifts-for-book-lovers",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Secret Santa gifts for book lovers | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/secret-santa-gifts-for-coffee-lovers",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-for-coffee-lovers",
+      "deadLinks": 0,
+      "description": "Choose coffee-lover Secret Santa gifts by brewing method, flavour preferences and useful accessories, with current coffee-interest ideas up to £20.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Secret Santa gifts for coffee lovers",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/secret-santa-gifts-for-coffee-lovers",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Secret Santa gifts for coffee lovers | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/gifts",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/gifts",
+      "deadLinks": 0,
+      "description": "Explore Secret Santa gift ideas from UK shops, with collections under £10, £20, £30 and £50. Find a gift within your group's budget.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Secret Santa Gift Ideas UK | CheckMyBasket",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/gifts",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Secret Santa Gift Ideas UK | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/guides",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/guides",
+      "deadLinks": 0,
+      "description": "Plan your Secret Santa, choose gifts by budget and interest, and get personalisation right with practical guides, invitation messages and printable checklists.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Secret Santa and gift guides | CheckMyBasket",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/guides",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Secret Santa and gift guides | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/secret-santa-wishlist-ideas",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-wishlist-ideas",
+      "deadLinks": 0,
+      "description": "Build a useful Secret Santa wishlist with examples under £10, £20 and £30, clear preferences, product details and considerate sharing tips.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "What to put on a Secret Santa wishlist",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/secret-santa-wishlist-ideas",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "What to Put on a Secret Santa Wishlist | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/secret-santa-gifts-under-30",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-under-30",
+      "deadLinks": 0,
+      "description": "Find Secret Santa gifts under £30 with advice on hobby gifts, quality details, useful sets and avoiding hidden extras.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Secret Santa gifts under £30",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/secret-santa-gifts-under-30",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Secret Santa gifts under £30 | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/secret-santa-gifts-for-colleagues",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-for-colleagues",
+      "deadLinks": 0,
+      "description": "Find considerate Secret Santa gifts for colleagues, with ideas by interest, workplace gift etiquette and a clear spending limit.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Secret Santa gifts for colleagues",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/secret-santa-gifts-for-colleagues",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Secret Santa gifts for colleagues | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/personalised-secret-santa-gifts",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/personalised-secret-santa-gifts",
+      "deadLinks": 0,
+      "description": "Choose personalised Secret Santa gifts with checks for spelling, options, final price, dispatch time and personalised returns.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Personalised Secret Santa gifts",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/personalised-secret-santa-gifts",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Personalised Secret Santa gifts | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/secret-santa-rules",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-rules",
+      "deadLinks": 0,
+      "description": "Organise a fair Secret Santa with clear rules for budgets, deadlines, wishlists and private draws. Includes a printable PDF organiser checklist.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Secret Santa rules",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/secret-santa-rules",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Secret Santa Rules & Organiser Checklist | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/personalised-money-clip-gift-guide",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/personalised-money-clip-gift-guide",
+      "deadLinks": 0,
+      "description": "A closer look at UtilityNestPro’s engraved Seigaiha money clip, with guidance on initials, recipient fit, clip-only pricing and gift-box options.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Personalised money clip gift guide",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/personalised-money-clip-gift-guide",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Personalised money clip gift guide | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/money-clip-engraving-ideas",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/money-clip-engraving-ideas",
+      "deadLinks": 0,
+      "description": "Explore original money clip engraving wording for initials, names and short messages, with a text preview, character count and printable ordering checklist.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Money clip engraving ideas: initials, names and short messages",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/money-clip-engraving-ideas",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Money clip engraving ideas: initials, names and short messages | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/create",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/create",
+      "deadLinks": 0,
+      "description": "Set up a free Secret Santa draw in 30 seconds. Name your group, set a budget, share the link. No account needed.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Create a Secret Santa Draw | CheckMyBasket",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/create",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Create a Secret Santa Draw | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/secret-santa-whatsapp",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-whatsapp",
+      "deadLinks": 0,
+      "description": "Organise a free Secret Santa draw with WhatsApp invitations. Follow the setup steps, copy an invitation message and keep everyone's match a surprise.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "How to Organise Secret Santa on WhatsApp | CheckMyBasket",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/secret-santa-whatsapp",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "How to Organise Secret Santa on WhatsApp | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/office-secret-santa",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/office-secret-santa",
+      "deadLinks": 0,
+      "description": "Plan an office Secret Santa with opt-in invitations, a clear budget, joining deadlines and wishlist etiquette. Includes a checklist and invitation template.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Office Secret Santa Guide & Organiser Checklist | CheckMyBasket",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/office-secret-santa",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Office Secret Santa Guide & Organiser Checklist | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/secret-santa-invitation-messages",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-invitation-messages",
+      "deadLinks": 0,
+      "description": "Copy 10 Secret Santa messages for WhatsApp and email: invitations, joining and exchange reminders, wishlist requests and thank-you notes.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Secret Santa invitation messages",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/secret-santa-invitation-messages",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Secret Santa Invitation Messages for WhatsApp & Email | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/secret-santa-odd-number",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-odd-number",
+      "deadLinks": 0,
+      "description": "See how Secret Santa works with 3, 5 or 7 people, with clear draw examples, exclusion checks and a practical organiser checklist.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Can you do Secret Santa with an odd number of people?",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/secret-santa-odd-number",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Can you do Secret Santa with an odd number of people? | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/remote-team-secret-santa",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/remote-team-secret-santa",
+      "deadLinks": 0,
+      "description": "Plan a remote team Secret Santa with optional participation, delivery deadlines, private address handling, a video-call reveal and a printable plan.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "How to organise Secret Santa for a remote team",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/remote-team-secret-santa",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "How to organise Secret Santa for a remote team | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/gifts/under-10",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/gifts/under-10",
+      "deadLinks": 0,
+      "description": "Great value crowd-pleasers. Explore gift ideas from UK shops for your Secret Santa exchange.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Gifts under £10 UK | CheckMyBasket",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/gifts/under-10",
+      "robots": "index, follow",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Gifts under £10 UK | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/gifts/under-20",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/gifts/under-20",
+      "deadLinks": 0,
+      "description": "Thoughtful gifts for a little more. Explore gift ideas from UK shops for your Secret Santa exchange.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Gifts under £20 UK | CheckMyBasket",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/gifts/under-20",
+      "robots": "index, follow",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Gifts under £20 UK | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/gifts/under-30",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/gifts/under-30",
+      "deadLinks": 0,
+      "description": "Something a little extra special. Explore gift ideas from UK shops for your Secret Santa exchange.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Gifts under £30 UK | CheckMyBasket",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/gifts/under-30",
+      "robots": "index, follow",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Gifts under £30 UK | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/gifts/under-50",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/gifts/under-50",
+      "deadLinks": 0,
+      "description": "Generous gifts for special people. Explore gift ideas from UK shops for your Secret Santa exchange.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Gifts under £50 UK | CheckMyBasket",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/gifts/under-50",
+      "robots": "index, follow",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Gifts under £50 UK | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/gifts/colleague",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/gifts/colleague",
+      "deadLinks": 0,
+      "description": "Thoughtful picks for your workmates. Explore gift ideas from UK shops for your Secret Santa exchange.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Gifts for colleagues UK | CheckMyBasket",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/gifts/colleague",
+      "robots": "index, follow",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Gifts for colleagues UK | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/gifts/funny",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/gifts/funny",
+      "deadLinks": 0,
+      "description": "Playful picks to make them smile. Explore gift ideas from UK shops for your Secret Santa exchange.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Funny Secret Santa gifts UK | CheckMyBasket",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/gifts/funny",
+      "robots": "index, follow",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Funny Secret Santa gifts UK | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/gifts/cosy",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/gifts/cosy",
+      "deadLinks": 0,
+      "description": "Warm treats for nights in. Explore gift ideas from UK shops for your Secret Santa exchange.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Cosy gifts UK | CheckMyBasket",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/gifts/cosy",
+      "robots": "index, follow",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Cosy gifts UK | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    },
+    {
+      "route": "/gifts/personalised",
+      "appleIcon": true,
+      "canonical": "https://www.checkmybasket.co.uk/gifts/personalised",
+      "deadLinks": 0,
+      "description": "Add their name or a special touch. Explore gift ideas from UK shops for your Secret Santa exchange.",
+      "h1": 1,
+      "headingSkips": [],
+      "lang": "en-GB",
+      "main": 1,
+      "manifest": true,
+      "missingAlt": 0,
+      "nested": 0,
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "ogTitle": "Personalised gifts UK | CheckMyBasket",
+      "ogType": "website",
+      "ogUrl": "https://www.checkmybasket.co.uk/gifts/personalised",
+      "robots": "index, follow",
+      "siteName": "CheckMyBasket",
+      "theme": "#FFFFFF",
+      "title": "Personalised gifts UK | CheckMyBasket",
+      "twitterImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "unlabelledInputs": [],
+      "unnamedButtons": 0,
+      "viewports": [
+        {
+          "width": 320,
+          "height": 740,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 414,
+          "height": 896,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 740,
+          "height": 320,
+          "overflow": false,
+          "smallLinks": []
+        },
+        {
+          "width": 2560,
+          "height": 1080,
+          "overflow": false,
+          "smallLinks": []
+        }
+      ]
+    }
+  ],
+  "console": [],
+  "viewportChecks": 400
+}

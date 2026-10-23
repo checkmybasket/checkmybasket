@@ -1,0 +1,64 @@
+{
+  "routes": [
+    {
+      "route": "/g/00000000-0000-4000-8000-000000000000",
+      "h1": [
+        "This group is private"
+      ],
+      "overflow": false,
+      "robots": "noindex, nofollow",
+      "title": "Your Secret Santa group | CheckMyBasket"
+    },
+    {
+      "route": "/g/00000000-0000-4000-8000-000000000000/reveal",
+      "body": "No match to show yetEither names haven't been drawn, or you joined after the draw.Back to group",
+      "h1": [
+        "No match to show yet"
+      ],
+      "overflow": false,
+      "robots": "noindex, nofollow",
+      "title": "Your Secret Santa match"
+    },
+    {
+      "route": "/g/00000000-0000-4000-8000-000000000000/settings",
+      "h1": [
+        "This group is private"
+      ],
+      "overflow": false,
+      "title": "Your Secret Santa group | CheckMyBasket",
+      "robots": "noindex, nofollow",
+      "finalUrl": "http://localhost:3100/g/00000000-0000-4000-8000-000000000000"
+    },
+    {
+      "route": "/join/polish-audit-invalid",
+      "h1": [
+        "This page could not load"
+      ],
+      "overflow": false,
+      "robots": "noindex, nofollow",
+      "title": "Join Secret Santa | CheckMyBasket",
+      "state": "Malformed invitation produces safe recovery UI"
+    },
+    {
+      "route": "/wishlists/invalid",
+      "body": "Wishlist not available in this browserOpen it in the browser where you created it, or use your verified email to sign in.Return & sign in",
+      "h1": [
+        "Wishlist not available in this browser"
+      ],
+      "overflow": false,
+      "robots": "noindex, nofollow",
+      "title": "Your wishlist | CheckMyBasket"
+    },
+    {
+      "route": "/w/invalid",
+      "body": "This wishlist isn't availableThe owner may have stopped sharing it or replaced the link. Ask them for a fresh link.Create your own wishlist",
+      "h1": [
+        "This wishlist isn't available"
+      ],
+      "overflow": false,
+      "robots": "noindex, nofollow",
+      "title": "A wishlist for you | CheckMyBasket"
+    }
+  ],
+  "logs": []
+}
