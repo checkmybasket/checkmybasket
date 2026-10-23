@@ -357,15 +357,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: OPEN
 - Completion note: Pending.
 
-### [ ] PERF 03 — P2
+### [x] PERF 03 — P2
 
 - Severity: P2
 - Location: Shared client bundle; app/layout.tsx and client import graph
 - Evidence: Lighthouse estimates 102KiB unused JavaScript on home/gifts and 93KiB on create. Largest emitted chunk is 293,704 bytes raw.
-- Fix: Attribute unused bytes to modules before editing; defer noncritical client functionality where profiling justifies it. Do not delete dependencies based solely on this estimate.
+- Fix: Current Lighthouse traces attribute about 78KB transferred / 64–78KB unused to the Supabase shared chunk, loaded on public gift pages by eager tool-route prefetch. Defer create-only recovery/QR/service imports until use and disable speculative private-tool prefetch. This changes network timing only, preserving navigation and creation behavior. Keep the essential React runtime.
 - Acceptance criteria: Record affected chunks and per-page transferred JS before/after; reduce proven unused initial code and verify every affected interaction.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Profiled unused code as the eagerly fetched Supabase chunk. Deferred create-only SDK/recovery/QR imports and private-tool prefetch; JS transfer fell 66,823 bytes on gifts and create, unused estimates fell to 29KiB. Browser validation and save-intent navigation work; build/lint/TypeScript pass. Gifts lab performance varied 95 to 92 while a11y/best-practices/SEO remain 100.
 
 ### [x] SEO 04 — P2
 

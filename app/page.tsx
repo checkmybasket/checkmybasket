@@ -118,7 +118,7 @@ export default function HomePage() {
                 Yes, if you have verified a recovery email. In your original
                 browser, use &ldquo;Save access to your group&rdquo; and follow
                 the verification email. On another device, use{" "}
-                <Link href="/return">Return to your group</Link> to request a
+                <Link prefetch={false} href="/return">Return to your group</Link> to request a
                 sign-in link. Adding a notification email alone does not enable
                 recovery. Without a verified recovery email, we cannot restore
                 your original member identity on another device.

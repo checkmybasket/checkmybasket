@@ -49,7 +49,7 @@ export function GiftCard({ id, title, price, shop, tags, url, image, description
           <a data-gift-retailer={shop} href={url} target="_blank" rel="noopener noreferrer sponsored" aria-label={`Shop at ${shop}: ${title} (opens in a new tab)`} className="inline-flex items-center justify-center gap-2 min-h-11 px-4 py-2 rounded-xl text-sm font-semibold bg-[var(--cmb-accent)] text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--cmb-primary)]">
             Shop at {shop} <ExternalLink size={13} strokeWidth={1.5} aria-hidden="true"/>
           </a>
-          {id ? <Link data-gift-save href={`/wishlists?gift=${encodeURIComponent(id)}`} aria-label={`Save to wishlist: ${title}`} className="flex min-h-11 items-center justify-center rounded-xl border border-[var(--cmb-border)] px-4 py-2 mt-2 text-sm font-semibold text-[var(--cmb-primary)] focus-visible:outline-2 focus-visible:outline-offset-2">Save to wishlist</Link> : null}
+          {id ? <Link prefetch={false} data-gift-save href={`/wishlists?gift=${encodeURIComponent(id)}`} aria-label={`Save to wishlist: ${title}`} className="flex min-h-11 items-center justify-center rounded-xl border border-[var(--cmb-border)] px-4 py-2 mt-2 text-sm font-semibold text-[var(--cmb-primary)] focus-visible:outline-2 focus-visible:outline-offset-2">Save to wishlist</Link> : null}
         </div>
       </div>
     </article>

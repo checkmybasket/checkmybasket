@@ -3,6 +3,7 @@ import { SITE_ORIGIN } from "@/lib/site";
 
 import { userError } from "@/lib/user-errors";
 import { useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Gift, Copy, MessageCircle, QrCode, ChevronLeft, Check, Share2, ArrowRight } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -10,11 +11,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
-import { createClient } from "@/lib/supabase/client";
-import { EmailRecovery } from "@/components/email-recovery";
 import { trackCreation } from "@/lib/analytics";
-import { QRCodeSvg } from "@/components/qr-code";
-import { ensureSession } from "@/lib/supabase/auth";
+
+const EmailRecovery = dynamic(() => import("@/components/email-recovery").then(value => value.EmailRecovery), {
+  loading: () => <div className="min-h-48 skeleton" role="status" aria-label="Loading email recovery options" />,
+});
+const QRCodeSvg = dynamic(() => import("@/components/qr-code").then(value => value.QRCodeSvg), {
+  loading: () => <div className="h-32 w-32 skeleton" role="status" aria-label="Loading invite QR code" />,
+});
 
 const BUDGET_PRESETS = [500, 1000, 1500, 2000, 2500] as const;
 interface FormData { groupName: string; budget: number; customBudget: string; exchangeDate: string; location: string; yourName: string; email: string; }
@@ -51,6 +55,7 @@ export default function CreatePage() {
     if (!validate() || busy) return;
     setBusy(true);
     try {
+      const [{ ensureSession }, { createClient }] = await Promise.all([import("@/lib/supabase/auth"), import("@/lib/supabase/client")]);
       await ensureSession();
       const budgetPence = form.budget === -1 ? null
         : form.budget === 0 ? Math.round(parseFloat(form.customBudget) * 100)
@@ -136,7 +141,7 @@ export default function CreatePage() {
           </Link>
         </div>
 
-        <EmailRecovery groupId={groupId} />
+        <div className="min-h-48"><EmailRecovery groupId={groupId} /></div>
 
         {/* Direct WhatsApp sharing remains available on every device. */}
         <Button onClick={shareWhatsApp} size="lg" className="w-full h-14 rounded-xl font-semibold mb-3 animate-fade-up animate-delay-200 text-white"

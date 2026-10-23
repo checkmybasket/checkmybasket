@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { GIFT_CATEGORIES } from "@/lib/gift-categories";
 
 export function Button({ href, children, variant = "primary" }: { href: string; children: ReactNode; variant?: "primary" | "secondary" | "inverse" }) {
-  return <Link href={href} className={`receipt-button receipt-button-${variant}`}>{children}</Link>;
+  return <Link href={href} prefetch={href.startsWith("/wishlists") ? false : undefined} className={`receipt-button receipt-button-${variant}`}>{children}</Link>;
 }
 
 const receiptBlocks = [
