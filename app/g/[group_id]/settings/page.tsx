@@ -55,7 +55,16 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
   const isOrganiser = me === group.organiser_id;
   const inviteLink = `${window.location.origin}/join/${group.invite_code}`;
 
-  async function copyLink() { await navigator.clipboard.writeText(inviteLink); setCopied(true); toast.success("Link copied"); setTimeout(()=>setCopied(false),2000); }
+  async function copyLink() {
+    try {
+      await navigator.clipboard.writeText(inviteLink);
+      setCopied(true);
+      toast.success("Link copied");
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      toast.error("Could not copy the link. Select the invite link above and copy it manually.");
+    }
+  }
 
   async function saveName() {
     if (!group || !groupName.trim() || busy) return;

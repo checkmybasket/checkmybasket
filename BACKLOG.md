@@ -606,3 +606,13 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Acceptance criteria: Enter and the fixed submit button use the same handler, invalid submission focuses the first field without backend writes, and build/lint/TypeScript pass.
 - Status: DONE
 - Completion note: Connected fields and fixed submit action to the labelled create form, retaining custom validation and the existing async handler. Production browser Enter triggers errors and focuses group-name; the submit action belongs to create-draw. No backend write; build/lint/TypeScript pass.
+
+### [x] STATE 06 — P1
+
+- Severity: P1
+- Location: app/g/[group_id]/settings/page.tsx; /g/[group_id]/settings
+- Evidence: Copy invite link awaits clipboard.writeText without a catch; denied clipboard permission rejects without an actionable message. The invite URL is already displayed.
+- Fix: Catch clipboard failures and explain how to copy the visible URL manually; retain success feedback.
+- Acceptance criteria: Success still sets copied state; failure shows a safe manual-copy instruction without an unhandled rejection. Build, lint and TypeScript pass; loaded permission-denial browser test requires OWNER 02 fixtures.
+- Status: DONE
+- Completion note: Caught clipboard permission failures with a manual-copy instruction; success feedback is unchanged. Build/lint/TypeScript pass. Loaded browser denial coverage remains in OWNER 02.
