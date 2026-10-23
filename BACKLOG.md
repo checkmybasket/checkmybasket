@@ -71,6 +71,8 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 
 - Completion note: Prediction inserts now require an open round. Real closed/revealed denial tests preserve the original row/count; valid open predictions and member-only revealed reads pass. Local advisor clean; build/lint/TypeScript and 110 regressions pass. Applied locally only.
 
+- Production release: Applied and read back as version 20261023162053. Normalized SQL hash matches 3400d68c42d2fd46c004658b01d44e4f; the live prediction insert policy requires an open round and same-group subject. Server history preserved; repo/local history aligned.
+
 ### [x] SECURITY 01 — P0
 
 - Severity: P0
