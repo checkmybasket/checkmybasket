@@ -254,15 +254,15 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: DONE
 - Completion note: The old 4.2s LCP does not reproduce in the current base: current initial home was 97 with 2.60s LCP; final is 96 with 2.76s LCP. No speedup is claimed from single-run variation. Initial script transfer falls from 262,483 to 213,575 bytes; no console or accessibility regression.
 
-### [ ] QA 01 — P1
+### [x] QA 01 — P1
 
 - Severity: P1
 - Location: Audit tooling and key pages
 - Evidence: Baseline captured with ephemeral Lighthouse 13.5.0: home 86/100/100/100; create 89/81/100/100; gifts 79/98/100/100 (performance/accessibility/best practices/SEO). Create fails the requested accessibility threshold.
 - Fix: Preserve baseline reports and rerun the same version/settings after fixes, including representative category and private pages once fixtures exist; do not add a project dependency.
 - Acceptance criteria: Record before/after performance, accessibility, best-practices and SEO scores; final accessibility, best-practices and SEO are each >=95.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Saved comparable current-version baselines, four final Lighthouse reports, bundle and console measurements in audit/FINAL_REPORT.md and audit/metrics.json. Final home/create/gifts/guide scores are 96/95/95/96 for performance and 100 for accessibility/best practices/SEO on every measured page. Private certification remains OWNER 02; no performance gain is inferred from single-run noise.
 
 ### [ ] QA 02 — P1
 
