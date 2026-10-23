@@ -58,6 +58,8 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 
 - Completion note: Prediction inserts now require subjects in the same group. Real member/outsider/impersonation and private-before-reveal checks pass; denied writes leave no rows. Local advisor clean; build/lint/TypeScript and 110 regressions pass. Applied locally only.
 
+- Production release: Applied and read back as version 20261023161924. Normalized SQL hash matches 5ece573546d0f5377c53a0564602769b; live policy requires a subject in the round group and matching authenticated predictor. Server history preserved; repo/local history aligned.
+
 ### [x] SECURITY 05 — P0
 
 - Severity: P0
