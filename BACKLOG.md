@@ -557,12 +557,12 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Unified positive whole-pence validation with submission and the existing integer API contract. Browser accepts £0.50 locally while rejecting sub-penny amounts; blank required names prevent backend calls. Clear format/too-large messages replace inconsistent parsing. Build/lint/TypeScript pass.
 
-### [ ] UI 07 — P1
+### [x] UI 07 — P1
 
 - Severity: P1
 - Location: app/globals.css and user-content headings/cards; all routes
 - Evidence: shared text has no overflow-wrap rule; share headings, settings names and other user-controlled text can contain unbroken names wider than their mobile container.
 - Fix: allow long unbroken text to wrap through an inherited text token; preserve explicit truncation and intentional nowrap controls.
 - Acceptance criteria: actual shared heading/card components render long strings plus empty/single/200-item fixtures without page overflow at requested widths. Remove the temporary test route before committing; build/lint/TypeScript pass.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Added inherited overflow-wrap:anywhere. Real InfoPage, GiftCard and GiftResults components passed long-string plus empty/single/200-item fixture checks at all requested widths, short landscape and ultrawide; 640px zoom-reflow proxy also fits. Temporary route removed; build/lint/TypeScript pass. Native browser zoom remains unverified in QA 02.

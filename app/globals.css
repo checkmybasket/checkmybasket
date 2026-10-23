@@ -127,6 +127,7 @@
     @apply bg-background text-foreground;
     font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
     font-size: 1rem; line-height: 1.5; min-height: 100dvh;
+    overflow-wrap: anywhere;
     -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
   }
   h1,h2,h3,h4,h5,h6 { font-family: var(--font-inter),"Helvetica Neue",sans-serif; line-height: 1.2; }
