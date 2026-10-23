@@ -437,12 +437,12 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Removed unused date-fns; source import scan is clear and build/lint/TypeScript pass. Existing local regressions pass after dependency cleanup.
 
-### [ ] HYGIENE 04 — P2
+### [x] HYGIENE 04 — P2
 
 - Severity: P2
 - Location: package.json/package-lock.json; build tooling and all routes
 - Evidence: No application, library, script or test source imports zustand. Current views use React state.
 - Fix: remove the unused zustand dependency only; no replacement or new dependency.
 - Acceptance criteria: full build/lint/TypeScript and local regressions pass; application imports resolve.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Removed unused zustand; source import scan is clear and build/lint/TypeScript pass. Existing local regressions pass after dependency cleanup.
