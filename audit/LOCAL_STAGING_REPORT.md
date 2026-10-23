@@ -86,3 +86,13 @@ Live production/preview deployment checks, domain/account configuration, real pr
 - [Issue backlog](../BACKLOG.md)
 
 The earlier public Lighthouse/bundle measurements remain in [FINAL_REPORT.md](FINAL_REPORT.md) with their original baseline provenance. They were not remeasured against a different local backend and presented as a performance gain.
+
+## Private follow-up: predictions and real wishlist stress
+
+The organiser completed a local game round through start, three category choices, prediction submission, results reveal and actual-gift logging. Selected values appeared in the locked confirmation and the actual gift appeared after saving. This verifies the organiser path; it does not certify the remaining participant/permission matrix.
+
+A real wishlist was created through the browser, including a 195-character unbroken title and 840-character unbroken note. The initial mobile owner view overflowed to 6781px. **UI 10** adds a shrink constraint to the shared item card. Fifty final viewport checks pass: owner/shared single-item, owner 200-item, shared 200-item list and shared 200-item cards, each at the ten audit sizes. The additional 199 items were seeded only into the disposable local database. See [wishlist-stress-matrix.json](wishlist-stress-matrix.json). No application dependency or data model changed.
+
+**A11Y 22** exposes prediction category selection with aria-pressed. Browser checks verified choosing, replacing and returning to a choice. Both fixes separately passed staging build, lint, TypeScript and all 110 local regression checks. Captured normal-state browser warnings/errors: zero. Lighthouse was not rerun for these narrowly scoped changes; the measurements above retain their original provenance.
+
+Remaining coverage is narrower: participant/game permission edges, empty/shared interactions beyond the checks above, controlled mutation failures, native 200% zoom, screen reader, physical devices and clipboard denial. Live deployment checks remain a release gate.
