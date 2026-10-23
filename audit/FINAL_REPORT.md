@@ -1,5 +1,7 @@
 # CheckMyBasket production polish report
 
+> Staging follow-up: environment isolation preparation is now recorded in [staging-preparation.json](staging-preparation.json) and [the staging runbook](../docs/staging.md). The original polish measurements below are unchanged; cloud provisioning awaits the required location/organisation decision.
+
 23 October 2026 · branch `polish/production-audit` · base `237cf0c` · repository `seo-release`.
 
 The public polish implementation is complete. 55 findings are fixed or verified as already resolved in the current application; three issues remain NEEDS OWNER. The complete production definition of done is **not certified** until the owner checks below pass. Changes are local commits; nothing was pushed or deployed. No database schemas/models, real memberships, draws, reservations or customer data were changed, and no emails or WhatsApp messages were sent.

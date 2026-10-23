@@ -242,7 +242,7 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Fix: NEEDS OWNER: provide a staging Supabase project and disposable multi-member groups, including pre-draw, drawn, empty, single-item and large-data states; confirm notification email is safely isolated.
 - Acceptance criteria: Run every private-route interaction, role/permission failure, slow/failed request, long-string case, requested viewport and 200% zoom without affecting real users.
 - Status: NEEDS OWNER
-- Completion note: Read-only Supabase inventory found only the production CheckMyBasket project and no branches; both local environment files target that project. NEEDS OWNER: provision an isolated staging project, three disposable users, organiser/member roles, pre/post-draw groups and wishlist fixtures (empty/single/200 items), with email delivery captured in a test inbox. Then test join/draw/reveal/settings/messages/reservations/recovery and failure/permission states. Do not reuse real groups or participants.
+- Completion note: Read-only Supabase inventory found only the production CheckMyBasket project and no branches; both local environment files target that project. Staging preparation is recorded in docs/staging.md: branch creation was rejected on Free; a location/organisation choice is pending. STAGE 01/02 fix environment CSP and guard integration writes without changing production credentials. NEEDS OWNER: provision an isolated staging project, three disposable users, organiser/member roles, pre/post-draw groups and wishlist fixtures (empty/single/200 items), with email delivery captured in a test inbox. Then test join/draw/reveal/settings/messages/reservations/recovery and failure/permission states. Do not reuse real groups or participants.
 
 ### [x] PERF 01 — P1
 
@@ -333,6 +333,26 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Acceptance criteria: every public page emits absolute OG/Twitter images, site name, type and route-specific text/URL; build/lint/TypeScript and browser tag audit pass.
 - Status: DONE
 - Completion note: Added complete shared OG/Twitter defaults to every metadata override. Browser confirms guide image, site name and website type with absolute production image URL. Existing page text and URLs are preserved; build/lint/TypeScript pass.
+
+### [x] STAGE 01 — P1
+
+- Severity: P1
+- Location: next.config.ts; all routes with Supabase requests
+- Evidence: connect-src hardcodes the production Supabase HTTPS and Realtime origins even when NEXT_PUBLIC_SUPABASE_URL points at staging; an isolated backend would be blocked by CSP.
+- Fix: derive both allowed origins from the configured Supabase URL, preserve the existing production fallback, require HTTPS except local loopback, and reject embedded credentials. No wildcard access or new dependency.
+- Acceptance criteria: staging/local origin tests pass, invalid/insecure origins fail closed; build/lint/TypeScript pass. Actual staging requests require provisioned environment.
+- Status: DONE
+- Completion note: CSP now derives HTTPS and Realtime origins from the configured backend, retaining the production fallback and strict origin validation. Three staging/local/invalid-origin tests and build/lint/TypeScript pass; no backend configuration was changed.
+
+### [x] STAGE 02 — P1
+
+- Severity: P1
+- Location: tests/wishlists*-live.cjs; integration test configuration
+- Evidence: Three integration scripts silently read .env.local, which currently targets production. Running them for staging would create production anonymous users unless the app env file were replaced.
+- Fix: Require explicit staging-only test variables and matching project ref; reject the known production project, privileged keys and production app domain before any request. Keep current app environment files unchanged. No new dependency.
+- Acceptance criteria: Missing/mismatched/production targets fail before network calls; explicit disposable project/local targets work in guard tests; build/lint/TypeScript and local regression tests pass. Live success requires provisioned staging.
+- Status: DONE
+- Completion note: All three live scripts now require explicit isolated test variables and matching project ref. Production, privileged keys and unsafe app targets fail before requests. Four guard tests, all 27 local Node tests and build/lint/TypeScript pass. No live integration writes were run.
 
 ### [x] STATE 01 — P1
 
@@ -603,23 +623,3 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Acceptance criteria: obsolete styling references are absent; current tokens/marks render consistently; build/lint/TypeScript and final responsive/contrast checks pass.
 - Status: DONE
 - Completion note: Align rectangular controls and panels with the shared brand radius. Intentional avatar/status pills remain round; build/lint/TypeScript pass.
-
-### [x] STAGE 01 — P1
-
-- Severity: P1
-- Location: next.config.ts; all routes with Supabase requests
-- Evidence: connect-src hardcodes the production Supabase HTTPS and Realtime origins even when NEXT_PUBLIC_SUPABASE_URL points at staging; an isolated backend would be blocked by CSP.
-- Fix: derive both allowed origins from the configured Supabase URL, preserve the existing production fallback, require HTTPS except local loopback, and reject embedded credentials. No wildcard access or new dependency.
-- Acceptance criteria: staging/local origin tests pass, invalid/insecure origins fail closed; build/lint/TypeScript pass. Actual staging requests require provisioned environment.
-- Status: DONE
-- Completion note: CSP now derives HTTPS and Realtime origins from the configured backend, retaining the production fallback and strict origin validation. Three staging/local/invalid-origin tests and build/lint/TypeScript pass; no backend configuration was changed.
-
-### [x] STAGE 02 — P1
-
-- Severity: P1
-- Location: tests/wishlists*-live.cjs; integration test configuration
-- Evidence: Three integration scripts silently read .env.local, which currently targets production. Running them for staging would create production anonymous users unless the app env file were replaced.
-- Fix: Require explicit staging-only test variables and matching project ref; reject the known production project, privileged keys and production app domain before any request. Keep current app environment files unchanged. No new dependency.
-- Acceptance criteria: Missing/mismatched/production targets fail before network calls; explicit disposable project/local targets work in guard tests; build/lint/TypeScript and local regression tests pass. Live success requires provisioned staging.
-- Status: DONE
-- Completion note: All three live scripts now require explicit isolated test variables and matching project ref. Production, privileged keys and unsafe app targets fail before requests. Four guard tests, all 27 local Node tests and build/lint/TypeScript pass. No live integration writes were run.

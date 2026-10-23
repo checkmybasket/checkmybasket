@@ -28,6 +28,8 @@ node scripts/gift-selection/test.cjs
 node scripts/gift-verifier/test.cjs
 ```
 
+See [docs/staging.md](docs/staging.md) for staging provisioning, guarded integration-test variables and outstanding setup gates.
+
 The commands above run local checks. Files named `*-db.cjs`, `*-live.cjs` and other integration scripts require a separately reviewed isolated fixture environment; they are not part of local verification.
 
 ## Production configuration
