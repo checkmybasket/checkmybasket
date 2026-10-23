@@ -30,7 +30,7 @@ export default function GuidesPage() {
     <nav aria-label="Guide topics" className="flex flex-wrap gap-x-5 gap-y-2">{groups.map(group => <a key={group.id} href={`#${group.id}`} className="inline-flex min-h-11 items-center underline text-sm">{group.heading}</a>)}</nav>
     <div className="flex flex-wrap gap-3">
       <Link href="/create" className="inline-flex min-h-11 items-center rounded-lg bg-[var(--cmb-primary)] px-4 text-white font-semibold text-sm">Create a free draw</Link>
-      <Link href="/wishlists" className="inline-flex min-h-11 items-center rounded-lg border border-[var(--cmb-border)] px-4 font-semibold text-sm">Create a wishlist</Link>
+      <Link prefetch={false} href="/wishlists" className="inline-flex min-h-11 items-center rounded-lg border border-[var(--cmb-border)] px-4 font-semibold text-sm">Create a wishlist</Link>
       <Link href="/gifts" className="inline-flex min-h-11 items-center underline text-sm">Browse current gifts</Link>
     </div>
     {groups.map(group => <Section key={group.id} id={group.id} heading={group.heading}>

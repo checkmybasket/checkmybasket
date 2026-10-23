@@ -47,7 +47,7 @@ export default async function MoneyClipGuide() {
     </Section>
     <Section heading="More personalised gift ideas">
       <p><Link href="/money-clip-engraving-ideas" className="underline">Engraving wording and preview</Link> · <Link href="/personalised-gifts-for-dads" className="underline">Personalised gifts for dads</Link> · <Link href="/personalised-groomsmen-gifts" className="underline">Groomsmen gift planning</Link></p>
-      <p><Link className="underline" href="/personalised-secret-santa-gifts">Read our personalised Secret Santa choosing guide</Link> · <Link className="underline" href="/gifts/personalised">Browse personalised gifts</Link> · <Link className="underline" href="/wishlists">Create a wishlist</Link></p>
+      <p><Link className="underline" href="/personalised-secret-santa-gifts">Read our personalised Secret Santa choosing guide</Link> · <Link className="underline" href="/gifts/personalised">Browse personalised gifts</Link> · <Link prefetch={false} className="underline" href="/wishlists">Create a wishlist</Link></p>
     </Section>
   </InfoPage>;
 }

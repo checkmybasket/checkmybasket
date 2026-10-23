@@ -136,7 +136,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
           Open it in the browser where you created it, or use your verified
           email to sign in.
         </p>
-        <Link className={secondary} href="/return">
+        <Link prefetch={false} className={secondary} href="/return">
           Return &amp; sign in
         </Link>
         {error && (

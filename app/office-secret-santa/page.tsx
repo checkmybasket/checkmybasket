@@ -78,7 +78,7 @@ export default function OfficeGuide() {
         <p>Before the exchange, send a practical reminder about the date, location or delivery arrangements. Agree how to label wrapped gifts and what to do if someone is away. If a participant&apos;s plans change after the draw, ask them to contact the organiser so the group can arrange a solution.</p>
       </Section>
       <Section heading="Help colleagues keep access to their draw">
-        <p>Ask participants to return using the browser they joined with. For another device, they should first verify a recovery email through <strong>Save access to your group</strong> in their original browser, then use <Link href="/return" className="underline">Return &amp; sign in</Link> to request a sign-in link. A notification email alone does not enable recovery.</p>
+        <p>Ask participants to return using the browser they joined with. For another device, they should first verify a recovery email through <strong>Save access to your group</strong> in their original browser, then use <Link prefetch={false} href="/return" className="underline">Return &amp; sign in</Link> to request a sign-in link. A notification email alone does not enable recovery.</p>
         <p>Without verified recovery, we cannot restore the original member identity on another device. Share the <Link href="/#faq-heading" className="underline">Secret Santa FAQs</Link> with colleagues who have questions before they join.</p>
       </Section>
       <p><Link href="/create" className="inline-flex min-h-11 items-center rounded-xl bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Set up your office Secret Santa</Link></p>

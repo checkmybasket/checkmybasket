@@ -107,7 +107,7 @@ export function SharedWishlist({ token }: { token: string }) {
             {error}
           </p>
         )}
-        <Link className={`${secondary} mt-5`} href="/wishlists">
+        <Link prefetch={false} className={`${secondary} mt-5`} href="/wishlists">
           Create your own wishlist
         </Link>
       </WishlistShell>
@@ -147,7 +147,7 @@ export function SharedWishlist({ token }: { token: string }) {
           <p className="text-sm">
             This is your list. Reservations stay hidden in your owner view.
           </p>
-          <Link className={`${secondary} mt-3`} href={`/wishlists/${list.id}`}>
+          <Link prefetch={false} className={`${secondary} mt-3`} href={`/wishlists/${list.id}`}>
             Edit my wishlist
           </Link>
         </div>
@@ -316,7 +316,7 @@ export function SharedWishlist({ token }: { token: string }) {
           <p className="text-sm mt-4 text-[var(--cmb-text-secondary)]">
             Your reservation is saved in this browser. Optional verified email
             lets you manage it on another device.{" "}
-            <Link className="underline" href="/wishlists">
+            <Link prefetch={false} className="underline" href="/wishlists">
               See your reservations
             </Link>
             .

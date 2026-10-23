@@ -42,7 +42,7 @@ export function WishlistFaq() {
           <p className="mt-3 text-sm leading-relaxed text-[var(--cmb-text-secondary)]">
             Yes, if you verify a recovery email using &ldquo;Save your wishlist access&rdquo;
             in your original browser. On another device, use{" "}
-            <Link href="/return" className="underline underline-offset-4">Return &amp; sign in</Link>{" "}
+            <Link prefetch={false} href="/return" className="underline underline-offset-4">Return &amp; sign in</Link>{" "}
             to request a sign-in link. Without verified email recovery, clearing
             browser data or switching devices can mean losing access to your
             lists and reservations. A shared wishlist link does not give you

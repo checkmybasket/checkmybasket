@@ -40,7 +40,7 @@ export default function GiftGuide() {
 
       <GiftGuidePicks category={guide.category} budget={guide.budget}/>
       <Section heading="More help choosing and organising">
-        <p><Link href="/secret-santa-gifts-under-10" className="underline">Secret Santa gifts under £10</Link> · <Link href="/wishlists" className="underline">Create a wishlist</Link> · <Link href="/create" className="underline">Create a free draw</Link></p>
+        <p><Link href="/secret-santa-gifts-under-10" className="underline">Secret Santa gifts under £10</Link> · <Link prefetch={false} href="/wishlists" className="underline">Create a wishlist</Link> · <Link href="/create" className="underline">Create a free draw</Link></p>
       </Section>
     </InfoPage>;
 }

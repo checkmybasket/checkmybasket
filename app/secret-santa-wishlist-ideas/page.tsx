@@ -23,7 +23,7 @@ export default function WishlistGuide() {
       { id: "create-and-share-your-list-in-checkmybasket", label: "Create and share your list" },
     ]} />
     <p className="text-lg leading-relaxed">Put a few things you would actually enjoy on your Secret Santa wishlist, with enough detail for someone else to choose confidently. Include options below the spending limit, explain your preferences and leave room for the buyer to surprise you.</p>
-    <Link href="/wishlists" className="inline-flex min-h-11 items-center rounded-xl bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Create a wishlist</Link>
+    <Link prefetch={false} href="/wishlists" className="inline-flex min-h-11 items-center rounded-xl bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Create a wishlist</Link>
     <Section id="start-with-three-to-five-useful-ideas" heading="Start with three to five useful ideas">
       <p>A short list is easier to use than dozens of unrelated links. Try one practical item, one hobby idea and one small treat, provided each fits the agreed budget. Include a lower-priced option so the buyer has room for postage or wrapping.</p>
       <p>For example, a reader could add a particular paperback, a bookmark and a note saying they enjoy historical fiction. A stationery fan could specify an A5 notebook with dotted pages rather than simply writing “notebook”. These details help even when the exact item is unavailable.</p>
@@ -70,7 +70,7 @@ export default function WishlistGuide() {
       </div>
     </Section>
     <Section id="create-and-share-your-list-in-checkmybasket" heading="Create and share your list in CheckMyBasket">
-      <p>If you are in a Secret Santa group, add ideas to your wishlist there so your Santa can use them. You can also <Link href="/wishlists" className="underline">create a personal wishlist</Link> without a group, add product links from different shops or describe a gift without a link.</p>
+      <p>If you are in a Secret Santa group, add ideas to your wishlist there so your Santa can use them. You can also <Link prefetch={false} href="/wishlists" className="underline">create a personal wishlist</Link> without a group, add product links from different shops or describe a gift without a link.</p>
       <GuideScreenshot src="/guides/wishlist-setup.jpg" width={1280} height={1470} alt="CheckMyBasket wishlist creation form with an example display name, wishlist title and a £20 budget note" caption="Actual personal wishlist setup screen, filled with fictional example details without saving a list. Add a short budget and interests note here; the wishlist starts private." />
       <p>A personal wishlist is private until you enable sharing. Once shared, anyone with its link can view it, reserve gifts and forward the link. Share it with your intended audience and leave delivery addresses and private details out of the list. You can turn sharing off in the editor.</p>
       <p>On personal wishlists, a reservation helps visitors avoid duplicates; it does not buy the gift or take payment. Buyers still need to order at the retailer. Reservations stay hidden in your normal owner view, so you can keep the surprise.</p>

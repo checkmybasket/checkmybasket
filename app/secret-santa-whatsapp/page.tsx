@@ -54,8 +54,8 @@ export default function WhatsAppGuide() {
         <p>Do not post your match or a screenshot of your reveal in the group chat. Look at your recipient&apos;s wishlist and preferences, or use anonymous questions in CheckMyBasket to ask what they would like. Browse <Link href="/gifts" className="underline">UK gift ideas by budget</Link> if you need inspiration.</p>
       </Section>
       <Section heading="Returning on another device">
-        <p>If you have already verified a recovery email, use <Link href="/return" className="underline">Return &amp; sign in</Link> to request a sign-in link. Saving a notification email alone does not enable recovery. Without a verified recovery email, we cannot restore your original member identity on a new device.</p>
-        <p>For wishlists outside a Secret Santa group, you can also <Link href="/wishlists" className="underline">create a personal wishlist</Link> and choose whether to share it.</p>
+        <p>If you have already verified a recovery email, use <Link prefetch={false} href="/return" className="underline">Return &amp; sign in</Link> to request a sign-in link. Saving a notification email alone does not enable recovery. Without a verified recovery email, we cannot restore your original member identity on a new device.</p>
+        <p>For wishlists outside a Secret Santa group, you can also <Link prefetch={false} href="/wishlists" className="underline">create a personal wishlist</Link> and choose whether to share it.</p>
       </Section>
       <p><Link href="/create" className="inline-flex min-h-11 items-center rounded-xl bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Set up your free draw</Link></p>
       <Section heading="More Secret Santa planning guides"><OrganiserGuideLinks /></Section>

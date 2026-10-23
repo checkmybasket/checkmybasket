@@ -14,10 +14,10 @@ export function WishlistShell({ children }: { children: React.ReactNode }) {
             CheckMyBasket
           </Link>
           <nav className="flex flex-wrap gap-x-4 text-sm" aria-label="Wishlist navigation">
-            <Link className="inline-flex min-h-11 items-center underline underline-offset-4" href="/wishlists">
+            <Link prefetch={false} className="inline-flex min-h-11 items-center underline underline-offset-4" href="/wishlists">
               My wishlists
             </Link>
-            <Link className="inline-flex min-h-11 items-center underline underline-offset-4" href="/return">
+            <Link prefetch={false} className="inline-flex min-h-11 items-center underline underline-offset-4" href="/return">
               Return &amp; sign in
             </Link>
           </nav>

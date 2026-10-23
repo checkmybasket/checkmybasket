@@ -149,7 +149,7 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
       <p className="text-sm mb-6 max-w-sm text-[var(--cmb-text-secondary)]">
         Already joined? Use your verified email to return on this device. To join for the first time, open the invite link from your organiser.
       </p>
-      <Link href={`/return?group=${group_id}`} className={buttonVariants({ variant: "default", size: "default", className: "rounded-xl h-11 px-6 mb-3" })}>Return with email</Link>
+      <Link prefetch={false} href={`/return?group=${group_id}`} className={buttonVariants({ variant: "default", size: "default", className: "rounded-xl h-11 px-6 mb-3" })}>Return with email</Link>
       <Link href="/" className={buttonVariants({ variant: "outline", size: "default", className: "rounded-xl h-11 px-6 border border-[var(--cmb-border-strong)]" })}>Back to home</Link>
     </div>
   );

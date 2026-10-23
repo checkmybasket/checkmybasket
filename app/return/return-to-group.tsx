@@ -194,7 +194,7 @@ export function ReturnToGroup() {
                 <ul className="space-y-2">
                   {wishlists.map((list) => (
                     <li key={list.id}>
-                      <Link
+                      <Link prefetch={false}
                         href={`/wishlists/${list.id}`}
                         className="block rounded-xl border border-[var(--cmb-border)] p-3 font-medium underline"
                       >
@@ -203,7 +203,7 @@ export function ReturnToGroup() {
                     </li>
                   ))}
                 </ul>
-                <Link href="/wishlists" className="block mt-3 underline">
+                <Link prefetch={false} href="/wishlists" className="block mt-3 underline">
                   Manage wishlists and gifts you are giving
                 </Link>
               </section>
