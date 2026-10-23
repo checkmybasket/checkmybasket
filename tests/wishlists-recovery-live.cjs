@@ -64,7 +64,7 @@ const file = "/tmp/wishlist-recovery-test.json";
       p_item: item,
       p_action: "reserve",
     });
-    const subjects = [a.data, b.data].map((data, i) => ({
+    const subjects = [a.data, b.data].map((data) => ({
       id: data.user.id,
       session: data.session,
       email: `wishlist-test-${crypto.randomUUID()}@example.invalid`,

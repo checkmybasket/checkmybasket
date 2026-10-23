@@ -4,14 +4,14 @@
 
 Current baseline: build PASS, TypeScript PASS, lint FAIL (CommonJS test harnesses are checked with TypeScript-only require rules, two restricted local variable names and a this-alias). Earlier Lighthouse scores are historical, not the baseline of this version. Current OG artwork exists in app/opengraph-image.tsx and will be reused after visual QA. No additional OG artwork is required by assumption.
 
-### [ ] BUILD 02 — P0
+### [x] BUILD 02 — P0
 
 - Severity: P0
 - Location: eslint.config.mjs, scripts/*/test.cjs, tests/wishlists-recovery-live.cjs; all routes
 - Evidence: npm run lint exits 1 before any changes. CommonJS imports trigger no-require-imports; local module variable triggers Next rule; test mock aliases this; unused callback index.
 - Fix: allow intentional require imports only in .cjs tools/tests; rename harness variables and remove alias/unused index without disabling application rules.
 - Acceptance criteria: build, lint and tsc pass; existing local analytics, selection, verifier and wishlist/email tests pass. No database/live tests run.
-- Status: OPEN
+- Status: DONE — build, lint, TypeScript, 16 analytics, 9 gift-flow, 54 verifier and 16 wishlist/email regression checks pass.
 
 # CheckMyBasket production polish backlog
 
