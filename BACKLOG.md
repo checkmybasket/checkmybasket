@@ -357,6 +357,17 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 
 - Completion note: One explicit credentialed manifest link serves the unchanged static manifest with correct MIME type. Local build/lint/TypeScript and 110 regressions pass. Protected verification build Lighthouse best practices is 100 (was 92), accessibility 100, and console audit passes on home/create/gifts; only expected noindex SEO failure remains. Before/after reports retained.
 
+### [x] DEPLOY 04 — P1
+
+- Severity: P1
+- Location: supabase/migrations/20260714090000_group_members_surprise_me.sql; full migration inventory
+- Evidence: Full 29-version comparison found repo/local version 20260714090000 versus production version 20260714101843. Normalized SQL hashes match fe6ed3fda4a8216588138e103e17d6a2; no SQL difference exists.
+- Fix: Align the filename and disposable local history with the already applied production version. Do not replay the SQL or edit production history.
+- Acceptance criteria: All 29 production/repo/local migration version/name pairs match; SQL bytes remain unchanged. Build/lint/TypeScript and local regressions pass.
+- Status: DONE
+
+- Completion note: Aligned the identical surprise-me migration to production version 20260714101843 and repaired local history only. All 29 production/repo/local version/name pairs now match; SQL hash unchanged. Build/lint/TypeScript and 110 regressions pass; production history preserved.
+
 ### [x] FORM 01 — P1
 
 - Severity: P1
