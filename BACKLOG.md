@@ -267,15 +267,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: OPEN
 - Completion note: Pending.
 
-### [ ] STATE 01 — P1
+### [x] STATE 01 — P1
 
 - Severity: P1
 - Location: app/not-found.tsx (missing); unmatched URLs and invalid gift categories
 - Evidence: Browser /polish-audit-missing shows default '404 / This page could not be found' with no recovery link.
 - Fix: Create a branded 404 with useful home and gift links.
 - Acceptance criteria: Unknown URLs return HTTP 404, match the app design and provide working keyboard-accessible recovery links.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Added a branded information-page 404 with home and gift recovery links. Browser confirms the heading and destinations; HTTP 404 and build/lint/TypeScript pass.
 
 ### [ ] STATE 02 — P1
 
