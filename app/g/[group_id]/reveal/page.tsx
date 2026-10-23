@@ -34,7 +34,8 @@ export default function RevealPage({ params }: { params: Promise<{ group_id: str
   useEffect(() => {
     (async () => {
       const supabase = createClient();
-      const { data: { user } } = await supabase.auth.getUser();
+      const { data: { user }, error: authError } = await supabase.auth.getUser();
+      if (authError && authError.name !== "AuthSessionMissingError" && authError.status !== 401 && authError.status !== 403) throw authError;
       if (!user) { setStage("nodraw"); return; }
 
       const { data: draw, error: drawError } = await supabase.from("draws")

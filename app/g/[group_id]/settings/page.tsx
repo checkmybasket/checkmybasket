@@ -31,7 +31,8 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
   useEffect(() => {
     (async () => {
       const supabase = createClient();
-      const { data: { user } } = await supabase.auth.getUser();
+      const { data: { user }, error: authError } = await supabase.auth.getUser();
+      if (authError && authError.name !== "AuthSessionMissingError" && authError.status !== 401 && authError.status !== 403) throw authError;
       if (!user) { router.replace(`/g/${group_id}`); return; }
       setMe(user.id);
       const { data, error } = await supabase.from("groups")

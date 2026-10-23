@@ -70,60 +70,61 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
 
   const refresh = useCallback(async () => {
     try {
-    const supabase = createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) { setLoadState("noaccess"); return; }
+      const supabase = createClient();
+      const { data: { user }, error: authError } = await supabase.auth.getUser();
+      if (authError && authError.name !== "AuthSessionMissingError" && authError.status !== 401 && authError.status !== 403) throw authError;
+      if (!user) { setLoadState("noaccess"); return; }
 
-    const { data: group, error: groupError } = await supabase.from("groups")
-      .select("id,name,mode,budget_amount,exchange_date,exchange_location,invite_code,draw_status,organiser_id")
-      .eq("id", group_id).maybeSingle();
-    if (groupError) throw groupError;
-    if (!group) { setLoadState("noaccess"); return; }
+      const { data: group, error: groupError } = await supabase.from("groups")
+        .select("id,name,mode,budget_amount,exchange_date,exchange_location,invite_code,draw_status,organiser_id")
+        .eq("id", group_id).maybeSingle();
+      if (groupError) throw groupError;
+      if (!group) { setLoadState("noaccess"); return; }
 
-    const [members, wishes, myDraw, messages, exclusions, round] = await Promise.all([
-      supabase.from("group_members").select("id,user_id,role,name,likes,dislikes,sizes,surprise_me,joined_at").eq("group_id", group_id).order("joined_at"),
-      supabase.from("wishlist_items").select("id,user_id,title,url,price,shop_name,notes,priority,created_at").eq("group_id", group_id).order("created_at"),
-      supabase.from("draws").select("id,giver_id,recipient_id,gift_bought").eq("group_id", group_id).maybeSingle(),
-      supabase.from("anon_messages").select("id,recipient_id,content,is_reply,parent_message_id,created_at").eq("group_id", group_id).order("created_at"),
-      supabase.from("exclusions").select("id,user_a_id,user_b_id").eq("group_id", group_id),
-      supabase.from("prediction_rounds").select("id,status").eq("group_id", group_id).maybeSingle(),
-    ]);
+      const [members, wishes, myDraw, messages, exclusions, round] = await Promise.all([
+        supabase.from("group_members").select("id,user_id,role,name,likes,dislikes,sizes,surprise_me,joined_at").eq("group_id", group_id).order("joined_at"),
+        supabase.from("wishlist_items").select("id,user_id,title,url,price,shop_name,notes,priority,created_at").eq("group_id", group_id).order("created_at"),
+        supabase.from("draws").select("id,giver_id,recipient_id,gift_bought").eq("group_id", group_id).maybeSingle(),
+        supabase.from("anon_messages").select("id,recipient_id,content,is_reply,parent_message_id,created_at").eq("group_id", group_id).order("created_at"),
+        supabase.from("exclusions").select("id,user_a_id,user_b_id").eq("group_id", group_id),
+        supabase.from("prediction_rounds").select("id,status").eq("group_id", group_id).maybeSingle(),
+      ]);
 
-    for (const result of [members, wishes, myDraw, messages, exclusions, round]) if (result.error) throw result.error;
+      for (const result of [members, wishes, myDraw, messages, exclusions, round]) if (result.error) throw result.error;
 
-    const itemIds = (wishes.data ?? []).map(w => w.id);
-    const [claims, predictions, actuals, bought] = await Promise.all([
-      itemIds.length
-        ? supabase.from("wishlist_claims").select("id,wishlist_item_id,claimed_by").in("wishlist_item_id", itemIds)
-        : Promise.resolve({ data: [] as ClaimRow[] }),
-      round.data
-        ? supabase.from("predictions").select("id,predictor_id,subject_id,predicted_category").eq("round_id", round.data.id)
-        : Promise.resolve({ data: [] as PredRow[] }),
-      round.data
-        ? supabase.from("actual_gifts").select("id,recipient_id,actual_category").eq("round_id", round.data.id)
-        : Promise.resolve({ data: [] as ActualRow[] }),
-      group.organiser_id === user.id && group.draw_status !== "pending"
-        ? supabase.rpc("gifts_bought_count", { p_group_id: group_id })
-        : Promise.resolve({ data: null }),
-    ]);
+      const itemIds = (wishes.data ?? []).map(w => w.id);
+      const [claims, predictions, actuals, bought] = await Promise.all([
+        itemIds.length
+          ? supabase.from("wishlist_claims").select("id,wishlist_item_id,claimed_by").in("wishlist_item_id", itemIds)
+          : Promise.resolve({ data: [] as ClaimRow[] }),
+        round.data
+          ? supabase.from("predictions").select("id,predictor_id,subject_id,predicted_category").eq("round_id", round.data.id)
+          : Promise.resolve({ data: [] as PredRow[] }),
+        round.data
+          ? supabase.from("actual_gifts").select("id,recipient_id,actual_category").eq("round_id", round.data.id)
+          : Promise.resolve({ data: [] as ActualRow[] }),
+        group.organiser_id === user.id && group.draw_status !== "pending"
+          ? supabase.rpc("gifts_bought_count", { p_group_id: group_id })
+          : Promise.resolve({ data: null }),
+      ]);
 
-    for (const result of [claims, predictions, actuals, bought]) if ("error" in result && result.error) throw result.error;
+      for (const result of [claims, predictions, actuals, bought]) if ("error" in result && result.error) throw result.error;
 
-    setData({
-      me: user.id,
-      group: group as GroupRow,
-      members: members.data ?? [],
-      wishes: wishes.data ?? [],
-      claims: claims.data ?? [],
-      myDraw: myDraw.data ?? null,
-      messages: messages.data ?? [],
-      exclusions: exclusions.data ?? [],
-      round: round.data ?? null,
-      predictions: predictions.data ?? [],
-      actuals: actuals.data ?? [],
-      giftsBought: bought.data ?? null,
-    });
-    setLoadState("ready");
+      setData({
+        me: user.id,
+        group: group as GroupRow,
+        members: members.data ?? [],
+        wishes: wishes.data ?? [],
+        claims: claims.data ?? [],
+        myDraw: myDraw.data ?? null,
+        messages: messages.data ?? [],
+        exclusions: exclusions.data ?? [],
+        round: round.data ?? null,
+        predictions: predictions.data ?? [],
+        actuals: actuals.data ?? [],
+        giftsBought: bought.data ?? null,
+      });
+      setLoadState("ready");
     } catch { setLoadState("error"); }
   }, [group_id]);
 

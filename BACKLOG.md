@@ -415,7 +415,7 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Fix: show the shared recoverable error panel on failed reads while preserving absent-group/no-match handling. This is an explicitly flagged error-state behavior change; successful flows and models are unchanged.
 - Acceptance criteria: build/lint/TypeScript pass; initial rejected loads have a retry action; valid absent-resource states stay distinct. Private fixture validation remains OWNER 02.
 - Status: DONE
-- Completion note: Initial reads now route rejected/backend failures to retryable recovery instead of permanent skeletons, false empty data or invalid-invite copy. Absent records retain existing states. Build/lint/TypeScript pass; valid private fixtures remain OWNER 02.
+- Completion note: Initial reads now route rejected/backend failures, including returned auth transport errors, to retryable recovery instead of permanent skeletons, false empty data or invalid-invite copy. Absent records retain existing states. Build/lint/TypeScript pass; valid private fixtures remain OWNER 02.
 
 ### [x] HYGIENE 02 — P2
 
