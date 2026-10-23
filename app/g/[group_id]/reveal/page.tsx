@@ -102,7 +102,7 @@ export default function RevealPage({ params }: { params: Promise<{ group_id: str
 
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-12">
         <div className="w-full max-w-sm">
-          {stage === "loading" && <div className="rounded-3xl h-64 skeleton" />}
+          {stage === "loading" && <div role="status" aria-label="Loading your match" className="rounded-3xl h-64 skeleton" />}
           {stage === "nodraw" && (
             <div className="text-center">
               <Lock size={36} strokeWidth={1.5} className="mx-auto mb-4 text-[var(--cmb-text-muted)]" />

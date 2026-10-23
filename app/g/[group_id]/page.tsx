@@ -134,7 +134,7 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
   if (loadState === "error") return <PageRecovery retry={() => void refresh()} />;
 
   if (loadState === "loading") return (
-    <div className="min-h-dvh flex items-center justify-center bg-[var(--cmb-bg)]">
+    <div role="status" aria-label="Loading your group" className="min-h-dvh flex items-center justify-center bg-[var(--cmb-bg)]">
       <div className="w-full max-w-2xl px-4 space-y-4">
         <div className="rounded-2xl h-36 skeleton" />
         <div className="rounded-2xl h-64 skeleton" />

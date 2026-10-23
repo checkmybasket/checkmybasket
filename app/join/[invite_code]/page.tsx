@@ -107,7 +107,7 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
   if (loadState === "error") return <PageRecovery retry={() => window.location.reload()} />;
 
   if (loadState === "loading") return (
-    <div className="min-h-dvh flex items-center justify-center bg-[var(--cmb-bg)]">
+    <div role="status" aria-label="Loading your invitation" className="min-h-dvh flex items-center justify-center bg-[var(--cmb-bg)]">
       <div className="w-full max-w-md px-4 space-y-4">
         <div className="rounded-2xl h-40 skeleton" />
         <div className="rounded-2xl h-56 skeleton" />

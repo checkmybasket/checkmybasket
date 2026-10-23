@@ -397,15 +397,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Added a valid manifest and 180/192/512px icons from the existing basket vector. Built PNG dimensions and image/png metadata verified; manifest icon paths match outputs. Build/lint/TypeScript pass; no replacement artwork invented.
 
-### [ ] STATE 04 — P2
+### [x] STATE 04 — P2
 
 - Severity: P2
 - Location: app/loading.tsx and segment loading files (missing); async route transitions
 - Evidence: There are no segment loading boundaries. Interactive views do contain local load states; those do not cover all server/navigation waits.
 - Fix: Add layout-matched loading boundaries where async server navigation can suspend.
 - Acceptance criteria: Throttled transitions show an accessible loading state with stable layout; no indefinite spinner on failure.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Added document, catalogue and group/wishlist navigation skeletons with accessible status text, and labelled existing client loading states. Existing reduced-motion CSS applies. Build/lint/TypeScript pass; private slow-network fixture coverage remains OWNER 02.
 
 ### [x] STATE 05 — P1
 

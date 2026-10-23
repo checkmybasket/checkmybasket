@@ -46,7 +46,7 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
   if (loadFailed) return <PageRecovery retry={() => window.location.reload()} />;
 
   if (!group || !me) return (
-    <div className="min-h-dvh flex items-center justify-center bg-[var(--cmb-bg)]">
+    <div role="status" aria-label="Loading group settings" className="min-h-dvh flex items-center justify-center bg-[var(--cmb-bg)]">
       <div className="w-full max-w-xl px-4 space-y-4"><div className="rounded-2xl h-40 skeleton"/><div className="rounded-2xl h-40 skeleton"/></div>
     </div>
   );
