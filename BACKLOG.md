@@ -207,15 +207,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: NEEDS OWNER
 - Completion note: Pending.
 
-### [ ] PERF 01 — P1
+### [x] PERF 01 — P1
 
 - Severity: P1
 - Location: app/page.tsx; app/layout.tsx; /
 - Evidence: Lighthouse mobile homepage LCP is 4.2s and performance is 86 in the captured baseline.
 - Fix: Profile the LCP element and critical font/style/render path; reduce the demonstrated delay without changing product behavior or hiding useful content.
 - Acceptance criteria: Repeat comparable mobile runs; record LCP and performance changes with no visual, accessibility or console regressions.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: The old 4.2s LCP does not reproduce in the current base: current initial home was 97 with 2.60s LCP; final is 96 with 2.76s LCP. No speedup is claimed from single-run variation. Initial script transfer falls from 262,483 to 213,575 bytes; no console or accessibility regression.
 
 ### [ ] QA 01 — P1
 
