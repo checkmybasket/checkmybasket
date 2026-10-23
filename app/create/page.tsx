@@ -37,7 +37,11 @@ export default function CreatePage() {
     if (!form.yourName.trim())  e.yourName  = "Please enter your name";
     if (form.budget === 0) { const b = parseInt(form.customBudget)*100; if (isNaN(b)||b<=0) e.customBudget="Please enter a valid amount"; }
     if (form.email.trim() && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email.trim())) e.email = "Please enter a valid email address or leave it blank";
-    setErrors(e); return Object.keys(e).length === 0;
+    setErrors(e);
+    const firstInvalid = (["groupName", "customBudget", "yourName", "email"] as const).find(key => e[key]);
+    const inputIds = { groupName: "group-name", customBudget: "custom-budget", yourName: "organiser-name", email: "email" };
+    if (firstInvalid) document.getElementById(inputIds[firstInvalid])?.focus();
+    return !firstInvalid;
   }
 
   async function handleCreate() {
@@ -180,7 +184,7 @@ export default function CreatePage() {
 
         {/* Group name */}
         <Field htmlFor="group-name" label="Group name" error={errors.groupName} required>
-          <Input id="group-name" placeholder="e.g. Office Secret Santa 2026" value={form.groupName}
+          <Input id="group-name" aria-required="true" aria-invalid={!!errors.groupName} aria-describedby={errors.groupName ? "group-name-error" : undefined} placeholder="e.g. Office Secret Santa 2026" value={form.groupName}
             onChange={e => setForm(f => ({ ...f, groupName:e.target.value }))}
             className="h-12 text-base rounded-xl" style={{ borderColor:errors.groupName?"var(--cmb-error)":"var(--cmb-border-strong)" }}/>
         </Field>
@@ -202,24 +206,24 @@ export default function CreatePage() {
             <div className="mt-3 relative">
               <Label htmlFor="custom-budget" className="sr-only">Custom budget in pounds</Label>
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-[var(--cmb-text-secondary)]">£</span>
-              <Input id="custom-budget" type="number" inputMode="decimal" placeholder="Enter amount" value={form.customBudget}
+              <Input id="custom-budget" aria-invalid={!!errors.customBudget} aria-describedby={errors.customBudget ? "custom-budget-error" : undefined} type="number" inputMode="decimal" placeholder="Enter amount" value={form.customBudget}
                 onChange={e => setForm(f => ({ ...f, customBudget:e.target.value }))}
                 className="h-12 pl-7 text-base rounded-xl" style={{ borderColor:errors.customBudget?"var(--cmb-error)":"var(--cmb-border-strong)" }}/>
-              {errors.customBudget && <p className="mt-1 text-sm text-[var(--cmb-error)]">{errors.customBudget}</p>}
+              {errors.customBudget && <p id="custom-budget-error" role="alert" className="mt-1 text-sm text-[var(--cmb-error)]">{errors.customBudget}</p>}
             </div>
           )}
         </div>
 
         <Field htmlFor="exchange-date" label="Gift exchange day" hint="Optional">
-          <Input id="exchange-date" type="date" value={form.exchangeDate} onChange={e => setForm(f => ({ ...f, exchangeDate:e.target.value }))}
+          <Input id="exchange-date" aria-describedby="exchange-date-hint" type="date" value={form.exchangeDate} onChange={e => setForm(f => ({ ...f, exchangeDate:e.target.value }))}
             className="h-12 text-base rounded-xl border border-[var(--cmb-border-strong)]"/>
         </Field>
         <Field htmlFor="exchange-location" label="Exchange location" hint="Optional">
-          <Input id="exchange-location" placeholder="e.g. The Rose & Crown, 7pm" value={form.location} onChange={e => setForm(f => ({ ...f, location:e.target.value }))}
+          <Input id="exchange-location" aria-describedby="exchange-location-hint" placeholder="e.g. The Rose & Crown, 7pm" value={form.location} onChange={e => setForm(f => ({ ...f, location:e.target.value }))}
             className="h-12 text-base rounded-xl border border-[var(--cmb-border-strong)]"/>
         </Field>
         <Field htmlFor="organiser-name" label="Your name" error={errors.yourName} required>
-          <Input id="organiser-name" placeholder="What should we call you?" value={form.yourName} onChange={e => setForm(f => ({ ...f, yourName:e.target.value }))}
+          <Input id="organiser-name" aria-required="true" aria-invalid={!!errors.yourName} aria-describedby={errors.yourName ? "organiser-name-error" : undefined} placeholder="What should we call you?" value={form.yourName} onChange={e => setForm(f => ({ ...f, yourName:e.target.value }))}
             className="h-12 text-base rounded-xl" style={{ borderColor:errors.yourName?"var(--cmb-error)":"var(--cmb-border-strong)" }}/>
         </Field>
         <div>
@@ -251,9 +255,9 @@ function Field({ htmlFor, label, children, hint, error, required }: { htmlFor:st
       <Label htmlFor={htmlFor} className="text-base font-medium mb-1.5 flex items-center gap-1">
         {label}{required && <span className="text-[var(--cmb-accent)]">*</span>}
       </Label>
-      {hint && <p className="text-sm mb-2 text-[var(--cmb-text-muted)]">{hint}</p>}
+      {hint && <p id={`${htmlFor}-hint`} className="text-sm mb-2 text-[var(--cmb-text-muted)]">{hint}</p>}
       {children}
-      {error && <p className="mt-1 text-sm text-[var(--cmb-error)]">{error}</p>}
+      {error && <p id={`${htmlFor}-error`} role="alert" className="mt-1 text-sm text-[var(--cmb-error)]">{error}</p>}
     </div>
   );
 }

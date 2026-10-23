@@ -67,15 +67,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Existing labels retained; added the missing custom-budget label. Browser confirms all six displayed inputs have labels; build, lint and TypeScript pass.
 
-### [ ] A11Y 02 — P1
+### [x] A11Y 02 — P1
 
 - Severity: P1
 - Location: app/create/page.tsx:232; /create
 - Evidence: Submit an empty form: errors appear, but aria-invalid and role=alert counts stay zero; focus remains on submit.
 - Fix: Associate field errors, set invalid state and focus the first invalid field or an announced summary.
 - Acceptance criteria: Keyboard/screen-reader users receive the errors and can navigate to each affected input.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Added invalid states, linked error/hint IDs and first-invalid focus. Production browser confirms group-name focus and two announced field errors; build/lint/TypeScript pass.
 
 ### [ ] A11Y 03 — P1
 
