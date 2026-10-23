@@ -256,7 +256,7 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
           {myDraw ? "Your match is ready and waiting." : "You joined after the draw — ask your organiser about a redraw."}
         </p>
         {myDraw && (
-          <Link href={`/g/${group.id}/reveal`} className={buttonVariants({ variant: "default", size: "lg", className: "h-12 px-8 rounded-[var(--cmb-radius)] font-semibold bg-[var(--cmb-accent)] text-white" })}>
+          <Link href={`/g/${group.id}/reveal`} className={cn(buttonVariants({ variant: "default", size: "lg" }), "h-auto min-h-12 max-w-full whitespace-normal px-4 py-3 sm:px-8 rounded-[var(--cmb-radius)] font-semibold bg-[var(--cmb-accent)] text-white")}>
               See who you&apos;re buying for <ArrowRight size={18} strokeWidth={1.5} className="ml-2"/>
             </Link>
         )}

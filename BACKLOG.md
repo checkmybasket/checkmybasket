@@ -724,12 +724,12 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: DONE
 - Completion note: Shared text inputs now have a mobile-only 44px minimum. Loaded pending-group measurements at 320/375/414px show 44px inputs and no overflow; larger explicit and compact desktop sizing remain intact. Build/lint/TypeScript and local regressions pass.
 
-### [ ] UI 09 — P1
+### [x] UI 09 — P1
 
 - Severity: P1
 - Location: app/g/[group_id]/page.tsx; drawn-group match CTA at 320px
 - Evidence: Browser document width is 323px at a 320px viewport; the See who you are buying for link reaches x=323.125 inside a padded card because its label cannot wrap and uses wide padding.
 - Fix: Merge button classes explicitly, allow the full label to wrap, cap width to the card and use responsive padding with a comfortable minimum height. Do not shorten or change the label meaning.
 - Acceptance criteria: CTA stays inside the card at every requested width, remains fully readable/clickable and at least 44px high; loaded browser/build/lint/TypeScript pass.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Merged link classes explicitly, enabled wrapping and responsive padding with a minimum height. At 320px the full CTA is 224x66px and ends at x=272; all ten widths have no overflow or undersized controls. Build/lint/TypeScript and 110 local checks pass.
