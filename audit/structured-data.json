@@ -1,0 +1,22 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@id": "https://www.checkmybasket.co.uk/#website",
+        "@type": "WebSite",
+        "inLanguage": "en-GB",
+        "name": "CheckMyBasket",
+        "url": "https://www.checkmybasket.co.uk"
+      },
+      {
+        "@id": "https://www.checkmybasket.co.uk/#app",
+        "@type": "WebApplication",
+        "description": "Organise a Secret Santa draw, share invitations and add wishlists from any shop.",
+        "inLanguage": "en-GB",
+        "name": "CheckMyBasket",
+        "url": "https://www.checkmybasket.co.uk"
+      }
+    ]
+  }
+]

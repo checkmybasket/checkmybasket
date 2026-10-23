@@ -616,3 +616,13 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Acceptance criteria: Success still sets copied state; failure shows a safe manual-copy instruction without an unhandled rejection. Build, lint and TypeScript pass; loaded permission-denial browser test requires OWNER 02 fixtures.
 - Status: DONE
 - Completion note: Caught clipboard permission failures with a manual-copy instruction; success feedback is unchanged. Build/lint/TypeScript pass. Loaded browser denial coverage remains in OWNER 02.
+
+### [x] SEO 09 — P2
+
+- Severity: P2
+- Location: app/page.tsx; /
+- Evidence: Source and rendered homepage contain no JSON-LD despite describing a real website and browser application.
+- Fix: Add static WebSite/WebApplication structured data using the shared production origin and existing public description. Do not invent reviews, ratings, organisation details or search actions. Schema references: https://schema.org/WebSite and https://schema.org/WebApplication.
+- Acceptance criteria: Rendered JSON-LD parses, names both real types, uses production URLs and contains no invented claims; build/lint/TypeScript and homepage browser/Lighthouse checks pass.
+- Status: DONE
+- Completion note: Added truthful homepage WebSite/WebApplication JSON-LD using SITE_ORIGIN. Rendered JSON parses and contains only public claims; build/lint/TypeScript pass and homepage Lighthouse is 96/100/100/100 with no console findings.

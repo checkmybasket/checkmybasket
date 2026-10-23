@@ -1,3 +1,4 @@
+import { SITE_ORIGIN } from "@/lib/site";
 import { socialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -23,6 +24,16 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <div className="receipt-home">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            { "@type": "WebSite", "@id": `${SITE_ORIGIN}/#website`, name: "CheckMyBasket", url: SITE_ORIGIN, inLanguage: "en-GB" },
+            { "@type": "WebApplication", "@id": `${SITE_ORIGIN}/#app`, name: "CheckMyBasket", url: SITE_ORIGIN, description: "Organise a Secret Santa draw, share invitations and add wishlists from any shop.", inLanguage: "en-GB" },
+          ],
+        }).replace(/</g, "\\u003c") }}
+      />
       <a className="receipt-skip-link" href="#main-content">
         Skip to content
       </a>
