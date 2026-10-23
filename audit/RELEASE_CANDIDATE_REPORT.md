@@ -1,5 +1,7 @@
 # CheckMyBasket release candidate
 
+Superseded release status: owner checks were explicitly approved and this candidate is now live on customer domains. See [PRODUCTION_RELEASE.md](PRODUCTION_RELEASE.md) for fresh public-domain verification. The sections below retain pre-promotion evidence.
+
 23 October 2026. This is the current release status; earlier audit reports retain historical measurements and stage-by-stage evidence.
 
 ## Current state

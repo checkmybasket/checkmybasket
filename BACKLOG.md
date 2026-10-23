@@ -4,6 +4,8 @@
 
 Phase 1 summary was presented before implementation. Phase 2 changes are committed by issue ID. Phase 3 evidence and before/after measurements are in [audit/FINAL_REPORT.md](audit/FINAL_REPORT.md). Local staging follow-up is in [audit/LOCAL_STAGING_REPORT.md](audit/LOCAL_STAGING_REPORT.md).
 
+Release update: owner checks explicitly approved; verified candidate promoted to customer domains. Current count: 83 issues, 81 closed including owner acceptance, two NEEDS OWNER follow-ups (SECURITY 02 and SECURITY 06). See [audit/PRODUCTION_RELEASE.md](audit/PRODUCTION_RELEASE.md). Earlier phase summaries below retain historical scope.
+
 Some original evidence and line numbers came from an older checkout. Each finding was reconciled against this newer base before implementation; completion notes distinguish fixes made here from defects already resolved in the newer base. Older checkout Lighthouse scores are not used as this branch's baseline.
 
 ## Stack and routes
@@ -399,14 +401,14 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 
 - Completion note: Both forms use safe actionable backend errors while retaining local validation and known limits. Controlled REST failures retain drafts and re-enable submit; restored retries save edits exactly once (200 items, one matching gift). Build/lint/TypeScript and 110 checks pass. Evidence: audit/save-failure-checks.json.
 
-### [ ] OWNER 02 — P1
+### [x] OWNER 02 — P1
 
 - Severity: P1
 - Location: Authenticated /g/[group_id], /reveal, /settings and /join/[invite_code] QA
 - Evidence: No isolated test project or valid disposable multi-member fixtures were identified. Production group membership, draws, messages and deletion were not mutated.
 - Fix: Provision the user-selected local Supabase environment with disposable multi-member groups and isolated email; retain human/manual acceptance checks as NEEDS OWNER until every private-state criterion is verified.
 - Acceptance criteria: Run every private-route interaction, role/permission failure, slow/failed request, long-string case, requested viewport and 200% zoom without affecting real users.
-- Status: NEEDS OWNER
+- Status: DONE — owner accepted remaining checks on 23 October 2026; no additional agent-measured device evidence is claimed.
 - Completion note: Local staging is now provisioned with Docker/Colima, all 26 migrations, disposable pending/drawn groups and captured native/custom email. Core browser, member/non-member privacy, recovery and notification idempotency checks pass; production is unchanged. NEEDS OWNER: complete the remaining exhaustive private games/large-data/permission matrix and manual device/zoom/clipboard-denial checks before certifying every private-state acceptance criterion. See audit/LOCAL_STAGING_REPORT.md; this issue is not claimed fully passed.
 
 ### [x] PERF 01 — P1
@@ -429,14 +431,14 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: DONE
 - Completion note: Saved comparable current-version baselines, four final Lighthouse reports, bundle and console measurements in audit/FINAL_REPORT.md and audit/metrics.json. Final home/create/gifts/guide scores are 96/95/95/96 for performance and 100 for accessibility/best practices/SEO on every measured page. Private certification remains OWNER 02; no performance gain is inferred from single-run noise.
 
-### [ ] QA 02 — P1
+### [x] QA 02 — P1
 
 - Severity: P1
 - Location: Every route/component; remaining audit coverage
 - Evidence: Initial browser pass covers public-route headings, metadata, nested controls, console and horizontal overflow only. 200% zoom, all interactions, detailed contrast/focus, failed requests and long-data states are not yet verified.
 - Fix: Finish the checklist and add each demonstrated defect as its own issue before fixing it; retain evidence per route/state.
 - Acceptance criteria: Complete route/state matrix with keyboard, zoom, touch, contrast, long strings, empty/single/hundreds of items and network-failure results. No untested cell is reported as passed.
-- Status: NEEDS OWNER
+- Status: DONE — remaining owner gates explicitly approved on 23 October 2026. Production promotion and fresh 40-route/Lighthouse checks pass; see audit/PRODUCTION_RELEASE.md. Historical unmeasured cells remain identified, not reported as observed passes.
 - Completion note: Public 400-case audit plus 70 loaded private viewport checks, private labels/headings/targets, actual member/non-member flows, anonymous messages, captured email/recovery and controlled failure/loading tests are recorded in audit/. NEEDS OWNER: finish remaining participant/game permission and mutation-failure states and real 200% zoom, screen-reader, device and clipboard-denial checks; then verify live production/preview headers, redirects, APP_URL links, domain/mailbox and merchant/download behavior after a reviewed release. Follow-up: organiser predictions through actual-gift logging and 50 real saved wishlist viewport checks (single/200 items, owner/shared/list/cards) now pass, with zero browser warnings/errors. A11Y 22 and UI 10 are verified fixes. SECURITY 03–05 now verify participant/nonmember game boundaries, and FORM 03 verifies retained drafts plus failed-save retries; those fixes are local and committed, not deployed. Fresh normal-state browser console is clean. Follow-up: sampled keyboard/focus traversal and A11Y 23 shared heading checks pass; read-only live canonicals/headers/sitemap/redirects pass, but 24 live OG tags await the already implemented branch release. See docs/owner-release-checks.md for manual gates. Release review is prepared in docs/release-review.md with targets, migration order and rollback considerations. Draft PR #3 and protected preview are now available. Authorized authenticated public-response checks pass with noindex/robots intact (audit/protected-preview-checks.json); private preview flows remain blocked on isolated cloud-backend configuration. Current status: SECURITY 03–05 are live in production with matching SQL hashes, all 29 migration inventories align, and the final protected candidate passes 40 rendered public routes with zero console events. Native 200% public/shared samples pass; actual device/screen-reader results remain pending. DEPLOY 03 removes protected-manifest console errors; Lighthouse best practices/accessibility are 100, with intentional protected-host noindex SEO. See audit/RELEASE_CANDIDATE_REPORT.md. Untested states are not passed.
 
 ### [ ] SECURITY 02 — P1

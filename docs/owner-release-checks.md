@@ -1,5 +1,7 @@
 # Remaining owner checks before release
 
+23 October 2026 update: the owner explicitly approved all owner checks, then authorized release. The candidate is now promoted. The unchecked entries below preserve the original checklist and are not claims of agent-observed human testing. See ../audit/PRODUCTION_RELEASE.md. SECURITY 02 and SECURITY 06 retain their specific follow-up instructions in BACKLOG.md.
+
 Use the running isolated app at http://localhost:3101. Keep disposable staging data; do not use production identities or real email addresses for these checks. Record browser/device, date, result and any screenshot in the audit report.
 
 - [ ] Native 200% browser zoom (partial native pass: home/create/gifts/Return and shared wishlist list/cards at 1920×1080; private owner/group views still pending): check home, create, gifts, Return, owner/shared wishlist, group tabs and settings. Confirm readable content, reachable actions and no page-level horizontal scroll. The recorded 640px reflow proxy is not proof of native zoom.

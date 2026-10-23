@@ -5,7 +5,7 @@
     "id": "dpl_7YiSVs9LvqgMxzNgeSCZ6oNEx8hK",
     "url": "https://checkmybasket-71t9f0oor-hassan-amjad-s-projects-1.vercel.app",
     "target": "production",
-    "promotion": "not promoted to customer domains",
+    "promotion": "promoted to customer domains on 2026-10-23 after explicit owner approval",
     "verifiedRuntimeFilesMatchLighthouseCandidate": 198,
     "websiteRuntimeMatchesCurrentCheckoutFiles": 146
   },
@@ -26,7 +26,9 @@
       "normalizedSqlMd5": "3400d68c42d2fd46c004658b01d44e4f"
     }
   ],
-  "customerAliasesVerifiedDeployment": "dpl_4CCvUnK2GER4ZiDYxcPeR1TPCwmt",
+  "customerAliasesVerifiedDeployment": "dpl_7YiSVs9LvqgMxzNgeSCZ6oNEx8hK",
+  "ownerChecks": "Owner explicitly approved all owner checks; not agent-measured device evidence",
+  "currentReleaseReport": "audit/PRODUCTION_RELEASE.md",
   "build": "pass",
   "lint": "pass",
   "typeCheck": "pass",

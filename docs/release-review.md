@@ -1,5 +1,7 @@
 # Production polish release review
 
+23 October 2026 release update: owner checks approved; tested candidate promoted to both customer domains. Fresh public Lighthouse accessibility/best-practices/SEO are 100 on home/create/gifts, with zero captured browser console warnings/errors across 40 routes. See audit/PRODUCTION_RELEASE.md. The original pre-release review follows; PR #3 remains draft and main is not merged.
+
 Production polish and local acceptance are ready for review; this draft does not claim the production release is complete.
 
 The change adds per-route social metadata and brand icons, consistent shared styling, accessible controls/headings/focus, safe loading/error/empty states, lighter initial page JavaScript and isolated local Supabase/mail staging. It also closes three verified game authorization gaps: actual gifts require round membership, prediction subjects must share the group, and submissions require an open round.
