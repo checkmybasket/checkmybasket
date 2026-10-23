@@ -92,4 +92,4 @@ No DNS, domain/account settings, fabricated brand assets or live-data actions we
 
 - [Backlog](../BACKLOG.md), individual issue commits on `polish/production-audit`.
 - [Desktop homepage](screenshots/home-desktop.png) and [mobile create screen](screenshots/create-mobile.png).
-- Source/build tests passed before marking code issues done; final source passed build/lint/TypeScript and all 99 local regressions. Documentation/evidence-only commits followed.
+- Source/build tests passed before marking code issues done; final source passed build/lint/TypeScript and all 99 local regressions. Only documentation/evidence and a two-line whitespace cleanup followed the measurements; build/lint/TypeScript and the full-branch whitespace check also pass after that cleanup.
