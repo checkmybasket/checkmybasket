@@ -28,6 +28,16 @@ Ruflo/ToolSearch tools were searched for but unavailable. No production data wri
 
 ## Issues
 
+### [x] SEO 10 — P1
+
+- Severity: P1
+- Location: lib/topic-guides.ts, data/topic-guides.json, components/topic-guide.tsx; /secret-santa-odd-number
+- Evidence: Search Console shows 262 impressions, average position 7.9 and zero clicks for 9–21 October. Queries include whether Secret Santa works with 5, 7 or an odd number of people. Existing description begins “See how” rather than answering directly.
+- Fix: User-approved editorial update: shorten search/social title around odd-number groups, answer yes in the description and opening copy, clarify a five-person example, and record this guide's actual revision date without changing other guides' dates. Preserve existing URL, canonical, examples, minimum three members and exclusion guidance. No ranking gain is assumed.
+- Acceptance criteria: Search/social metadata use the new accurate title/description; one h1 and the existing canonical; direct answer and valid five-person example visible; revision date applies only to this guide; 320/375/414/768/1440 layouts fit; build/lint/TypeScript and 110 regressions pass. Compare Search Console after sufficient new data.
+- Status: DONE
+- Completion note: Updated search/social title and description, direct opening answer and five-person explanation; preserved h1, canonical, 3/5/7 example tables and draw constraints. Only this guide's revision date changes. Five-width browser checks pass with no overflow or captured warnings/errors; another guide retains its old date. Build/lint/TypeScript and 110 regressions pass. Search impact remains to be measured.
+
 ### [x] UI 12 — P2
 
 - Severity: P2

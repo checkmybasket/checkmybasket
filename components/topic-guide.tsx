@@ -13,7 +13,7 @@ import { InvitationMessage } from "@/components/whatsapp-invitation";
 import { EngravingPreview } from "@/components/engraving-preview";
 
 type TopicContent = {
-  slug: string; title: string; answer: string; intro: string; kind: string;
+  slug: string; title: string; answer: string; intro: string; kind: string; updated?: string;
   sections: { id: string; heading: string; paragraphs: string[]; bullets?: string[]; tool?: string }[];
   category?: string; budget?: number; interest?: string; retailer?: string;
   download?: { path: string; label: string }; related: string[];
@@ -57,7 +57,7 @@ Add a few wishlist ideas within the budget. Please use [our agreed private deliv
 export async function TopicGuide({ slug }: { slug: string }) {
   const guide = guides.find(item => item.slug === slug);
   if (!guide) throw new Error("Unknown guide");
-  return <InfoPage title={guide.title} updated="11 October 2026">
+  return <InfoPage title={guide.title} updated={guide.updated ?? "11 October 2026"}>
     <GuideIntro answer={guide.answer} contents={[
       ...guide.sections.map(section => ({ id: section.id, label: section.heading })),
       ...(guide.download ? [{ id: "printable-planning-sheet", label: "Download the printable sheet" }] : []),
