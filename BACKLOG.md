@@ -2,7 +2,7 @@
 
 23 October 2026. Repository: `seo-release`; branch: `polish/production-audit`; starting commit: `237cf0c`. This is the production-polish backlog. The parent `../BACKLOG.md` remains the separate product/security master backlog.
 
-Phase 1 summary was presented before implementation. Phase 2 changes are committed by issue ID. Phase 3 evidence and before/after measurements are in [audit/FINAL_REPORT.md](audit/FINAL_REPORT.md).
+Phase 1 summary was presented before implementation. Phase 2 changes are committed by issue ID. Phase 3 evidence and before/after measurements are in [audit/FINAL_REPORT.md](audit/FINAL_REPORT.md). Local staging follow-up is in [audit/LOCAL_STAGING_REPORT.md](audit/LOCAL_STAGING_REPORT.md).
 
 Some original evidence and line numbers came from an older checkout. Each finding was reconciled against this newer base before implementation; completion notes distinguish fixes made here from defects already resolved in the newer base. Older checkout Lighthouse scores are not used as this branch's baseline.
 
@@ -16,9 +16,9 @@ The complete page/handler inventory is in [audit/route-inventory.json](audit/rou
 
 Current checkout baseline: build PASS; TypeScript PASS; lint FAIL in CommonJS test harness rules. Initial current-home Lighthouse: 97/100/100/100. Create/gifts performance baselines were captured after correctness work and before the performance pass; see the report for precise provenance.
 
-Final source: build, lint and TypeScript PASS; 99 local regression checks PASS. Four measured public page types score 100 for accessibility, best practices and SEO. The public 40-route/10-viewport matrix passes structural, metadata and overflow checks with zero captured console errors/warnings. Authenticated end-to-end certification remains NEEDS OWNER, not a claimed pass.
+Current source: build, lint and TypeScript PASS; 110 local regression checks PASS. Four measured public page types score 100 for accessibility, best practices and SEO. The public 40-route/10-viewport matrix passes structural, metadata and overflow checks with zero captured console errors/warnings. Authenticated end-to-end certification remains NEEDS OWNER, not a claimed pass.
 
-Ruflo/ToolSearch tools were searched for but unavailable. No production data writes, email/WhatsApp sends, schema changes, pushes or deployment occurred. Existing OG artwork was reused and verified.
+Ruflo/ToolSearch tools were searched for but unavailable. No production data writes, external email/WhatsApp sends, production schema changes, pushes or deployment occurred. Local disposable fixtures and captured test mail were created in isolated staging. Existing OG artwork was reused and verified.
 
 ## Issues
 
@@ -194,6 +194,66 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: DONE
 - Completion note: Use the accessible green token for share and reminder actions. Contrast is above 4.5:1 for white-on-green and green-on-white; labels and handlers are untouched. Build/lint/TypeScript pass; private share-state browser tests remain OWNER 02.
 
+### [x] A11Y 16 — P1
+
+- Severity: P1
+- Location: app/g/[group_id]/page.tsx; group section navigation
+- Evidence: Loaded four-member staging group: Draw/Wishlists/Messages/Games buttons have neither aria-pressed nor aria-current; selection appears only in color/underline. The nav has no accessible label.
+- Fix: Name the navigation and expose the selected button state without changing keyboard order or section behavior.
+- Acceptance criteria: Exactly one group section is pressed, and selection follows clicks; loaded browser verification, build/lint/TypeScript pass.
+- Status: DONE
+- Completion note: Named Group sections navigation and exposed aria-pressed on its buttons. Loaded staging browser confirms exactly one selected section and correct state after switching to Wishlists. Build/lint/TypeScript and 110 local checks pass.
+
+### [x] A11Y 17 — P1
+
+- Severity: P1
+- Location: app/g/[group_id]/page.tsx; loaded private group views — Message composer label
+- Evidence: Loaded Messages composer has no associated label or aria-label; only a disappearing placeholder names the input.
+- Fix: Add a visible, associated message/reply label and describe the character limit.
+- Acceptance criteria: Input remains named after typing, its label focuses it, and the local message send/reply flow still works. Browser/build/lint/TypeScript checks pass.
+- Status: DONE
+- Completion note: Added persistent message/reply labels and linked the character-limit hint. Browser confirms one associated label, label-click focus and successful Enter submission; a separate local recipient received/replied while sender identity remained protected. Build/lint/TypeScript and local regressions pass.
+
+### [x] A11Y 18 — P1
+
+- Severity: P1
+- Location: app/g/[group_id]/page.tsx; loaded private group views — Empty-state heading hierarchy
+- Evidence: Loaded Messages empty state goes directly from the group h1 to Break the ice h3. Games pending has the same root empty-state helper.
+- Fix: Allow the empty-state helper to render h2 by default and h3 explicitly when nested under the wishlist h2.
+- Acceptance criteria: No heading level is skipped in loaded empty Messages/Games/Wishlists views. Browser/build/lint/TypeScript checks pass.
+- Status: DONE
+- Completion note: Empty states now default to h2, with wishlist-nested content explicitly h3. Loaded browser verifies root Messages and pending Games h1→h2, and wishlist h1→h2→h3. Build/lint/TypeScript and local regressions pass.
+
+### [x] A11Y 19 — P1
+
+- Severity: P1
+- Location: app/g/[group_id]/page.tsx; loaded private group views — Conversation selection state
+- Evidence: Recipient/Your Secret Santa conversation buttons expose no selected state, only selected styling.
+- Fix: Name the conversation button group and expose aria-pressed on both choices.
+- Acceptance criteria: Exactly one conversation is pressed after switching, with existing message permissions retained. Browser/build/lint/TypeScript checks pass.
+- Status: DONE
+- Completion note: Named the Conversation group and exposed aria-pressed on both thread choices. Loaded browser confirms exactly one pressed choice after switching; permissions and message flow remain unchanged. Build/lint/TypeScript and local regressions pass.
+
+### [x] A11Y 20 — P1
+
+- Severity: P1
+- Location: app/g/[group_id]/page.tsx; loaded private group views — Progress indicator names
+- Evidence: Loaded Gifts bought progressbar has neither aria-label nor aria-labelledby; setup progress uses the same unnamed pattern.
+- Fix: Name both progressbars from their visible section purpose, preserving values.
+- Acceptance criteria: Loaded Gifts bought and Setup progress indicators have correct names and numeric values. Browser/build/lint/TypeScript checks pass.
+- Status: DONE
+- Completion note: Named Setup progress and Gifts bought indicators. Loaded pending/drawn browser states expose those names and correct numeric values (17 and 25 in fixtures); build/lint/TypeScript and local regressions pass.
+
+### [x] A11Y 21 — P1
+
+- Severity: P1
+- Location: components/ui/input.tsx styling via app/globals.css; private recovery/notification forms
+- Evidence: Loaded pending/drawn groups at 320, 375 and 414px: both email inputs are 32px high, below the requested 44px mobile target.
+- Fix: Apply a mobile minimum height to the existing shared text-input primitive; preserve compact desktop sizes and larger explicit input sizes.
+- Acceptance criteria: Every displayed email input measures at least 44px at mobile widths without new overflow; build/lint/TypeScript pass.
+- Status: DONE
+- Completion note: Shared text inputs now have a mobile-only 44px minimum. Loaded pending-group measurements at 320/375/414px show 44px inputs and no overflow; larger explicit and compact desktop sizing remain intact. Build/lint/TypeScript and local regressions pass.
+
 ### [x] BUILD 01 — P1
 
 - Severity: P1
@@ -354,6 +414,26 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: DONE
 - Completion note: All three live scripts now require explicit isolated test variables and matching project ref. Production, privileged keys and unsafe app targets fail before requests. Four guard tests, all 27 local Node tests and build/lint/TypeScript pass. No live integration writes were run.
 
+### [x] STAGE 03 — P1
+
+- Severity: P1
+- Location: supabase/config.toml and local staging setup; /create, /g/*, /wishlists/*, /return
+- Evidence: User selected local staging with Docker. Docker/CLI and a local Supabase configuration are absent; authenticated acceptance tests cannot yet run safely.
+- Fix: Install a Docker-compatible runtime and pinned Supabase CLI tooling (no app dependency), initialise a uniquely named local stack bound to loopback, enable anonymous auth and captured local email, and apply existing migrations only locally. Keep production files/credentials unchanged.
+- Acceptance criteria: Docker runs; local Auth/Postgres/API/mail capture are healthy; all checked-in migrations apply; app uses local backend and noindex; disposable fixture tests run without cloud writes or external email. Any first-run agreement/admin step stays NEEDS OWNER until performed by the user. Build/lint/TypeScript pass for committed configuration.
+- Status: DONE
+- Completion note: Installed Docker CLI 29.9.2 with Colima 0.10.3 and pinned Supabase CLI 2.122.0; all 26 migrations applied to the loopback-only local stack. App build/lint/TypeScript, 27 Node tests, existing wishlist/API acceptance suites, local Auth inbox receipt and create/join/draw/reveal/settings/role checks pass. Production env files are unchanged; evidence: audit/local-staging.json. Custom Resend capture and broader private QA remain separate follow-up.
+
+### [x] STAGE 04 — P1
+
+- Severity: P1
+- Location: supabase/functions/group-recovery, send-draw-emails and local staging tooling
+- Evidence: Native Auth mail is captured locally, but custom recovery/draw functions hardcode Resend; recovery links also hardcode the production app URL. Their full acceptance path cannot be exercised in the isolated inbox.
+- Fix: Add explicit local-only email transport to Mailpit, fail closed outside the known local stack and for non-fixture recipients, keep normal production delivery unchanged, allow the existing APP_URL setting for recovery links, and configure only ignored local function variables. No new dependency or data model.
+- Acceptance criteria: Default transport behavior is unchanged; local capture rejects cloud configuration and real recipient domains; actual recovery verification/redemption and draw-email suppression work through local Edge Functions and captured messages; build/lint/TypeScript and local regressions pass.
+- Status: DONE
+- Completion note: Added guarded local Mailpit transport; default provider fetch is unchanged, cloud activation and real-recipient domains are rejected. Real local recovery identity restoration/single-use tokens and draw-email duplicate suppression pass. Staging build/lint/TypeScript, 31 Node tests and 79 other local regressions pass. No cloud function or provider credentials were changed.
+
 ### [x] STATE 01 — P1
 
 - Severity: P1
@@ -424,6 +504,26 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: DONE
 - Completion note: Added inherited overflow-wrap:anywhere. Real InfoPage, GiftCard and GiftResults components passed long-string plus empty/single/200-item fixture checks at all requested widths, short landscape and ultrawide; 640px zoom-reflow proxy also fits. Temporary route removed; build/lint/TypeScript pass. Native browser zoom remains unverified in QA 02.
 
+### [x] UI 08 — P1
+
+- Severity: P1
+- Location: app/g/[group_id]/reveal/page.tsx and app/g/[group_id]/page.tsx; reveal Ask link
+- Evidence: Click Ask Local member two a question after revealing the disposable match: browser navigates to the group URL and renders Names have been drawn, not the Messages composer.
+- Fix: Link directly to the messages section using an explicit query parameter; derive selection from the URL and keep section navigation/reloads consistent. This is a logged navigation behavior correction; no data/model change.
+- Acceptance criteria: Ask link opens the recipient message composer directly; ordinary group URLs still open Draw; loaded browser/build/lint/TypeScript checks pass.
+- Status: DONE
+- Completion note: Reveal Ask now links to ?tab=messages and the group initialises its Messages section on arrival. Actual staging click opens the recipient composer with Messages pressed; ordinary group URLs retain Draw. Build/lint/TypeScript and 110 local checks pass.
+
+### [x] UI 09 — P1
+
+- Severity: P1
+- Location: app/g/[group_id]/page.tsx; drawn-group match CTA at 320px
+- Evidence: Browser document width is 323px at a 320px viewport; the See who you are buying for link reaches x=323.125 inside a padded card because its label cannot wrap and uses wide padding.
+- Fix: Merge button classes explicitly, allow the full label to wrap, cap width to the card and use responsive padding with a comfortable minimum height. Do not shorten or change the label meaning.
+- Acceptance criteria: CTA stays inside the card at every requested width, remains fully readable/clickable and at least 44px high; loaded browser/build/lint/TypeScript pass.
+- Status: DONE
+- Completion note: Merged link classes explicitly, enabled wrapping and responsive padding with a minimum height. At 320px the full CTA is 224x66px and ends at x=272; all ten widths have no overflow or undersized controls. Build/lint/TypeScript and 110 local checks pass.
+
 ### [x] CONTENT 01 — P2
 
 - Severity: P2
@@ -453,6 +553,16 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Acceptance criteria: visual and accessible labels both make the sample nature clear; build/lint/TypeScript pass.
 - Status: DONE
 - Completion note: Label the homepage illustration as an example draw. The existing accessible description already describes the example; build/lint/TypeScript pass.
+
+### [x] CONTENT 04 — P2
+
+- Severity: P2
+- Location: app/g/[group_id]/page.tsx and reveal/page.tsx; loaded draw, surprise prompts and recipient-message control
+- Evidence: Loaded private views use decorative gift emoji above the draw/reveal and inside surprise headings/message controls, while the rest of the app uses Lucide.
+- Fix: Use the existing Gift icon for standalone decoration and remove decorative emoji from those labels, preserving meaning and genuine game category content.
+- Acceptance criteria: Those controls/headings keep the same text meaning and behavior, with no decorative emoji; existing category data is unchanged; browser/build/lint/TypeScript pass.
+- Status: DONE
+- Completion note: Replaced standalone gift decorations with the existing Lucide Gift mark and removed decorative emoji from surprise/conversation labels. Browser confirms plain labels and clean console; game category content is unchanged. Build/lint/TypeScript and 110 local checks pass.
 
 ### [x] HYGIENE 01 — P2
 
@@ -623,113 +733,3 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Acceptance criteria: obsolete styling references are absent; current tokens/marks render consistently; build/lint/TypeScript and final responsive/contrast checks pass.
 - Status: DONE
 - Completion note: Align rectangular controls and panels with the shared brand radius. Intentional avatar/status pills remain round; build/lint/TypeScript pass.
-
-### [x] STAGE 03 — P1
-
-- Severity: P1
-- Location: supabase/config.toml and local staging setup; /create, /g/*, /wishlists/*, /return
-- Evidence: User selected local staging with Docker. Docker/CLI and a local Supabase configuration are absent; authenticated acceptance tests cannot yet run safely.
-- Fix: Install the official Docker app and pinned Supabase CLI tooling (no app dependency), initialise a uniquely named local stack bound to loopback, enable anonymous auth and captured local email, and apply existing migrations only locally. Keep production files/credentials unchanged.
-- Acceptance criteria: Docker runs; local Auth/Postgres/API/mail capture are healthy; all checked-in migrations apply; app uses local backend and noindex; disposable fixture tests run without cloud writes or external email. Any first-run agreement/admin step stays NEEDS OWNER until performed by the user. Build/lint/TypeScript pass for committed configuration.
-- Status: DONE
-- Completion note: Installed Docker CLI 29.9.2 with Colima 0.10.3 and pinned Supabase CLI 2.122.0; all 26 migrations applied to the loopback-only local stack. App build/lint/TypeScript, 27 Node tests, existing wishlist/API acceptance suites, local Auth inbox receipt and create/join/draw/reveal/settings/role checks pass. Production env files are unchanged; evidence: audit/local-staging.json. Custom Resend capture and broader private QA remain separate follow-up.
-
-### [x] STAGE 04 — P1
-
-- Severity: P1
-- Location: supabase/functions/group-recovery, send-draw-emails and local staging tooling
-- Evidence: Native Auth mail is captured locally, but custom recovery/draw functions hardcode Resend; recovery links also hardcode the production app URL. Their full acceptance path cannot be exercised in the isolated inbox.
-- Fix: Add explicit local-only email transport to Mailpit, fail closed outside the known local stack and for non-fixture recipients, keep normal production delivery unchanged, allow the existing APP_URL setting for recovery links, and configure only ignored local function variables. No new dependency or data model.
-- Acceptance criteria: Default transport behavior is unchanged; local capture rejects cloud configuration and real recipient domains; actual recovery verification/redemption and draw-email suppression work through local Edge Functions and captured messages; build/lint/TypeScript and local regressions pass.
-- Status: DONE
-- Completion note: Added guarded local Mailpit transport; default provider fetch is unchanged, cloud activation and real-recipient domains are rejected. Real local recovery identity restoration/single-use tokens and draw-email duplicate suppression pass. Staging build/lint/TypeScript, 31 Node tests and 79 other local regressions pass. No cloud function or provider credentials were changed.
-
-### [x] A11Y 16 — P1
-
-- Severity: P1
-- Location: app/g/[group_id]/page.tsx; group section navigation
-- Evidence: Loaded four-member staging group: Draw/Wishlists/Messages/Games buttons have neither aria-pressed nor aria-current; selection appears only in color/underline. The nav has no accessible label.
-- Fix: Name the navigation and expose the selected button state without changing keyboard order or section behavior.
-- Acceptance criteria: Exactly one group section is pressed, and selection follows clicks; loaded browser verification, build/lint/TypeScript pass.
-- Status: DONE
-- Completion note: Named Group sections navigation and exposed aria-pressed on its buttons. Loaded staging browser confirms exactly one selected section and correct state after switching to Wishlists. Build/lint/TypeScript and 110 local checks pass.
-
-### [x] UI 08 — P1
-
-- Severity: P1
-- Location: app/g/[group_id]/reveal/page.tsx and app/g/[group_id]/page.tsx; reveal Ask link
-- Evidence: Click Ask Local member two a question after revealing the disposable match: browser navigates to the group URL and renders Names have been drawn, not the Messages composer.
-- Fix: Link directly to the messages section using an explicit query parameter; derive selection from the URL and keep section navigation/reloads consistent. This is a logged navigation behavior correction; no data/model change.
-- Acceptance criteria: Ask link opens the recipient message composer directly; ordinary group URLs still open Draw; loaded browser/build/lint/TypeScript checks pass.
-- Status: DONE
-- Completion note: Reveal Ask now links to ?tab=messages and the group initialises its Messages section on arrival. Actual staging click opens the recipient composer with Messages pressed; ordinary group URLs retain Draw. Build/lint/TypeScript and 110 local checks pass.
-
-### [x] CONTENT 04 — P2
-
-- Severity: P2
-- Location: app/g/[group_id]/page.tsx and reveal/page.tsx; loaded draw, surprise prompts and recipient-message control
-- Evidence: Loaded private views use decorative gift emoji above the draw/reveal and inside surprise headings/message controls, while the rest of the app uses Lucide.
-- Fix: Use the existing Gift icon for standalone decoration and remove decorative emoji from those labels, preserving meaning and genuine game category content.
-- Acceptance criteria: Those controls/headings keep the same text meaning and behavior, with no decorative emoji; existing category data is unchanged; browser/build/lint/TypeScript pass.
-- Status: DONE
-- Completion note: Replaced standalone gift decorations with the existing Lucide Gift mark and removed decorative emoji from surprise/conversation labels. Browser confirms plain labels and clean console; game category content is unchanged. Build/lint/TypeScript and 110 local checks pass.
-
-### [x] A11Y 17 — P1
-
-- Severity: P1
-- Location: app/g/[group_id]/page.tsx; loaded private group views — Message composer label
-- Evidence: Loaded Messages composer has no associated label or aria-label; only a disappearing placeholder names the input.
-- Fix: Add a visible, associated message/reply label and describe the character limit.
-- Acceptance criteria: Input remains named after typing, its label focuses it, and the local message send/reply flow still works. Browser/build/lint/TypeScript checks pass.
-- Status: DONE
-- Completion note: Added persistent message/reply labels and linked the character-limit hint. Browser confirms one associated label, label-click focus and successful Enter submission; a separate local recipient received/replied while sender identity remained protected. Build/lint/TypeScript and local regressions pass.
-
-### [x] A11Y 18 — P1
-
-- Severity: P1
-- Location: app/g/[group_id]/page.tsx; loaded private group views — Empty-state heading hierarchy
-- Evidence: Loaded Messages empty state goes directly from the group h1 to Break the ice h3. Games pending has the same root empty-state helper.
-- Fix: Allow the empty-state helper to render h2 by default and h3 explicitly when nested under the wishlist h2.
-- Acceptance criteria: No heading level is skipped in loaded empty Messages/Games/Wishlists views. Browser/build/lint/TypeScript checks pass.
-- Status: DONE
-- Completion note: Empty states now default to h2, with wishlist-nested content explicitly h3. Loaded browser verifies root Messages and pending Games h1→h2, and wishlist h1→h2→h3. Build/lint/TypeScript and local regressions pass.
-
-### [x] A11Y 19 — P1
-
-- Severity: P1
-- Location: app/g/[group_id]/page.tsx; loaded private group views — Conversation selection state
-- Evidence: Recipient/Your Secret Santa conversation buttons expose no selected state, only selected styling.
-- Fix: Name the conversation button group and expose aria-pressed on both choices.
-- Acceptance criteria: Exactly one conversation is pressed after switching, with existing message permissions retained. Browser/build/lint/TypeScript checks pass.
-- Status: DONE
-- Completion note: Named the Conversation group and exposed aria-pressed on both thread choices. Loaded browser confirms exactly one pressed choice after switching; permissions and message flow remain unchanged. Build/lint/TypeScript and local regressions pass.
-
-### [x] A11Y 20 — P1
-
-- Severity: P1
-- Location: app/g/[group_id]/page.tsx; loaded private group views — Progress indicator names
-- Evidence: Loaded Gifts bought progressbar has neither aria-label nor aria-labelledby; setup progress uses the same unnamed pattern.
-- Fix: Name both progressbars from their visible section purpose, preserving values.
-- Acceptance criteria: Loaded Gifts bought and Setup progress indicators have correct names and numeric values. Browser/build/lint/TypeScript checks pass.
-- Status: DONE
-- Completion note: Named Setup progress and Gifts bought indicators. Loaded pending/drawn browser states expose those names and correct numeric values (17 and 25 in fixtures); build/lint/TypeScript and local regressions pass.
-
-### [x] A11Y 21 — P1
-
-- Severity: P1
-- Location: components/ui/input.tsx styling via app/globals.css; private recovery/notification forms
-- Evidence: Loaded pending/drawn groups at 320, 375 and 414px: both email inputs are 32px high, below the requested 44px mobile target.
-- Fix: Apply a mobile minimum height to the existing shared text-input primitive; preserve compact desktop sizes and larger explicit input sizes.
-- Acceptance criteria: Every displayed email input measures at least 44px at mobile widths without new overflow; build/lint/TypeScript pass.
-- Status: DONE
-- Completion note: Shared text inputs now have a mobile-only 44px minimum. Loaded pending-group measurements at 320/375/414px show 44px inputs and no overflow; larger explicit and compact desktop sizing remain intact. Build/lint/TypeScript and local regressions pass.
-
-### [x] UI 09 — P1
-
-- Severity: P1
-- Location: app/g/[group_id]/page.tsx; drawn-group match CTA at 320px
-- Evidence: Browser document width is 323px at a 320px viewport; the See who you are buying for link reaches x=323.125 inside a padded card because its label cannot wrap and uses wide padding.
-- Fix: Merge button classes explicitly, allow the full label to wrap, cap width to the card and use responsive padding with a comfortable minimum height. Do not shorten or change the label meaning.
-- Acceptance criteria: CTA stays inside the card at every requested width, remains fully readable/clickable and at least 44px high; loaded browser/build/lint/TypeScript pass.
-- Status: DONE
-- Completion note: Merged link classes explicitly, enabled wrapping and responsive padding with a minimum height. At 320px the full CTA is 224x66px and ends at x=272; all ten widths have no overflow or undersized controls. Build/lint/TypeScript and 110 local checks pass.
