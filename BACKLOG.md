@@ -674,15 +674,15 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: OPEN
 - Completion note: Pending.
 
-### [ ] A11Y 17 — P1
+### [x] A11Y 17 — P1
 
 - Severity: P1
 - Location: app/g/[group_id]/page.tsx; loaded private group views — Message composer label
 - Evidence: Loaded Messages composer has no associated label or aria-label; only a disappearing placeholder names the input.
 - Fix: Add a visible, associated message/reply label and describe the character limit.
 - Acceptance criteria: Input remains named after typing, its label focuses it, and the local message send/reply flow still works. Browser/build/lint/TypeScript checks pass.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Added persistent message/reply labels and linked the character-limit hint. Browser confirms one associated label, label-click focus and successful Enter submission; a separate local recipient received/replied while sender identity remained protected. Build/lint/TypeScript and local regressions pass.
 
 ### [ ] A11Y 18 — P1
 

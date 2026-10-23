@@ -812,15 +812,16 @@ function MessagesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<voi
         </div>
       )}
 
+      <Label htmlFor="anonymous-message">{thread === "recipient" ? "Message to your match" : "Reply to your Secret Santa"}</Label>
       <div className="flex gap-2">
-        <Input placeholder={canSend?(thread==="recipient"?"Ask a question...":"Reply to your Secret Santa..."):"You can reply once they message you"}
+        <Input id="anonymous-message" aria-describedby="message-limit" placeholder={canSend?(thread==="recipient"?"Ask a question...":"Reply to your Secret Santa..."):"You can reply once they message you"}
           value={draft} onChange={e=>setDraft(e.target.value)} onKeyDown={e=>e.key==="Enter"&&sendMessage(draft)} disabled={!canSend||busy}
           maxLength={500} className="h-11 text-base rounded-[var(--cmb-radius)] flex-1 border border-[var(--cmb-border-strong)]"/>
         <Button onClick={()=>sendMessage(draft)} disabled={!draft.trim()||!canSend||busy} className="h-11 w-11 p-0 rounded-[var(--cmb-radius)] flex-shrink-0 bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]" aria-label="Send message">
           <Send size={16} strokeWidth={1.5}/>
         </Button>
       </div>
-      <p className="text-xs text-[var(--cmb-text-muted)]">{draft.length}/500 · 10 messages per day</p>
+      <p id="message-limit" className="text-xs text-[var(--cmb-text-muted)]">{draft.length}/500 · 10 messages per day</p>
     </div>
   );
 }
