@@ -603,3 +603,13 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Acceptance criteria: obsolete styling references are absent; current tokens/marks render consistently; build/lint/TypeScript and final responsive/contrast checks pass.
 - Status: DONE
 - Completion note: Align rectangular controls and panels with the shared brand radius. Intentional avatar/status pills remain round; build/lint/TypeScript pass.
+
+### [x] STAGE 01 — P1
+
+- Severity: P1
+- Location: next.config.ts; all routes with Supabase requests
+- Evidence: connect-src hardcodes the production Supabase HTTPS and Realtime origins even when NEXT_PUBLIC_SUPABASE_URL points at staging; an isolated backend would be blocked by CSP.
+- Fix: derive both allowed origins from the configured Supabase URL, preserve the existing production fallback, require HTTPS except local loopback, and reject embedded credentials. No wildcard access or new dependency.
+- Acceptance criteria: staging/local origin tests pass, invalid/insecure origins fail closed; build/lint/TypeScript pass. Actual staging requests require provisioned environment.
+- Status: DONE
+- Completion note: CSP now derives HTTPS and Realtime origins from the configured backend, retaining the production fallback and strict origin validation. Three staging/local/invalid-origin tests and build/lint/TypeScript pass; no backend configuration was changed.
