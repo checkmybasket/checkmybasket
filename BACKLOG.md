@@ -416,3 +416,33 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Acceptance criteria: build/lint/TypeScript pass; initial rejected loads have a retry action; valid absent-resource states stay distinct. Private fixture validation remains OWNER 02.
 - Status: DONE
 - Completion note: Initial reads now route rejected/backend failures to retryable recovery instead of permanent skeletons, false empty data or invalid-invite copy. Absent records retain existing states. Build/lint/TypeScript pass; valid private fixtures remain OWNER 02.
+
+### [x] HYGIENE 02 — P2
+
+- Severity: P2
+- Location: package.json/package-lock.json; build tooling and all routes
+- Evidence: The component-generation CLI is an unused development dependency and pulls in most of the remaining advisory chain; checked-in components use Base UI directly.
+- Fix: remove the unused shadcn dependency only; no replacement or new dependency.
+- Acceptance criteria: full build/lint/TypeScript and local regressions pass; application imports resolve.
+- Status: DONE
+- Completion note: Removed unused shadcn generation CLI and 255 transitive packages. Checked-in Base UI components are unchanged; build/lint/TypeScript and all 99 local regressions pass. Remaining advisories are limited to development tooling.
+
+### [ ] HYGIENE 03 — P2
+
+- Severity: P2
+- Location: package.json/package-lock.json; build tooling and all routes
+- Evidence: No application, library, script or test source imports date-fns. Date formatting uses Intl/custom helpers.
+- Fix: remove the unused date-fns dependency only; no replacement or new dependency.
+- Acceptance criteria: full build/lint/TypeScript and local regressions pass; application imports resolve.
+- Status: OPEN
+- Completion note: Pending.
+
+### [ ] HYGIENE 04 — P2
+
+- Severity: P2
+- Location: package.json/package-lock.json; build tooling and all routes
+- Evidence: No application, library, script or test source imports zustand. Current views use React state.
+- Fix: remove the unused zustand dependency only; no replacement or new dependency.
+- Acceptance criteria: full build/lint/TypeScript and local regressions pass; application imports resolve.
+- Status: OPEN
+- Completion note: Pending.
