@@ -576,3 +576,23 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Acceptance criteria: measured mobile links meet 44x44px, no horizontal overflow/overlap is introduced, and build/lint/TypeScript pass.
 - Status: DONE
 - Completion note: Enforced mobile 44px minimum link hit boxes with prose/list links handled without changing card/flex layouts. Rechecked home, contact and two guide types at 320px: no small links or overflow. Build/lint/TypeScript pass; final full sweep follows.
+
+### [x] A11Y 14 — P1
+
+- Severity: P1
+- Location: components/gift-card.tsx: retailer action; gift routes
+- Evidence: The hover opacity .9 composites the red action background to about #D83F3A on white: white text contrast drops from 5.05:1 to 4.46:1, below AA for its 14px label.
+- Fix: Use the existing darker accent-hover token instead of reducing whole-button opacity; preserve text, destination and click behavior.
+- Acceptance criteria: normal/hover action text contrast meets 4.5:1; no action behavior changes; build/lint/TypeScript pass.
+- Status: DONE
+- Completion note: Keep retailer hover text above AA contrast. Existing dark accent hover yields 6.64:1 against white, versus 4.46:1 under the old opacity treatment; build/lint/TypeScript pass.
+
+### [ ] A11Y 15 — P1
+
+- Severity: P1
+- Location: app/create/page.tsx share view and app/g/[group_id]/page.tsx reminder action
+- Evidence: The hardcoded bright #25D366 gives insufficient contrast for white share text and green reminder text on white. These states were found in the source contrast review.
+- Fix: Use the existing accessible success-green token for these WhatsApp actions, preserving their labels and share behavior.
+- Acceptance criteria: normal/hover action text contrast meets 4.5:1; no action behavior changes; build/lint/TypeScript pass.
+- Status: OPEN
+- Completion note: Pending.
