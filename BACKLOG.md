@@ -237,15 +237,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: OPEN
 - Completion note: Pending.
 
-### [ ] SEO 01 — P1
+### [x] SEO 01 — P1
 
 - Severity: P1
 - Location: app/layout.tsx: metadata.alternates; every public child route
 - Evidence: Browser checked 15 non-homepage public URLs: all declare https://www.checkmybasket.co.uk as canonical.
 - Fix: Give each public page its own production canonical, including category metadata; keep private routes noindex.
 - Acceptance criteria: Rendered canonicals exactly match each public route on the production origin.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Reconciled with the newer base: all 39 indexable public canonicals match their exact production route in audit/public-route-matrix.json. No duplicate canonical defect remains.
 
 ### [x] SEO 02 — P1
 
