@@ -451,14 +451,15 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: DONE
 - Completion note: Updated dev-only transitive Zod 4.4.3 to compatible 4.6.7; only its lockfile entry changed. Full and production npm audits return zero vulnerabilities. Staging build, lint, TypeScript and all 110 existing regressions pass. No package.json or runtime code changes. Advisory: https://github.com/advisories/GHSA-mrhx-c7xc-m3w5.
 
-### [ ] SECURITY 02 — P1
+### [x] SECURITY 02 — P1
 
 - Severity: P1
 - Location: package-lock.json; development-only lint toolchain
 - Evidence: after removing the unused generator, npm reports eight high development advisories; production audit is clean. Several transitive fixes are compatible; the braces advisory affects every currently published version (latest is 3.0.3), and npm suggests downgrading eslint-config-next to 14.2.35 for that chain.
 - Fix: apply compatible transitive patches without force or framework/linter downgrades. Record any unpatched upstream lint chain as NEEDS OWNER with a concrete follow-up rather than claiming all dependencies are clean. No new dependency.
 - Acceptance criteria: required checks and local regressions pass; npm production audit remains clean; remaining advisory chain is accurately documented with supported mitigation and owner follow-up.
-- Status: NEEDS OWNER
+- Status: DONE
+- Current verification: On the post-release follow-up, full and production npm audits both exit 0 with zero findings after SECURITY 07. The previously reported braces/micromatch/fast-glob advisory chain is no longer returned by the current registry audit. Build/lint/TypeScript and all 110 regressions pass. This closes the pending advisory decision without a forced downgrade; the earlier completion note below records the historical finding, not a current risk exception.
 - Completion note: Compatible transitive patches applied; 20 original development findings reduced to five entries in the same unpatched braces → micromatch → fast-glob → Next ESLint chain. Production dependencies are clean; build/lint/TypeScript and 99 local regressions pass. NEEDS OWNER: record a temporary development-tool risk exception, do not process untrusted glob patterns, and update the matching ESLint config when a compatible upstream fix ships. Do not force a downgrade to Next 14 tooling.
 
 ### [x] SEO 01 — P1
