@@ -205,7 +205,7 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Fix: NEEDS OWNER: provide a staging Supabase project and disposable multi-member groups, including pre-draw, drawn, empty, single-item and large-data states; confirm notification email is safely isolated.
 - Acceptance criteria: Run every private-route interaction, role/permission failure, slow/failed request, long-string case, requested viewport and 200% zoom without affecting real users.
 - Status: NEEDS OWNER
-- Completion note: Pending.
+- Completion note: Read-only Supabase inventory found only the production CheckMyBasket project and no branches; both local environment files target that project. NEEDS OWNER: provision an isolated staging project, three disposable users, organiser/member roles, pre/post-draw groups and wishlist fixtures (empty/single/200 items), with email delivery captured in a test inbox. Then test join/draw/reveal/settings/messages/reservations/recovery and failure/permission states. Do not reuse real groups or participants.
 
 ### [x] PERF 01 — P1
 
