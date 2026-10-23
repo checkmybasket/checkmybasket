@@ -546,3 +546,23 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Acceptance criteria: every public page emits absolute OG/Twitter images, site name, type and route-specific text/URL; build/lint/TypeScript and browser tag audit pass.
 - Status: DONE
 - Completion note: Added complete shared OG/Twitter defaults to every metadata override. Browser confirms guide image, site name and website type with absolute production image URL. Existing page text and URLs are preserved; build/lint/TypeScript pass.
+
+### [x] FORM 01 — P1
+
+- Severity: P1
+- Location: app/create/page.tsx; /create custom budget
+- Evidence: validation uses parseInt while submission uses parseFloat. A positive £0.50 budget is rejected even though the existing pence model supports it. Fractions beyond two decimal places are silently rounded at submission.
+- Fix: validate positive whole-pence currency consistently with submission, including the existing signed-integer API range. This is an explicitly flagged validation behavior correction; no data model or successful normal-budget flow changes.
+- Acceptance criteria: £0.50 and ordinary two-decimal budgets validate; zero, sub-penny and out-of-range values get clear local errors; no backend calls during the invalid-form browser checks; build/lint/TypeScript pass.
+- Status: DONE
+- Completion note: Unified positive whole-pence validation with submission and the existing integer API contract. Browser accepts £0.50 locally while rejecting sub-penny amounts; blank required names prevent backend calls. Clear format/too-large messages replace inconsistent parsing. Build/lint/TypeScript pass.
+
+### [ ] UI 07 — P1
+
+- Severity: P1
+- Location: app/globals.css and user-content headings/cards; all routes
+- Evidence: shared text has no overflow-wrap rule; share headings, settings names and other user-controlled text can contain unbroken names wider than their mobile container.
+- Fix: allow long unbroken text to wrap through an inherited text token; preserve explicit truncation and intentional nowrap controls.
+- Acceptance criteria: actual shared heading/card components render long strings plus empty/single/200-item fixtures without page overflow at requested widths. Remove the temporary test route before committing; build/lint/TypeScript pass.
+- Status: OPEN
+- Completion note: Pending.

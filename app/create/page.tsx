@@ -43,7 +43,15 @@ export default function CreatePage() {
     const e: typeof errors = {};
     if (!form.groupName.trim()) e.groupName = "Please name your group";
     if (!form.yourName.trim())  e.yourName  = "Please enter your name";
-    if (form.budget === 0) { const b = parseInt(form.customBudget)*100; if (isNaN(b)||b<=0) e.customBudget="Please enter a valid amount"; }
+    if (form.budget === 0) {
+      const value = form.customBudget.trim();
+      const pence = Math.round(Number(value) * 100);
+      if (!/^(?:\d+(?:\.\d{1,2})?|\.\d{1,2})$/.test(value) || pence <= 0) {
+        e.customBudget = "Enter a positive amount in pounds, with up to two decimal places.";
+      } else if (!Number.isSafeInteger(pence) || pence > 2147483647) {
+        e.customBudget = "That budget is too large. Enter a smaller amount.";
+      }
+    }
     if (form.email.trim() && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email.trim())) e.email = "Please enter a valid email address or leave it blank";
     setErrors(e);
     const firstInvalid = (["groupName", "customBudget", "yourName", "email"] as const).find(key => e[key]);
