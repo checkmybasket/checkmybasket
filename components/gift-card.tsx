@@ -46,8 +46,8 @@ export function GiftCard({ id, title, price, shop, tags, url, image, description
           <p className="text-xs text-[var(--cmb-text-muted)] mb-1">{checked ? <>Price checked <time dateTime={checked.dateTime}>{checked.label}</time>. Confirm current price at the retailer.</> : "Confirm current price at the retailer."}</p>
           <p className="text-xs text-[var(--cmb-text-muted)] mb-1">{deliveryNote}</p>
           <p className="text-xs text-[var(--cmb-text-muted)] mb-3">{shop}</p>
-          <a data-gift-retailer={shop} href={url} target="_blank" rel="noopener noreferrer sponsored" aria-label={`Shop at ${shop}: ${title} (opens in a new tab)`} className="inline-flex items-center justify-center gap-2 min-h-11 px-4 py-2 rounded-[var(--cmb-radius)] text-sm font-semibold bg-[var(--cmb-accent)] text-white transition-colors hover:bg-[var(--cmb-accent-light)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--cmb-primary)]">
-            Shop at {shop} <ExternalLink size={13} strokeWidth={1.5} aria-hidden="true"/>
+          <a data-gift-retailer={shop} href={url} target="_blank" rel="noopener noreferrer sponsored" aria-label={`Shop at ${shop}: ${title} (opens in a new tab)`} className="flex w-full items-center justify-center gap-2 min-h-11 px-4 py-2 rounded-[var(--cmb-radius)] text-sm font-semibold bg-[var(--cmb-accent)] text-white transition-colors hover:bg-[var(--cmb-accent-light)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--cmb-primary)]">
+            <span className="min-w-0 text-center wrap-anywhere">Shop at {shop}</span> <ExternalLink size={13} strokeWidth={1.5} className="shrink-0" aria-hidden="true"/>
           </a>
           {id ? <Link prefetch={false} data-gift-save href={`/wishlists?gift=${encodeURIComponent(id)}`} aria-label={`Save to wishlist: ${title}`} className="flex min-h-11 items-center justify-center rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] px-4 py-2 mt-2 text-sm font-semibold text-[var(--cmb-primary)] focus-visible:outline-2 focus-visible:outline-offset-2">Save to wishlist</Link> : null}
         </div>
