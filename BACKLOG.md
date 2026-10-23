@@ -467,15 +467,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Use the shared paper header surface instead of old tinted glass. Header dimensions are unchanged; build/lint/TypeScript pass.
 
-### [ ] CONTENT 03 — P2
+### [x] CONTENT 03 — P2
 
 - Severity: P2
 - Location: components/receipt/sections.tsx; homepage example receipt
 - Evidence: the receipt has made-up sample member/budget counts; its example label is accessible only, while the visible caption says Draw no. 0412.
 - Fix: explicitly label it Example draw in visible text, preserving the illustration and its accessible description. This is a flagged clarification, not a claim about real usage.
 - Acceptance criteria: visual and accessible labels both make the sample nature clear; build/lint/TypeScript pass.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Label the homepage illustration as an example draw. The existing accessible description already describes the example; build/lint/TypeScript pass.
 
 ### [x] UI 03 — P2
 
