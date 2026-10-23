@@ -68,7 +68,45 @@
     "nonMemberDenials": "PASS: group/member/draw/wishlist/message reads, draw execution and late join rejected",
     "authFailureRecovery": "PASS: local Auth stopped, safe recovery shown, restart and Try again restored group",
     "stalledDataLoading": "PASS: local REST paused, named loader shown, unpause restored group",
-    "normalConsoleErrorsWarnings": 0
+    "normalConsoleErrorsWarnings": 0,
+    "localLighthouse": {
+      "environment": "Local build with deliberate preview noindex; performance is not compared with earlier production-backend runs",
+      "pages": [
+        {
+          "page": "home",
+          "performance": 96,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 66,
+          "failedSeo": [
+            "is-crawlable"
+          ],
+          "consoleAuditPass": true
+        },
+        {
+          "page": "create",
+          "performance": 95,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 66,
+          "failedSeo": [
+            "is-crawlable"
+          ],
+          "consoleAuditPass": true
+        },
+        {
+          "page": "gifts",
+          "performance": 95,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 69,
+          "failedSeo": [
+            "is-crawlable"
+          ],
+          "consoleAuditPass": true
+        }
+      ]
+    }
   },
   "productionEnvFilesUnchanged": true,
   "cloudWrites": false,

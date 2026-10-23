@@ -46,6 +46,18 @@ The fault tests intentionally produce failed/stalled requests; their expected fa
 
 The private matrix covers pending group, drawn group, Messages, Wishlists, initial Games, settings and reveal-ready states at 320, 375, 414, 768, 1024, 1280, 1440 and 1920 widths, landscape 740×320 and ultrawide 2560×1080. It is not a claim to cover every game round, dialog, role, shared-list state or actual device.
 
+## Local Lighthouse follow-up
+
+Lighthouse 13.5.0 on this final local build, default simulated mobile settings:
+
+| Page | Performance | Accessibility | Best practices | SEO |
+| --- | --- | --- | --- | --- |
+| home | 96 | 100 | 100 | 66 |
+| create | 95 | 100 | 100 | 66 |
+| gifts | 95 | 100 | 100 | 69 |
+
+The only failed SEO audit is `is-crawlable`: staging deliberately blocks indexing with noindex/robots protection. This is expected and was preserved. Accessibility, best practices and console checks pass on all three pages. The earlier production-mode SEO scores were 100; live production verification remains a release gate. These local performance scores are not treated as comparable before/after gains. Raw reports are `lighthouse-local-{home,create,gifts}.json`.
+
 ## Fixes made during staging
 
 - **STAGE 01–02:** environment-specific CSP; explicit integration-test targets reject production and privileged client keys.
