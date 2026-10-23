@@ -613,3 +613,13 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Acceptance criteria: staging/local origin tests pass, invalid/insecure origins fail closed; build/lint/TypeScript pass. Actual staging requests require provisioned environment.
 - Status: DONE
 - Completion note: CSP now derives HTTPS and Realtime origins from the configured backend, retaining the production fallback and strict origin validation. Three staging/local/invalid-origin tests and build/lint/TypeScript pass; no backend configuration was changed.
+
+### [x] STAGE 02 — P1
+
+- Severity: P1
+- Location: tests/wishlists*-live.cjs; integration test configuration
+- Evidence: Three integration scripts silently read .env.local, which currently targets production. Running them for staging would create production anonymous users unless the app env file were replaced.
+- Fix: Require explicit staging-only test variables and matching project ref; reject the known production project, privileged keys and production app domain before any request. Keep current app environment files unchanged. No new dependency.
+- Acceptance criteria: Missing/mismatched/production targets fail before network calls; explicit disposable project/local targets work in guard tests; build/lint/TypeScript and local regression tests pass. Live success requires provisioned staging.
+- Status: DONE
+- Completion note: All three live scripts now require explicit isolated test variables and matching project ref. Production, privileged keys and unsafe app targets fail before requests. Four guard tests, all 27 local Node tests and build/lint/TypeScript pass. No live integration writes were run.

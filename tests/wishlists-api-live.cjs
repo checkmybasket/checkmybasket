@@ -1,17 +1,9 @@
 const fs = require("node:fs"),
-  path = require("node:path"),
   assert = require("node:assert/strict");
 const { createClient } = require("@supabase/supabase-js");
-const env = Object.fromEntries(
-  fs
-    .readFileSync(path.join(__dirname, "../.env.local"), "utf8")
-    .split("\n")
-    .filter((l) => /^NEXT_PUBLIC_SUPABASE_\w+=/.test(l))
-    .map((l) => {
-      const at = l.indexOf("=");
-      return [l.slice(0, at), l.slice(at + 1).replace(/^['"]|['"]$/g, "")];
-    }),
-);
+const { stagingEnv, stagingAppUrl } = require("./helpers/staging-env.cjs");
+const env = stagingEnv();
+const base = stagingAppUrl(env.appUrl);
 (async () => {
   const c = createClient(
     env.NEXT_PUBLIC_SUPABASE_URL,
@@ -27,7 +19,6 @@ const env = Object.fromEntries(
   );
   const project = new URL(env.NEXT_PUBLIC_SUPABASE_URL).hostname.split(".")[0];
   const cookie = `sb-${project}-auth-token=base64-${Buffer.from(JSON.stringify(data.session)).toString("base64url")}`;
-  const base = process.env.WISHLIST_TEST_URL ?? "http://localhost:3101";
   const headers = { "Content-Type": "application/json", Cookie: cookie };
   try {
     const unauth = await fetch(`${base}/api/wishlists/metadata`, {

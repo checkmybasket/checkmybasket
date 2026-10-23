@@ -1,18 +1,9 @@
 const { createClient } = require("@supabase/supabase-js");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
-const path = require("node:path");
 const crypto = require("node:crypto");
-const env = Object.fromEntries(
-  fs
-    .readFileSync(path.join(__dirname, "../.env.local"), "utf8")
-    .split("\n")
-    .filter((l) => /^NEXT_PUBLIC_SUPABASE_\w+=/.test(l))
-    .map((l) => {
-      const at = l.indexOf("=");
-      return [l.slice(0, at), l.slice(at + 1).replace(/^['"]|['"]$/g, "")];
-    }),
-);
+const { stagingEnv } = require("./helpers/staging-env.cjs");
+const env = stagingEnv();
 const client = () =>
   createClient(
     env.NEXT_PUBLIC_SUPABASE_URL,
@@ -32,7 +23,7 @@ async function recovery(body) {
       headers: {
         "Content-Type": "application/json",
         apikey: env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-        Origin: "http://localhost:3101",
+        Origin: env.appUrl ?? "http://localhost:3101",
       },
       body: JSON.stringify(body),
     },
