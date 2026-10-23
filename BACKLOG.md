@@ -45,6 +45,8 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 
 - Completion note: Restricted actual-gift inserts to round-group members. Live denial/unchanged-data and valid-member checks pass; local security advisor clean; staging build/lint/TypeScript and 110 regressions pass. Migration is committed for release, applied locally only.
 
+- Production release: Applied via authenticated Supabase migration API as version 20261023161744. Normalized SQL hash matches 02471f08e268121a11b76b363e43934b; live policy now requires authenticated round membership. Server history preserved; repo filename/local history aligned to that assigned version.
+
 ### [x] SECURITY 04 — P0
 
 - Severity: P0
