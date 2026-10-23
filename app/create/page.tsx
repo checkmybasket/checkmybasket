@@ -154,7 +154,7 @@ export default function CreatePage() {
 
         {/* Direct WhatsApp sharing remains available on every device. */}
         <Button onClick={shareWhatsApp} size="lg" className="w-full h-14 rounded-[var(--cmb-radius)] font-semibold mb-3 animate-fade-up animate-delay-200 text-white"
-          style={{ background:"#25D366" }}>
+          style={{ background:"var(--cmb-success)" }}>
           <MessageCircle size={20} strokeWidth={1.5} className="mr-2" /> Share via WhatsApp
         </Button>
 

@@ -587,12 +587,12 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Keep retailer hover text above AA contrast. Existing dark accent hover yields 6.64:1 against white, versus 4.46:1 under the old opacity treatment; build/lint/TypeScript pass.
 
-### [ ] A11Y 15 — P1
+### [x] A11Y 15 — P1
 
 - Severity: P1
 - Location: app/create/page.tsx share view and app/g/[group_id]/page.tsx reminder action
 - Evidence: The hardcoded bright #25D366 gives insufficient contrast for white share text and green reminder text on white. These states were found in the source contrast review.
 - Fix: Use the existing accessible success-green token for these WhatsApp actions, preserving their labels and share behavior.
 - Acceptance criteria: normal/hover action text contrast meets 4.5:1; no action behavior changes; build/lint/TypeScript pass.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Use the accessible green token for share and reminder actions. Contrast is above 4.5:1 for white-on-green and green-on-white; labels and handlers are untouched. Build/lint/TypeScript pass; private share-state browser tests remain OWNER 02.

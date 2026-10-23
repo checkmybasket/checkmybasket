@@ -329,7 +329,7 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
           <div className="flex items-center gap-2">
             <span className="text-xs text-[var(--cmb-text-muted)]">{joined} joined</span>
             <Button size="sm" variant="outline" onClick={sendReminder} className="h-7 px-2.5 text-xs rounded-[var(--cmb-radius)] gap-1"
-              style={{ borderColor:"#25D366", color:"#25D366" }} aria-label="Send reminder via WhatsApp">
+              style={{ borderColor:"var(--cmb-success)", color:"var(--cmb-success)" }} aria-label="Send reminder via WhatsApp">
               <Share2 size={12} strokeWidth={1.5}/> {reminderSent?"Sent":"Remind"}
             </Button>
           </div>
