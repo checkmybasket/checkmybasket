@@ -1,18 +1,28 @@
-# Production polish: current workspace
+# CheckMyBasket production polish backlog
 
-23 October 2026. Implementation branch: polish/production-audit. Current base: 237cf0c (Next.js 16.4.0). This backlog is scoped to production polish; ../BACKLOG.md remains the product master backlog. Earlier audit used an outdated checkout. Findings below are being reconciled against this newer app before changes.
+23 October 2026. Repository: `seo-release`; branch: `polish/production-audit`; starting commit: `237cf0c`. This is the production-polish backlog. The parent `../BACKLOG.md` remains the separate product/security master backlog.
 
-Current baseline: build PASS, TypeScript PASS, lint FAIL (CommonJS test harnesses are checked with TypeScript-only require rules, two restricted local variable names and a this-alias). Earlier Lighthouse scores are historical, not the baseline of this version. Current OG artwork exists in app/opengraph-image.tsx and will be reused after visual QA. No additional OG artwork is required by assumption.
+Phase 1 summary was presented before implementation. Phase 2 changes are committed by issue ID. Phase 3 evidence and before/after measurements are in [audit/FINAL_REPORT.md](audit/FINAL_REPORT.md).
 
-### [x] SECURITY 01 — P0
+Some original evidence and line numbers came from an older checkout. Each finding was reconciled against this newer base before implementation; completion notes distinguish fixes made here from defects already resolved in the newer base. Older checkout Lighthouse scores are not used as this branch's baseline.
 
-- Severity: P0
-- Location: package.json and package-lock.json; all routes
-- Evidence: npm audit --omit=dev on 23 October reports critical Next.js advisories GHSA-2464-fhr4-w9xw and GHSA-673q-mjm6-r5xr plus high GHSA-p3m5-59mp-jv5r affecting installed 16.4.0. npm recommends 16.4.2. The vendor's build security gate also interrupts verification.
-- Fix: update existing next and matching eslint-config-next to exact 16.4.2. No new dependency. This takes priority over remaining polish.
-- Acceptance criteria: production dependency audit has zero findings; build/lint/TypeScript and existing local regression suites pass; public browser smoke succeeds.
-- Status: DONE
-- Completion note: Updated Next.js and matching ESLint config to 16.4.2. Production npm audit reports zero advisories; build/lint/TypeScript, 95 local regression checks and homepage browser smoke pass. Development-tool advisories remain a separate backlog finding.
+## Stack and routes
+
+Next.js App Router (16.4.0 at baseline, patched to 16.4.2), React 19.2.4, strict TypeScript, Tailwind CSS 4, semantic CSS variables, Base UI/shadcn-generated primitives, Lucide and Sonner; Supabase backend, documented Vercel hosting. Fonts: Inter and IBM Plex Mono. Removed unused date-fns, Zustand and the shadcn generator; no dependencies added.
+
+The complete page/handler inventory is in [audit/route-inventory.json](audit/route-inventory.json). There are 39 indexable public URLs, plus noindex `/return`, `/wishlists`, `/wishlists/[id]`, `/w/[token]`, `/join/[invite_code]`, `/g/[group_id]`, `/g/[group_id]/reveal` and `/g/[group_id]/settings`. Gift categories resolve to eight public routes. Wishlist metadata/image API handlers and generated metadata/image endpoints are included in the inventory.
+
+## Baseline and final checks
+
+Current checkout baseline: build PASS; TypeScript PASS; lint FAIL in CommonJS test harness rules. Initial current-home Lighthouse: 97/100/100/100. Create/gifts performance baselines were captured after correctness work and before the performance pass; see the report for precise provenance.
+
+Final source: build, lint and TypeScript PASS; 99 local regression checks PASS. Four measured public page types score 100 for accessibility, best practices and SEO. The public 40-route/10-viewport matrix passes structural, metadata and overflow checks with zero captured console errors/warnings. Authenticated end-to-end certification remains NEEDS OWNER, not a claimed pass.
+
+Ruflo/ToolSearch tools were searched for but unavailable. No production data writes, email/WhatsApp sends, schema changes, pushes or deployment occurred. Existing OG artwork was reused and verified.
+
+## Issues
+
+Sorted by severity, then area and ID. DONE refers to the documented implementation/source verification; any fixture-dependent browser coverage is explicitly retained in OWNER 02/QA 02. Every remaining issue is marked NEEDS OWNER with a concrete next action.
 
 ### [x] BUILD 02 — P0
 
@@ -23,49 +33,15 @@ Current baseline: build PASS, TypeScript PASS, lint FAIL (CommonJS test harnesse
 - Acceptance criteria: build, lint and tsc pass; existing local analytics, selection, verifier and wishlist/email tests pass. No database/live tests run.
 - Status: DONE — build, lint, TypeScript, 16 analytics, 9 gift-flow, 54 verifier and 16 wishlist/email regression checks pass.
 
-# CheckMyBasket production polish backlog
+### [x] SECURITY 01 — P0
 
-Audit date: 23 October 2026. Phase 1 findings; Phase 2 has not started.
-Repository: `work/site-text-removal`, local branch `main`, remote `https://github.com/checkmybasket/checkmybasket.git`.
-This is a local snapshot, not a verified current production checkout. Other copies exist; `work/google-analytics` has uncommitted SEO edits and was left untouched. Do not overwrite or duplicate those changes without reconciliation.
-Synced files under project `sources/` remain read-only.
-
-## Stack and route inventory
-
-Next.js 16.2.7 App Router, React 19.2.4, TypeScript strict, Tailwind CSS 4 with CSS variables, Base UI/shadcn components, Lucide icons, Sonner, Zustand and Supabase. Vercel is the documented hosting target; live account configuration was not verified.
-Public routes: `/`, `/about`, `/contact`, `/privacy`, `/terms`, `/create`, `/gifts`, and `/gifts/[category]` for under-10, under-20, under-30, under-50, colleague, funny, cosy and personalised.
-Utility/private routes: `/return`, `/join/[invite_code]`, `/g/[group_id]`, `/g/[group_id]/reveal`, `/g/[group_id]/settings`.
-Metadata/system endpoints: `/icon`, `/opengraph-image`, `/robots.txt`, `/sitemap.xml`, generated `/_not-found`.
-
-## Baseline
-
-- `npm run build`: PASS. All routes compiled and generated.
-- `npm run lint`: PASS with no reported findings.
-- `tsc --noEmit --incremental false`: PASS.
-- Production server: localhost:3100; startup warns about incorrect inferred workspace root.
-- JavaScript: 1,244,623 bytes across all emitted static JS chunks (raw on disk, not per-page transferred size). Largest chunks: 293,704; 227,313; 146,770; 112,594; 55,883 bytes. These figures alone do not prove wasted code.
-- Lighthouse 13.5.0, local production server, default simulated mobile throttling (412x823, 4x CPU, 150ms RTT), one run per page:
-  - Home: performance 86, accessibility 100, best practices 100, SEO 100; LCP 4.2s.
-  - Create: performance 89, accessibility 81, best practices 100, SEO 100; LCP 3.8s.
-  - Gifts: performance 79, accessibility 98, best practices 100, SEO 100; LCP 5.7s.
-  - JSON reports retained in `audit/lighthouse-before-{home,create,gifts}.json`. These are local baseline measurements, not live-production scores. Automated 100s do not negate manually confirmed defects.
-- Public-page console: no warning/error logs captured during the first 16-page navigation pass. This is not proof for private routes or every interaction. The deliberate later 404 probe is outside this clean navigation sample.
-- Public routes tested at 320, 375, 414, 768, 1024, 1280, 1440, 1920px; landscape 740x320; ultrawide 2560x1080: 160 route/viewport combinations. Homepage overflow reproduced at 320px; no other page-level overflow detected by document-width measurement. This does not certify visual layout, touch targets or zoom.
-- Public route h1 counts: exactly one in each tested page. Information-page headings come from the shared shell. Private loaded states remain unverified.
-- Images initially awaiting load were NOT counted as broken. Gift-index images subsequently reported complete with nonzero natural width.
-- Origin scan: .env.local contains none of the requested dev/preview host markers; values were not printed. localhost appears in starter README, historical notes, and an explicit recovery-function development CORS allowlist. The historical vercel.app reference is documentation, not a demonstrated runtime link defect.
-- Existing positives: en-GB document language, branded generated favicon, 1200x630 generated OG image, public sitemap excluding group/invite routes, join/return noindex, reduced-motion CSS, actual privacy/terms/contact routes, sponsored external gift links with noopener/noreferrer, category empty states.
-- Additional public-route DOM scan: one main landmark and en-GB on every route; no image missing an alt attribute and no empty/#/javascript:void(0) links. Create has one unnamed button. No production static chunk source maps or service-role/secret-key marker matches were found; this is not a comprehensive secret scan.
-- No product behavior, copy, dependencies, data models or runtime source were changed.
-- Ruflo/ToolSearch tools are unavailable in this session. Audit used local tools and browser inspection.
-
-## Remaining verification
-
-This is a partial audit with confirmed source/browser findings, not a completed full checklist. QA 02 explicitly tracks outstanding coverage. Deployed headers and redirects, real external-link availability, complete shared-token drift, all component focus/contrast checks, and authenticated states remain unverified. No speculative security finding is asserted.
-
-## Issues
-
-Each implementation issue must pass build, lint, type check and its specific acceptance criteria before completion. Tick only after verification. Commit one issue at a time with its ID. Owner items remain open with a concrete instruction.
+- Severity: P0
+- Location: package.json and package-lock.json; all routes
+- Evidence: npm audit --omit=dev on 23 October reports critical Next.js advisories GHSA-2464-fhr4-w9xw and GHSA-673q-mjm6-r5xr plus high GHSA-p3m5-59mp-jv5r affecting installed 16.4.0. npm recommends 16.4.2. The vendor's build security gate also interrupts verification.
+- Fix: update existing next and matching eslint-config-next to exact 16.4.2. No new dependency. This takes priority over remaining polish.
+- Acceptance criteria: production dependency audit has zero findings; build/lint/TypeScript and existing local regression suites pass; public browser smoke succeeds.
+- Status: DONE
+- Completion note: Updated Next.js and matching ESLint config to 16.4.2. Production npm audit reports zero advisories; build/lint/TypeScript, 95 local regression checks and homepage browser smoke pass. Development-tool advisories remain a separate backlog finding.
 
 ### [x] A11Y 01 — P1
 
@@ -177,6 +153,46 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Start accessible names with the visible shop/save link text. Source strings match visible text in order; build/lint/TypeScript pass.
 
+### [x] A11Y 12 — P1
+
+- Severity: P1
+- Location: app/create/page.tsx; /create budget presets
+- Evidence: preset selection is communicated by color only; buttons have no aria-pressed state and the Budget per person label has no group association.
+- Fix: name and describe the budget button group and expose each preset's pressed state, preserving existing clicks, tab order and validation.
+- Acceptance criteria: exactly one preset is announced selected, including after choosing Custom; generated markup and browser checks plus build/lint/TypeScript pass.
+- Status: DONE
+- Completion note: Named and described the budget group and added aria-pressed to presets. Production browser confirms exactly one selected Custom preset and its labelled amount field; build/lint/TypeScript pass.
+
+### [x] A11Y 13 — P1
+
+- Severity: P1
+- Location: inline guide/contact links and compact footer links; mobile public routes
+- Evidence: the final 320px browser sweep finds prose links about 20px tall and footer links such as About/Terms narrower than the requested 44px minimum.
+- Fix: enforce mobile minimum anchor hit sizes and give plain prose/list links an inline-flex hit box, preserving existing card/grid/flex link layouts and desktop typesetting.
+- Acceptance criteria: measured mobile links meet 44x44px, no horizontal overflow/overlap is introduced, and build/lint/TypeScript pass.
+- Status: DONE
+- Completion note: Enforced mobile 44px minimum link hit boxes with prose/list links handled without changing card/flex layouts. Rechecked home, contact and two guide types at 320px: no small links or overflow. Build/lint/TypeScript pass; final full sweep follows.
+
+### [x] A11Y 14 — P1
+
+- Severity: P1
+- Location: components/gift-card.tsx: retailer action; gift routes
+- Evidence: The hover opacity .9 composites the red action background to about #D83F3A on white: white text contrast drops from 5.05:1 to 4.46:1, below AA for its 14px label.
+- Fix: Use the existing darker accent-hover token instead of reducing whole-button opacity; preserve text, destination and click behavior.
+- Acceptance criteria: normal/hover action text contrast meets 4.5:1; no action behavior changes; build/lint/TypeScript pass.
+- Status: DONE
+- Completion note: Keep retailer hover text above AA contrast. Existing dark accent hover yields 6.64:1 against white, versus 4.46:1 under the old opacity treatment; build/lint/TypeScript pass.
+
+### [x] A11Y 15 — P1
+
+- Severity: P1
+- Location: app/create/page.tsx share view and app/g/[group_id]/page.tsx reminder action
+- Evidence: The hardcoded bright #25D366 gives insufficient contrast for white share text and green reminder text on white. These states were found in the source contrast review.
+- Fix: Use the existing accessible success-green token for these WhatsApp actions, preserving their labels and share behavior.
+- Acceptance criteria: normal/hover action text contrast meets 4.5:1; no action behavior changes; build/lint/TypeScript pass.
+- Status: DONE
+- Completion note: Use the accessible green token for share and reminder actions. Contrast is above 4.5:1 for white-on-green and green-on-white; labels and handlers are untouched. Build/lint/TypeScript pass; private share-state browser tests remain OWNER 02.
+
 ### [x] BUILD 01 — P1
 
 - Severity: P1
@@ -196,6 +212,26 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Acceptance criteria: Production public pages remain indexable; preview responses and robots disallow indexing. Owner verifies hosting environment values.
 - Status: DONE
 - Completion note: Added environment-aware noindex response headers, root metadata and robots. Local/production retain existing indexing; preview/development/custom environments deny indexing. Five environment cases plus build/lint/TypeScript pass; deployed host confirmation stays in final owner checklist.
+
+### [x] FORM 01 — P1
+
+- Severity: P1
+- Location: app/create/page.tsx; /create custom budget
+- Evidence: validation uses parseInt while submission uses parseFloat. A positive £0.50 budget is rejected even though the existing pence model supports it. Fractions beyond two decimal places are silently rounded at submission.
+- Fix: validate positive whole-pence currency consistently with submission, including the existing signed-integer API range. This is an explicitly flagged validation behavior correction; no data model or successful normal-budget flow changes.
+- Acceptance criteria: £0.50 and ordinary two-decimal budgets validate; zero, sub-penny and out-of-range values get clear local errors; no backend calls during the invalid-form browser checks; build/lint/TypeScript pass.
+- Status: DONE
+- Completion note: Unified positive whole-pence validation with submission and the existing integer API contract. Browser accepts £0.50 locally while rejecting sub-penny amounts; blank required names prevent backend calls. Clear format/too-large messages replace inconsistent parsing. Build/lint/TypeScript pass.
+
+### [x] FORM 02 — P1
+
+- Severity: P1
+- Location: app/create/page.tsx; /create keyboard submission
+- Evidence: create inputs and the fixed submit action are not associated with a native form, so Enter does not submit or invoke validation.
+- Fix: connect the existing fields and action through a labelled native form using the existing validation and async handler. This is a flagged keyboard behavior improvement; click behavior and backend payload stay the same.
+- Acceptance criteria: Enter and the fixed submit button use the same handler, invalid submission focuses the first field without backend writes, and build/lint/TypeScript pass.
+- Status: DONE
+- Completion note: Connected fields and fixed submit action to the labelled create form, retaining custom validation and the existing async handler. Production browser Enter triggers errors and focuses group-name; the submit action belongs to create-draw. No backend write; build/lint/TypeScript pass.
 
 ### [ ] OWNER 02 — P1
 
@@ -237,6 +273,16 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: NEEDS OWNER
 - Completion note: Public 40-route x 10-viewport checks, settled images, representative interactions, long-string/empty/single/200-item component fixtures and anonymous private states are recorded in audit/. NEEDS OWNER: finish authenticated coverage using OWNER 02; check real 200% browser zoom (automation shortcut had no effect, 640px reflow only passed); run physical-device/screen-reader and slow/offline tests; after an owner-approved deployment verify preview noindex and production headers, redirects, APP_URL email links, domain/account configuration, downloadable documents and real merchant destinations. Untested checks are not passed.
 
+### [ ] SECURITY 02 — P1
+
+- Severity: P1
+- Location: package-lock.json; development-only lint toolchain
+- Evidence: after removing the unused generator, npm reports eight high development advisories; production audit is clean. Several transitive fixes are compatible; the braces advisory affects every currently published version (latest is 3.0.3), and npm suggests downgrading eslint-config-next to 14.2.35 for that chain.
+- Fix: apply compatible transitive patches without force or framework/linter downgrades. Record any unpatched upstream lint chain as NEEDS OWNER with a concrete follow-up rather than claiming all dependencies are clean. No new dependency.
+- Acceptance criteria: required checks and local regressions pass; npm production audit remains clean; remaining advisory chain is accurately documented with supported mitigation and owner follow-up.
+- Status: NEEDS OWNER
+- Completion note: Compatible transitive patches applied; 20 original development findings reduced to five entries in the same unpatched braces → micromatch → fast-glob → Next ESLint chain. Production dependencies are clean; build/lint/TypeScript and 99 local regressions pass. NEEDS OWNER: record a temporary development-tool risk exception, do not process untrusted glob patterns, and update the matching ESLint config when a compatible upstream fix ships. Do not force a downgrade to Next 14 tooling.
+
 ### [x] SEO 01 — P1
 
 - Severity: P1
@@ -266,6 +312,26 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Acceptance criteria: All group, reveal and settings responses contain noindex and remain excluded from the sitemap.
 - Status: DONE
 - Completion note: The newer base already provides inherited noindex. Anonymous HTTP verifies group, reveal and settings all emit noindex,nofollow; private routes are absent from the 39-URL sitemap. Evidence: audit/private-metadata.json.
+
+### [x] SEO 07 — P1
+
+- Severity: P1
+- Location: app/g/layout.tsx, group reveal/settings layouts, return and wishlist editor metadata; private routes
+- Evidence: group routes inherit the homepage marketing title/description; return and wishlist editor lack their own descriptions. Public catalogue metadata already derives from catalogue data.
+- Fix: provide accurate generic per-role private metadata and previews without fetching or publishing private group names, assignments, identities or tokens. Private metadata deliberately stays generic for confidentiality; noindex remains intact.
+- Acceptance criteria: private titles/descriptions reflect each screen, all remain noindex, and no private data enters metadata; build/lint/TypeScript pass.
+- Status: DONE
+- Completion note: Added per-role private titles, descriptions and generic social previews for groups, matches, settings, recovery, join and wishlist tools. Metadata uses no private names, assignments or tokens; noindex is preserved. Build/lint/TypeScript pass.
+
+### [x] SEO 08 — P1
+
+- Severity: P1
+- Location: guide metadata and shared defaults; public guides and social previews
+- Evidence: browser on /secret-santa-gifts-under-10 shows only og:title/description/url; og:image, og:site_name and og:type are absent. Child metadata replaces the root object, and Twitter images have similar gaps.
+- Fix: share complete OG/Twitter defaults, including the existing branded image, across every page-level metadata object. Preserve page titles, descriptions and URLs.
+- Acceptance criteria: every public page emits absolute OG/Twitter images, site name, type and route-specific text/URL; build/lint/TypeScript and browser tag audit pass.
+- Status: DONE
+- Completion note: Added complete shared OG/Twitter defaults to every metadata override. Browser confirms guide image, site name and website type with absolute production image URL. Existing page text and URLs are preserved; build/lint/TypeScript pass.
 
 ### [x] STATE 01 — P1
 
@@ -297,6 +363,26 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Added action-specific safe errors for group/create/join, notification and wishlist surfaces while retaining draw constraints. Four error-safety tests and 16 wishlist/email regressions pass; build/lint/TypeScript pass. No database behavior changed.
 
+### [x] STATE 05 — P1
+
+- Severity: P1
+- Location: app/g/[group_id]/page.tsx, reveal/page.tsx, settings/page.tsx and app/join/[invite_code]/page.tsx; initial async views
+- Evidence: initial effects lack rejection handling; join treats backend errors as invalid invitations; dashboard defaults failed queries to empty arrays. A rejected load can leave skeletons indefinitely.
+- Fix: show the shared recoverable error panel on failed reads while preserving absent-group/no-match handling. This is an explicitly flagged error-state behavior change; successful flows and models are unchanged.
+- Acceptance criteria: build/lint/TypeScript pass; initial rejected loads have a retry action; valid absent-resource states stay distinct. Private fixture validation remains OWNER 02.
+- Status: DONE
+- Completion note: Initial reads now route rejected/backend failures, including returned auth transport errors, to retryable recovery instead of permanent skeletons, false empty data or invalid-invite copy. Absent records retain existing states. Build/lint/TypeScript pass; valid private fixtures remain OWNER 02.
+
+### [x] STATE 06 — P1
+
+- Severity: P1
+- Location: app/g/[group_id]/settings/page.tsx; /g/[group_id]/settings
+- Evidence: Copy invite link awaits clipboard.writeText without a catch; denied clipboard permission rejects without an actionable message. The invite URL is already displayed.
+- Fix: Catch clipboard failures and explain how to copy the visible URL manually; retain success feedback.
+- Acceptance criteria: Success still sets copied state; failure shows a safe manual-copy instruction without an unhandled rejection. Build, lint and TypeScript pass; loaded permission-denial browser test requires OWNER 02 fixtures.
+- Status: DONE
+- Completion note: Caught clipboard permission failures with a manual-copy instruction; success feedback is unchanged. Build/lint/TypeScript pass. Loaded browser denial coverage remains in OWNER 02.
+
 ### [x] UI 01 — P1
 
 - Severity: P1
@@ -306,6 +392,16 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Acceptance criteria: No overflow, clipping or overlap at 320px and all requested widths; navigation remains usable.
 - Status: DONE
 - Completion note: The current receipt header already resolves the older overflow defect. Final 40-route x 10-viewport matrix has no page overflow, including homepage at 320px; visually inspected mobile and desktop layouts.
+
+### [x] UI 07 — P1
+
+- Severity: P1
+- Location: app/globals.css and user-content headings/cards; all routes
+- Evidence: shared text has no overflow-wrap rule; share headings, settings names and other user-controlled text can contain unbroken names wider than their mobile container.
+- Fix: allow long unbroken text to wrap through an inherited text token; preserve explicit truncation and intentional nowrap controls.
+- Acceptance criteria: actual shared heading/card components render long strings plus empty/single/200-item fixtures without page overflow at requested widths. Remove the temporary test route before committing; build/lint/TypeScript pass.
+- Status: DONE
+- Completion note: Added inherited overflow-wrap:anywhere. Real InfoPage, GiftCard and GiftResults components passed long-string plus empty/single/200-item fixture checks at all requested widths, short landscape and ultrawide; 640px zoom-reflow proxy also fits. Temporary route removed; build/lint/TypeScript pass. Native browser zoom remains unverified in QA 02.
 
 ### [x] CONTENT 01 — P2
 
@@ -327,6 +423,16 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Use the existing Lucide trophy icon for the awards heading. Meaning is preserved and the decorative icon is aria-hidden; build/lint/TypeScript pass.
 
+### [x] CONTENT 03 — P2
+
+- Severity: P2
+- Location: components/receipt/sections.tsx; homepage example receipt
+- Evidence: the receipt has made-up sample member/budget counts; its example label is accessible only, while the visible caption says Draw no. 0412.
+- Fix: explicitly label it Example draw in visible text, preserving the illustration and its accessible description. This is a flagged clarification, not a claim about real usage.
+- Acceptance criteria: visual and accessible labels both make the sample nature clear; build/lint/TypeScript pass.
+- Status: DONE
+- Completion note: Label the homepage illustration as an example draw. The existing accessible description already describes the example; build/lint/TypeScript pass.
+
 ### [x] HYGIENE 01 — P2
 
 - Severity: P2
@@ -336,6 +442,36 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Acceptance criteria: A new developer can follow documented commands; no starter text or secrets remain.
 - Status: DONE
 - Completion note: Replace starter documentation with actual setup and verification instructions. Commands, environment names and private/deployment boundaries match the repository; build/lint/TypeScript pass.
+
+### [x] HYGIENE 02 — P2
+
+- Severity: P2
+- Location: package.json/package-lock.json; build tooling and all routes
+- Evidence: The component-generation CLI is an unused development dependency and pulls in most of the remaining advisory chain; checked-in components use Base UI directly.
+- Fix: remove the unused shadcn dependency only; no replacement or new dependency.
+- Acceptance criteria: full build/lint/TypeScript and local regressions pass; application imports resolve.
+- Status: DONE
+- Completion note: Removed unused shadcn generation CLI and 255 transitive packages. Checked-in Base UI components are unchanged; build/lint/TypeScript and all 99 local regressions pass. Remaining advisories are limited to development tooling.
+
+### [x] HYGIENE 03 — P2
+
+- Severity: P2
+- Location: package.json/package-lock.json; build tooling and all routes
+- Evidence: No application, library, script or test source imports date-fns. Date formatting uses Intl/custom helpers.
+- Fix: remove the unused date-fns dependency only; no replacement or new dependency.
+- Acceptance criteria: full build/lint/TypeScript and local regressions pass; application imports resolve.
+- Status: DONE
+- Completion note: Removed unused date-fns; source import scan is clear and build/lint/TypeScript pass. Existing local regressions pass after dependency cleanup.
+
+### [x] HYGIENE 04 — P2
+
+- Severity: P2
+- Location: package.json/package-lock.json; build tooling and all routes
+- Evidence: No application, library, script or test source imports zustand. Current views use React state.
+- Fix: remove the unused zustand dependency only; no replacement or new dependency.
+- Acceptance criteria: full build/lint/TypeScript and local regressions pass; application imports resolve.
+- Status: DONE
+- Completion note: Removed unused zustand; source import scan is clear and build/lint/TypeScript pass. Existing local regressions pass after dependency cleanup.
 
 ### [x] OWNER 01 — P2
 
@@ -397,6 +533,16 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Added a valid manifest and 180/192/512px icons from the existing basket vector. Built PNG dimensions and image/png metadata verified; manifest icon paths match outputs. Build/lint/TypeScript pass; no replacement artwork invented.
 
+### [x] SEO 09 — P2
+
+- Severity: P2
+- Location: app/page.tsx; /
+- Evidence: Source and rendered homepage contain no JSON-LD despite describing a real website and browser application.
+- Fix: Add static WebSite/WebApplication structured data using the shared production origin and existing public description. Do not invent reviews, ratings, organisation details or search actions. Schema references: https://schema.org/WebSite and https://schema.org/WebApplication.
+- Acceptance criteria: Rendered JSON-LD parses, names both real types, uses production URLs and contains no invented claims; build/lint/TypeScript and homepage browser/Lighthouse checks pass.
+- Status: DONE
+- Completion note: Added truthful homepage WebSite/WebApplication JSON-LD using SITE_ORIGIN. Rendered JSON parses and contains only public claims; build/lint/TypeScript pass and homepage Lighthouse is 96/100/100/100 with no console findings.
+
 ### [x] STATE 04 — P2
 
 - Severity: P2
@@ -407,56 +553,6 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Added document, catalogue and group/wishlist navigation skeletons with accessible status text, and labelled existing client loading states. Existing reduced-motion CSS applies. Build/lint/TypeScript pass; private slow-network fixture coverage remains OWNER 02.
 
-### [x] STATE 05 — P1
-
-- Severity: P1
-- Location: app/g/[group_id]/page.tsx, reveal/page.tsx, settings/page.tsx and app/join/[invite_code]/page.tsx; initial async views
-- Evidence: initial effects lack rejection handling; join treats backend errors as invalid invitations; dashboard defaults failed queries to empty arrays. A rejected load can leave skeletons indefinitely.
-- Fix: show the shared recoverable error panel on failed reads while preserving absent-group/no-match handling. This is an explicitly flagged error-state behavior change; successful flows and models are unchanged.
-- Acceptance criteria: build/lint/TypeScript pass; initial rejected loads have a retry action; valid absent-resource states stay distinct. Private fixture validation remains OWNER 02.
-- Status: DONE
-- Completion note: Initial reads now route rejected/backend failures, including returned auth transport errors, to retryable recovery instead of permanent skeletons, false empty data or invalid-invite copy. Absent records retain existing states. Build/lint/TypeScript pass; valid private fixtures remain OWNER 02.
-
-### [x] HYGIENE 02 — P2
-
-- Severity: P2
-- Location: package.json/package-lock.json; build tooling and all routes
-- Evidence: The component-generation CLI is an unused development dependency and pulls in most of the remaining advisory chain; checked-in components use Base UI directly.
-- Fix: remove the unused shadcn dependency only; no replacement or new dependency.
-- Acceptance criteria: full build/lint/TypeScript and local regressions pass; application imports resolve.
-- Status: DONE
-- Completion note: Removed unused shadcn generation CLI and 255 transitive packages. Checked-in Base UI components are unchanged; build/lint/TypeScript and all 99 local regressions pass. Remaining advisories are limited to development tooling.
-
-### [x] HYGIENE 03 — P2
-
-- Severity: P2
-- Location: package.json/package-lock.json; build tooling and all routes
-- Evidence: No application, library, script or test source imports date-fns. Date formatting uses Intl/custom helpers.
-- Fix: remove the unused date-fns dependency only; no replacement or new dependency.
-- Acceptance criteria: full build/lint/TypeScript and local regressions pass; application imports resolve.
-- Status: DONE
-- Completion note: Removed unused date-fns; source import scan is clear and build/lint/TypeScript pass. Existing local regressions pass after dependency cleanup.
-
-### [x] HYGIENE 04 — P2
-
-- Severity: P2
-- Location: package.json/package-lock.json; build tooling and all routes
-- Evidence: No application, library, script or test source imports zustand. Current views use React state.
-- Fix: remove the unused zustand dependency only; no replacement or new dependency.
-- Acceptance criteria: full build/lint/TypeScript and local regressions pass; application imports resolve.
-- Status: DONE
-- Completion note: Removed unused zustand; source import scan is clear and build/lint/TypeScript pass. Existing local regressions pass after dependency cleanup.
-
-### [ ] SECURITY 02 — P1
-
-- Severity: P1
-- Location: package-lock.json; development-only lint toolchain
-- Evidence: after removing the unused generator, npm reports eight high development advisories; production audit is clean. Several transitive fixes are compatible; the braces advisory affects every currently published version (latest is 3.0.3), and npm suggests downgrading eslint-config-next to 14.2.35 for that chain.
-- Fix: apply compatible transitive patches without force or framework/linter downgrades. Record any unpatched upstream lint chain as NEEDS OWNER with a concrete follow-up rather than claiming all dependencies are clean. No new dependency.
-- Acceptance criteria: required checks and local regressions pass; npm production audit remains clean; remaining advisory chain is accurately documented with supported mitigation and owner follow-up.
-- Status: NEEDS OWNER
-- Completion note: Compatible transitive patches applied; 20 original development findings reduced to five entries in the same unpatched braces → micromatch → fast-glob → Next ESLint chain. Production dependencies are clean; build/lint/TypeScript and 99 local regressions pass. NEEDS OWNER: record a temporary development-tool risk exception, do not process untrusted glob patterns, and update the matching ESLint config when a compatible upstream fix ships. Do not force a downgrade to Next 14 tooling.
-
 ### [x] UI 02 — P2
 
 - Severity: P2
@@ -466,16 +562,6 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Acceptance criteria: no old cream header literals remain, computed header backgrounds match the paper theme; build/lint/TypeScript and responsive checks pass.
 - Status: DONE
 - Completion note: Use the shared paper header surface instead of old tinted glass. Header dimensions are unchanged; build/lint/TypeScript pass.
-
-### [x] CONTENT 03 — P2
-
-- Severity: P2
-- Location: components/receipt/sections.tsx; homepage example receipt
-- Evidence: the receipt has made-up sample member/budget counts; its example label is accessible only, while the visible caption says Draw no. 0412.
-- Fix: explicitly label it Example draw in visible text, preserving the illustration and its accessible description. This is a flagged clarification, not a claim about real usage.
-- Acceptance criteria: visual and accessible labels both make the sample nature clear; build/lint/TypeScript pass.
-- Status: DONE
-- Completion note: Label the homepage illustration as an example draw. The existing accessible description already describes the example; build/lint/TypeScript pass.
 
 ### [x] UI 03 — P2
 
@@ -516,113 +602,3 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Acceptance criteria: obsolete styling references are absent; current tokens/marks render consistently; build/lint/TypeScript and final responsive/contrast checks pass.
 - Status: DONE
 - Completion note: Align rectangular controls and panels with the shared brand radius. Intentional avatar/status pills remain round; build/lint/TypeScript pass.
-
-### [x] A11Y 12 — P1
-
-- Severity: P1
-- Location: app/create/page.tsx; /create budget presets
-- Evidence: preset selection is communicated by color only; buttons have no aria-pressed state and the Budget per person label has no group association.
-- Fix: name and describe the budget button group and expose each preset's pressed state, preserving existing clicks, tab order and validation.
-- Acceptance criteria: exactly one preset is announced selected, including after choosing Custom; generated markup and browser checks plus build/lint/TypeScript pass.
-- Status: DONE
-- Completion note: Named and described the budget group and added aria-pressed to presets. Production browser confirms exactly one selected Custom preset and its labelled amount field; build/lint/TypeScript pass.
-
-### [x] SEO 07 — P1
-
-- Severity: P1
-- Location: app/g/layout.tsx, group reveal/settings layouts, return and wishlist editor metadata; private routes
-- Evidence: group routes inherit the homepage marketing title/description; return and wishlist editor lack their own descriptions. Public catalogue metadata already derives from catalogue data.
-- Fix: provide accurate generic per-role private metadata and previews without fetching or publishing private group names, assignments, identities or tokens. Private metadata deliberately stays generic for confidentiality; noindex remains intact.
-- Acceptance criteria: private titles/descriptions reflect each screen, all remain noindex, and no private data enters metadata; build/lint/TypeScript pass.
-- Status: DONE
-- Completion note: Added per-role private titles, descriptions and generic social previews for groups, matches, settings, recovery, join and wishlist tools. Metadata uses no private names, assignments or tokens; noindex is preserved. Build/lint/TypeScript pass.
-
-### [x] SEO 08 — P1
-
-- Severity: P1
-- Location: guide metadata and shared defaults; public guides and social previews
-- Evidence: browser on /secret-santa-gifts-under-10 shows only og:title/description/url; og:image, og:site_name and og:type are absent. Child metadata replaces the root object, and Twitter images have similar gaps.
-- Fix: share complete OG/Twitter defaults, including the existing branded image, across every page-level metadata object. Preserve page titles, descriptions and URLs.
-- Acceptance criteria: every public page emits absolute OG/Twitter images, site name, type and route-specific text/URL; build/lint/TypeScript and browser tag audit pass.
-- Status: DONE
-- Completion note: Added complete shared OG/Twitter defaults to every metadata override. Browser confirms guide image, site name and website type with absolute production image URL. Existing page text and URLs are preserved; build/lint/TypeScript pass.
-
-### [x] FORM 01 — P1
-
-- Severity: P1
-- Location: app/create/page.tsx; /create custom budget
-- Evidence: validation uses parseInt while submission uses parseFloat. A positive £0.50 budget is rejected even though the existing pence model supports it. Fractions beyond two decimal places are silently rounded at submission.
-- Fix: validate positive whole-pence currency consistently with submission, including the existing signed-integer API range. This is an explicitly flagged validation behavior correction; no data model or successful normal-budget flow changes.
-- Acceptance criteria: £0.50 and ordinary two-decimal budgets validate; zero, sub-penny and out-of-range values get clear local errors; no backend calls during the invalid-form browser checks; build/lint/TypeScript pass.
-- Status: DONE
-- Completion note: Unified positive whole-pence validation with submission and the existing integer API contract. Browser accepts £0.50 locally while rejecting sub-penny amounts; blank required names prevent backend calls. Clear format/too-large messages replace inconsistent parsing. Build/lint/TypeScript pass.
-
-### [x] UI 07 — P1
-
-- Severity: P1
-- Location: app/globals.css and user-content headings/cards; all routes
-- Evidence: shared text has no overflow-wrap rule; share headings, settings names and other user-controlled text can contain unbroken names wider than their mobile container.
-- Fix: allow long unbroken text to wrap through an inherited text token; preserve explicit truncation and intentional nowrap controls.
-- Acceptance criteria: actual shared heading/card components render long strings plus empty/single/200-item fixtures without page overflow at requested widths. Remove the temporary test route before committing; build/lint/TypeScript pass.
-- Status: DONE
-- Completion note: Added inherited overflow-wrap:anywhere. Real InfoPage, GiftCard and GiftResults components passed long-string plus empty/single/200-item fixture checks at all requested widths, short landscape and ultrawide; 640px zoom-reflow proxy also fits. Temporary route removed; build/lint/TypeScript pass. Native browser zoom remains unverified in QA 02.
-
-### [x] A11Y 13 — P1
-
-- Severity: P1
-- Location: inline guide/contact links and compact footer links; mobile public routes
-- Evidence: the final 320px browser sweep finds prose links about 20px tall and footer links such as About/Terms narrower than the requested 44px minimum.
-- Fix: enforce mobile minimum anchor hit sizes and give plain prose/list links an inline-flex hit box, preserving existing card/grid/flex link layouts and desktop typesetting.
-- Acceptance criteria: measured mobile links meet 44x44px, no horizontal overflow/overlap is introduced, and build/lint/TypeScript pass.
-- Status: DONE
-- Completion note: Enforced mobile 44px minimum link hit boxes with prose/list links handled without changing card/flex layouts. Rechecked home, contact and two guide types at 320px: no small links or overflow. Build/lint/TypeScript pass; final full sweep follows.
-
-### [x] A11Y 14 — P1
-
-- Severity: P1
-- Location: components/gift-card.tsx: retailer action; gift routes
-- Evidence: The hover opacity .9 composites the red action background to about #D83F3A on white: white text contrast drops from 5.05:1 to 4.46:1, below AA for its 14px label.
-- Fix: Use the existing darker accent-hover token instead of reducing whole-button opacity; preserve text, destination and click behavior.
-- Acceptance criteria: normal/hover action text contrast meets 4.5:1; no action behavior changes; build/lint/TypeScript pass.
-- Status: DONE
-- Completion note: Keep retailer hover text above AA contrast. Existing dark accent hover yields 6.64:1 against white, versus 4.46:1 under the old opacity treatment; build/lint/TypeScript pass.
-
-### [x] A11Y 15 — P1
-
-- Severity: P1
-- Location: app/create/page.tsx share view and app/g/[group_id]/page.tsx reminder action
-- Evidence: The hardcoded bright #25D366 gives insufficient contrast for white share text and green reminder text on white. These states were found in the source contrast review.
-- Fix: Use the existing accessible success-green token for these WhatsApp actions, preserving their labels and share behavior.
-- Acceptance criteria: normal/hover action text contrast meets 4.5:1; no action behavior changes; build/lint/TypeScript pass.
-- Status: DONE
-- Completion note: Use the accessible green token for share and reminder actions. Contrast is above 4.5:1 for white-on-green and green-on-white; labels and handlers are untouched. Build/lint/TypeScript pass; private share-state browser tests remain OWNER 02.
-
-### [x] FORM 02 — P1
-
-- Severity: P1
-- Location: app/create/page.tsx; /create keyboard submission
-- Evidence: create inputs and the fixed submit action are not associated with a native form, so Enter does not submit or invoke validation.
-- Fix: connect the existing fields and action through a labelled native form using the existing validation and async handler. This is a flagged keyboard behavior improvement; click behavior and backend payload stay the same.
-- Acceptance criteria: Enter and the fixed submit button use the same handler, invalid submission focuses the first field without backend writes, and build/lint/TypeScript pass.
-- Status: DONE
-- Completion note: Connected fields and fixed submit action to the labelled create form, retaining custom validation and the existing async handler. Production browser Enter triggers errors and focuses group-name; the submit action belongs to create-draw. No backend write; build/lint/TypeScript pass.
-
-### [x] STATE 06 — P1
-
-- Severity: P1
-- Location: app/g/[group_id]/settings/page.tsx; /g/[group_id]/settings
-- Evidence: Copy invite link awaits clipboard.writeText without a catch; denied clipboard permission rejects without an actionable message. The invite URL is already displayed.
-- Fix: Catch clipboard failures and explain how to copy the visible URL manually; retain success feedback.
-- Acceptance criteria: Success still sets copied state; failure shows a safe manual-copy instruction without an unhandled rejection. Build, lint and TypeScript pass; loaded permission-denial browser test requires OWNER 02 fixtures.
-- Status: DONE
-- Completion note: Caught clipboard permission failures with a manual-copy instruction; success feedback is unchanged. Build/lint/TypeScript pass. Loaded browser denial coverage remains in OWNER 02.
-
-### [x] SEO 09 — P2
-
-- Severity: P2
-- Location: app/page.tsx; /
-- Evidence: Source and rendered homepage contain no JSON-LD despite describing a real website and browser application.
-- Fix: Add static WebSite/WebApplication structured data using the shared production origin and existing public description. Do not invent reviews, ratings, organisation details or search actions. Schema references: https://schema.org/WebSite and https://schema.org/WebApplication.
-- Acceptance criteria: Rendered JSON-LD parses, names both real types, uses production URLs and contains no invented claims; build/lint/TypeScript and homepage browser/Lighthouse checks pass.
-- Status: DONE
-- Completion note: Added truthful homepage WebSite/WebApplication JSON-LD using SITE_ORIGIN. Rendered JSON parses and contains only public claims; build/lint/TypeScript pass and homepage Lighthouse is 96/100/100/100 with no console findings.
