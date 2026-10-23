@@ -307,15 +307,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: OPEN
 - Completion note: Pending.
 
-### [ ] CONTENT 01 — P2
+### [x] CONTENT 01 — P2
 
 - Severity: P2
 - Location: components/info-page.tsx:30; app/page.tsx footer
 - Evidence: Copyright is hardcoded to 2026. It is correct today but will become stale.
 - Fix: Derive the year through a shared server-rendered value.
 - Acceptance criteria: Rendered year matches the current year without a manual edit and does not create hydration warnings.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Render copyright from a shared server-side year. Both footer renders use the current year without client hydration changes; build/lint/TypeScript pass.
 
 ### [ ] CONTENT 02 — P2
 

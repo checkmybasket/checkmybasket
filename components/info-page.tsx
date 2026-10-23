@@ -1,3 +1,4 @@
+import { COPYRIGHT_YEAR } from "@/lib/site";
 import Link from "next/link";
 import { ExploreNavigation } from "@/components/explore-navigation";
 import { Gift, ChevronLeft } from "lucide-react";
@@ -30,7 +31,7 @@ export function InfoPage({ title, updated, children }: { title: string; updated?
           <Link href="/terms" className="inline-flex min-h-11 items-center hover:underline">Terms</Link>
           <Link href="/contact" className="inline-flex min-h-11 items-center hover:underline">Contact</Link>
         </div>
-        <p>© 2026 CheckMyBasket</p>
+        <p>© {COPYRIGHT_YEAR} CheckMyBasket</p>
       </footer>
     </div>
   );

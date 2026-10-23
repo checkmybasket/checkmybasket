@@ -1,3 +1,4 @@
+import { COPYRIGHT_YEAR } from "@/lib/site";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { GIFT_CATEGORIES } from "@/lib/gift-categories";
@@ -59,5 +60,5 @@ export function CtaBand() {
   return <section className="receipt-container receipt-closing" aria-labelledby="closing-heading"><h2 id="closing-heading">Ready to organise your gift exchange?</h2><Button href="/create" variant="inverse">Create a free draw</Button></section>;
 }
 export function Footer() {
-  return <footer className="receipt-footer"><div className="receipt-container receipt-footer-row"><p>Some gift links may earn us a small commission at no extra cost to you. That keeps CheckMyBasket free and free of ads.</p><div><nav aria-label="Footer navigation">{[["/guides", "Guides"], ["/gifts", "Gift ideas"], ["/about", "About"], ["/privacy", "Privacy"], ["/terms", "Terms"], ["/contact", "Contact"]].map(([href, label]) => <Link href={href} key={href}>{label}</Link>)}</nav><p>© 2026 CheckMyBasket</p></div></div></footer>;
+  return <footer className="receipt-footer"><div className="receipt-container receipt-footer-row"><p>Some gift links may earn us a small commission at no extra cost to you. That keeps CheckMyBasket free and free of ads.</p><div><nav aria-label="Footer navigation">{[["/guides", "Guides"], ["/gifts", "Gift ideas"], ["/about", "About"], ["/privacy", "Privacy"], ["/terms", "Terms"], ["/contact", "Contact"]].map(([href, label]) => <Link href={href} key={href}>{label}</Link>)}</nav><p>© {COPYRIGHT_YEAR} CheckMyBasket</p></div></div></footer>;
 }
