@@ -167,15 +167,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Add an h2 for each product listing before the card h3 headings. Source hierarchy and build/lint/TypeScript pass; guide-card hierarchy is preserved.
 
-### [ ] A11Y 11 — P1
+### [x] A11Y 11 — P1
 
 - Severity: P1
 - Location: components/gift-card.tsx:36; all product listings
 - Evidence: Lighthouse label-content-name-mismatch: visible Shop at Cadbury is overridden by a label beginning Shop [product] at [shop], without the visible phrase.
 - Fix: Build the accessible name from the actual visible shop label, then append product/context.
 - Acceptance criteria: Accessible name contains visible link text in the same order; speech-control selection and automated name check pass.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Start accessible names with the visible shop/save link text. Source strings match visible text in order; build/lint/TypeScript pass.
 
 ### [ ] BUILD 01 — P1
 
