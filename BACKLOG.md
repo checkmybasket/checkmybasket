@@ -85,7 +85,7 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Fix: Render one semantic anchor styled as a button for navigation; retain buttons for actions.
 - Acceptance criteria: No nested interactive elements across routes; each navigation control is one tab stop and navigates correctly.
 - Status: DONE
-- Completion note: Converted six remaining nested link/button controls into styled links. Production create DOM has no nested controls; source scan, build/lint/TypeScript pass.
+- Completion note: Converted all thirteen nested link/button controls (including multiline private-route controls) into styled links. Production create DOM has no nested controls; source scan, build/lint/TypeScript pass.
 
 ### [x] A11Y 04 — P1
 

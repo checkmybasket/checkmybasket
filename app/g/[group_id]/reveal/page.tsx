@@ -3,7 +3,7 @@
 import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { Gift, MessageCircle, ShoppingBag, CheckCircle2, Lock, ChevronLeft, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { formatBudget } from "@/lib/utils";
 import { toast } from "sonner";
 import { NotificationEmail } from "@/components/notification-email";
@@ -83,11 +83,9 @@ export default function RevealPage({ params }: { params: Promise<{ group_id: str
       {/* Header */}
       <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background: "rgba(255,248,240,0.92)", backdropFilter: "blur(12px)" }}>
         <div className="max-w-xl mx-auto px-4 h-14 flex items-center gap-3">
-          <Link href={`/g/${group_id}`} aria-label="Back to group">
-            <Button variant="ghost" size="sm" className="h-11 w-11 p-0 rounded-lg">
+          <Link href={`/g/${group_id}`} aria-label="Back to group" className={buttonVariants({ variant: "ghost", size: "sm", className: "h-11 w-11 p-0 rounded-lg" })}>
               <ChevronLeft size={20} strokeWidth={1.5} />
-            </Button>
-          </Link>
+            </Link>
           <div className="flex items-center gap-2 text-[var(--cmb-primary)]">
             <Gift size={20} strokeWidth={1.5} />
             <span className="font-semibold font-display">Your match</span>
@@ -105,9 +103,7 @@ export default function RevealPage({ params }: { params: Promise<{ group_id: str
               <p className="text-sm mb-6 text-[var(--cmb-text-secondary)]">
                 Either names haven&apos;t been drawn, or you joined after the draw.
               </p>
-              <Link href={`/g/${group_id}`}>
-                <Button variant="outline" className="rounded-xl h-11 px-6 border-[var(--cmb-border-strong)]">Back to group</Button>
-              </Link>
+              <Link href={`/g/${group_id}`} className={buttonVariants({ variant: "outline", size: "default", className: "rounded-xl h-11 px-6 border-[var(--cmb-border-strong)]" })}>Back to group</Link>
             </div>
           )}
           {stage === "pre" && <PreReveal onReveal={handleReveal} />}
@@ -309,24 +305,14 @@ function RevealedScreen({
 
       {/* Action buttons */}
       <div className="space-y-3">
-        <Link href={`/g/${groupId}`}>
-          <Button
-            variant="outline"
-            className="w-full h-12 rounded-xl font-medium border-[var(--cmb-border-strong)]"
-          >
+        <Link href={`/g/${groupId}`} className={buttonVariants({ variant: "outline", size: "default", className: "w-full h-12 rounded-xl font-medium border-[var(--cmb-border-strong)]" })}>
             <MessageCircle size={18} strokeWidth={1.5} className="mr-2" />
             Ask {recipientName} a question
-          </Button>
-        </Link>
-        <Link href={match.budget != null ? `/gifts?budget=${match.budget}` : "/gifts"}>
-          <Button
-            variant="outline"
-            className="w-full h-12 rounded-xl font-medium border-[var(--cmb-border-strong)]"
-          >
+          </Link>
+        <Link href={match.budget != null ? `/gifts?budget=${match.budget}` : "/gifts"} className={buttonVariants({ variant: "outline", size: "default", className: "w-full h-12 rounded-xl font-medium border-[var(--cmb-border-strong)]" })}>
             <ShoppingBag size={18} strokeWidth={1.5} className="mr-2" />
             {match.budget != null ? `Find gifts under ${formatBudget(match.budget)}` : "Browse gift ideas"}
-          </Button>
-        </Link>
+          </Link>
         <Button
           onClick={onToggleBought}
           className="w-full h-12 rounded-xl font-medium"

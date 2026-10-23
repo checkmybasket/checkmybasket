@@ -159,9 +159,7 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
             </span>
           </div>
           {isOrganiser && (
-            <Link href={`/g/${group.id}/settings`}>
-              <Button variant="ghost" size="sm" className="h-11 w-11 p-0 rounded-lg" aria-label="Group settings"><Settings size={18} strokeWidth={1.5}/></Button>
-            </Link>
+            <Link href={`/g/${group.id}/settings`} aria-label="Group settings" className={buttonVariants({ variant: "ghost", size: "sm", className: "h-11 w-11 p-0 rounded-lg" })}><Settings size={18} strokeWidth={1.5}/></Link>
           )}
         </div>
       </header>
@@ -241,11 +239,9 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
           {myDraw ? "Your match is ready and waiting." : "You joined after the draw — ask your organiser about a redraw."}
         </p>
         {myDraw && (
-          <Link href={`/g/${group.id}/reveal`}>
-            <Button size="lg" className="h-12 px-8 rounded-xl font-semibold bg-[var(--cmb-accent)] text-white">
+          <Link href={`/g/${group.id}/reveal`} className={buttonVariants({ variant: "default", size: "lg", className: "h-12 px-8 rounded-xl font-semibold bg-[var(--cmb-accent)] text-white" })}>
               See who you&apos;re buying for <ArrowRight size={18} strokeWidth={1.5} className="ml-2"/>
-            </Button>
-          </Link>
+            </Link>
         )}
       </div>
 
@@ -657,11 +653,9 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
           <p className="text-xs mt-1 mb-3 text-[var(--cmb-text-muted)]">
             No need to stick to a list — browse curated ideas{budgetTier ? " within the group budget" : ""} and pick something you think they&apos;d like.
           </p>
-          <Link href={giftIdeasHref}>
-            <Button size="sm" variant="outline" className="h-9 rounded-lg text-xs px-3">
+          <Link href={giftIdeasHref} className={buttonVariants({ variant: "outline", size: "sm", className: "h-9 rounded-lg text-xs px-3" })}>
               Browse gift ideas <ArrowRight size={13} strokeWidth={2} className="ml-1"/>
-            </Button>
-          </Link>
+            </Link>
         </div>
       )}
       {!isMyList && activeMember && (activeMember.dislikes || activeMember.sizes || activeMember.likes) && (
