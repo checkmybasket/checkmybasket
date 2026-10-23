@@ -9,22 +9,26 @@ import { ORGANISER_GUIDES } from "@/lib/organiser-guides";
 
 const guide = ORGANISER_GUIDES.find(item => item.slug === "secret-santa-wishlist-ideas")!;
 export const metadata: Metadata = {
-  title: { absolute: "What to Put on a Secret Santa Wishlist | CheckMyBasket" }, description: guide.description,
+  title: { absolute: `${guide.title} | CheckMyBasket` }, description: guide.description,
   alternates: { canonical: `/${guide.slug}` },
   openGraph: { ...OPEN_GRAPH_DEFAULTS,  title: guide.title, description: guide.description, url: `${SITE_ORIGIN}/${guide.slug}` },
   twitter: { ...TWITTER_DEFAULTS,  card: "summary_large_image", title: guide.title, description: guide.description },
 };
 
 export default function WishlistGuide() {
-  return <InfoPage title="What to put on a Secret Santa wishlist" updated="11 October 2026">
-    <GuideIntro answer="Add three to five gifts you would enjoy, all within the agreed budget, with at least one cheaper option. Include useful sizes, colours, editions or hobbies, say whether alternatives are welcome, and check delivery costs before adding a product link." contents={[
+  return <InfoPage title="What to put on a Secret Santa wishlist" updated="23 October 2026">
+    <GuideIntro answer="Ask for three to five things you would enjoy: a book, a useful everyday item, something for a hobby or a small treat. Keep each idea within the agreed budget and include a cheaper option. Add the size, colour or edition where it matters, say whether alternatives are welcome, and leave room for delivery costs." contents={[
       { id: "start-with-three-to-five-useful-ideas", label: "Choosing your ideas" },
       { id: "wishlist-ideas-for-different-budgets", label: "Ideas by budget" },
+      { id: "wishlist-ideas-by-interest", label: "Ideas by interest" },
       { id: "completed-wishlist-examples", label: "Three completed examples" },
       { id: "create-and-share-your-list-in-checkmybasket", label: "Create and share your list" },
     ]} />
     <p className="text-lg leading-relaxed">Put a few things you would actually enjoy on your Secret Santa wishlist, with enough detail for someone else to choose confidently. Include options below the spending limit, explain your preferences and leave room for the buyer to surprise you.</p>
-    <Link prefetch={false} href="/wishlists" className="inline-flex min-h-11 items-center rounded-[var(--cmb-radius)] bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Create a wishlist</Link>
+    <div className="space-y-2">
+      <Link prefetch={false} href="/wishlists" className="inline-flex min-h-11 items-center rounded-[var(--cmb-radius)] bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Create your Secret Santa wishlist</Link>
+      <p className="text-sm text-[var(--cmb-text-secondary)]">Add ideas from different shops or describe a gift without a link. Your personal list starts private; you choose when to share it.</p>
+    </div>
     <Section id="start-with-three-to-five-useful-ideas" heading="Start with three to five useful ideas">
       <p>A short list is easier to use than dozens of unrelated links. Try one practical item, one hobby idea and one small treat, provided each fits the agreed budget. Include a lower-priced option so the buyer has room for postage or wrapping.</p>
       <p>For example, a reader could add a particular paperback, a bookmark and a note saying they enjoy historical fiction. A stationery fan could specify an A5 notebook with dotted pages rather than simply writing “notebook”. These details help even when the exact item is unavailable.</p>
@@ -36,6 +40,16 @@ export default function WishlistGuide() {
         <div><h3 className="font-semibold">Under £20</h3><p>Consider a book, small game, mug or accessory related to a hobby. Specify the edition, style or colour if it matters. If your group’s total limit is £20 including delivery, choose an item comfortably below it. <Link href="/gifts/under-20" className="underline">Browse current ideas under £20</Link>.</p></div>
         <div><h3 className="font-semibold">Under £30</h3><p>A complete craft kit, a game or a personalised keepsake may suit this budget. Check what is included: an accessory or refill is not always a complete gift. Add any personalisation details the buyer will need. <Link href="/gifts/under-30" className="underline">Browse current ideas under £30</Link>.</p></div>
       </div>
+    </Section>
+    <Section id="wishlist-ideas-by-interest" heading="What to ask for based on your interests">
+      <p>Start with something you already enjoy. The examples below are types of gifts to look for, not checked offers or a promise that every option fits your budget.</p>
+      <ul className="list-disc pl-5 space-y-3">
+        <li><strong>Reading:</strong> name a book you do not own, with its author and preferred format. A bookmark or book light can be an alternative. <Link href="/secret-santa-gifts-for-book-lovers" className="underline">Choosing gifts for book lovers</Link>.</li>
+        <li><strong>Coffee:</strong> describe your usual brewing method and whether you use whole beans or ground coffee. A mug or small coffee accessory may be easier to choose if your Santa is unsure. <Link href="/secret-santa-gifts-for-coffee-lovers" className="underline">Coffee gift ideas and compatibility checks</Link>.</li>
+        <li><strong>Games:</strong> mention the platform for a video-game accessory, or the player count and playing time you prefer for a tabletop game. List games you already own to help avoid duplicates. <Link href="/secret-santa-gifts-for-gamers" className="underline">Choosing a gaming gift</Link>.</li>
+        <li><strong>Crafts and stationery:</strong> ask for a notebook with a particular page layout, a sketchbook suited to your materials or a complete beginner kit. Say what equipment you already have so your Santa can choose something useful.</li>
+      </ul>
+      <p>For example: “I use ground coffee in a cafetière. A small bag within our £10 total budget would be lovely; please choose an option that leaves room for delivery.” A preference plus a limit is more useful than a long list of unrelated products.</p>
     </Section>
     <Section id="add-the-details-that-prevent-guesswork" heading="Add the details that prevent guesswork">
       <ul className="list-disc pl-5 space-y-2">
@@ -79,6 +93,7 @@ export default function WishlistGuide() {
     </Section>
     <Section id="keep-it-helpful-without-turning-it-into-a-shopping-demand" heading="Keep it helpful, without turning it into a shopping demand">
       <p>Update links that are sold out and remove items you have already bought. Offer alternatives and avoid asking the buyer to exceed the group’s limit. Your list should help them understand your taste, while leaving the final choice with them.</p>
+      <p><Link prefetch={false} href="/wishlists" className="inline-flex min-h-11 items-center rounded-[var(--cmb-radius)] bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Create your Secret Santa wishlist</Link></p>
       <OrganiserGuideLinks current={guide.slug}/>
       <p><Link href="/gifts" className="underline">Find ideas by category, budget and interest</Link> · <Link href="/personalised-secret-santa-gifts" className="underline">Choosing a personalised gift</Link></p>
     </Section>
