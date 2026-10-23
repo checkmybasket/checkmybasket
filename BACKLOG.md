@@ -31,7 +31,8 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Evidence: npm run lint exits 1 before any changes. CommonJS imports trigger no-require-imports; local module variable triggers Next rule; test mock aliases this; unused callback index.
 - Fix: allow intentional require imports only in .cjs tools/tests; rename harness variables and remove alias/unused index without disabling application rules.
 - Acceptance criteria: build, lint and tsc pass; existing local analytics, selection, verifier and wishlist/email tests pass. No database/live tests run.
-- Status: DONE — build, lint, TypeScript, 16 analytics, 9 gift-flow, 54 verifier and 16 wishlist/email regression checks pass.
+- Status: DONE
+- Completion note: Build, lint, TypeScript, 16 analytics, 9 gift-flow, 54 verifier and 16 wishlist/email regression checks pass.
 
 ### [x] SECURITY 01 — P0
 
