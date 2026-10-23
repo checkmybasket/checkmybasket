@@ -193,7 +193,8 @@ export default function CreatePage() {
         </div>
       </header>
 
-      <main className="max-w-xl mx-auto px-4 py-8 pb-28 space-y-8">
+      <main className="max-w-xl mx-auto px-4 py-8 pb-28">
+        <form id="create-draw" aria-label="Create your Secret Santa draw" noValidate onSubmit={event => { event.preventDefault(); void handleCreate(); }} className="space-y-8">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold mb-2 font-display">Create your draw</h1>
           <p className="text-[var(--cmb-text-secondary)]">Fill in the details below, then share the invite link with your group.</p>
@@ -252,11 +253,12 @@ export default function CreatePage() {
           {errors.email && <p id="email-error" role="alert" className="mt-1 text-sm text-[var(--cmb-error)]">{errors.email}</p>}
           <p className="text-xs mt-2 text-[var(--cmb-text-muted)]">This updates your notification email across your groups; leaving it blank turns notifications off. Notifications require email verification after joining; creating and using your group does not require email. <Link href="/privacy" className="underline">Privacy policy</Link></p>
         </div>
+        </form>
       </main>
 
       <div className="fixed bottom-0 left-0 right-0 z-20 px-4 pt-4 border-t safe-bottom bg-[var(--cmb-bg)] border-[var(--cmb-border)]">
         <div className="max-w-xl mx-auto">
-          <Button onClick={handleCreate} disabled={busy} size="lg" className="w-full h-14 text-base rounded-[var(--cmb-radius)] font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">
+          <Button type="submit" form="create-draw" disabled={busy} size="lg" className="w-full h-14 text-base rounded-[var(--cmb-radius)] font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">
             <Gift size={20} strokeWidth={1.5} className="mr-2"/> {busy ? "Creating…" : "Create your draw"}
           </Button>
           <p className="text-center mt-2 text-xs pb-2 text-[var(--cmb-text-muted)]">Free forever. No account needed.</p>
@@ -270,7 +272,7 @@ function Field({ htmlFor, label, children, hint, error, required }: { htmlFor:st
   return (
     <div>
       <Label htmlFor={htmlFor} className="text-base font-medium mb-1.5 flex items-center gap-1">
-        {label}{required && <span className="text-[var(--cmb-accent)]">*</span>}
+        {label}{required && <span aria-hidden="true" className="text-[var(--cmb-accent)]">*</span>}
       </Label>
       {hint && <p id={`${htmlFor}-hint`} className="text-sm mb-2 text-[var(--cmb-text-muted)]">{hint}</p>}
       {children}

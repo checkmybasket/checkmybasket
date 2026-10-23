@@ -596,3 +596,13 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Acceptance criteria: normal/hover action text contrast meets 4.5:1; no action behavior changes; build/lint/TypeScript pass.
 - Status: DONE
 - Completion note: Use the accessible green token for share and reminder actions. Contrast is above 4.5:1 for white-on-green and green-on-white; labels and handlers are untouched. Build/lint/TypeScript pass; private share-state browser tests remain OWNER 02.
+
+### [x] FORM 02 — P1
+
+- Severity: P1
+- Location: app/create/page.tsx; /create keyboard submission
+- Evidence: create inputs and the fixed submit action are not associated with a native form, so Enter does not submit or invoke validation.
+- Fix: connect the existing fields and action through a labelled native form using the existing validation and async handler. This is a flagged keyboard behavior improvement; click behavior and backend payload stay the same.
+- Acceptance criteria: Enter and the fixed submit button use the same handler, invalid submission focuses the first field without backend writes, and build/lint/TypeScript pass.
+- Status: DONE
+- Completion note: Connected fields and fixed submit action to the labelled create form, retaining custom validation and the existing async handler. Production browser Enter triggers errors and focuses group-name; the submit action belongs to create-draw. No backend write; build/lint/TypeScript pass.
