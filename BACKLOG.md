@@ -377,15 +377,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Centralise public production URLs in SITE_ORIGIN. Metadata base, robots, sitemap and public guide/social URLs share one origin; production values remain independent of previews. Build/lint/TypeScript pass.
 
-### [ ] SEO 05 — P2
+### [x] SEO 05 — P2
 
 - Severity: P2
 - Location: app/gifts/layout.tsx; app/gifts/[category]/page.tsx:14
 - Evidence: Browser category titles end at 'UK' and omit CheckMyBasket: the intermediate layout defines a plain title rather than forwarding a template.
 - Fix: Apply the intended title template consistently to gift categories.
 - Acceptance criteria: Every category title remains specific and includes CheckMyBasket exactly once.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Current category absolute titles already include CheckMyBasket. All eight rendered category titles are specific and include the brand exactly once; evidence: audit/public-route-matrix.json.
 
 ### [x] SEO 06 — P2
 
