@@ -28,6 +28,16 @@ Ruflo/ToolSearch tools were searched for but unavailable. No production data wri
 
 ## Issues
 
+### [x] CONTENT 01 — P2
+
+- Severity: P2
+- Location: docs/editorial-drafts/; unpublished editorial package, no public routes
+- Evidence: Owner requested five creative SEO-focused guide drafts for morning review.
+- Fix: Write five complete articles with distinct intent, proposed metadata/slugs, useful original examples and contextual links. Keep unpublished; no route/sitemap/public assets or invented keyword demand, tests, offers or app capabilities.
+- Acceptance criteria: Exactly five labelled drafts and a review index; one h1 per article, description <=155 characters, internal destinations exist; runtime code/routes remain unaffected. Owner reviews before publication.
+- Status: DONE — draft delivery, not publication approval.
+- Completion note: Prepared last-minute planning, gift questionnaire, no-clutter, secondhand and anonymous-wrapping guides. Each has 600+ words including editorial notes; five draft/heading/description/link checks pass and git diff --check is clean. Files remain outside app/public and sitemap. Review index records keyword uncertainty and publication checks.
+
 ### [x] SEO 12 — P1
 
 - Severity: P1
