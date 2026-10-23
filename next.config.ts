@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import path from "node:path";
 
 // Supabase project origin the browser must be allowed to reach (REST + Realtime).
 const SUPABASE_ORIGIN = "https://nejkvrzabdetsnhpeqtl.supabase.co";
@@ -32,6 +33,8 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  outputFileTracingRoot: path.resolve(__dirname),
+  turbopack: { root: path.resolve(__dirname) },
   images: {
     remotePatterns: [
       ...["cdn.waterstones.com", "cdn.notonthehighstreet.com", "media.johnlewiscontent.com", "thelittlebotanical.com", "www.dunelm.com", "images.dunelm.com", "i.etsystatic.com"].map(hostname => ({ protocol: "https" as const, hostname, pathname: "/**" })),

@@ -177,15 +177,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Start accessible names with the visible shop/save link text. Source strings match visible text in order; build/lint/TypeScript pass.
 
-### [ ] BUILD 01 — P1
+### [x] BUILD 01 — P1
 
 - Severity: P1
 - Location: next.config.ts; production server startup
 - Evidence: next start warns that /Users/hassan/package-lock.json was selected as the workspace root because multiple lockfiles exist.
 - Fix: Explicitly configure the correct tracing root after checking deployment needs.
 - Acceptance criteria: Build and start pass without inferred-root warning; traced deployment includes required application files only.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Declare the repository as the tracing and Turbopack root. Build/lint/TypeScript pass and the build no longer emits an ignored external-lockfile warning.
 
 ### [ ] DEPLOY 01 — P1
 
