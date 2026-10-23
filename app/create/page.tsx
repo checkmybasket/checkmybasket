@@ -200,8 +200,9 @@ export default function CreatePage() {
           </div>
           {form.budget === 0 && (
             <div className="mt-3 relative">
+              <Label htmlFor="custom-budget" className="sr-only">Custom budget in pounds</Label>
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-[var(--cmb-text-secondary)]">£</span>
-              <Input type="number" inputMode="decimal" placeholder="Enter amount" value={form.customBudget}
+              <Input id="custom-budget" type="number" inputMode="decimal" placeholder="Enter amount" value={form.customBudget}
                 onChange={e => setForm(f => ({ ...f, customBudget:e.target.value }))}
                 className="h-12 pl-7 text-base rounded-xl" style={{ borderColor:errors.customBudget?"var(--cmb-error)":"var(--cmb-border-strong)" }}/>
               {errors.customBudget && <p className="mt-1 text-sm text-[var(--cmb-error)]">{errors.customBudget}</p>}

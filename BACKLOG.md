@@ -57,15 +57,15 @@ This is a partial audit with confirmed source/browser findings, not a completed 
 
 Each implementation issue must pass build, lint, type check and its specific acceptance criteria before completion. Tick only after verification. Commit one issue at a time with its ID. Owner items remain open with a concrete instruction.
 
-### [ ] A11Y 01 — P1
+### [x] A11Y 01 — P1
 
 - Severity: P1
 - Location: app/create/page.tsx:232; /create
 - Evidence: Browser: four inputs have labels.length=0 and no aria-label. Field renders a sibling Label without htmlFor.
 - Fix: Give each control a stable id and connect its label, hint and error.
 - Acceptance criteria: All inputs have accurate accessible names; clicking each label focuses its control.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Existing labels retained; added the missing custom-budget label. Browser confirms all six displayed inputs have labels; build, lint and TypeScript pass.
 
 ### [ ] A11Y 02 — P1
 
