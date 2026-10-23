@@ -1,4 +1,5 @@
 "use client";
+import { userError } from "@/lib/user-errors";
 import { use, useCallback, useEffect, useMemo, useState } from "react";
 import { Dice5, Gift, MessageCircle, Gamepad2, Settings, CheckCircle2, Circle, AlertTriangle, ExternalLink, Send, Plus, Trash2, Lock, ArrowRight, Share2, X, Trophy, Star } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -213,7 +214,7 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
     setDrawBusy(true);
     const supabase = createClient();
     const { error } = await supabase.rpc("execute_draw", { p_group_id: group.id });
-    if (error) { toast.error(error.message); }
+    if (error) { toast.error(userError(error, "draw names")); }
     else {
       toast.success("Names drawn! Everyone can now see their match.");
       // Best-effort: email members who saved an address. No-op until RESEND_API_KEY
@@ -377,14 +378,14 @@ function ExclusionsEditor({ data, open, setOpen, refresh }: { data:DashData; ope
     if (pendingA === pendingB) { toast.error("Pick two different people"); return; }
     const supabase = createClient();
     const { error } = await supabase.from("exclusions").insert({ group_id: group.id, user_a_id: pendingA, user_b_id: pendingB });
-    if (error) { toast.error(error.message); return; }
+    if (error) { toast.error(userError(error, "add this exclusion")); return; }
     setPendingA(""); setPendingB("");
     await refresh();
   }
   async function removeExclusion(id:string) {
     const supabase = createClient();
     const { error } = await supabase.from("exclusions").delete().eq("id", id);
-    if (error) { toast.error(error.message); return; }
+    if (error) { toast.error(userError(error, "remove this exclusion")); return; }
     await refresh();
   }
 
@@ -470,11 +471,11 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
     if (existing) {
       if (existing.claimed_by !== me) { toast.info("Someone else is getting this one"); return; }
       const { error } = await supabase.from("wishlist_claims").delete().eq("id", existing.id);
-      if (error) { toast.error(error.message); return; }
+      if (error) { toast.error(userError(error, "release this gift")); return; }
       toast.success("Unmarked");
     } else {
       const { error } = await supabase.from("wishlist_claims").insert({ wishlist_item_id: itemId, claimed_by: me });
-      if (error) { toast.error(error.message); return; }
+      if (error) { toast.error(userError(error, "reserve this gift")); return; }
       toast.success("Marked as yours to buy — the owner can't see this");
     }
     await refresh();
@@ -491,7 +492,7 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
       title: isUrl ? title.replace(/^https?:\/\/(www\.)?/i,"").split(/[/?#]/)[0] : title,
       url: isUrl ? title : null,
     });
-    if (error) toast.error(error.message);
+    if (error) toast.error(userError(error, "add this gift"));
     else { toast.success("Item added"); setNewItem(""); await refresh(); }
     setBusy(false);
   }
@@ -499,7 +500,7 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
   async function deleteItem(id:string) {
     const supabase = createClient();
     const { error } = await supabase.from("wishlist_items").delete().eq("id", id);
-    if (error) { toast.error(error.message); return; }
+    if (error) { toast.error(userError(error, "remove this gift")); return; }
     await refresh();
   }
 
@@ -511,7 +512,7 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
     const { error } = await supabase.from("group_members")
       .update({ surprise_me: next })
       .eq("group_id", data.group.id).eq("user_id", me);
-    if (error) toast.error(error.message);
+    if (error) toast.error(userError(error, "save your surprise preference"));
     else {
       setSurpriseMe(next);
       toast.success(next ? "Your Secret Santa will be pointed at gift ideas in budget" : "Surprise me turned off");
@@ -525,7 +526,7 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
     const { error } = await supabase.from("group_members")
       .update({ dislikes: pleaseAvoid.trim() || null, sizes: mySizes.trim() || null })
       .eq("group_id", data.group.id).eq("user_id", me);
-    if (error) { toast.error(error.message); return; }
+    if (error) { toast.error(userError(error, "save your gift preferences")); return; }
     setEditingMeta(false); toast.success("Saved");
     await refresh();
   }
@@ -729,7 +730,7 @@ function MessagesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<voi
     } else {
       ({ error } = await supabase.rpc("reply_to_anon_message", { p_parent_id: lastSantaMsgId, p_content: text }));
     }
-    if (error) toast.error(error.message);
+    if (error) toast.error(userError(error, "send your message"));
     else { setDraft(""); await refresh(); }
     setBusy(false);
   }
@@ -834,7 +835,7 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
     setBusy(true);
     const supabase = createClient();
     const { error } = await supabase.from("prediction_rounds").insert({ group_id: group.id });
-    if (error && !error.message.includes("duplicate")) toast.error(error.message);
+    if (error && !error.message.includes("duplicate")) toast.error(userError(error, "start the prediction round"));
     await refresh();
     setBusy(false);
   }
@@ -847,7 +848,7 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
       round_id: round.id, predictor_id: me, subject_id: s.user_id, predicted_category: picks[s.user_id],
     }));
     const { error } = await supabase.from("predictions").insert(rows);
-    if (error) toast.error(error.message);
+    if (error) toast.error(userError(error, "save your predictions"));
     else { toast.success("Predictions locked in!"); setPredicting(false); }
     await refresh();
     setBusy(false);
@@ -858,7 +859,7 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
     setBusy(true);
     const supabase = createClient();
     const { error } = await supabase.from("prediction_rounds").update({ status: "revealed", closed_at: new Date().toISOString() }).eq("id", round.id);
-    if (error) toast.error(error.message);
+    if (error) toast.error(userError(error, "reveal the prediction results"));
     await refresh();
     setBusy(false);
   }
@@ -868,7 +869,7 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
     setBusy(true);
     const supabase = createClient();
     const { error } = await supabase.from("actual_gifts").insert({ round_id: round.id, recipient_id: me, actual_category: key, logged_by: me });
-    if (error) toast.error(error.message);
+    if (error) toast.error(userError(error, "record your gift"));
     await refresh();
     setBusy(false);
   }

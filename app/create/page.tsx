@@ -1,4 +1,5 @@
 "use client";
+import { userError } from "@/lib/user-errors";
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { Gift, Copy, MessageCircle, QrCode, ChevronLeft, Check, Share2, ArrowRight } from "lucide-react";
@@ -72,7 +73,7 @@ export default function CreatePage() {
       setGroupId(data.group_id);
       setStep("share");
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Something went wrong — please try again");
+      toast.error(userError(err, "create your draw"));
     } finally {
       setBusy(false);
     }

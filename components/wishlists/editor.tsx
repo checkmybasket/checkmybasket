@@ -1,4 +1,5 @@
 "use client";
+import { userError } from "@/lib/user-errors";
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -52,7 +53,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
         return load();
       })
       .catch((e) => {
-        setError(e.message);
+        setError(userError(e, "load your wishlist"));
         setLoading(false);
       });
   }, [load]);
@@ -180,7 +181,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
             list={list}
             onSaved={() => {
               setEditList(false);
-              load().catch((e) => setError(e.message));
+              load().catch((e) => setError(userError(e, "load your wishlist")));
             }}
             onCancel={() => setEditList(false)}
           />
@@ -212,7 +213,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
           onSaved={() => {
             setEditing(undefined);
             if (pendingDraft) { setPendingDraft(false); router.replace(`/wishlists/${id}`, { scroll: false }); }
-            load().catch((e) => setError(e.message));
+            load().catch((e) => setError(userError(e, "load your wishlist")));
             setMessage("Gift saved.");
           }}
           onCancel={() => { setEditing(undefined); if (pendingDraft) { setPendingDraft(false); router.replace(`/wishlists/${id}`, { scroll: false }); } }}

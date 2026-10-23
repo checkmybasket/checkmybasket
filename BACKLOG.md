@@ -287,15 +287,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Added segment and root error boundaries using the installed Next.js retry API. A temporary dynamic route reproduced a server render failure; browser verified recovery UI and retry without raw internal text. Fixture removed; final build/lint/TypeScript pass.
 
-### [ ] STATE 03 — P1
+### [x] STATE 03 — P1
 
 - Severity: P1
 - Location: app/g/[group_id]/page.tsx:217 and other toast.error(error.message) call sites; group, reveal and settings routes
 - Evidence: Multiple backend errors are passed directly to toast.error(error.message).
-- Fix: Map failures to specific plain-language actions; keep technical diagnostics outside user-facing messages.
+- Fix: Map failures to specific plain-language actions across group/create/join views; keep technical diagnostics outside user-facing messages. This is a flagged copy change: preserve known domain constraints, and replace arbitrary backend details with recovery guidance.
 - Acceptance criteria: Simulated permission, network and validation failures give useful recovery guidance without raw database/internal errors.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Added action-specific safe errors for group/create/join, notification and wishlist surfaces while retaining draw constraints. Four error-safety tests and 16 wishlist/email regressions pass; build/lint/TypeScript pass. No database behavior changed.
 
 ### [ ] UI 01 — P1
 

@@ -1,4 +1,5 @@
 "use client";
+import { userError } from "@/lib/user-errors";
 
 import { useEffect, useId, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -40,7 +41,7 @@ export function NotificationEmail({ groupId }: { groupId: string }) {
       if (reply.error) throw reply.error;
       setStatus(reply.data as Status); setEmail(reply.data.email ?? "");
       setMessage(reply.data.state === "off" ? "Draw notifications are off. Your sign-in recovery is unchanged." : reply.data.state === "verified" ? "Saved and verified for future draw notifications." : "Address saved. Verify ownership before draw notifications can be sent.");
-    } catch (err) { setError(err instanceof Error ? err.message : (err as { message?: string })?.message ?? "Could not save notification settings."); }
+    } catch (err) { setError(userError(err, "save notification settings")); }
     finally { setBusy(false); }
   }
   async function verify() {
@@ -49,7 +50,7 @@ export function NotificationEmail({ groupId }: { groupId: string }) {
     try {
       const reply = await recoveryRequest({ action: "setup", email: status.email, group_id: groupId });
       setMessage(reply.message ?? "Check your inbox and open the verification link to confirm this email.");
-    } catch (err) { setError(err instanceof Error ? err.message : "Could not request verification."); }
+    } catch (err) { setError(userError(err, "request email verification")); }
     finally { setBusy(false); }
   }
   const unsaved = email.trim().toLowerCase() !== (status?.email ?? "").toLowerCase();

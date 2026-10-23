@@ -1,4 +1,5 @@
 "use client";
+import { userError } from "@/lib/user-errors";
 import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -65,7 +66,7 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
       toast.success(`Welcome, ${name.trim()}!`);
       setStep("onboard");
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Could not join — please try again");
+      toast.error(userError(err, "join this group"));
     } finally {
       setBusy(false);
     }
@@ -93,7 +94,7 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
       toast.success("Saved");
       router.push(`/g/${group.group_id}`);
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Could not save — please try again");
+      toast.error(userError(err, "save your preferences"));
       setBusy(false);
     }
   }

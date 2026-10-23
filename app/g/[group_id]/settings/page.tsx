@@ -1,4 +1,5 @@
 "use client";
+import { userError } from "@/lib/user-errors";
 import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -55,7 +56,7 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
     setBusy(true);
     const supabase = createClient();
     const { error } = await supabase.from("groups").update({ name: groupName.trim() }).eq("id", group.id);
-    if (error) toast.error(error.message);
+    if (error) toast.error(userError(error, "save the group name"));
     else { setGroup(g => g ? { ...g, name: groupName.trim() } : g); setEditName(false); toast.success("Updated"); }
     setBusy(false);
   }
@@ -65,7 +66,7 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
     setBusy(true);
     const supabase = createClient();
     const { error } = await supabase.from("wishlist_items").delete().eq("group_id", group.id).eq("user_id", me!);
-    if (error) toast.error(error.message);
+    if (error) toast.error(userError(error, "clear your wishlist"));
     else toast.success("Wishlist cleared");
     setBusy(false);
   }
@@ -75,7 +76,7 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
     setBusy(true);
     const supabase = createClient();
     const { error } = await supabase.rpc("leave_group", { p_group_id: group.id });
-    if (error) { toast.error(error.message); setBusy(false); return; }
+    if (error) { toast.error(userError(error, "leave the group")); setBusy(false); return; }
     toast.success("You've left the group");
     router.push("/");
   }
@@ -86,7 +87,7 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
     setBusy(true);
     const supabase = createClient();
     const { error } = await supabase.from("groups").delete().eq("id", group.id);
-    if (error) { toast.error(error.message); setBusy(false); return; }
+    if (error) { toast.error(userError(error, "delete the group")); setBusy(false); return; }
     toast.success("Group deleted");
     router.push("/");
   }

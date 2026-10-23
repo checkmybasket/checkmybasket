@@ -1,4 +1,5 @@
 "use client";
+import { userError } from "@/lib/user-errors";
 
 import { use, useEffect, useState } from "react";
 import Link from "next/link";
@@ -73,7 +74,7 @@ export default function RevealPage({ params }: { params: Promise<{ group_id: str
     const supabase = createClient();
     const next = !match.giftBought;
     const { error } = await supabase.from("draws").update({ gift_bought: next }).eq("id", match.drawId);
-    if (error) { toast.error(error.message); return; }
+    if (error) { toast.error(userError(error, "update your bought status")); return; }
     setMatch(m => m ? { ...m, giftBought: next } : m);
     toast.success(next ? "Marked as bought — only you can see this" : "Unmarked as bought");
   }

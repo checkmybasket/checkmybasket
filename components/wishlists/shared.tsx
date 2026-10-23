@@ -1,4 +1,5 @@
 "use client";
+import { userError } from "@/lib/user-errors";
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
@@ -39,7 +40,7 @@ export function SharedWishlist({ token }: { token: string }) {
       .then(load)
       .catch((e) => {
         if (active) {
-          setError(e.message);
+          setError(userError(e, "load this shared wishlist"));
           setLoading(false);
         }
       });

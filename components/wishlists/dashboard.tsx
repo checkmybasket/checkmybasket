@@ -1,4 +1,5 @@
 "use client";
+import { userError } from "@/lib/user-errors";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -53,7 +54,7 @@ export function WishlistDashboard({ draft, giftUnavailable }: { draft?: Catalogu
     Promise.resolve()
       .then(load)
       .catch((e) => {
-        setError(e.message);
+        setError(userError(e, "load your wishlists"));
         setLoading(false);
       });
   }, []);
