@@ -327,15 +327,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Use the existing Lucide trophy icon for the awards heading. Meaning is preserved and the decorative icon is aria-hidden; build/lint/TypeScript pass.
 
-### [ ] HYGIENE 01 — P2
+### [x] HYGIENE 01 — P2
 
 - Severity: P2
 - Location: README.md; repository root
 - Evidence: README still identifies the app as a create-next-app starter with generic setup instructions.
 - Fix: Replace with accurate CheckMyBasket setup, verification, environment-variable names and deployment instructions; never include values.
 - Acceptance criteria: A new developer can follow documented commands; no starter text or secrets remain.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Replace starter documentation with actual setup and verification instructions. Commands, environment names and private/deployment boundaries match the repository; build/lint/TypeScript pass.
 
 ### [x] OWNER 01 — P2
 
