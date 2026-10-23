@@ -1,5 +1,7 @@
 # Production release — 23 October 2026
 
+Post-release update: PR #3 is merged and its main-branch build is live. See [POST_RELEASE.md](POST_RELEASE.md) for source/deployment reconciliation and the development-only security follow-up. The release-time account below is retained as historical evidence.
+
 The owner explicitly approved all owner checks and then authorized promotion. This records owner acceptance; it does not invent device, screen-reader or provider measurements by the audit agent. OWNER 02 and QA 02 are closed by that acceptance plus the recorded automated/local evidence. Their earlier notes remain historical.
 
 The tested production candidate `dpl_7YiSVs9LvqgMxzNgeSCZ6oNEx8hK`, website source `5534eb0ef523cf6d543dab745e878aea9581965a`, was promoted without rebuilding. Both customer-domain alias readbacks point to that deployment. The apex retains its 308 redirect to www. The three production authorization migrations remain applied.

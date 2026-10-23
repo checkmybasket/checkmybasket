@@ -6,6 +6,8 @@ Phase 1 summary was presented before implementation. Phase 2 changes are committ
 
 Release update: owner checks explicitly approved; verified candidate promoted to customer domains. Current count: 83 issues, 81 closed including owner acceptance, two NEEDS OWNER follow-ups (SECURITY 02 and SECURITY 06). See [audit/PRODUCTION_RELEASE.md](audit/PRODUCTION_RELEASE.md). Earlier phase summaries below retain historical scope.
 
+Post-release update: PR #3 merged into main; its production deployment is verified. SECURITY 07 patches a newly reported dev-only advisory and SECURITY 02 now has clean full-audit evidence. Current count: 84 issues, 83 closed, SECURITY 06 NEEDS OWNER. See [audit/POST_RELEASE.md](audit/POST_RELEASE.md).
+
 Some original evidence and line numbers came from an older checkout. Each finding was reconciled against this newer base before implementation; completion notes distinguish fixes made here from defects already resolved in the newer base. Older checkout Lighthouse scores are not used as this branch's baseline.
 
 ## Stack and routes
@@ -441,14 +443,25 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: DONE — remaining owner gates explicitly approved on 23 October 2026. Production promotion and fresh 40-route/Lighthouse checks pass; see audit/PRODUCTION_RELEASE.md. Historical unmeasured cells remain identified, not reported as observed passes.
 - Completion note: Public 400-case audit plus 70 loaded private viewport checks, private labels/headings/targets, actual member/non-member flows, anonymous messages, captured email/recovery and controlled failure/loading tests are recorded in audit/. NEEDS OWNER: finish remaining participant/game permission and mutation-failure states and real 200% zoom, screen-reader, device and clipboard-denial checks; then verify live production/preview headers, redirects, APP_URL links, domain/mailbox and merchant/download behavior after a reviewed release. Follow-up: organiser predictions through actual-gift logging and 50 real saved wishlist viewport checks (single/200 items, owner/shared/list/cards) now pass, with zero browser warnings/errors. A11Y 22 and UI 10 are verified fixes. SECURITY 03–05 now verify participant/nonmember game boundaries, and FORM 03 verifies retained drafts plus failed-save retries; those fixes are local and committed, not deployed. Fresh normal-state browser console is clean. Follow-up: sampled keyboard/focus traversal and A11Y 23 shared heading checks pass; read-only live canonicals/headers/sitemap/redirects pass, but 24 live OG tags await the already implemented branch release. See docs/owner-release-checks.md for manual gates. Release review is prepared in docs/release-review.md with targets, migration order and rollback considerations. Draft PR #3 and protected preview are now available. Authorized authenticated public-response checks pass with noindex/robots intact (audit/protected-preview-checks.json); private preview flows remain blocked on isolated cloud-backend configuration. Current status: SECURITY 03–05 are live in production with matching SQL hashes, all 29 migration inventories align, and the final protected candidate passes 40 rendered public routes with zero console events. Native 200% public/shared samples pass; actual device/screen-reader results remain pending. DEPLOY 03 removes protected-manifest console errors; Lighthouse best practices/accessibility are 100, with intentional protected-host noindex SEO. See audit/RELEASE_CANDIDATE_REPORT.md. Untested states are not passed.
 
-### [ ] SECURITY 02 — P1
+### [x] SECURITY 07 — P1
+
+- Severity: P1
+- Location: package-lock.json; development-only ESLint dependency chain, all routes at build time
+- Evidence: Fresh npm audit reports one high advisory GHSA-mrhx-c7xc-m3w5 in transitive zod 4.4.3 through eslint-plugin-react-hooks. Production-only audit remains zero. The advisory was updated on 23 October 2026 and names 4.6.6 as patched.
+- Fix: Update only the existing transitive Zod resolution within the consumers' supported range. No new dependency, runtime behavior, copy or data-model change. Avoid force or framework downgrades.
+- Acceptance criteria: Lockfile diff contains only the intended compatible transitive update; full and production npm audits have zero findings; build/lint/TypeScript and all 110 local regressions pass.
+- Status: DONE
+- Completion note: Updated dev-only transitive Zod 4.4.3 to compatible 4.6.7; only its lockfile entry changed. Full and production npm audits return zero vulnerabilities. Staging build, lint, TypeScript and all 110 existing regressions pass. No package.json or runtime code changes. Advisory: https://github.com/advisories/GHSA-mrhx-c7xc-m3w5.
+
+### [x] SECURITY 02 — P1
 
 - Severity: P1
 - Location: package-lock.json; development-only lint toolchain
 - Evidence: after removing the unused generator, npm reports eight high development advisories; production audit is clean. Several transitive fixes are compatible; the braces advisory affects every currently published version (latest is 3.0.3), and npm suggests downgrading eslint-config-next to 14.2.35 for that chain.
 - Fix: apply compatible transitive patches without force or framework/linter downgrades. Record any unpatched upstream lint chain as NEEDS OWNER with a concrete follow-up rather than claiming all dependencies are clean. No new dependency.
 - Acceptance criteria: required checks and local regressions pass; npm production audit remains clean; remaining advisory chain is accurately documented with supported mitigation and owner follow-up.
-- Status: NEEDS OWNER
+- Status: DONE
+- Current verification: On the post-release follow-up, full and production npm audits both exit 0 with zero findings after SECURITY 07. The previously reported braces/micromatch/fast-glob advisory chain is no longer returned by the current registry audit. Build/lint/TypeScript and all 110 regressions pass. This closes the pending advisory decision without a forced downgrade; the earlier completion note below records the historical finding, not a current risk exception.
 - Completion note: Compatible transitive patches applied; 20 original development findings reduced to five entries in the same unpatched braces → micromatch → fast-glob → Next ESLint chain. Production dependencies are clean; build/lint/TypeScript and 99 local regressions pass. NEEDS OWNER: record a temporary development-tool risk exception, do not process untrusted glob patterns, and update the matching ESLint config when a compatible upstream fix ships. Do not force a downgrade to Next 14 tooling.
 
 ### [x] SEO 01 — P1
