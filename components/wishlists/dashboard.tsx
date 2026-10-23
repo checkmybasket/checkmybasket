@@ -1,4 +1,5 @@
 "use client";
+import { userError } from "@/lib/user-errors";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -53,7 +54,7 @@ export function WishlistDashboard({ draft, giftUnavailable }: { draft?: Catalogu
     Promise.resolve()
       .then(load)
       .catch((e) => {
-        setError(e.message);
+        setError(userError(e, "load your wishlists"));
         setLoading(false);
       });
   }, []);
@@ -96,7 +97,7 @@ export function WishlistDashboard({ draft, giftUnavailable }: { draft?: Catalogu
         />
       ) : (
         <Button
-          className="rounded-xl min-h-12 mb-6"
+          className="rounded-[var(--cmb-radius)] min-h-12 mb-6"
           disabled={loading}
           onClick={() => setCreating(true)}
         >
@@ -117,7 +118,7 @@ export function WishlistDashboard({ draft, giftUnavailable }: { draft?: Catalogu
             <ul className="grid sm:grid-cols-2 gap-4 mt-5">
               {lists.map((list) => (
                 <li key={list.id} className={panel}>
-                  <Link
+                  <Link prefetch={false}
                     className="block underline underline-offset-4 text-xl font-semibold break-words"
                     href={`/wishlists/${list.id}${giftQuery}`}
                   >
@@ -181,7 +182,7 @@ export function WishlistDashboard({ draft, giftUnavailable }: { draft?: Catalogu
       <p className="text-sm mt-6 text-[var(--cmb-text-secondary)]">
         This browser remembers your access. Without verified email recovery,
         clearing browser data means losing access.{" "}
-        <Link className="underline" href="/return">
+        <Link prefetch={false} className="underline" href="/return">
           Return on another device
         </Link>
         .

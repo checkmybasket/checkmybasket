@@ -1,3 +1,5 @@
+import { OPEN_GRAPH_DEFAULTS, TWITTER_DEFAULTS } from "@/lib/page-metadata";
+import { SITE_ORIGIN } from "@/lib/site";
 import { GuideIntro, GuideScreenshot } from "@/components/guide-intro";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -10,8 +12,8 @@ const guide = ORGANISER_GUIDES.find(item => item.slug === "secret-santa-invitati
 export const metadata: Metadata = {
   title: { absolute: "Secret Santa Invitation Messages for WhatsApp & Email | CheckMyBasket" }, description: guide.description,
   alternates: { canonical: `/${guide.slug}` },
-  openGraph: { title: guide.title, description: guide.description, url: `https://www.checkmybasket.co.uk/${guide.slug}` },
-  twitter: { card: "summary_large_image", title: guide.title, description: guide.description },
+  openGraph: { ...OPEN_GRAPH_DEFAULTS,  title: guide.title, description: guide.description, url: `${SITE_ORIGIN}/${guide.slug}` },
+  twitter: { ...TWITTER_DEFAULTS,  card: "summary_large_image", title: guide.title, description: guide.description },
 };
 const extraTemplates = [
   { heading: "A wishlist request for your group", label: "Copy wishlist request", text: `Help your Secret Santa choose something you’ll enjoy! Please add three to five ideas to your group wishlist by [date].

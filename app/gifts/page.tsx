@@ -1,3 +1,5 @@
+import { BasketMark } from "@/components/receipt/logo";
+import { socialMetadata } from "@/lib/page-metadata";
 import { GIFT_GUIDES } from "@/lib/gift-guides";
 import { ExploreNavigation } from "@/components/explore-navigation";
 import { GiftPagination } from "@/components/gift-pagination";
@@ -11,6 +13,7 @@ import { GiftResults } from "@/components/gift-results";
 import { GiftCard } from "@/components/gift-card";
 
 export const metadata = {
+  ...socialMetadata("Secret Santa Gift Ideas UK", "Explore Secret Santa gift ideas from UK shops, with collections under \u00a310, \u00a320, \u00a330 and \u00a350. Find a gift within your group's budget.", "/gifts"),
   alternates: { canonical: "/gifts" },
   title: "Secret Santa Gift Ideas UK",
   description: "Explore Secret Santa gift ideas from UK shops, with collections under £10, £20, £30 and £50. Find a gift within your group's budget.",
@@ -28,12 +31,12 @@ export default async function GiftsPage({ searchParams }: { searchParams: Promis
   return (
     <div className="min-h-dvh bg-[var(--cmb-bg)]">
       <a className="cmb-skip-link" href="#main-content">Skip to content</a>
-      <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background:"rgba(255,248,240,0.92)", backdropFilter:"blur(12px)" }}>
+      <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background:"var(--cmb-header-bg)" }}>
         <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
           <Link href="/" className="flex min-h-11 items-center gap-2 text-[var(--cmb-primary)]">
-            <Gift strokeWidth={1.5} size={20}/><span className="font-semibold font-display">CheckMyBasket</span>
+            <BasketMark size={20} /><span className="font-semibold font-display">CheckMyBasket</span>
           </Link>
-          <Link href="/create" className="inline-flex min-h-11 items-center justify-center px-4 rounded-lg text-sm font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">Create a draw</Link>
+          <Link href="/create" className="inline-flex min-h-11 items-center justify-center px-4 rounded-[var(--cmb-radius)] text-sm font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">Create a draw</Link>
         </div>
       </header>
       <main id="main-content" tabIndex={-1} className="max-w-5xl mx-auto px-4 py-10">
@@ -50,8 +53,8 @@ export default async function GiftsPage({ searchParams }: { searchParams: Promis
           <summary className="min-h-11 cursor-pointer py-2 font-semibold text-sm">Browse gift collections</summary>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-3">
           {GIFT_CATEGORIES.map(cat => (
-            <Link key={cat.slug} href={giftFiltersHref(filters, cat.slug)} className="rounded-2xl p-4 border transition-all duration-150 hover:scale-105 group bg-[var(--cmb-surface)] border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style={{ background:"rgba(27,67,50,0.08)" }}>
+            <Link key={cat.slug} href={giftFiltersHref(filters, cat.slug)} className="rounded-[var(--cmb-radius)] p-4 border transition-all duration-150 hover:scale-105 group bg-[var(--cmb-surface)] border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
+              <div className="w-10 h-10 rounded-[var(--cmb-radius)] flex items-center justify-center mb-3" style={{ background:"color-mix(in srgb, var(--cmb-primary) 8%, transparent)" }}>
                 <Gift size={20} strokeWidth={1.5} className="text-[var(--cmb-primary)]"/>
               </div>
               <p className="font-semibold text-sm mb-0.5">{cat.label}</p>
@@ -63,11 +66,12 @@ export default async function GiftsPage({ searchParams }: { searchParams: Promis
         </details>
         <GiftResults products={products} catalogue={catalogue} filters={filters} page={page} pageSize={12}/>
         <p className="sr-only" data-gift-day={day}>Gift selection for {day}</p>
+        <h2 className="sr-only">Available gift ideas</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
           {products.slice((page - 1) * 12, page * 12).map(item => <GiftCard key={item.id} {...item}/>)}
         </div>
         <GiftPagination page={page} pages={pages} filters={filters}/>
-        <div className="rounded-xl p-4 flex gap-2 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]">
+        <div className="rounded-[var(--cmb-radius)] p-4 flex gap-2 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]">
           <ShieldOff size={16} strokeWidth={1.5} className="text-[var(--cmb-text-muted)] shrink-0 mt-0.5"/>
           <p className="text-xs text-[var(--cmb-text-muted)]">
             Some gift links may earn us a small commission at no extra cost to you. This is how we keep CheckMyBasket free and ad-free.

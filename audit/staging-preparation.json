@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-23",
+  "productionSupabaseRef": "nejkvrzabdetsnhpeqtl",
+  "organization": "sqdqxiddbanwxwqnwvwu",
+  "plan": "free",
+  "attemptedBranch": "polish-staging",
+  "branchResult": "Rejected: Branching is supported only on the Pro plan or above",
+  "cloudResourcesCreated": 0,
+  "dockerInstalled": false,
+  "vercelProject": "prj_n7T4GLJLEZBnejmvD3BfTL3O5Bcj",
+  "previewSupabaseCredentialsConfigured": false,
+  "productionChanged": false,
+  "gates": {
+    "stagingLocation": "Awaiting explicit user organisation/location choice",
+    "quotedCost": "No cost accepted or plan upgrade requested",
+    "testInbox": "Not provisioned",
+    "liveFixtures": "Not created"
+  },
+  "checks": {
+    "build": "PASS",
+    "lint": "PASS",
+    "typescript": "PASS",
+    "localNodeTests": 27,
+    "otherLocalRegressionChecks": 79,
+    "guardSmoke": "All three live scripts refuse missing staging config before requests"
+  },
+  "next": "Continue provisioning after the pending staging-location answer. See docs/staging.md.",
+  "supersededBy": "local-staging.json",
+  "decision": "User selected local staging with Docker; local stack is now running. Earlier provisioning gates below are historical."
+}

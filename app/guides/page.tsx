@@ -1,3 +1,4 @@
+import { OPEN_GRAPH_DEFAULTS, TWITTER_DEFAULTS } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { InfoPage, Section } from "@/components/info-page";
@@ -9,8 +10,8 @@ const description = "Plan your Secret Santa, choose gifts by budget and interest
 export const metadata: Metadata = {
   title: { absolute: title }, description,
   alternates: { canonical: "/guides" },
-  openGraph: { title, description, url: "/guides", type: "website" },
-  twitter: { card: "summary_large_image", title, description },
+  openGraph: { ...OPEN_GRAPH_DEFAULTS,  title, description, url: "/guides", type: "website" },
+  twitter: { ...TWITTER_DEFAULTS,  card: "summary_large_image", title, description },
 };
 const planning = [
   { slug: "secret-santa-whatsapp", title: "Secret Santa on WhatsApp", description: "Create a draw and share your invitation with a WhatsApp group." },
@@ -29,13 +30,13 @@ export default function GuidesPage() {
     <p className="text-[var(--cmb-text-secondary)] leading-relaxed">Practical help for organising a gift exchange and choosing something thoughtful. Browse the guides below, then put your plan into action with a free draw or wishlist.</p>
     <nav aria-label="Guide topics" className="flex flex-wrap gap-x-5 gap-y-2">{groups.map(group => <a key={group.id} href={`#${group.id}`} className="inline-flex min-h-11 items-center underline text-sm">{group.heading}</a>)}</nav>
     <div className="flex flex-wrap gap-3">
-      <Link href="/create" className="inline-flex min-h-11 items-center rounded-lg bg-[var(--cmb-primary)] px-4 text-white font-semibold text-sm">Create a free draw</Link>
-      <Link href="/wishlists" className="inline-flex min-h-11 items-center rounded-lg border border-[var(--cmb-border)] px-4 font-semibold text-sm">Create a wishlist</Link>
+      <Link href="/create" className="inline-flex min-h-11 items-center rounded-[var(--cmb-radius)] bg-[var(--cmb-primary)] px-4 text-white font-semibold text-sm">Create a free draw</Link>
+      <Link prefetch={false} href="/wishlists" className="inline-flex min-h-11 items-center rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] px-4 font-semibold text-sm">Create a wishlist</Link>
       <Link href="/gifts" className="inline-flex min-h-11 items-center underline text-sm">Browse current gifts</Link>
     </div>
     {groups.map(group => <Section key={group.id} id={group.id} heading={group.heading}>
       <p>{group.intro}</p>
-      <ul className="grid sm:grid-cols-2 gap-3 list-none p-0">{group.guides.map(guide => <li key={guide.slug} className="rounded-xl border border-[var(--cmb-border)] bg-white p-4">
+      <ul className="grid sm:grid-cols-2 gap-3 list-none p-0">{group.guides.map(guide => <li key={guide.slug} className="rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] bg-white p-4">
         <h3 className="font-semibold text-[var(--cmb-text)]"><Link href={`/${guide.slug}`} className="inline-flex min-h-11 items-center underline underline-offset-4">{guide.title}</Link></h3>
         <p className="mt-1">{guide.description}</p>
       </li>)}</ul>

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { userError } from "@/lib/user-errors";
 import { createClient } from "@/lib/supabase/client";
 import { ensureSession } from "@/lib/supabase/auth";
 import { trackCreation } from "@/lib/analytics";
@@ -33,12 +34,7 @@ export function ListForm({
       if (!list) trackCreation("wishlist_created");
       onSaved(data);
     } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : ((err as { message?: string })?.message ??
-              "Could not save your wishlist."),
-      );
+      setError(userError(err, "save your wishlist"));
     } finally {
       setBusy(false);
     }
@@ -106,7 +102,7 @@ export function ListForm({
         Your list starts private. No email or group needed.
       </p>
       <div className="flex flex-wrap gap-3">
-        <Button className="rounded-xl min-h-11" type="submit" disabled={busy}>
+        <Button className="rounded-[var(--cmb-radius)] min-h-11" type="submit" disabled={busy}>
           {busy ? "Saving…" : list ? "Save changes" : "Create my wishlist"}
         </Button>
         {onCancel && (

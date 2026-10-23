@@ -1,3 +1,5 @@
+import { OPEN_GRAPH_DEFAULTS, TWITTER_DEFAULTS } from "@/lib/page-metadata";
+import { SITE_ORIGIN } from "@/lib/site";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { InfoPage, Section } from "@/components/info-page";
@@ -11,8 +13,8 @@ const guide = GIFT_GUIDES.find(item => item.slug === "personalised-money-clip-gi
 export const metadata: Metadata = {
   title: { absolute: `${guide.title} | CheckMyBasket` }, description: guide.description,
   alternates: { canonical: `/${guide.slug}` },
-  openGraph: { title: guide.title, description: guide.description, url: `https://www.checkmybasket.co.uk/${guide.slug}` },
-  twitter: { card: "summary_large_image", title: guide.title, description: guide.description },
+  openGraph: { ...OPEN_GRAPH_DEFAULTS,  title: guide.title, description: guide.description, url: `${SITE_ORIGIN}/${guide.slug}` },
+  twitter: { ...TWITTER_DEFAULTS,  card: "summary_large_image", title: guide.title, description: guide.description },
 };
 
 export default async function MoneyClipGuide() {
@@ -46,7 +48,7 @@ export default async function MoneyClipGuide() {
     </Section>
     <Section heading="More personalised gift ideas">
       <p><Link href="/money-clip-engraving-ideas" className="underline">Engraving wording and preview</Link> · <Link href="/personalised-gifts-for-dads" className="underline">Personalised gifts for dads</Link> · <Link href="/personalised-groomsmen-gifts" className="underline">Groomsmen gift planning</Link></p>
-      <p><Link className="underline" href="/personalised-secret-santa-gifts">Read our personalised Secret Santa choosing guide</Link> · <Link className="underline" href="/gifts/personalised">Browse personalised gifts</Link> · <Link className="underline" href="/wishlists">Create a wishlist</Link></p>
+      <p><Link className="underline" href="/personalised-secret-santa-gifts">Read our personalised Secret Santa choosing guide</Link> · <Link className="underline" href="/gifts/personalised">Browse personalised gifts</Link> · <Link prefetch={false} className="underline" href="/wishlists">Create a wishlist</Link></p>
     </Section>
   </InfoPage>;
 }

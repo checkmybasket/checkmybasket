@@ -1,0 +1,27 @@
+{
+  "rawBytes": 1426303,
+  "chunks": 36,
+  "largest": [
+    {
+      "file": "06l_pd3ozeo6z.js",
+      "bytes": 242077
+    },
+    {
+      "file": "41_uuy53trypd.js",
+      "bytes": 233875
+    },
+    {
+      "file": "1bd1mts-qcwdz.js",
+      "bytes": 159203
+    },
+    {
+      "file": "0cz1d0mv5g_q7.js",
+      "bytes": 112594
+    },
+    {
+      "file": "0n07ci5zf9t1p.js",
+      "bytes": 57190
+    }
+  ],
+  "sourceMaps": 0
+}

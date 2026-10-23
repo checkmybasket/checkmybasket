@@ -1,4 +1,5 @@
 "use client";
+import { userError } from "@/lib/user-errors";
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -52,7 +53,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
         return load();
       })
       .catch((e) => {
-        setError(e.message);
+        setError(userError(e, "load your wishlist"));
         setLoading(false);
       });
   }, [load]);
@@ -135,7 +136,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
           Open it in the browser where you created it, or use your verified
           email to sign in.
         </p>
-        <Link className={secondary} href="/return">
+        <Link prefetch={false} className={secondary} href="/return">
           Return &amp; sign in
         </Link>
         {error && (
@@ -180,7 +181,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
             list={list}
             onSaved={() => {
               setEditList(false);
-              load().catch((e) => setError(e.message));
+              load().catch((e) => setError(userError(e, "load your wishlist")));
             }}
             onCancel={() => setEditList(false)}
           />
@@ -188,7 +189,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
       )}
       <div className="my-6 flex flex-wrap gap-3">
         <Button
-          className="rounded-xl min-h-11"
+          className="rounded-[var(--cmb-radius)] min-h-11"
           onClick={() => setEditing(null)}
         >
           Add a gift
@@ -212,7 +213,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
           onSaved={() => {
             setEditing(undefined);
             if (pendingDraft) { setPendingDraft(false); router.replace(`/wishlists/${id}`, { scroll: false }); }
-            load().catch((e) => setError(e.message));
+            load().catch((e) => setError(userError(e, "load your wishlist")));
             setMessage("Gift saved.");
           }}
           onCancel={() => { setEditing(undefined); if (pendingDraft) { setPendingDraft(false); router.replace(`/wishlists/${id}`, { scroll: false }); } }}
@@ -230,7 +231,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
           <label className="block text-sm">
             Your sharing link
             <input
-              className="mt-1 w-full p-3 rounded-xl border border-[var(--cmb-border)] text-sm"
+              className="mt-1 w-full p-3 rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] text-sm"
               value={shareUrl}
               readOnly
               onFocus={(e) => e.target.select()}
@@ -310,7 +311,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
           </p>
           <Button
             type="button"
-            className="mt-4 rounded-xl min-h-11"
+            className="mt-4 rounded-[var(--cmb-radius)] min-h-11"
             onClick={() => setEditing(null)}
           >
             Add a gift
@@ -352,7 +353,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
               Cancel
             </button>
             <Button
-              className="rounded-xl min-h-11"
+              className="rounded-[var(--cmb-radius)] min-h-11"
               disabled={busy}
               onClick={() => mutate(confirm.action, confirm.item)}
             >

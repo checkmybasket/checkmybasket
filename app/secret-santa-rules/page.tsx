@@ -1,3 +1,5 @@
+import { OPEN_GRAPH_DEFAULTS, TWITTER_DEFAULTS } from "@/lib/page-metadata";
+import { SITE_ORIGIN } from "@/lib/site";
 import { GuideIntro, GuideScreenshot } from "@/components/guide-intro";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -9,8 +11,8 @@ const guide = ORGANISER_GUIDES.find(item => item.slug === "secret-santa-rules")!
 export const metadata: Metadata = {
   title: { absolute: "Secret Santa Rules & Organiser Checklist | CheckMyBasket" }, description: guide.description,
   alternates: { canonical: `/${guide.slug}` },
-  openGraph: { title: guide.title, description: guide.description, url: `https://www.checkmybasket.co.uk/${guide.slug}` },
-  twitter: { card: "summary_large_image", title: guide.title, description: guide.description },
+  openGraph: { ...OPEN_GRAPH_DEFAULTS,  title: guide.title, description: guide.description, url: `${SITE_ORIGIN}/${guide.slug}` },
+  twitter: { ...TWITTER_DEFAULTS,  card: "summary_large_image", title: guide.title, description: guide.description },
 };
 
 export default function RulesGuide() {
@@ -22,7 +24,7 @@ export default function RulesGuide() {
       { id: "can-secret-santa-work-with-an-odd-number-of-people", label: "Odd-numbered groups" },
     ]} />
     <p className="text-lg leading-relaxed">In Secret Santa, each participant is assigned someone to buy a gift for. Everyone gives one gift and receives one gift, while the matches stay a surprise until your agreed reveal. The organiser’s main job is to make the budget, deadlines and expectations clear before drawing names.</p>
-    <Link href="/create" className="inline-flex min-h-11 items-center rounded-xl bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Create a free Secret Santa draw</Link>
+    <Link href="/create" className="inline-flex min-h-11 items-center rounded-[var(--cmb-radius)] bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Create a free Secret Santa draw</Link>
     <Section id="1-invite-people-to-opt-in" heading="1. Invite people to opt in">
       <p>Ask who wants to participate rather than adding everyone automatically. This is especially useful at work, where people may have different budgets or plans. Give people a joining deadline and a named organiser to contact with questions.</p>
       <p>CheckMyBasket needs at least three joined members before you can draw names. Wait until everyone who wants to take part has joined, then check the member list for missing or duplicate entries.</p>
@@ -61,7 +63,7 @@ export default function RulesGuide() {
         <li>Participants have time to add wishlists and buy their gifts.</li>
         <li>Matches stay private, and everyone knows how the reveal works.</li>
       </ul>
-      <p><a href="/secret-santa-organiser-checklist.pdf" download className="inline-flex min-h-11 items-center rounded-xl bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Download the printable checklist (PDF)</a></p>
+      <p><a href="/secret-santa-organiser-checklist.pdf" download className="inline-flex min-h-11 items-center rounded-[var(--cmb-radius)] bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Download the printable checklist (PDF)</a></p>
       <p>The one-page A4 checklist includes space for your budget, dates and exchange plan, plus boxes to tick as you organise. Print at actual size and fill it in by hand. You can also <a href="/secret-santa-organiser-checklist.txt" download className="underline">download a plain-text version</a> to edit in your usual text editor.</p>
     </Section>
     <Section id="can-secret-santa-work-with-an-odd-number-of-people" heading="Can Secret Santa work with an odd number of people?">

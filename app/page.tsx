@@ -1,3 +1,5 @@
+import { SITE_ORIGIN } from "@/lib/site";
+import { socialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/receipt/header";
@@ -13,6 +15,7 @@ import {
 import "./receipt.css";
 
 export const metadata: Metadata = {
+  ...socialMetadata("Free Secret Santa Generator & Organiser | CheckMyBasket", "Organise a free Secret Santa draw. Share your invite on WhatsApp, draw names privately, add wishlists from any shop and ask anonymous questions. No ads.", "/"),
   title: { absolute: "Free Secret Santa Generator & Organiser | CheckMyBasket" },
   description: "Organise a free Secret Santa draw. Share your invite on WhatsApp, draw names privately, add wishlists from any shop and ask anonymous questions. No ads.",
   alternates: { canonical: "/" },
@@ -21,6 +24,16 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <div className="receipt-home">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            { "@type": "WebSite", "@id": `${SITE_ORIGIN}/#website`, name: "CheckMyBasket", url: SITE_ORIGIN, inLanguage: "en-GB" },
+            { "@type": "WebApplication", "@id": `${SITE_ORIGIN}/#app`, name: "CheckMyBasket", url: SITE_ORIGIN, description: "Organise a Secret Santa draw, share invitations and add wishlists from any shop.", inLanguage: "en-GB" },
+          ],
+        }).replace(/</g, "\\u003c") }}
+      />
       <a className="receipt-skip-link" href="#main-content">
         Skip to content
       </a>
@@ -116,7 +129,7 @@ export default function HomePage() {
                 Yes, if you have verified a recovery email. In your original
                 browser, use &ldquo;Save access to your group&rdquo; and follow
                 the verification email. On another device, use{" "}
-                <Link href="/return">Return to your group</Link> to request a
+                <Link prefetch={false} href="/return">Return to your group</Link> to request a
                 sign-in link. Adding a notification email alone does not enable
                 recovery. Without a verified recovery email, we cannot restore
                 your original member identity on another device.

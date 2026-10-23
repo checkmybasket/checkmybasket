@@ -1,0 +1,66 @@
+[
+  {
+    "route": "/g/00000000-0000-4000-8000-000000000000",
+    "status": 200,
+    "robots": [
+      "noindex, nofollow"
+    ],
+    "title": "Your Secret Santa group | CheckMyBasket"
+  },
+  {
+    "route": "/g/00000000-0000-4000-8000-000000000000/reveal",
+    "status": 200,
+    "robots": [
+      "noindex, nofollow"
+    ],
+    "title": "Your Secret Santa match"
+  },
+  {
+    "route": "/g/00000000-0000-4000-8000-000000000000/settings",
+    "status": 200,
+    "robots": [
+      "noindex, nofollow"
+    ],
+    "title": "Group settings"
+  },
+  {
+    "route": "/join/polish-audit-invalid",
+    "status": 200,
+    "robots": [
+      "noindex, nofollow"
+    ],
+    "title": "Join Secret Santa | CheckMyBasket"
+  },
+  {
+    "route": "/return",
+    "status": 200,
+    "robots": [
+      "noindex, nofollow"
+    ],
+    "title": "Return to CheckMyBasket | CheckMyBasket"
+  },
+  {
+    "route": "/wishlists",
+    "status": 200,
+    "robots": [
+      "noindex, nofollow"
+    ],
+    "title": "Personal wishlists | CheckMyBasket"
+  },
+  {
+    "route": "/wishlists/invalid",
+    "status": 200,
+    "robots": [
+      "noindex, nofollow"
+    ],
+    "title": "Your wishlist | CheckMyBasket"
+  },
+  {
+    "route": "/w/invalid",
+    "status": 200,
+    "robots": [
+      "noindex, nofollow"
+    ],
+    "title": "A wishlist for you | CheckMyBasket"
+  }
+]

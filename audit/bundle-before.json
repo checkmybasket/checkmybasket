@@ -1,0 +1,135 @@
+{
+  "phase": "before performance fixes, after correctness fixes",
+  "commit": "ae3b44d",
+  "totalRawJsBytes": 1409743,
+  "chunks": [
+    {
+      "file": ".next/static/chunks/0or8lvozhir0k.js",
+      "bytes": 286272
+    },
+    {
+      "file": ".next/static/chunks/41_uuy53trypd.js",
+      "bytes": 233875
+    },
+    {
+      "file": ".next/static/chunks/1bd1mts-qcwdz.js",
+      "bytes": 159203
+    },
+    {
+      "file": ".next/static/chunks/0cz1d0mv5g_q7.js",
+      "bytes": 112594
+    },
+    {
+      "file": ".next/static/chunks/1j8se9-lbrcfv.js",
+      "bytes": 55542
+    },
+    {
+      "file": ".next/static/chunks/3ik8g7-l2k8jn.js",
+      "bytes": 36000
+    },
+    {
+      "file": ".next/static/chunks/33hks22ql35q_.js",
+      "bytes": 34000
+    },
+    {
+      "file": ".next/static/chunks/23o73kpgfzye-.js",
+      "bytes": 32318
+    },
+    {
+      "file": ".next/static/chunks/0r2f8p5ldxaui.js",
+      "bytes": 30520
+    },
+    {
+      "file": ".next/static/chunks/3srfjz42u14tx.js",
+      "bytes": 29981
+    },
+    {
+      "file": ".next/static/chunks/030rvmx6s7-6c.js",
+      "bytes": 27527
+    },
+    {
+      "file": ".next/static/chunks/0azxc_vvx935r.js",
+      "bytes": 27042
+    },
+    {
+      "file": ".next/static/chunks/0b4ebz4qg9b1h.js",
+      "bytes": 26437
+    },
+    {
+      "file": ".next/static/chunks/3ji1mzqsx1h3r.js",
+      "bytes": 25557
+    },
+    {
+      "file": ".next/static/chunks/05cpg4stajohk.js",
+      "bytes": 24454
+    },
+    {
+      "file": ".next/static/chunks/2y6f5le_alyfc.js",
+      "bytes": 24045
+    },
+    {
+      "file": ".next/static/chunks/19l98ljhvu1xa.js",
+      "bytes": 23653
+    },
+    {
+      "file": ".next/static/chunks/41x6gye7n1zhl.js",
+      "bytes": 23645
+    },
+    {
+      "file": ".next/static/chunks/26n5livcaz_kt.js",
+      "bytes": 22659
+    },
+    {
+      "file": ".next/static/chunks/1wglfui74ywzv.js",
+      "bytes": 22522
+    },
+    {
+      "file": ".next/static/chunks/27gjg8e11zukd.js",
+      "bytes": 21505
+    },
+    {
+      "file": ".next/static/chunks/2vgr72-aws4rw.js",
+      "bytes": 21399
+    },
+    {
+      "file": ".next/static/chunks/3sw-ejfmu5zs2.js",
+      "bytes": 20431
+    },
+    {
+      "file": ".next/static/chunks/17aba9r35_1wz.js",
+      "bytes": 14745
+    },
+    {
+      "file": ".next/static/chunks/turbopack-2c3mg3r-05n1w.js",
+      "bytes": 11255
+    },
+    {
+      "file": ".next/static/chunks/3jtcjy1p6yr9e.js",
+      "bytes": 9960
+    },
+    {
+      "file": ".next/static/chunks/09vixrbehe1qr.js",
+      "bytes": 9849
+    },
+    {
+      "file": ".next/static/chunks/1vcwzubd1_azg.js",
+      "bytes": 9694
+    },
+    {
+      "file": ".next/static/chunks/1aza7e_th8drp.js",
+      "bytes": 9343
+    },
+    {
+      "file": ".next/static/chunks/2cfjzhe8t7xpn.js",
+      "bytes": 9214
+    },
+    {
+      "file": ".next/static/chunks/2n5qeheznvl4u.js",
+      "bytes": 7820
+    },
+    {
+      "file": ".next/static/chunks/2uju8phnrg0bl.js",
+      "bytes": 6682
+    }
+  ]
+}

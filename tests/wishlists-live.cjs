@@ -3,17 +3,8 @@
 const { createClient } = require("@supabase/supabase-js");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
-const path = require("node:path");
-const env = Object.fromEntries(
-  fs
-    .readFileSync(path.join(__dirname, "../.env.local"), "utf8")
-    .split("\n")
-    .filter((l) => /^NEXT_PUBLIC_SUPABASE_\w+=/.test(l))
-    .map((l) => {
-      const at = l.indexOf("=");
-      return [l.slice(0, at), l.slice(at + 1).replace(/^['"]|['"]$/g, "")];
-    }),
-);
+const { stagingEnv } = require("./helpers/staging-env.cjs");
+const env = stagingEnv();
 const options = { auth: { persistSession: false, autoRefreshToken: false } };
 const client = () =>
   createClient(

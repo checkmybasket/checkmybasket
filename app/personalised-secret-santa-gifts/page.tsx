@@ -1,3 +1,5 @@
+import { OPEN_GRAPH_DEFAULTS, TWITTER_DEFAULTS } from "@/lib/page-metadata";
+import { SITE_ORIGIN } from "@/lib/site";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { InfoPage, Section } from "@/components/info-page";
@@ -9,8 +11,8 @@ const guide = GIFT_GUIDES.find(item => item.slug === "personalised-secret-santa-
 export const metadata: Metadata = {
   title: { absolute: `${guide.title} | CheckMyBasket` }, description: guide.description,
   alternates: { canonical: `/${guide.slug}` },
-  openGraph: { title: guide.title, description: guide.description, url: `https://www.checkmybasket.co.uk/${guide.slug}` },
-  twitter: { card: "summary_large_image", title: guide.title, description: guide.description },
+  openGraph: { ...OPEN_GRAPH_DEFAULTS,  title: guide.title, description: guide.description, url: `${SITE_ORIGIN}/${guide.slug}` },
+  twitter: { ...TWITTER_DEFAULTS,  card: "summary_large_image", title: guide.title, description: guide.description },
 };
 export default function GiftGuide() {
   return <InfoPage title={guide.title} updated="11 October 2026">
@@ -23,7 +25,7 @@ export default function GiftGuide() {
       <GiftGuidePicks category={guide.category}/>
       <Section heading="More help choosing and organising">
         <nav aria-label="Other gift guides" className="flex flex-wrap gap-x-4 gap-y-2">{GIFT_GUIDES.filter(item => item.slug !== guide.slug).map(item => <Link key={item.slug} href={`/${item.slug}`} className="inline-flex min-h-11 items-center underline">{item.title}</Link>)}</nav>
-        <p><Link href="/wishlists" className="underline">Create a wishlist</Link> · <Link href="/create" className="underline">Create a free Secret Santa draw</Link> · <Link href="/office-secret-santa" className="underline">Office organiser checklist</Link></p>
+        <p><Link prefetch={false} href="/wishlists" className="underline">Create a wishlist</Link> · <Link href="/create" className="underline">Create a free Secret Santa draw</Link> · <Link href="/office-secret-santa" className="underline">Office organiser checklist</Link></p>
       </Section>
     </InfoPage>;
 }

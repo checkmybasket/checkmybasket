@@ -1,4 +1,5 @@
 "use client";
+import { userError } from "@/lib/user-errors";
 
 import { useEffect, useId, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -40,7 +41,7 @@ export function NotificationEmail({ groupId }: { groupId: string }) {
       if (reply.error) throw reply.error;
       setStatus(reply.data as Status); setEmail(reply.data.email ?? "");
       setMessage(reply.data.state === "off" ? "Draw notifications are off. Your sign-in recovery is unchanged." : reply.data.state === "verified" ? "Saved and verified for future draw notifications." : "Address saved. Verify ownership before draw notifications can be sent.");
-    } catch (err) { setError(err instanceof Error ? err.message : (err as { message?: string })?.message ?? "Could not save notification settings."); }
+    } catch (err) { setError(userError(err, "save notification settings")); }
     finally { setBusy(false); }
   }
   async function verify() {
@@ -49,11 +50,11 @@ export function NotificationEmail({ groupId }: { groupId: string }) {
     try {
       const reply = await recoveryRequest({ action: "setup", email: status.email, group_id: groupId });
       setMessage(reply.message ?? "Check your inbox and open the verification link to confirm this email.");
-    } catch (err) { setError(err instanceof Error ? err.message : "Could not request verification."); }
+    } catch (err) { setError(userError(err, "request email verification")); }
     finally { setBusy(false); }
   }
   const unsaved = email.trim().toLowerCase() !== (status?.email ?? "").toLowerCase();
-  return <section className="rounded-2xl p-5 mt-6 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]" aria-labelledby={`${id}-title`}>
+  return <section className="rounded-[var(--cmb-radius)] p-5 mt-6 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]" aria-labelledby={`${id}-title`}>
     <h2 id={`${id}-title`} className="font-semibold text-sm mb-2">Optional draw notification email</h2>
     <p className="text-xs mb-3 text-[var(--cmb-text-secondary)]">Email is optional. Save and verify an address for future draws across your groups, or turn notifications off. Neither action changes your matches or sends an email for this draw.</p>
     <form onSubmit={event => { event.preventDefault(); void save(email); }} className="space-y-3">

@@ -1,5 +1,5 @@
 const fs=require('node:fs'),vm=require('node:vm'),ts=require('typescript'),assert=require('node:assert/strict');
-function load(file,imports={}){const module={exports:{}};const js=ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;vm.runInNewContext(js,{module,exports:module.exports,require:n=>imports[n],URL,URLSearchParams,Date,Intl,Set,console});return module.exports;}
+function load(file,imports={}){const testModule={exports:{}};const js=ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;vm.runInNewContext(js,{module:testModule,exports:testModule.exports,require:n=>imports[n],URL,URLSearchParams,Date,Intl,Set,console});return testModule.exports;}
 const categories=load('lib/gift-categories.ts');const selection=load('lib/gift-selection.ts',{'@/lib/gift-categories':categories});const feed=load('lib/gift-sheet-feed.ts');
 let checks=0;function check(name,fn){fn();checks++;console.log('PASS '+name);}
 const products=Array.from({length:20},(_,i)=>({id:'id'+String(i).padStart(2,'0'),price:500+i*100,categories:i%2?['colleague']:['cosy'],interests:i%3?['coffee']:['games'],tags:[]}));

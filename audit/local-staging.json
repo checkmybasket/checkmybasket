@@ -1,0 +1,119 @@
+{
+  "date": "2026-10-23",
+  "environment": "local only",
+  "docker": {
+    "cli": "29.9.2",
+    "runtime": "Colima 0.10.3",
+    "profile": "cmb-staging",
+    "defaultContextChanged": false,
+    "cpu": 2,
+    "memoryGiB": 6,
+    "ports": "127.0.0.1 only"
+  },
+  "supabase": {
+    "cli": "2.122.0",
+    "projectId": "checkmybasket-local",
+    "appliedMigrations": 26,
+    "initialAuthUsers": 0,
+    "publicTablesWithoutRls": 0,
+    "securityAdvisorWarnings": 0,
+    "api": "http://127.0.0.1:54321",
+    "studio": "http://127.0.0.1:54323",
+    "capturedInbox": "http://127.0.0.1:54324",
+    "anonymousAuth": true
+  },
+  "app": {
+    "url": "http://localhost:3101",
+    "noindex": true,
+    "cspAllowsLocal": true,
+    "cspAllowsProductionBackend": false
+  },
+  "verification": {
+    "build": "PASS",
+    "lint": "PASS",
+    "typescript": "PASS",
+    "nodeTests": 31,
+    "wishlistLive": "PASS",
+    "wishlistApiLive": "PASS",
+    "nativeAuthCapture": "PASS",
+    "browser": [
+      "create group",
+      "join three disposable members",
+      "loaded organiser dashboard",
+      "edit group name",
+      "copy invite",
+      "confirm draw",
+      "reveal own match",
+      "mark gift bought"
+    ],
+    "separateMemberApi": [
+      "each sees only own match",
+      "members cannot execute organiser draw",
+      "match assignment immutable"
+    ],
+    "capturedBrowserWarningsErrors": 0,
+    "customRecoveryAndDrawMail": "PASS: captured setup, identity restoration, single-use redemption, verified preference, accepted draw email and duplicate suppression",
+    "privateViewportCases": 70,
+    "privateStates": [
+      "drawn group",
+      "pending group",
+      "messages",
+      "wishlists",
+      "games",
+      "settings",
+      "reveal ready"
+    ],
+    "privateNoindexLabelsHeadingsAndControls": "PASS",
+    "anonymousQuestionReply": "PASS: sender identity column protected, real local reply displayed",
+    "nonMemberDenials": "PASS: group/member/draw/wishlist/message reads, draw execution and late join rejected",
+    "authFailureRecovery": "PASS: local Auth stopped, safe recovery shown, restart and Try again restored group",
+    "stalledDataLoading": "PASS: local REST paused, named loader shown, unpause restored group",
+    "normalConsoleErrorsWarnings": 0,
+    "localLighthouse": {
+      "environment": "Local build with deliberate preview noindex; performance is not compared with earlier production-backend runs",
+      "pages": [
+        {
+          "page": "home",
+          "performance": 96,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 66,
+          "failedSeo": [
+            "is-crawlable"
+          ],
+          "consoleAuditPass": true
+        },
+        {
+          "page": "create",
+          "performance": 95,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 66,
+          "failedSeo": [
+            "is-crawlable"
+          ],
+          "consoleAuditPass": true
+        },
+        {
+          "page": "gifts",
+          "performance": 95,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 69,
+          "failedSeo": [
+            "is-crawlable"
+          ],
+          "consoleAuditPass": true
+        }
+      ]
+    }
+  },
+  "productionEnvFilesUnchanged": true,
+  "cloudWrites": false,
+  "externalMailSent": false,
+  "remaining": [
+    "Full exhaustive private games/large-data/permission state certification",
+    "Native 200% zoom, screen-reader, physical device and clipboard-denial checks",
+    "Production/preview deployment and account/domain/email delivery smoke checks"
+  ]
+}

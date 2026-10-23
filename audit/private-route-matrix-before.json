@@ -1,0 +1,628 @@
+[
+  {
+    "route": "/g/dd58cc60-ef38-431b-acf2-9dc0b4cb0dbc",
+    "label": "drawn group",
+    "h1": 1,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Local staging acceptance updated"
+      },
+      {
+        "level": 2,
+        "text": "Names have been drawn"
+      },
+      {
+        "level": 2,
+        "text": "Gifts bought"
+      },
+      {
+        "level": 2,
+        "text": "Optional draw notification email"
+      },
+      {
+        "level": 2,
+        "text": " Save access to your group"
+      }
+    ],
+    "main": 1,
+    "nested": 0,
+    "robots": "noindex, nofollow",
+    "unlabelled": [],
+    "viewports": [
+      {
+        "width": 320,
+        "height": 740,
+        "overflow": true,
+        "small": [
+          {
+            "height": 32,
+            "tag": "INPUT",
+            "text": "",
+            "width": 246
+          },
+          {
+            "height": 32,
+            "tag": "INPUT",
+            "text": "",
+            "width": 246
+          }
+        ]
+      },
+      {
+        "width": 375,
+        "height": 812,
+        "overflow": false,
+        "small": [
+          {
+            "height": 32,
+            "tag": "INPUT",
+            "text": "",
+            "width": 301
+          },
+          {
+            "height": 32,
+            "tag": "INPUT",
+            "text": "",
+            "width": 301
+          }
+        ]
+      },
+      {
+        "width": 414,
+        "height": 896,
+        "overflow": false,
+        "small": [
+          {
+            "height": 32,
+            "tag": "INPUT",
+            "text": "",
+            "width": 340
+          },
+          {
+            "height": 32,
+            "tag": "INPUT",
+            "text": "",
+            "width": 340
+          }
+        ]
+      },
+      {
+        "width": 768,
+        "height": 1024,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1024,
+        "height": 768,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1280,
+        "height": 800,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1440,
+        "height": 900,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1920,
+        "height": 1080,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 740,
+        "height": 320,
+        "overflow": false,
+        "small": [
+          {
+            "height": 32,
+            "tag": "INPUT",
+            "text": "",
+            "width": 598
+          },
+          {
+            "height": 32,
+            "tag": "INPUT",
+            "text": "",
+            "width": 598
+          }
+        ]
+      },
+      {
+        "width": 2560,
+        "height": 1080,
+        "overflow": false,
+        "small": []
+      }
+    ]
+  },
+  {
+    "route": "/g/48f8cc5a-bae2-4061-aa10-fb3b5205f6c2",
+    "label": "pending group",
+    "h1": 1,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Local pending acceptance"
+      },
+      {
+        "level": 2,
+        "text": "Setup progress"
+      },
+      {
+        "level": 2,
+        "text": "Members"
+      },
+      {
+        "level": 2,
+        "text": "Optional draw notification email"
+      },
+      {
+        "level": 2,
+        "text": " Save access to your group"
+      }
+    ],
+    "main": 1,
+    "nested": 0,
+    "robots": "noindex, nofollow",
+    "unlabelled": [],
+    "viewports": [
+      {
+        "width": 320,
+        "height": 740,
+        "overflow": false,
+        "small": [
+          {
+            "height": 32,
+            "tag": "INPUT",
+            "text": "",
+            "width": 246
+          },
+          {
+            "height": 32,
+            "tag": "INPUT",
+            "text": "",
+            "width": 246
+          }
+        ]
+      },
+      {
+        "width": 375,
+        "height": 812,
+        "overflow": false,
+        "small": [
+          {
+            "height": 32,
+            "tag": "INPUT",
+            "text": "",
+            "width": 301
+          },
+          {
+            "height": 32,
+            "tag": "INPUT",
+            "text": "",
+            "width": 301
+          }
+        ]
+      },
+      {
+        "width": 414,
+        "height": 896,
+        "overflow": false,
+        "small": [
+          {
+            "height": 32,
+            "tag": "INPUT",
+            "text": "",
+            "width": 340
+          },
+          {
+            "height": 32,
+            "tag": "INPUT",
+            "text": "",
+            "width": 340
+          }
+        ]
+      },
+      {
+        "width": 768,
+        "height": 1024,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1024,
+        "height": 768,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1280,
+        "height": 800,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1440,
+        "height": 900,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1920,
+        "height": 1080,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 740,
+        "height": 320,
+        "overflow": false,
+        "small": [
+          {
+            "height": 32,
+            "tag": "INPUT",
+            "text": "",
+            "width": 598
+          },
+          {
+            "height": 32,
+            "tag": "INPUT",
+            "text": "",
+            "width": 598
+          }
+        ]
+      },
+      {
+        "width": 2560,
+        "height": 1080,
+        "overflow": false,
+        "small": []
+      }
+    ]
+  },
+  {
+    "route": "/g/dd58cc60-ef38-431b-acf2-9dc0b4cb0dbc?tab=messages",
+    "label": "messages",
+    "h1": 1,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Local staging acceptance updated"
+      }
+    ],
+    "main": 1,
+    "nested": 0,
+    "robots": "noindex, nofollow",
+    "unlabelled": [],
+    "viewports": [
+      {
+        "width": 320,
+        "height": 740,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 375,
+        "height": 812,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 414,
+        "height": 896,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 768,
+        "height": 1024,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1024,
+        "height": 768,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1280,
+        "height": 800,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1440,
+        "height": 900,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1920,
+        "height": 1080,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 740,
+        "height": 320,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 2560,
+        "height": 1080,
+        "overflow": false,
+        "small": []
+      }
+    ]
+  },
+  {
+    "route": "/g/dd58cc60-ef38-431b-acf2-9dc0b4cb0dbc?tab=wishlists",
+    "label": "wishlists",
+    "h1": 1,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Local staging acceptance updated"
+      },
+      {
+        "level": 2,
+        "text": "Your wishlist"
+      },
+      {
+        "level": 3,
+        "text": "No wishlist items yet"
+      }
+    ],
+    "main": 1,
+    "nested": 0,
+    "robots": "noindex, nofollow",
+    "unlabelled": [],
+    "viewports": [
+      {
+        "width": 320,
+        "height": 740,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 375,
+        "height": 812,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 414,
+        "height": 896,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 768,
+        "height": 1024,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1024,
+        "height": 768,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1280,
+        "height": 800,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1440,
+        "height": 900,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1920,
+        "height": 1080,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 740,
+        "height": 320,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 2560,
+        "height": 1080,
+        "overflow": false,
+        "small": []
+      }
+    ]
+  },
+  {
+    "route": "/g/dd58cc60-ef38-431b-acf2-9dc0b4cb0dbc?tab=games",
+    "label": "games",
+    "h1": 1,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Local staging acceptance updated"
+      },
+      {
+        "level": 2,
+        "text": "Gift Predictions"
+      }
+    ],
+    "main": 1,
+    "nested": 0,
+    "robots": "noindex, nofollow",
+    "unlabelled": [],
+    "viewports": [
+      {
+        "width": 320,
+        "height": 740,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 375,
+        "height": 812,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 414,
+        "height": 896,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 768,
+        "height": 1024,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1024,
+        "height": 768,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1280,
+        "height": 800,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1440,
+        "height": 900,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1920,
+        "height": 1080,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 740,
+        "height": 320,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 2560,
+        "height": 1080,
+        "overflow": false,
+        "small": []
+      }
+    ]
+  },
+  {
+    "route": "/g/dd58cc60-ef38-431b-acf2-9dc0b4cb0dbc/settings",
+    "label": "settings",
+    "h1": 1,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Group settings"
+      },
+      {
+        "level": 2,
+        "text": "GROUP DETAILS"
+      },
+      {
+        "level": 2,
+        "text": "INVITE LINK"
+      },
+      {
+        "level": 2,
+        "text": "YOUR DATA"
+      },
+      {
+        "level": 2,
+        "text": "DELETE GROUP"
+      }
+    ],
+    "main": 1,
+    "nested": 0,
+    "robots": "noindex, nofollow",
+    "unlabelled": [],
+    "viewports": [
+      {
+        "width": 320,
+        "height": 740,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 375,
+        "height": 812,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 414,
+        "height": 896,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 768,
+        "height": 1024,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1024,
+        "height": 768,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1280,
+        "height": 800,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1440,
+        "height": 900,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 1920,
+        "height": 1080,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 740,
+        "height": 320,
+        "overflow": false,
+        "small": []
+      },
+      {
+        "width": 2560,
+        "height": 1080,
+        "overflow": false,
+        "small": []
+      }
+    ]
+  }
+]

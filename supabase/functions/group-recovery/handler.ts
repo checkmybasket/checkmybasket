@@ -1,6 +1,8 @@
 import { createClient } from "jsr:@supabase/supabase-js@2.107.0";
 
-const APP_URL = "https://www.checkmybasket.co.uk";
+import { localEmailFetch } from "../_shared/local-email.ts";
+
+const APP_URL = Deno.env.get("APP_URL") ?? "https://www.checkmybasket.co.uk";
 const URL = Deno.env.get("SUPABASE_URL")!;
 const ANON = Deno.env.get("SUPABASE_ANON_KEY")!;
 const admin = createClient(URL, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, {
@@ -71,7 +73,8 @@ async function sendLink(
       ? "Confirm this email to reopen your wishlists, reservations and groups on another device."
       : "Use this link to reopen your CheckMyBasket wishlists, reservations and groups.";
   try {
-    const result = await fetch("https://api.resend.com/emails", {
+    const emailFetch = localEmailFetch({ enabled: Deno.env.get("CMB_LOCAL_MAILPIT"), supabaseUrl: URL });
+    const result = await emailFetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${key}`,

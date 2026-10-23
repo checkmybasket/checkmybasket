@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
+import path from "node:path";
+import { shouldPreventIndexing } from "./lib/deployment";
+import { supabaseConnectSources } from "./lib/supabase/origins";
 
 // Supabase project origin the browser must be allowed to reach (REST + Realtime).
-const SUPABASE_ORIGIN = "https://nejkvrzabdetsnhpeqtl.supabase.co";
+const SUPABASE_SOURCES = supabaseConnectSources(
+  process.env.NEXT_PUBLIC_SUPABASE_URL ?? "https://nejkvrzabdetsnhpeqtl.supabase.co",
+);
 
 // Content-Security-Policy. Next.js injects inline bootstrap scripts and the app uses
 // inline style attributes throughout, so 'unsafe-inline' is required for script/style;
@@ -13,7 +18,7 @@ const csp = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https://*.google-analytics.com https://www.googletagmanager.com",
   "font-src 'self' data:",
-  `connect-src 'self' ${SUPABASE_ORIGIN} wss://nejkvrzabdetsnhpeqtl.supabase.co https://*.google-analytics.com https://www.googletagmanager.com`,
+  `connect-src 'self' ${SUPABASE_SOURCES} https://*.google-analytics.com https://www.googletagmanager.com`,
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "form-action 'self'",
@@ -32,6 +37,8 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  outputFileTracingRoot: path.resolve(__dirname),
+  turbopack: { root: path.resolve(__dirname) },
   images: {
     remotePatterns: [
       ...["cdn.waterstones.com", "cdn.notonthehighstreet.com", "media.johnlewiscontent.com", "thelittlebotanical.com", "www.dunelm.com", "images.dunelm.com", "i.etsystatic.com"].map(hostname => ({ protocol: "https" as const, hostname, pathname: "/**" })),
@@ -42,7 +49,7 @@ const nextConfig: NextConfig = {
     maximumRedirects: 0,
   },
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    return [{ source: "/:path*", headers: [...securityHeaders, ...(shouldPreventIndexing() ? [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] : [])] }];
   },
 };
 

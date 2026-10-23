@@ -78,7 +78,7 @@ export function EmailRecovery({
   if (loading) return null;
   return (
     <section
-      className="rounded-2xl p-5 mt-6 mb-6 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]"
+      className="rounded-[var(--cmb-radius)] p-5 mt-6 mb-6 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]"
       aria-labelledby={`${id}-title`}
     >
       <h2
@@ -131,7 +131,7 @@ export function EmailRecovery({
             <Button
               type="submit"
               disabled={busy}
-              className="w-full rounded-xl h-11"
+              className="w-full rounded-[var(--cmb-radius)] h-11"
             >
               {busy
                 ? "Sending…"

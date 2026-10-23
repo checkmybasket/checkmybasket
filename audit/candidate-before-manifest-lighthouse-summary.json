@@ -1,0 +1,44 @@
+{
+  "lighthouseVersion": "13.5.0",
+  "deployment": "dpl_BEMdYbmRMTXvQFghjJn9gs2Eb4gT",
+  "commit": "dc392b6aa80f8a81e8bb244a17a8b7c6e230557e",
+  "method": "Single default simulated mobile run per page; authenticated URL access. Temporary access values redacted from reports.",
+  "rows": [
+    {
+      "page": "home",
+      "performance": 99,
+      "accessibility": 100,
+      "best-practices": 92,
+      "seo": 66,
+      "finalUrl": "https://checkmybasket-ag1mpl9l2-hassan-amjad-s-projects-1.vercel.app/",
+      "failedSeo": [
+        "is-crawlable"
+      ],
+      "consoleAudit": 0
+    },
+    {
+      "page": "create",
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 92,
+      "seo": 66,
+      "finalUrl": "https://checkmybasket-ag1mpl9l2-hassan-amjad-s-projects-1.vercel.app/create",
+      "failedSeo": [
+        "is-crawlable"
+      ],
+      "consoleAudit": 0
+    },
+    {
+      "page": "gifts",
+      "performance": 99,
+      "accessibility": 100,
+      "best-practices": 92,
+      "seo": 69,
+      "finalUrl": "https://checkmybasket-ag1mpl9l2-hassan-amjad-s-projects-1.vercel.app/gifts",
+      "failedSeo": [
+        "is-crawlable"
+      ],
+      "consoleAudit": 0
+    }
+  ]
+}

@@ -1,7 +1,9 @@
+import { socialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import { InfoPage, Section } from "@/components/info-page";
 
 export const metadata: Metadata = {
+  ...socialMetadata("Contact", "Get in touch with CheckMyBasket \u2014 questions, problems, feedback or data requests.", "/contact"),
   alternates: { canonical: "/contact" },
   title: "Contact",
   description: "Get in touch with CheckMyBasket — questions, problems, feedback or data requests.",

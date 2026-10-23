@@ -17,7 +17,7 @@ const path = require("node:path");
     `);
     for (const name of [
       "20261003185559_individual_wishlists.sql",
-      "20261006190147_personal_wishlist_owner_unreserve.sql",
+      "20261006190849_personal_wishlist_owner_unreserve.sql",
     ]) {
       await db.exec(
         fs.readFileSync(

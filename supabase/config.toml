@@ -1,0 +1,49 @@
+# Local acceptance environment; Supabase CLI 2.122.0. Never link this ID to production.
+project_id = "checkmybasket-local"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 17
+
+[db.seed]
+enabled = false
+
+[studio]
+enabled = true
+port = 54323
+api_url = "http://127.0.0.1"
+
+# Supabase Auth email is captured locally, never delivered to recipient mailboxes.
+[local_smtp]
+enabled = true
+port = 54324
+smtp_port = 54325
+
+[auth]
+enabled = true
+site_url = "http://localhost:3101"
+additional_redirect_urls = ["http://127.0.0.1:3101"]
+enable_signup = true
+enable_anonymous_sign_ins = true
+jwt_expiry = 3600
+
+[auth.email]
+enable_signup = true
+double_confirm_changes = true
+enable_confirmations = false
+
+[edge_runtime]
+enabled = true
+policy = "per_worker"
+deno_version = 2
+
+[analytics]
+enabled = false

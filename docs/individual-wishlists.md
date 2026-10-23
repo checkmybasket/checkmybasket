@@ -43,7 +43,7 @@ Run local checks with `node --test tests/wishlists.test.cjs`, TypeScript, ESLint
 
 ## Pending owner backup release — 6 October 2026
 
-Migration `20261006190147_personal_wishlist_owner_unreserve` adds `release` to the owner mutation RPC; apply it before releasing the updated editor. Not yet applied to production. The combined compact shared-view and owner backup update awaits explicit publication approval.
+Migration `20261006190849_personal_wishlist_owner_unreserve` adds `release` to the owner mutation RPC; apply it before releasing the updated editor. This version is already applied in production; the repo timestamp now matches the verified production history. Application publication remains part of the production-polish release.
 
 Local PostgreSQL/PGlite tests in `tests/wishlists-owner-unreserve.cjs` verify ownership, anonymous and other-user denial, cross-list gift denial, bought reset, repeat clearing, retaining gifts and unrelated reservations, new reservations after clearing, former-reserver denial and disabled-sharing behavior. Run with PGlite installed outside the app and `PGLITE_MODULE` pointing to that package; no live credentials or production records are used. Build, TypeScript and targeted ESLint pass. Live database and browser interaction verification for this addition remain pending release.
 

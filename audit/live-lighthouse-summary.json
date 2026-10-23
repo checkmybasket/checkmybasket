@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-23T21:24:59.967Z",
+  "deployment": "dpl_7YiSVs9LvqgMxzNgeSCZ6oNEx8hK",
+  "method": "Single default simulated mobile run per page on public production domain",
+  "rows": [
+    {
+      "page": "home",
+      "performance": 94,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "consoleAudit": 1
+    },
+    {
+      "page": "create",
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "consoleAudit": 1
+    },
+    {
+      "page": "gifts",
+      "performance": 99,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "consoleAudit": 1
+    }
+  ]
+}

@@ -26,7 +26,7 @@ export function GiftResults({ products, catalogue, filters, category, page, page
       {active.map(a => <Link key={a.label} href={giftFiltersHref(a.filters, category)} aria-label={`Remove ${a.label} filter`} className={linkClass}>{a.label}<span aria-hidden="true" className="ml-2">×</span></Link>)}
       <Link href={giftFiltersHref({}, category)} className="inline-flex min-h-11 items-center px-2 text-sm underline underline-offset-4">Clear filters</Link>
     </div> : null}
-    {!products.length ? <div className="rounded-2xl border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-5">
+    {!products.length ? <div className="rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-5">
       <p className="text-sm text-[var(--cmb-text-secondary)] mb-4">{suggestions.length ? "These options keep your selected budget. Choose one to broaden the results." : "Try changing your budget or clearing the filters to explore this collection."}</p>
       <div className="flex flex-wrap gap-2">
         {suggestions.map(s => <Link key={s.label} href={giftFiltersHref(s.filters, category)} className={linkClass}>{s.label} ({s.count})</Link>)}

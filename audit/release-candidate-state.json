@@ -1,0 +1,84 @@
+{
+  "date": "2026-10-23",
+  "sourceCommit": "5534eb0ef523cf6d543dab745e878aea9581965a",
+  "candidate": {
+    "id": "dpl_7YiSVs9LvqgMxzNgeSCZ6oNEx8hK",
+    "url": "https://checkmybasket-71t9f0oor-hassan-amjad-s-projects-1.vercel.app",
+    "target": "production",
+    "promotion": "promoted to customer domains on 2026-10-23 after explicit owner approval",
+    "verifiedRuntimeFilesMatchLighthouseCandidate": 198,
+    "websiteRuntimeMatchesCurrentCheckoutFiles": 146
+  },
+  "productionMigrations": [
+    {
+      "version": "20261023161744",
+      "name": "actual_gifts_require_round_membership",
+      "normalizedSqlMd5": "02471f08e268121a11b76b363e43934b"
+    },
+    {
+      "version": "20261023161924",
+      "name": "predictions_require_member_subject",
+      "normalizedSqlMd5": "5ece573546d0f5377c53a0564602769b"
+    },
+    {
+      "version": "20261023162053",
+      "name": "predictions_require_open_round",
+      "normalizedSqlMd5": "3400d68c42d2fd46c004658b01d44e4f"
+    }
+  ],
+  "customerAliasesVerifiedDeployment": "dpl_7YiSVs9LvqgMxzNgeSCZ6oNEx8hK",
+  "ownerChecks": "Owner explicitly approved all owner checks; not agent-measured device evidence",
+  "currentReleaseReport": "audit/PRODUCTION_RELEASE.md",
+  "build": "pass",
+  "lint": "pass",
+  "typeCheck": "pass",
+  "localRegressions": 110,
+  "localGamePermissionSuite": "pass",
+  "productionDependencyAuditVulnerabilities": 0,
+  "bundle": {
+    "baselineBeforePerformanceRawJsBytes": 1409743,
+    "priorAfterRawJsBytes": 1426303,
+    "currentLocalStagingRawJsBytes": 1430969,
+    "currentChunks": 40,
+    "publicSourceMaps": 0,
+    "comparisonLimit": "Current local bundle includes later staging/private fixes; hosted transfer bytes and timings are not directly comparable with local historical measurements."
+  },
+  "nativeZoom": {
+    "browser": "Google Chrome native UI",
+    "confirmedPercent": 200,
+    "screenPixels": [
+      1920,
+      1080
+    ],
+    "inspectedStates": [
+      "home",
+      "create top",
+      "create bottom and fixed action",
+      "gifts",
+      "shared 200-item list",
+      "shared 200-item cards",
+      "Return signed-out"
+    ],
+    "restoredPercent": 100,
+    "scope": "Visual inspection only at this native desktop window. Private group/owner zoom and actual assistive-device checks remain unverified."
+  },
+  "protectedManifest": {
+    "beforeBestPractices": 92,
+    "afterBestPractices": 100,
+    "beforeConsoleErrorsPerPage": 2,
+    "afterConsoleErrorsPerPage": 0,
+    "measuredPages": [
+      "home",
+      "create",
+      "gifts"
+    ],
+    "expectedSeoFailure": "is-crawlable: Vercel x-robots-tag noindex on unpromoted protected host"
+  },
+  "productionVerificationLimit": "Live policy definitions and migration SQL hashes checked; adversarial writes tested only on disposable local fixtures, not customer data.",
+  "migrationInventoryParity": {
+    "production": 29,
+    "repo": 29,
+    "local": 29,
+    "allVersionNamePairsMatch": true
+  }
+}

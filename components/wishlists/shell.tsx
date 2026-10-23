@@ -1,5 +1,5 @@
+import { BasketMark } from "@/components/receipt/logo";
 import Link from "next/link";
-import { Gift } from "lucide-react";
 export function WishlistShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-dvh bg-[var(--cmb-bg)] text-[var(--cmb-text-primary)] px-4 py-6 sm:py-10">
@@ -10,14 +10,14 @@ export function WishlistShell({ children }: { children: React.ReactNode }) {
             href="/"
             className="inline-flex min-h-11 items-center gap-2 font-semibold text-[var(--cmb-primary)]"
           >
-            <Gift size={20} aria-hidden />
+            <BasketMark size={20} />
             CheckMyBasket
           </Link>
           <nav className="flex flex-wrap gap-x-4 text-sm" aria-label="Wishlist navigation">
-            <Link className="inline-flex min-h-11 items-center underline underline-offset-4" href="/wishlists">
+            <Link prefetch={false} className="inline-flex min-h-11 items-center underline underline-offset-4" href="/wishlists">
               My wishlists
             </Link>
-            <Link className="inline-flex min-h-11 items-center underline underline-offset-4" href="/return">
+            <Link prefetch={false} className="inline-flex min-h-11 items-center underline underline-offset-4" href="/return">
               Return &amp; sign in
             </Link>
           </nav>
@@ -37,8 +37,8 @@ export function WishlistShell({ children }: { children: React.ReactNode }) {
   );
 }
 export const panel =
-  "rounded-2xl border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-5 sm:p-6";
+  "rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-5 sm:p-6";
 export const field =
-  "w-full rounded-xl border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-3 min-h-11 text-base";
+  "w-full rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-3 min-h-11 text-base";
 export const secondary =
-  "inline-flex items-center justify-center rounded-xl border border-[var(--cmb-border)] px-4 py-2 min-h-11 text-sm font-medium hover:bg-[var(--cmb-bg)] disabled:opacity-50";
+  "inline-flex items-center justify-center rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] px-4 py-2 min-h-11 text-sm font-medium hover:bg-[var(--cmb-bg)] disabled:opacity-50";

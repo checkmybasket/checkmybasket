@@ -1,0 +1,91 @@
+{
+  "fixture": "Real InfoPage, GiftCard and GiftResults components; synthetic local fixtures, removed before commit",
+  "widths": [
+    {
+      "width": 320,
+      "items": 200,
+      "overflow": false,
+      "single": 1,
+      "wrap": "anywhere"
+    },
+    {
+      "width": 375,
+      "items": 200,
+      "overflow": false,
+      "single": 1,
+      "wrap": "anywhere"
+    },
+    {
+      "width": 414,
+      "items": 200,
+      "overflow": false,
+      "single": 1,
+      "wrap": "anywhere"
+    },
+    {
+      "width": 768,
+      "items": 200,
+      "overflow": false,
+      "single": 1,
+      "wrap": "anywhere"
+    },
+    {
+      "width": 1024,
+      "items": 200,
+      "overflow": false,
+      "single": 1,
+      "wrap": "anywhere"
+    },
+    {
+      "width": 1280,
+      "items": 200,
+      "overflow": false,
+      "single": 1,
+      "wrap": "anywhere"
+    },
+    {
+      "width": 1440,
+      "items": 200,
+      "overflow": false,
+      "single": 1,
+      "wrap": "anywhere"
+    },
+    {
+      "width": 1920,
+      "items": 200,
+      "overflow": false,
+      "single": 1,
+      "wrap": "anywhere"
+    },
+    {
+      "width": 2560,
+      "items": 200,
+      "overflow": false,
+      "single": 1,
+      "wrap": "anywhere"
+    }
+  ],
+  "landscape": {
+    "height": 320,
+    "items": 200,
+    "overflow": false,
+    "width": 740
+  },
+  "zoomReflow": {
+    "height": 450,
+    "overflow": false,
+    "width": 640
+  },
+  "nativeZoom": {
+    "before": {
+      "dpr": 1,
+      "width": 1280
+    },
+    "after": {
+      "dpr": 1,
+      "overflow": false,
+      "width": 1280
+    },
+    "status": "UNVERIFIED: browser shortcut did not change zoom"
+  }
+}

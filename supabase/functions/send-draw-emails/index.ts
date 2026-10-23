@@ -1,6 +1,7 @@
 import { createClient } from "jsr:@supabase/supabase-js@2.107.0";
 import { handleRequest } from "./handler.ts";
 import type { Claim } from "./delivery.ts";
+import { localEmailFetch } from "../_shared/local-email.ts";
 
 // Keep platform verify_jwt=true AND validate the caller against Auth.
 // Privileged data/RPCs stay server-only; responses contain aggregate counts.
@@ -14,6 +15,7 @@ Deno.serve(async (req) => {
     appUrl: Deno.env.get("APP_URL") ?? "https://www.checkmybasket.co.uk",
     from: Deno.env.get("EMAIL_FROM") ?? "CheckMyBasket <onboarding@resend.dev>",
     apiKey: Deno.env.get("RESEND_API_KEY"),
+    fetcher: localEmailFetch({ enabled: Deno.env.get("CMB_LOCAL_MAILPIT"), supabaseUrl: url }),
     authenticate: async (header) => {
       const client = createClient(url, anonKey, {
         global: { headers: { Authorization: header } },

@@ -7,6 +7,7 @@
 :root {
   --cmb-ink: #141414;
   --cmb-paper: #FFFFFF;
+  --cmb-header-bg: var(--cmb-paper);
   --cmb-receipt: #F6F5F2;
   --cmb-receipt-edge: #DDDAD3;
   --cmb-red: #D42A24;
@@ -67,7 +68,7 @@
   --border:               var(--cmb-border);
   --input:                var(--cmb-border-strong);
   --ring:                 var(--cmb-primary);
-  --radius:               0.75rem;
+  --radius:               var(--cmb-radius);
   --sidebar: var(--cmb-surface);
   --sidebar-foreground: var(--cmb-text-primary);
   --sidebar-primary: var(--cmb-primary);
@@ -126,6 +127,7 @@
     @apply bg-background text-foreground;
     font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
     font-size: 1rem; line-height: 1.5; min-height: 100dvh;
+    overflow-wrap: anywhere;
     -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
   }
   h1,h2,h3,h4,h5,h6 { font-family: var(--font-inter),"Helvetica Neue",sans-serif; line-height: 1.2; }
@@ -171,4 +173,22 @@
 .skeleton {
   background: linear-gradient(90deg,var(--cmb-surface-hover) 25%,var(--cmb-border) 50%,var(--cmb-surface-hover) 75%);
   background-size: 200% auto; animation: shimmer 1.4s linear infinite; border-radius: var(--radius-md);
+}
+
+/* Keep compact desktop controls comfortable to tap on narrow screens. */
+@media (max-width: 767px) {
+  input[data-slot="input"] { min-height: 44px; }
+  button, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+@media (max-width: 767px) {
+  a { min-height: 44px; min-width: 44px; }
+  p a:not([class*="flex"]):not([class*="grid"]),
+  li > a:not([class*="flex"]):not([class*="grid"]) {
+    display: inline-flex;
+    align-items: center;
+  }
 }

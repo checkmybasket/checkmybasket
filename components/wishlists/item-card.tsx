@@ -10,12 +10,15 @@ export function ItemCard({
   children,
   shareToken,
   layout = "default",
+  headingLevel = 2,
 }: {
   item: PersonalWish;
   children?: React.ReactNode;
   shareToken?: string;
   layout?: "default" | "compact" | "list";
+  headingLevel?: 2 | 3;
 }) {
+  const Heading = headingLevel === 3 ? "h3" : "h2";
   const [failed, setFailed] = useState(false);
   let url = "";
   try {
@@ -25,8 +28,8 @@ export function ItemCard({
     <article
       className={
         layout === "default"
-          ? `${panel} flex flex-col h-full`
-          : "rounded-2xl border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-4 h-full"
+          ? `${panel} min-w-0 flex flex-col h-full`
+          : "rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-4 min-w-0 h-full"
       }
     >
       <div
@@ -35,7 +38,7 @@ export function ItemCard({
         }
       >
         <div
-          className={`${layout === "list" ? "h-20 w-20 sm:h-24 sm:w-24 shrink-0" : layout === "compact" ? "h-28 mb-3" : "h-40 mb-4"} relative rounded-xl bg-[var(--cmb-bg)] flex items-center justify-center overflow-hidden`}
+          className={`${layout === "list" ? "h-20 w-20 sm:h-24 sm:w-24 shrink-0" : layout === "compact" ? "h-28 mb-3" : "h-40 mb-4"} relative rounded-[var(--cmb-radius)] bg-[var(--cmb-bg)] flex items-center justify-center overflow-hidden`}
         >
           {item.image_url && !failed ? (
             <Image
@@ -70,7 +73,7 @@ export function ItemCard({
               </span>
             )}
           </div>
-          <h2 className="text-lg font-semibold break-words">{item.title}</h2>
+          <Heading className="text-lg font-semibold break-words">{item.title}</Heading>
           <p className="mt-1 text-sm">{money(item.price, item.currency)}</p>
           {item.shop_name && (
             <p className="text-sm text-[var(--cmb-text-secondary)] break-words mt-1">
@@ -101,7 +104,7 @@ export function ItemCard({
           >
             {url && (
               <a
-                className={`${layout === "default" ? "mt-4" : ""} inline-flex items-center justify-center min-h-11 rounded-xl bg-[var(--cmb-primary)] text-white px-4 py-2 text-sm`}
+                className={`${layout === "default" ? "mt-4" : ""} inline-flex items-center justify-center min-h-11 rounded-[var(--cmb-radius)] bg-[var(--cmb-primary)] text-white px-4 py-2 text-sm`}
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"

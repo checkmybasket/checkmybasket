@@ -1,4 +1,5 @@
 "use client";
+import { userError } from "@/lib/user-errors";
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
@@ -39,7 +40,7 @@ export function SharedWishlist({ token }: { token: string }) {
       .then(load)
       .catch((e) => {
         if (active) {
-          setError(e.message);
+          setError(userError(e, "load this shared wishlist"));
           setLoading(false);
         }
       });
@@ -106,7 +107,7 @@ export function SharedWishlist({ token }: { token: string }) {
             {error}
           </p>
         )}
-        <Link className={`${secondary} mt-5`} href="/wishlists">
+        <Link prefetch={false} className={`${secondary} mt-5`} href="/wishlists">
           Create your own wishlist
         </Link>
       </WishlistShell>
@@ -146,7 +147,7 @@ export function SharedWishlist({ token }: { token: string }) {
           <p className="text-sm">
             This is your list. Reservations stay hidden in your owner view.
           </p>
-          <Link className={`${secondary} mt-3`} href={`/wishlists/${list.id}`}>
+          <Link prefetch={false} className={`${secondary} mt-3`} href={`/wishlists/${list.id}`}>
             Edit my wishlist
           </Link>
         </div>
@@ -254,6 +255,7 @@ export function SharedWishlist({ token }: { token: string }) {
                         key={`${item.id}:${item.image_url}`}
                         item={item}
                         shareToken={token}
+                        headingLevel={3}
                         layout={view === "list" ? "list" : "compact"}
                       >
                         {!list.is_owner && (
@@ -315,7 +317,7 @@ export function SharedWishlist({ token }: { token: string }) {
           <p className="text-sm mt-4 text-[var(--cmb-text-secondary)]">
             Your reservation is saved in this browser. Optional verified email
             lets you manage it on another device.{" "}
-            <Link className="underline" href="/wishlists">
+            <Link prefetch={false} className="underline" href="/wishlists">
               See your reservations
             </Link>
             .

@@ -1,3 +1,5 @@
+import { OPEN_GRAPH_DEFAULTS, TWITTER_DEFAULTS } from "@/lib/page-metadata";
+import { SITE_ORIGIN } from "@/lib/site";
 import { GIFT_GUIDES } from "@/lib/gift-guides";
 import { ORGANISER_GUIDES } from "@/lib/organiser-guides";
 import type { Metadata } from "next";
@@ -24,8 +26,8 @@ export function topicMetadata(slug: string): Metadata {
   return {
     title: { absolute: `${guide.title} | CheckMyBasket` }, description: guide.description,
     alternates: { canonical: `/${slug}` },
-    openGraph: { title: guide.title, description: guide.description, url: `https://www.checkmybasket.co.uk/${slug}` },
-    twitter: { card: "summary_large_image", title: guide.title, description: guide.description },
+    openGraph: { ...OPEN_GRAPH_DEFAULTS,  title: guide.title, description: guide.description, url: `${SITE_ORIGIN}/${slug}` },
+    twitter: { ...TWITTER_DEFAULTS,  card: "summary_large_image", title: guide.title, description: guide.description },
   };
 }
 
@@ -71,7 +73,7 @@ export async function TopicGuide({ slug }: { slug: string }) {
       {section.tool === "remote-message" && <InvitationMessage invitation={remoteMessage} copyLabel="Copy remote-team invitation" />}
       {section.tool === "engraving" && <EngravingPreview />}
     </Section>)}
-    {guide.download && <Section id="printable-planning-sheet" heading="Your printable planning sheet"><p><a href={guide.download.path} download className="inline-flex min-h-11 items-center rounded-xl bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">{guide.download.label}</a><span className="block text-sm mt-2">One-page A4 sheet. Print at actual size and fill it in by hand.</span></p></Section>}
+    {guide.download && <Section id="printable-planning-sheet" heading="Your printable planning sheet"><p><a href={guide.download.path} download className="inline-flex min-h-11 items-center rounded-[var(--cmb-radius)] bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">{guide.download.label}</a><span className="block text-sm mt-2">One-page A4 sheet. Print at actual size and fill it in by hand.</span></p></Section>}
     {guide.kind === "gift" && <GiftGuidePicks category={guide.category} budget={guide.budget} interest={guide.interest} retailer={guide.retailer} />}
     <Section id="next-steps" heading="Your next step">
       <p><Link href={guide.kind === "organiser" ? "/create" : "/wishlists"} className="inline-flex min-h-11 items-center underline font-semibold">{guide.kind === "organiser" ? "Create a free Secret Santa draw" : "Create a wishlist with your gift ideas"}</Link></p>

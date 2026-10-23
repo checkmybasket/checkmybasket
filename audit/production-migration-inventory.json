@@ -1,0 +1,122 @@
+{
+  "project": "nejkvrzabdetsnhpeqtl",
+  "scope": "Migration metadata only; no user records",
+  "migrations": [
+    {
+      "version": "20260604115605",
+      "name": "initial_schema"
+    },
+    {
+      "version": "20260708102733",
+      "name": "anon_messages_sender_privacy"
+    },
+    {
+      "version": "20260708102810",
+      "name": "draws_restrict_update_to_gift_bought"
+    },
+    {
+      "version": "20260708102844",
+      "name": "profiles_comember_visibility"
+    },
+    {
+      "version": "20260708212756",
+      "name": "function_hardening_search_path_and_grants"
+    },
+    {
+      "version": "20260709081825",
+      "name": "group_lifecycle_rpcs"
+    },
+    {
+      "version": "20260709082241",
+      "name": "dashboard_support"
+    },
+    {
+      "version": "20260710140940",
+      "name": "prediction_rounds_48h_auto_close"
+    },
+    {
+      "version": "20260711100522",
+      "name": "group_members_prevent_role_escalation"
+    },
+    {
+      "version": "20260711101340",
+      "name": "harden_prediction_rounds_and_groups_insert"
+    },
+    {
+      "version": "20260711103024",
+      "name": "prediction_rounds_organiser_only_create"
+    },
+    {
+      "version": "20260711214435",
+      "name": "tighten_wishlist_claims_insert_membership"
+    },
+    {
+      "version": "20260711214443",
+      "name": "tighten_wishlist_items_write_membership"
+    },
+    {
+      "version": "20260711214459",
+      "name": "rate_limit_get_group_preview"
+    },
+    {
+      "version": "20260711221929",
+      "name": "email_capture_rpcs"
+    },
+    {
+      "version": "20260714101843",
+      "name": "group_members_surprise_me"
+    },
+    {
+      "version": "20261002144507",
+      "name": "email_group_recovery"
+    },
+    {
+      "version": "20261003185559",
+      "name": "individual_wishlists"
+    },
+    {
+      "version": "20261003190353",
+      "name": "personal_wishlist_image_access"
+    },
+    {
+      "version": "20261003190621",
+      "name": "personal_wishlist_recovery"
+    },
+    {
+      "version": "20261006190849",
+      "name": "personal_wishlist_owner_unreserve"
+    },
+    {
+      "version": "20261012100146",
+      "name": "draw_email_delivery_guards"
+    },
+    {
+      "version": "20261012102106",
+      "name": "atomic_draw_finalisation"
+    },
+    {
+      "version": "20261012125946",
+      "name": "privacy_leave_and_preview_retention"
+    },
+    {
+      "version": "20261012133842",
+      "name": "creation_allowances"
+    },
+    {
+      "version": "20261012145204",
+      "name": "verified_draw_notifications"
+    },
+    {
+      "version": "20261023161744",
+      "name": "actual_gifts_require_round_membership"
+    },
+    {
+      "version": "20261023161924",
+      "name": "predictions_require_member_subject"
+    },
+    {
+      "version": "20261023162053",
+      "name": "predictions_require_open_round"
+    }
+  ]
+}

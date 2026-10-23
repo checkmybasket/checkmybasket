@@ -20,7 +20,7 @@ export function Header() {
         <Logo />
         <nav className="receipt-desktop-nav" aria-label="Main navigation">
           {links.map(([href, label]) => (
-            <Link key={href} href={href}>
+            <Link key={href} href={href} prefetch={href === "/wishlists" || href === "/return" ? false : undefined}>
               {label}
             </Link>
           ))}
@@ -50,7 +50,7 @@ export function Header() {
           hidden={!open}
         >
           {links.map(([href, label]) => (
-            <Link key={href} href={href} onClick={() => setOpen(false)}>
+            <Link key={href} href={href} prefetch={href === "/wishlists" || href === "/return" ? false : undefined} onClick={() => setOpen(false)}>
               {label}
             </Link>
           ))}

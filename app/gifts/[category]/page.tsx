@@ -1,3 +1,4 @@
+import { socialMetadata } from "@/lib/page-metadata";
 import { GIFT_GUIDES } from "@/lib/gift-guides";
 import { ExploreNavigation } from "@/components/explore-navigation";
 import { CategoryGuideLinks } from "@/components/category-guide-links";
@@ -18,6 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
   const cat = GIFT_CATEGORIES.find(cat => cat.slug === category);
   if (!cat) return {};
   return {
+    ...socialMetadata(`${cat.heading} UK`, `${cat.desc}. Explore gift ideas from UK shops for your Secret Santa exchange.`, `/gifts/${category}`),
     title: { absolute: `${cat.heading} UK | CheckMyBasket` },
     description: `${cat.desc}. Explore gift ideas from UK shops for your Secret Santa exchange.`,
     alternates: { canonical: `/gifts/${category}` },
@@ -41,14 +43,14 @@ export default async function CategoryPage({ params, searchParams }: { params: P
   return (
     <div className="min-h-dvh bg-[var(--cmb-bg)]">
       <a className="cmb-skip-link" href="#main-content">Skip to content</a>
-      <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background:"rgba(255,248,240,0.92)", backdropFilter:"blur(12px)" }}>
+      <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background:"var(--cmb-header-bg)" }}>
         <div className="max-w-5xl mx-auto px-4 h-14 flex items-center gap-3">
-          <Link href={giftFiltersHref({ budget: filters.budget, interest: filters.interest })} aria-label="Back to gift ideas" className="inline-flex min-h-11 w-11 shrink-0 items-center justify-center rounded-lg hover:bg-[var(--cmb-surface-hover)]"><ChevronLeft size={20} strokeWidth={1.5} aria-hidden="true"/></Link>
+          <Link href={giftFiltersHref({ budget: filters.budget, interest: filters.interest })} aria-label="Back to gift ideas" className="inline-flex min-h-11 w-11 shrink-0 items-center justify-center rounded-[var(--cmb-radius)] hover:bg-[var(--cmb-surface-hover)]"><ChevronLeft size={20} strokeWidth={1.5} aria-hidden="true"/></Link>
           <div className="flex items-center gap-2 flex-1 min-w-0">
             <Gift size={18} strokeWidth={1.5} className="text-[var(--cmb-primary)] shrink-0"/>
             <span className="font-semibold truncate font-display text-[var(--cmb-primary)]">{cat.heading}</span>
           </div>
-          <Link href="/create" className="inline-flex min-h-11 items-center justify-center px-3 rounded-lg text-xs font-semibold flex-shrink-0 bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">Create draw</Link>
+          <Link href="/create" className="inline-flex min-h-11 items-center justify-center px-3 rounded-[var(--cmb-radius)] text-xs font-semibold flex-shrink-0 bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">Create draw</Link>
         </div>
       </header>
       <main id="main-content" tabIndex={-1} className="max-w-5xl mx-auto px-4 py-10">
@@ -67,17 +69,18 @@ export default async function CategoryPage({ params, searchParams }: { params: P
         </div>
         <p className="sr-only" data-gift-day={londonDay()}>Gift ideas rotate daily within this collection.</p>
         <GiftResults products={products} catalogue={catalogue} filters={filters} category={category} page={page} pageSize={24}/>
+        <h2 className="sr-only">Available gift ideas</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
           {products.slice((page - 1) * 24, page * 24).map(item => <GiftCard key={item.id} size="lg" {...item}/>)}
         </div>
         <GiftPagination page={page} pages={pages} filters={filters} category={category}/>
         <CategoryGuideLinks category={category} />
-        <div className="rounded-2xl p-8 text-center mb-8 bg-[var(--cmb-primary)] shadow-[var(--shadow-lg)]">
+        <div className="rounded-[var(--cmb-radius)] p-8 text-center mb-8 bg-[var(--cmb-primary)] shadow-[var(--shadow-lg)]">
           <h2 className="text-2xl font-bold mb-2 font-display text-[var(--cmb-text-inverse)]">Found the perfect gift?</h2>
-          <p className="mb-6" style={{ color:"rgba(255,248,240,0.75)" }}>Set up Secret Santa for your group in 30 seconds — free, no account needed.</p>
-          <Link href="/create" className="inline-flex min-h-12 items-center justify-center px-8 rounded-xl font-semibold bg-[var(--cmb-accent)] text-white">Create a free draw</Link>
+          <p className="mb-6" style={{ color:"color-mix(in srgb, var(--cmb-text-inverse) 75%, transparent)" }}>Set up Secret Santa for your group in 30 seconds — free, no account needed.</p>
+          <Link href="/create" className="inline-flex min-h-12 items-center justify-center px-8 rounded-[var(--cmb-radius)] font-semibold bg-[var(--cmb-accent)] text-white">Create a free draw</Link>
         </div>
-        <div className="rounded-xl p-4 flex gap-2 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]">
+        <div className="rounded-[var(--cmb-radius)] p-4 flex gap-2 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]">
           <ShieldOff size={16} strokeWidth={1.5} className="text-[var(--cmb-text-muted)] shrink-0 mt-0.5"/>
           <p className="text-xs text-[var(--cmb-text-muted)]">Some gift links may earn us a small commission at no extra cost to you. This is how we keep CheckMyBasket free and ad-free.</p>
         </div>

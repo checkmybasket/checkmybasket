@@ -1,3 +1,5 @@
+import { OPEN_GRAPH_DEFAULTS, TWITTER_DEFAULTS } from "@/lib/page-metadata";
+import { SITE_ORIGIN } from "@/lib/site";
 import { OrganiserGuideLinks } from "@/components/organiser-guide-links";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -23,8 +25,8 @@ export const metadata: Metadata = {
   title: { absolute: title },
   description,
   alternates: { canonical: "/office-secret-santa" },
-  openGraph: { title, description, url: "https://www.checkmybasket.co.uk/office-secret-santa" },
-  twitter: { card: "summary_large_image", title, description },
+  openGraph: { ...OPEN_GRAPH_DEFAULTS,  title, description, url: `${SITE_ORIGIN}/office-secret-santa` },
+  twitter: { ...TWITTER_DEFAULTS,  card: "summary_large_image", title, description },
 };
 
 export default function OfficeGuide() {
@@ -36,7 +38,7 @@ export default function OfficeGuide() {
         organise your workplace gift exchange, then let CheckMyBasket draw names
         and keep each participant&apos;s match private.
       </p>
-      <Link href="/create" className="inline-flex min-h-11 items-center rounded-xl bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Create a free office draw</Link>
+      <Link href="/create" className="inline-flex min-h-11 items-center rounded-[var(--cmb-radius)] bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Create a free office draw</Link>
       <Section heading="Your organiser checklist">
         <ul className="list-disc pl-5 space-y-2">
           <li>Invite colleagues to opt in; avoid automatically enrolling the whole team.</li>
@@ -77,10 +79,10 @@ export default function OfficeGuide() {
         <p>Before the exchange, send a practical reminder about the date, location or delivery arrangements. Agree how to label wrapped gifts and what to do if someone is away. If a participant&apos;s plans change after the draw, ask them to contact the organiser so the group can arrange a solution.</p>
       </Section>
       <Section heading="Help colleagues keep access to their draw">
-        <p>Ask participants to return using the browser they joined with. For another device, they should first verify a recovery email through <strong>Save access to your group</strong> in their original browser, then use <Link href="/return" className="underline">Return &amp; sign in</Link> to request a sign-in link. A notification email alone does not enable recovery.</p>
+        <p>Ask participants to return using the browser they joined with. For another device, they should first verify a recovery email through <strong>Save access to your group</strong> in their original browser, then use <Link prefetch={false} href="/return" className="underline">Return &amp; sign in</Link> to request a sign-in link. A notification email alone does not enable recovery.</p>
         <p>Without verified recovery, we cannot restore the original member identity on another device. Share the <Link href="/#faq-heading" className="underline">Secret Santa FAQs</Link> with colleagues who have questions before they join.</p>
       </Section>
-      <p><Link href="/create" className="inline-flex min-h-11 items-center rounded-xl bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Set up your office Secret Santa</Link></p>
+      <p><Link href="/create" className="inline-flex min-h-11 items-center rounded-[var(--cmb-radius)] bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Set up your office Secret Santa</Link></p>
       <Section heading="More Secret Santa planning guides"><OrganiserGuideLinks /></Section>
     </InfoPage>
   );

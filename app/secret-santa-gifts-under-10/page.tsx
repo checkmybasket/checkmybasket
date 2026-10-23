@@ -1,3 +1,5 @@
+import { OPEN_GRAPH_DEFAULTS, TWITTER_DEFAULTS } from "@/lib/page-metadata";
+import { SITE_ORIGIN } from "@/lib/site";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { InfoPage, Section } from "@/components/info-page";
@@ -9,8 +11,8 @@ const guide = GIFT_GUIDES.find(item => item.slug === "secret-santa-gifts-under-1
 export const metadata: Metadata = {
   title: { absolute: `${guide.title} | CheckMyBasket` }, description: guide.description,
   alternates: { canonical: `/${guide.slug}` },
-  openGraph: { title: guide.title, description: guide.description, url: `https://www.checkmybasket.co.uk/${guide.slug}` },
-  twitter: { card: "summary_large_image", title: guide.title, description: guide.description },
+  openGraph: { ...OPEN_GRAPH_DEFAULTS,  title: guide.title, description: guide.description, url: `${SITE_ORIGIN}/${guide.slug}` },
+  twitter: { ...TWITTER_DEFAULTS,  card: "summary_large_image", title: guide.title, description: guide.description },
 };
 export default function GiftGuide() {
   return <InfoPage title={guide.title} updated="11 October 2026">
@@ -40,7 +42,7 @@ export default function GiftGuide() {
 
       <GiftGuidePicks category={guide.category} budget={guide.budget}/>
       <Section heading="More help choosing and organising">
-        <p><Link href="/secret-santa-gifts-for-colleagues" className="underline">Secret Santa gifts for colleagues</Link> · <Link href="/wishlists" className="underline">Create a wishlist</Link> · <Link href="/create" className="underline">Create a free draw</Link></p>
+        <p><Link href="/secret-santa-gifts-for-colleagues" className="underline">Secret Santa gifts for colleagues</Link> · <Link prefetch={false} href="/wishlists" className="underline">Create a wishlist</Link> · <Link href="/create" className="underline">Create a free draw</Link></p>
       </Section>
     </InfoPage>;
 }
