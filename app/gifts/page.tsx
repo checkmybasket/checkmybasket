@@ -54,7 +54,7 @@ export default async function GiftsPage({ searchParams }: { searchParams: Promis
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-3">
           {GIFT_CATEGORIES.map(cat => (
             <Link key={cat.slug} href={giftFiltersHref(filters, cat.slug)} className="rounded-2xl p-4 border transition-all duration-150 hover:scale-105 group bg-[var(--cmb-surface)] border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style={{ background:"rgba(27,67,50,0.08)" }}>
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style={{ background:"color-mix(in srgb, var(--cmb-primary) 8%, transparent)" }}>
                 <Gift size={20} strokeWidth={1.5} className="text-[var(--cmb-primary)]"/>
               </div>
               <p className="font-semibold text-sm mb-0.5">{cat.label}</p>

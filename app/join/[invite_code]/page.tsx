@@ -131,7 +131,7 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
     <div className="min-h-dvh bg-[var(--cmb-bg)]">
       <div className="max-w-md mx-auto px-4 py-8 pb-28 space-y-5">
         <div className="rounded-2xl p-4 flex items-center gap-3 animate-scale-in"
-          style={{ background:"rgba(27,67,50,0.08)", border:"1px solid rgba(27,67,50,0.15)" }}>
+          style={{ background:"color-mix(in srgb, var(--cmb-primary) 8%, transparent)", border:"1px solid color-mix(in srgb, var(--cmb-primary) 15%, transparent)" }}>
           <div className="w-10 h-10 rounded-full flex items-center justify-center text-lg bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">🎉</div>
           <div>
             <p className="font-semibold text-sm">You&apos;re in, {name}!</p>
@@ -198,7 +198,7 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
         <div className="w-full max-w-md space-y-5">
           <div className="rounded-2xl p-6 animate-scale-in bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-lg)]">
             <div className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium mb-4 text-[var(--cmb-primary)]"
-              style={{ background:"rgba(27,67,50,0.08)" }}>
+              style={{ background:"color-mix(in srgb, var(--cmb-primary) 8%, transparent)" }}>
               <Gift size={12} strokeWidth={1.5}/> Secret Santa
             </div>
             <h1 className="text-xl font-bold mb-1 font-display">{group.name}</h1>

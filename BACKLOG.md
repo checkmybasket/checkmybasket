@@ -497,15 +497,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Use active Inter and IBM Plex Mono variables in functional pages. Typography roles are preserved and undefined font references are removed; build/lint/TypeScript pass.
 
-### [ ] UI 05 — P2
+### [x] UI 05 — P2
 
 - Severity: P2
 - Location: app/ and components/ shared theme; public and functional routes
 - Evidence: Legacy palette literals bypass the active tokens. Functional panels still contain rgba(27,67,50,...) from the old primary palette and cream inverse text despite current black/white tokens.
 - Fix: Express these tint/inverse treatments through color-mix and the active semantic tokens; keep opacity and semantic success colors.
 - Acceptance criteria: obsolete styling references are absent; current tokens/marks render consistently; build/lint/TypeScript and final responsive/contrast checks pass.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Derive legacy tint treatments from semantic theme colors. Opacities and success/error meaning are preserved; build/lint/TypeScript pass.
 
 ### [ ] UI 06 — P2
 

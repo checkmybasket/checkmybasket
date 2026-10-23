@@ -77,7 +77,7 @@ export default async function CategoryPage({ params, searchParams }: { params: P
         <CategoryGuideLinks category={category} />
         <div className="rounded-2xl p-8 text-center mb-8 bg-[var(--cmb-primary)] shadow-[var(--shadow-lg)]">
           <h2 className="text-2xl font-bold mb-2 font-display text-[var(--cmb-text-inverse)]">Found the perfect gift?</h2>
-          <p className="mb-6" style={{ color:"rgba(255,248,240,0.75)" }}>Set up Secret Santa for your group in 30 seconds — free, no account needed.</p>
+          <p className="mb-6" style={{ color:"color-mix(in srgb, var(--cmb-text-inverse) 75%, transparent)" }}>Set up Secret Santa for your group in 30 seconds — free, no account needed.</p>
           <Link href="/create" className="inline-flex min-h-12 items-center justify-center px-8 rounded-xl font-semibold bg-[var(--cmb-accent)] text-white">Create a free draw</Link>
         </div>
         <div className="rounded-xl p-4 flex gap-2 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]">

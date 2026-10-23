@@ -165,7 +165,7 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
           <div className="flex items-center gap-2 min-w-0">
             <Gift size={18} strokeWidth={1.5} className="text-[var(--cmb-primary)] shrink-0"/>
             <h1 className="font-semibold truncate font-display text-[var(--cmb-primary)]">{group.name}</h1>
-            <span className="rounded-full px-2 py-0.5 text-xs font-medium flex-shrink-0 text-[var(--cmb-primary)]" style={{ background:"rgba(27,67,50,0.1)" }}>
+            <span className="rounded-full px-2 py-0.5 text-xs font-medium flex-shrink-0 text-[var(--cmb-primary)]" style={{ background:"color-mix(in srgb, var(--cmb-primary) 10%, transparent)" }}>
               {members.length} member{members.length===1?"":"s"}
             </span>
           </div>
@@ -246,7 +246,7 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
       <div className="rounded-2xl p-8 text-center bg-[var(--cmb-primary)] shadow-[var(--shadow-lg)]">
         <div className="text-4xl mb-3">🎁</div>
         <h2 className="font-bold text-xl mb-2 text-[var(--cmb-text-inverse)] font-display">Names have been drawn</h2>
-        <p className="text-sm mb-5" style={{ color:"rgba(255,248,240,0.75)" }}>
+        <p className="text-sm mb-5" style={{ color:"color-mix(in srgb, var(--cmb-text-inverse) 75%, transparent)" }}>
           {myDraw ? "Your match is ready and waiting." : "You joined after the draw — ask your organiser about a redraw."}
         </p>
         {myDraw && (
@@ -290,7 +290,7 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
         <h2 className="font-semibold text-lg mb-2 font-display">Waiting for the draw</h2>
         <p className="text-[var(--cmb-text-secondary)]">{organiserName} will draw names when everyone&apos;s ready.</p>
       </div>
-      <div className="rounded-xl p-4 flex gap-3" style={{ background:"rgba(27,67,50,0.06)", border:"1px solid rgba(27,67,50,0.15)" }}>
+      <div className="rounded-xl p-4 flex gap-3" style={{ background:"color-mix(in srgb, var(--cmb-primary) 6%, transparent)", border:"1px solid color-mix(in srgb, var(--cmb-primary) 15%, transparent)" }}>
         <Gift size={18} strokeWidth={1.5} className="text-[var(--cmb-primary)] shrink-0"/>
         <p className="text-sm text-[var(--cmb-text-secondary)]">While you wait, add your wishlist so your Secret Santa knows what to get you.</p>
       </div>
@@ -556,7 +556,7 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
         <h2 className="font-semibold text-lg font-display">
           {isMyList?"Your wishlist":`${activeMember?.name ?? "Their"}'s wishlist`}
         </h2>
-        {isMyList && <Badge className="text-xs text-[var(--cmb-primary)]" style={{ background:"rgba(27,67,50,0.1)" }}>{items.length} item{items.length===1?"":"s"}</Badge>}
+        {isMyList && <Badge className="text-xs text-[var(--cmb-primary)]" style={{ background:"color-mix(in srgb, var(--cmb-primary) 10%, transparent)" }}>{items.length} item{items.length===1?"":"s"}</Badge>}
       </div>
       {items.length===0 ? (
         <EmptyState title="No wishlist items yet"
@@ -760,7 +760,7 @@ function MessagesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<voi
         ))}
       </div>
 
-      <div className="rounded-xl p-3 flex gap-2" style={{ background:"rgba(27,67,50,0.06)", border:"1px solid rgba(27,67,50,0.15)" }}>
+      <div className="rounded-xl p-3 flex gap-2" style={{ background:"color-mix(in srgb, var(--cmb-primary) 6%, transparent)", border:"1px solid color-mix(in srgb, var(--cmb-primary) 15%, transparent)" }}>
         <Lock size={14} strokeWidth={1.5} className="text-[var(--cmb-primary)] shrink-0 mt-0.5"/>
         <p className="text-xs text-[var(--cmb-text-secondary)]">
           {thread==="recipient"
@@ -787,7 +787,7 @@ function MessagesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<voi
                     {thread==="santa"?"Your Secret Santa 🤫":`${recipientName ?? "Them"}`}
                   </p>}
                   <p className="text-sm leading-relaxed">{msg.content}</p>
-                  <p className="text-xs mt-1" style={{ color:isMe?"rgba(255,248,240,0.55)":"var(--cmb-text-muted)" }}>{timeAgo(msg.created_at)}</p>
+                  <p className="text-xs mt-1" style={{ color:isMe?"color-mix(in srgb, var(--cmb-text-inverse) 55%, transparent)":"var(--cmb-text-muted)" }}>{timeAgo(msg.created_at)}</p>
                 </div>
               </div>
             );
@@ -1007,7 +1007,7 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
                   <div>
                     <p className="font-semibold text-sm text-[var(--cmb-text-inverse)]">{award.title}</p>
                     <p className="text-sm text-[var(--cmb-warm)]">{award.winner}</p>
-                    <p className="text-xs mt-0.5" style={{ color:"rgba(255,248,240,0.6)" }}>{award.detail}</p>
+                    <p className="text-xs mt-0.5" style={{ color:"color-mix(in srgb, var(--cmb-text-inverse) 60%, transparent)" }}>{award.detail}</p>
                   </div>
                 </div>
               ))}

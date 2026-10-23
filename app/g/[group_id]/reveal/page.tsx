@@ -164,7 +164,7 @@ function AnimatingReveal() {
         >
           <div
             className="w-full h-1 rounded"
-            style={{ background: "rgba(255,248,240,0.2)", margin: "0 16px" }}
+            style={{ background: "color-mix(in srgb, var(--cmb-text-inverse) 20%, transparent)", margin: "0 16px" }}
           />
         </div>
         {/* Envelope flap (animates open) */}
@@ -228,7 +228,7 @@ function RevealedScreen({
     <div className="animate-fade-in">
       {/* Name reveal */}
       <div className="rounded-3xl p-8 text-center mb-6 animate-card-rise bg-[var(--cmb-primary)] shadow-[var(--shadow-xl)]">
-        <p className="text-sm mb-2" style={{ color: "rgba(255,248,240,0.6)" }}>
+        <p className="text-sm mb-2" style={{ color: "color-mix(in srgb, var(--cmb-text-inverse) 60%, transparent)" }}>
           You&apos;re buying for...
         </p>
         <h1 className="text-4xl font-bold mb-1 font-display text-[var(--cmb-text-inverse)]">
@@ -236,7 +236,7 @@ function RevealedScreen({
         </h1>
         <div className="text-3xl my-3" role="img" aria-label="gift">🎁</div>
         {match.budget != null && (
-          <p className="text-sm" style={{ color: "rgba(255,248,240,0.7)" }}>
+          <p className="text-sm" style={{ color: "color-mix(in srgb, var(--cmb-text-inverse) 70%, transparent)" }}>
             Budget: {formatBudget(match.budget)}
           </p>
         )}
