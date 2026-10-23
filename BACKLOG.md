@@ -298,6 +298,17 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 
 - Completion note: Prediction categories expose aria-pressed. Browser verified selection, replacement and back-navigation state; staging build/lint/TypeScript and all 110 local checks pass.
 
+### [x] A11Y 23 — P1
+
+- Severity: P1
+- Location: components/wishlists/item-card.tsx and shared.tsx; /w/[token]
+- Evidence: Loaded shared wishlist has h1 list title, h2 priority section, then h2 gift titles inside that section. Item titles do not express their nested relationship.
+- Fix: Allow ItemCard heading level 2 or 3; shared priority sections use level 3 while owner cards retain level 2. Preserve labels, style and interactions.
+- Acceptance criteria: Shared list/card views render h1 → h2 priority → h3 gift titles; owner titles remain h2. Build/lint/TypeScript and local checks pass; keyboard interaction remains usable.
+- Status: DONE
+
+- Completion note: Shared list/card views expose h1 title, h2 priority and 200 h3 gift titles; owner gift headings remain h2. Keyboard Enter collapses/expands priority sections. Build/lint/TypeScript and all 110 local checks pass.
+
 ### [x] BUILD 01 — P1
 
 - Severity: P1

@@ -10,12 +10,15 @@ export function ItemCard({
   children,
   shareToken,
   layout = "default",
+  headingLevel = 2,
 }: {
   item: PersonalWish;
   children?: React.ReactNode;
   shareToken?: string;
   layout?: "default" | "compact" | "list";
+  headingLevel?: 2 | 3;
 }) {
+  const Heading = headingLevel === 3 ? "h3" : "h2";
   const [failed, setFailed] = useState(false);
   let url = "";
   try {
@@ -70,7 +73,7 @@ export function ItemCard({
               </span>
             )}
           </div>
-          <h2 className="text-lg font-semibold break-words">{item.title}</h2>
+          <Heading className="text-lg font-semibold break-words">{item.title}</Heading>
           <p className="mt-1 text-sm">{money(item.price, item.currency)}</p>
           {item.shop_name && (
             <p className="text-sm text-[var(--cmb-text-secondary)] break-words mt-1">

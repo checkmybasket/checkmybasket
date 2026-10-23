@@ -255,6 +255,7 @@ export function SharedWishlist({ token }: { token: string }) {
                         key={`${item.id}:${item.image_url}`}
                         item={item}
                         shareToken={token}
+                        headingLevel={3}
                         layout={view === "list" ? "list" : "compact"}
                       >
                         {!list.is_owner && (
