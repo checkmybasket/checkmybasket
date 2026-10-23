@@ -28,12 +28,19 @@ async function denied(request) { const r = await request; assert.equal(r.error?.
     await ok(member.from("predictions").insert({ round_id: round.id, predictor_id: ids[1], subject_id: ids[0], predicted_category: "mug" }));
     assert.equal((await ok(member.from("predictions").select("id").eq("round_id", round.id))).length, 1);
     assert.deepEqual(await ok(owner.from("predictions").select("id").eq("round_id", round.id)), []);
+    await ok(owner.from("prediction_rounds").update({ status: "closed" }).eq("id", round.id));
+    await denied(owner.from("predictions").insert({ round_id: round.id, predictor_id: ids[0], subject_id: ids[1], predicted_category: "book" }));
     await ok(owner.from("prediction_rounds").update({ status: "revealed" }).eq("id", round.id));
+    await denied(owner.from("predictions").insert({ round_id: round.id, predictor_id: ids[0], subject_id: ids[1], predicted_category: "book" }));
+    const revealed = await ok(owner.from("predictions").select("predictor_id,subject_id,predicted_category").eq("round_id", round.id));
+    assert.deepEqual(revealed, [{ predictor_id: ids[1], subject_id: ids[0], predicted_category: "mug" }]);
+    assert.deepEqual(await ok(outsider.from("predictions").select("id").eq("round_id", round.id)), []);
+
     assert.deepEqual(await ok(owner.from("actual_gifts").select("id").eq("round_id", round.id)), []);
     await ok(member.from("actual_gifts").insert({ round_id: round.id, recipient_id: ids[1], logged_by: ids[1], actual_category: "book" }));
     const gifts = await ok(owner.from("actual_gifts").select("recipient_id,actual_category").eq("round_id", round.id));
     assert.deepEqual(gifts, [{ recipient_id: ids[1], actual_category: "book" }]);
-    console.log("PASS: participant cannot start/reveal rounds; outsider/impersonated actual gifts denied without writes; member logs own gift; invalid prediction subjects and impersonation denied, valid predictions saved and private before reveal.");
+    console.log("PASS: participant cannot start/reveal rounds; outsider/impersonated actual gifts denied without writes; member logs own gift; invalid prediction subjects and impersonation denied, valid predictions saved and private before reveal; closed/revealed writes denied without changes and revealed data hidden from outsiders.");
   } finally {
     if (group) await ok(owner.from("groups").delete().eq("id", group.group_id));
   }

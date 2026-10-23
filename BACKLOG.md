@@ -56,14 +56,16 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 
 - Completion note: Prediction inserts now require subjects in the same group. Real member/outsider/impersonation and private-before-reveal checks pass; denied writes leave no rows. Local advisor clean; build/lint/TypeScript and 110 regressions pass. Applied locally only.
 
-### [ ] SECURITY 05 — P0
+### [x] SECURITY 05 — P0
 
 - Severity: P0
 - Location: supabase/migrations; /g/[group_id]?tab=games Data API
 - Evidence: A local member successfully submitted a new prediction after the organiser revealed the round.
 - Fix: Require round status open for prediction inserts; preserve existing prediction visibility. This explicitly flags a backend authorization change before implementation; no table/data-model change.
 - Acceptance criteria: Open-round predictions succeed; closed and revealed submissions fail; denied writes leave counts unchanged. Local integration, build, lint and TypeScript pass.
-- Status: OPEN
+- Status: DONE
+
+- Completion note: Prediction inserts now require an open round. Real closed/revealed denial tests preserve the original row/count; valid open predictions and member-only revealed reads pass. Local advisor clean; build/lint/TypeScript and 110 regressions pass. Applied locally only.
 
 ### [x] SECURITY 01 — P0
 
