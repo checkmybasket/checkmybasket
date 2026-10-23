@@ -612,14 +612,16 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 
 - Completion note: Shared cards now shrink within grid columns. Real saved long-text fixtures pass 50 owner/shared/list/card viewport checks, including 200 items; zero browser warnings/errors. Build/lint/TypeScript and all 110 local checks pass. Evidence: audit/wishlist-stress-matrix.json.
 
-### [ ] UI 11 — P1
+### [x] UI 11 — P1
 
 - Severity: P1
 - Location: app/return/return-to-group.tsx; /return
 - Evidence: Native 200% inspection shows a generic Gift icon beside the app name, while other app-name headers use the existing basket mark.
 - Fix: Reuse BasketMark for the Return app-name link, preserving link destination and layout.
 - Acceptance criteria: Return renders the same basket mark as other functional headers; build/lint/TypeScript and browser inspection pass.
-- Status: OPEN
+- Status: DONE
+
+- Completion note: Return now uses the existing 20px basket mark. Loaded browser confirms the branded SVG and unchanged home link. Build/lint/TypeScript and all 110 regressions pass.
 
 ### [x] CONTENT 01 — P2
 

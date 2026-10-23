@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Gift, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
+import { BasketMark } from "@/components/receipt/logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -157,7 +158,7 @@ export function ReturnToGroup() {
           href="/"
           className="flex gap-2 items-center font-semibold text-[var(--cmb-primary)] mb-6"
         >
-          <Gift size={20} aria-hidden />
+          <BasketMark size={20} />
           CheckMyBasket
         </Link>
         <h1 className="text-2xl font-bold font-display mb-3">
