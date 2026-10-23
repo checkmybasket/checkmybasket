@@ -3,7 +3,7 @@ import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChevronLeft, Gift, Trash2, LogOut, AlertTriangle, Copy, Check, Calendar, MapPin, Edit2, CheckCircle2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
@@ -95,7 +95,7 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
     <div className="min-h-dvh bg-[var(--cmb-bg)]">
       <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background:"rgba(255,248,240,0.92)", backdropFilter:"blur(12px)" }}>
         <div className="max-w-xl mx-auto px-4 h-14 flex items-center gap-3">
-          <Link href={`/g/${group_id}`}><Button variant="ghost" size="sm" className="h-9 w-9 p-0 rounded-lg"><ChevronLeft size={20} strokeWidth={1.5}/></Button></Link>
+          <Link href={`/g/${group_id}`} className={buttonVariants({ variant: "ghost", size: "sm", className: "h-9 w-9 p-0 rounded-lg" })}><ChevronLeft size={20} strokeWidth={1.5}/></Link>
           <div className="flex items-center gap-2 text-[var(--cmb-primary)]">
             <Gift size={18} strokeWidth={1.5}/><span className="font-semibold font-display">Group settings</span>
           </div>

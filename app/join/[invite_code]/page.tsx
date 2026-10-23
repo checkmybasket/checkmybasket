@@ -3,7 +3,7 @@ import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Gift, Users, ChevronLeft, ArrowRight, Plus, Trash2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -117,7 +117,7 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
       <p className="text-sm mb-6 max-w-sm text-[var(--cmb-text-secondary)]">
         Double-check the link you were sent, or ask your organiser to share it again.
       </p>
-      <Link href="/"><Button variant="outline" className="rounded-xl h-11 px-6 border border-[var(--cmb-border-strong)]">Back to home</Button></Link>
+      <Link href="/" className={buttonVariants({ variant: "outline", size: "default", className: "rounded-xl h-11 px-6 border border-[var(--cmb-border-strong)]" })}>Back to home</Link>
     </div>
   );
 
@@ -182,7 +182,7 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
     <div className="min-h-dvh flex flex-col bg-[var(--cmb-bg)]">
       <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background:"rgba(255,248,240,0.92)", backdropFilter:"blur(12px)" }}>
         <div className="max-w-md mx-auto px-4 h-14 flex items-center gap-3">
-          <Link href="/"><Button variant="ghost" size="sm" className="h-9 w-9 p-0 rounded-lg"><ChevronLeft size={20} strokeWidth={1.5}/></Button></Link>
+          <Link href="/" className={buttonVariants({ variant: "ghost", size: "sm", className: "h-9 w-9 p-0 rounded-lg" })}><ChevronLeft size={20} strokeWidth={1.5}/></Link>
           <div className="flex items-center gap-2 text-[var(--cmb-primary)]">
             <Gift size={20} strokeWidth={1.5}/><span className="font-semibold font-display">CheckMyBasket</span>
           </div>

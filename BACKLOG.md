@@ -77,15 +77,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Added invalid states, linked error/hint IDs and first-invalid focus. Production browser confirms group-name focus and two announced field errors; build/lint/TypeScript pass.
 
-### [ ] A11Y 03 — P1
+### [x] A11Y 03 — P1
 
 - Severity: P1
 - Location: components/info-page.tsx:11; app/page.tsx; app/gifts/[category]/page.tsx; shared navigation
 - Evidence: Rendered DOM contains a > button: four on /, one on each information page and three on each category page.
 - Fix: Render one semantic anchor styled as a button for navigation; retain buttons for actions.
 - Acceptance criteria: No nested interactive elements across routes; each navigation control is one tab stop and navigates correctly.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Converted six remaining nested link/button controls into styled links. Production create DOM has no nested controls; source scan, build/lint/TypeScript pass.
 
 ### [ ] A11Y 04 — P1
 
