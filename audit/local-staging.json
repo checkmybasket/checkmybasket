@@ -32,7 +32,7 @@
     "build": "PASS",
     "lint": "PASS",
     "typescript": "PASS",
-    "nodeTests": 27,
+    "nodeTests": 31,
     "wishlistLive": "PASS",
     "wishlistApiLive": "PASS",
     "nativeAuthCapture": "PASS",
@@ -51,13 +51,13 @@
       "members cannot execute organiser draw",
       "match assignment immutable"
     ],
-    "capturedBrowserWarningsErrors": 0
+    "capturedBrowserWarningsErrors": 0,
+    "customRecoveryAndDrawMail": "PASS: captured setup, identity restoration, single-use redemption, verified preference, accepted draw email and duplicate suppression"
   },
   "productionEnvFilesUnchanged": true,
   "cloudWrites": false,
   "externalMailSent": false,
   "remaining": [
-    "Custom Resend recovery/draw-email capture needs separate local transport",
     "Full private stress/failure/role/browser matrix",
     "Manual zoom/screen-reader and production deployment checks"
   ]

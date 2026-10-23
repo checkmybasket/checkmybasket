@@ -633,3 +633,13 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Acceptance criteria: Docker runs; local Auth/Postgres/API/mail capture are healthy; all checked-in migrations apply; app uses local backend and noindex; disposable fixture tests run without cloud writes or external email. Any first-run agreement/admin step stays NEEDS OWNER until performed by the user. Build/lint/TypeScript pass for committed configuration.
 - Status: DONE
 - Completion note: Installed Docker CLI 29.9.2 with Colima 0.10.3 and pinned Supabase CLI 2.122.0; all 26 migrations applied to the loopback-only local stack. App build/lint/TypeScript, 27 Node tests, existing wishlist/API acceptance suites, local Auth inbox receipt and create/join/draw/reveal/settings/role checks pass. Production env files are unchanged; evidence: audit/local-staging.json. Custom Resend capture and broader private QA remain separate follow-up.
+
+### [x] STAGE 04 — P1
+
+- Severity: P1
+- Location: supabase/functions/group-recovery, send-draw-emails and local staging tooling
+- Evidence: Native Auth mail is captured locally, but custom recovery/draw functions hardcode Resend; recovery links also hardcode the production app URL. Their full acceptance path cannot be exercised in the isolated inbox.
+- Fix: Add explicit local-only email transport to Mailpit, fail closed outside the known local stack and for non-fixture recipients, keep normal production delivery unchanged, allow the existing APP_URL setting for recovery links, and configure only ignored local function variables. No new dependency or data model.
+- Acceptance criteria: Default transport behavior is unchanged; local capture rejects cloud configuration and real recipient domains; actual recovery verification/redemption and draw-email suppression work through local Edge Functions and captured messages; build/lint/TypeScript and local regressions pass.
+- Status: DONE
+- Completion note: Added guarded local Mailpit transport; default provider fetch is unchanged, cloud activation and real-recipient domains are rejected. Real local recovery identity restoration/single-use tokens and draw-email duplicate suppression pass. Staging build/lint/TypeScript, 31 Node tests and 79 other local regressions pass. No cloud function or provider credentials were changed.
