@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description: "Draw names, share wishlists from any shop and ask anonymous questions. Organise a free Secret Santa draw and find UK gift ideas. No ads, ever.",
   keywords: ["Secret Santa","wishlist","gift exchange","Christmas","UK","free Secret Santa generator","Secret Santa gifts UK"],
   metadataBase: new URL(SITE_ORIGIN),
-  openGraph: { ...OPEN_GRAPH_DEFAULTS, 
+  openGraph: { ...OPEN_GRAPH_DEFAULTS,
     title: "CheckMyBasket | Free Secret Santa generator with wishlists",
     description: "Thoughtful gifts, no matter how well you know them. Free draws, wishlists and anonymous questions. No ads, ever.",
     type: "website", url: SITE_ORIGIN, siteName: "CheckMyBasket",

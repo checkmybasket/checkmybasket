@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "View a shared wishlist on CheckMyBasket. Gifts from any shop, all in one place.",
   robots: { index: false, follow: false },
   referrer: "no-referrer",
-  openGraph: { ...OPEN_GRAPH_DEFAULTS, 
+  openGraph: { ...OPEN_GRAPH_DEFAULTS,
     title: "A wishlist for you",
     description: "Gifts from any shop, all in one place.",
     url: `${SITE_ORIGIN}/wishlists`,
