@@ -384,10 +384,21 @@
   {
     "slug": "secret-santa-gifts-for-coffee-lovers",
     "title": "Secret Santa gifts for coffee lovers",
-    "description": "Choose coffee-lover Secret Santa gifts by brewing method, flavour preferences and useful accessories, with current coffee-interest ideas up to £20.",
-    "answer": "Check how they make coffee and what they already use. Beans, ground coffee and capsules are not interchangeable. Choose their preferred format or a useful accessory, then check ingredients where relevant, compatibility and the full delivered price.",
+    "description": "Coffee Secret Santa ideas up to £20: beans, mugs and useful accessories. Match their brewing method, check preferences and allow for delivery.",
+    "updated": "23 October 2026",
+    "answer": "Start with coffee in the format they use, a mug they have asked for or a small accessory that suits their routine. For a £20 Secret Santa, choose one useful gift and leave room for delivery. Check their brewing method first: whole beans, ground coffee and capsules are not interchangeable, and a capsule must fit the exact machine system.",
     "intro": "A coffee gift is more thoughtful when it fits a daily routine. Someone using a cafetière needs a different choice from someone using a capsule machine, and a person who enjoys plain coffee may not want sweet syrups. Start with the routine, then choose one useful gift within the limit.",
     "sections": [
+      {
+        "id": "coffee-gift-ideas-by-budget",
+        "heading": "Coffee gift ideas for a £10 or £20 budget",
+        "paragraphs": [
+          "These are ideas to look for, not verified offers at fixed prices. Check the selected option and postage; the catalogue below filters item prices, not delivered totals. There is no need to spend the whole limit.",
+          "For a £10 total limit, look for a small bag of their usual coffee, a simple coaster or a coffee-themed notebook. A local purchase may leave more of the budget for the gift, but confirm the current price and availability before travelling.",
+          "For a £20 total limit, consider a small coffee selection in the right format, a requested mug or a storage accessory with dimensions that fit their space. Avoid adding equipment they will need to buy separately before they can use the gift.",
+          "If you do not know their setup, ask one useful question: “How do you usually make your coffee, and do you prefer regular or decaf?” If you cannot check, choose a non-machine item from their wishlist rather than guessing a capsule system or grind."
+        ]
+      },
       {
         "id": "ask-about-their-brewing-method",
         "heading": "Ask about their brewing method",
