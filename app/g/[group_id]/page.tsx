@@ -183,7 +183,7 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
         {tab==="games"     && <GamesTab data={data} refresh={refresh}/>}
       </main>
 
-      <nav className="fixed bottom-0 left-0 right-0 z-30 border-t tab-bar bg-[var(--cmb-surface)] border-[var(--cmb-border)]">
+      <nav aria-label="Group sections" className="fixed bottom-0 left-0 right-0 z-30 border-t tab-bar bg-[var(--cmb-surface)] border-[var(--cmb-border)]">
         <div className="max-w-2xl mx-auto px-2 flex">
           {([
             { key:"draw",      icon:Dice5,         label:"Draw",      dot:false },
@@ -191,7 +191,7 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
             { key:"messages",  icon:MessageCircle, label:"Messages",  dot:unreadMessages },
             { key:"games",     icon:Gamepad2,      label:"Games",     dot:false },
           ] as const).map(({ key, icon:Icon, label, dot }) => (
-            <button key={key} onClick={() => setTab(key)} className="flex-1 flex flex-col items-center pt-2 pb-1 gap-1 relative min-h-[56px]"
+            <button key={key} aria-pressed={tab===key} onClick={() => setTab(key)} className="flex-1 flex flex-col items-center pt-2 pb-1 gap-1 relative min-h-[56px]"
               style={{ color:tab===key?"var(--cmb-primary)":"var(--cmb-text-muted)" }} aria-label={label}>
               <Icon size={22} strokeWidth={1.5}/>
               <span className="text-xs font-medium">{label}</span>

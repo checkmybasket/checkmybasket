@@ -644,15 +644,15 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: DONE
 - Completion note: Added guarded local Mailpit transport; default provider fetch is unchanged, cloud activation and real-recipient domains are rejected. Real local recovery identity restoration/single-use tokens and draw-email duplicate suppression pass. Staging build/lint/TypeScript, 31 Node tests and 79 other local regressions pass. No cloud function or provider credentials were changed.
 
-### [ ] A11Y 16 — P1
+### [x] A11Y 16 — P1
 
 - Severity: P1
 - Location: app/g/[group_id]/page.tsx; group section navigation
 - Evidence: Loaded four-member staging group: Draw/Wishlists/Messages/Games buttons have neither aria-pressed nor aria-current; selection appears only in color/underline. The nav has no accessible label.
 - Fix: Name the navigation and expose the selected button state without changing keyboard order or section behavior.
 - Acceptance criteria: Exactly one group section is pressed, and selection follows clicks; loaded browser verification, build/lint/TypeScript pass.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Named Group sections navigation and exposed aria-pressed on its buttons. Loaded staging browser confirms exactly one selected section and correct state after switching to Wishlists. Build/lint/TypeScript and 110 local checks pass.
 
 ### [ ] UI 08 — P1
 
