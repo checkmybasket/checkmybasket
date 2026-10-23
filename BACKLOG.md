@@ -28,6 +28,16 @@ Ruflo/ToolSearch tools were searched for but unavailable. No production data wri
 
 ## Issues
 
+### [x] SEO 11 — P1
+
+- Severity: P1
+- Location: app/secret-santa-wishlist-ideas/page.tsx, lib/organiser-guides.ts; /secret-santa-wishlist-ideas
+- Evidence: Search Console baseline 9–21 October: 44 impressions, average position 7.8, zero clicks. Existing useful budget/examples content has limited interest-based navigation and only an early prominent creation action.
+- Fix: Approved editorial update: align search/social title with wishlist-idea intent, give a concrete opening answer, add interest-based examples and relevant guide links, clarify the creation action and repeat it after the guidance. Preserve privacy/recovery/reservation details, budgets, URL and canonical; update only the genuinely revised page date. No behavior/data-model/dependency changes or invented offers.
+- Acceptance criteria: Accurate matching search/social title and description, one h1, unchanged canonical, new interest links resolve, two prominent create links point to /wishlists; no overflow at 320/375/414/768/1440; build/lint/TypeScript and 110 regressions pass; verify production after release. Search results remain to be measured.
+- Status: DONE
+- Completion note: Updated title/description/direct answer, added interest examples and three contextual guide links, clarified private-list creation and repeated the action after guidance. Existing budget/fictional examples and privacy/recovery advice retained. Five-width metadata/heading/link/action checks pass without overflow or captured console errors; build/lint/TypeScript and 110 regressions pass. Production verification follows deployment; ranking impact is not claimed.
+
 ### [x] SEO 10 — P1
 
 - Severity: P1
