@@ -277,15 +277,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Added a branded information-page 404 with home and gift recovery links. Browser confirms the heading and destinations; HTTP 404 and build/lint/TypeScript pass.
 
-### [ ] STATE 02 — P1
+### [x] STATE 02 — P1
 
 - Severity: P1
 - Location: app/error.tsx and app/global-error.tsx (missing); all routes
 - Evidence: No route-level or root runtime error boundary exists in the app tree.
 - Fix: Add branded error recovery with a clear explanation, retry and safe navigation.
 - Acceptance criteria: Inject a controlled render failure in an isolated environment; recovery UI works and shows no stack trace or raw error object.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Added segment and root error boundaries using the installed Next.js retry API. A temporary dynamic route reproduced a server render failure; browser verified recovery UI and retry without raw internal text. Fixture removed; final build/lint/TypeScript pass.
 
 ### [ ] STATE 03 — P1
 
