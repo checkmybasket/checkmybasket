@@ -257,15 +257,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Added shared page-specific social metadata for home, information, create and gift routes. Generated HTML has distinct OG/Twitter titles and production URLs; categories use catalogue data; existing branded OG artwork is referenced at 1200x630. Build/lint/TypeScript pass.
 
-### [ ] SEO 03 — P1
+### [x] SEO 03 — P1
 
 - Severity: P1
 - Location: app/g/[group_id] route tree; app/robots.ts:10
 - Evidence: robots disallows /g/, but the route tree has no metadata noindex directive. Crawl disallow alone does not declare noindex.
 - Fix: Add inherited private-route noindex metadata without exposing private data in titles or social previews.
 - Acceptance criteria: All group, reveal and settings responses contain noindex and remain excluded from the sitemap.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: The newer base already provides inherited noindex. Anonymous HTTP verifies group, reveal and settings all emit noindex,nofollow; private routes are absent from the 39-URL sitemap. Evidence: audit/private-metadata.json.
 
 ### [x] STATE 01 — P1
 
