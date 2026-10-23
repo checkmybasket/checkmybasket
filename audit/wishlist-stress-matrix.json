@@ -1,0 +1,417 @@
+{
+  "fixture": "Local disposable wishlist; 1 UI-created long item plus 199 database-seeded items",
+  "before": [
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 6781,
+      "width": 320
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 6781,
+      "width": 375
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 6781,
+      "width": 414
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 768,
+      "width": 768
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 1024,
+      "width": 1024
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 1280,
+      "width": 1280
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 1440,
+      "width": 1440
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 1920,
+      "width": 1920
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 740,
+      "width": 740
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 2560,
+      "width": 2560
+    }
+  ],
+  "after": [
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 320,
+      "width": 320,
+      "state": "owner-single"
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 375,
+      "width": 375,
+      "state": "owner-single"
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 414,
+      "width": 414,
+      "state": "owner-single"
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 768,
+      "width": 768,
+      "state": "owner-single"
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 1024,
+      "width": 1024,
+      "state": "owner-single"
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 1280,
+      "width": 1280,
+      "state": "owner-single"
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 1440,
+      "width": 1440,
+      "state": "owner-single"
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 1920,
+      "width": 1920,
+      "state": "owner-single"
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 740,
+      "width": 740,
+      "state": "owner-single"
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 2560,
+      "width": 2560,
+      "state": "owner-single"
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 320,
+      "width": 320,
+      "state": "shared-single"
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 375,
+      "width": 375,
+      "state": "shared-single"
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 414,
+      "width": 414,
+      "state": "shared-single"
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 768,
+      "width": 768,
+      "state": "shared-single"
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 1024,
+      "width": 1024,
+      "state": "shared-single"
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 1280,
+      "width": 1280,
+      "state": "shared-single"
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 1440,
+      "width": 1440,
+      "state": "shared-single"
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 1920,
+      "width": 1920,
+      "state": "shared-single"
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 740,
+      "width": 740,
+      "state": "shared-single"
+    },
+    {
+      "articles": 1,
+      "h1": 1,
+      "scroll": 2560,
+      "width": 2560,
+      "state": "shared-single"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 320,
+      "width": 320,
+      "state": "shared-list-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 375,
+      "width": 375,
+      "state": "shared-list-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 414,
+      "width": 414,
+      "state": "shared-list-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 768,
+      "width": 768,
+      "state": "shared-list-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 1024,
+      "width": 1024,
+      "state": "shared-list-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 1280,
+      "width": 1280,
+      "state": "shared-list-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 1440,
+      "width": 1440,
+      "state": "shared-list-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 1920,
+      "width": 1920,
+      "state": "shared-list-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 740,
+      "width": 740,
+      "state": "shared-list-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 2560,
+      "width": 2560,
+      "state": "shared-list-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 320,
+      "width": 320,
+      "state": "shared-cards-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 375,
+      "width": 375,
+      "state": "shared-cards-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 414,
+      "width": 414,
+      "state": "shared-cards-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 768,
+      "width": 768,
+      "state": "shared-cards-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 1024,
+      "width": 1024,
+      "state": "shared-cards-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 1280,
+      "width": 1280,
+      "state": "shared-cards-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 1440,
+      "width": 1440,
+      "state": "shared-cards-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 1920,
+      "width": 1920,
+      "state": "shared-cards-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 740,
+      "width": 740,
+      "state": "shared-cards-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 2560,
+      "width": 2560,
+      "state": "shared-cards-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 320,
+      "width": 320,
+      "state": "owner-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 375,
+      "width": 375,
+      "state": "owner-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 414,
+      "width": 414,
+      "state": "owner-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 768,
+      "width": 768,
+      "state": "owner-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 1024,
+      "width": 1024,
+      "state": "owner-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 1280,
+      "width": 1280,
+      "state": "owner-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 1440,
+      "width": 1440,
+      "state": "owner-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 1920,
+      "width": 1920,
+      "state": "owner-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 740,
+      "width": 740,
+      "state": "owner-200"
+    },
+    {
+      "articles": 200,
+      "h1": 1,
+      "scroll": 2560,
+      "width": 2560,
+      "state": "owner-200"
+    }
+  ]
+}

@@ -535,6 +535,17 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: DONE
 - Completion note: Merged link classes explicitly, enabled wrapping and responsive padding with a minimum height. At 320px the full CTA is 224x66px and ends at x=272; all ten widths have no overflow or undersized controls. Build/lint/TypeScript and 110 local checks pass.
 
+### [x] UI 10 — P1
+
+- Severity: P1
+- Location: components/wishlists/item-card.tsx; /wishlists/[id] and /w/[token]
+- Evidence: A saved 195-character unbroken title and 840-character note expand the real owner grid to 6781px at 320/375/414px viewports. Desktop explicit grid columns contain it.
+- Fix: Allow the shared grid item to shrink below its intrinsic text width, retaining existing text wrapping and full content.
+- Acceptance criteria: Single and 200-item owner/shared lists with long text have no horizontal overflow at all ten audit sizes; build/lint/TypeScript and local checks pass.
+- Status: DONE
+
+- Completion note: Shared cards now shrink within grid columns. Real saved long-text fixtures pass 50 owner/shared/list/card viewport checks, including 200 items; zero browser warnings/errors. Build/lint/TypeScript and all 110 local checks pass. Evidence: audit/wishlist-stress-matrix.json.
+
 ### [x] CONTENT 01 — P2
 
 - Severity: P2

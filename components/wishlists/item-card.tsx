@@ -25,8 +25,8 @@ export function ItemCard({
     <article
       className={
         layout === "default"
-          ? `${panel} flex flex-col h-full`
-          : "rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-4 h-full"
+          ? `${panel} min-w-0 flex flex-col h-full`
+          : "rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-4 min-w-0 h-full"
       }
     >
       <div
