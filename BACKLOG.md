@@ -446,3 +446,13 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Acceptance criteria: full build/lint/TypeScript and local regressions pass; application imports resolve.
 - Status: DONE
 - Completion note: Removed unused zustand; source import scan is clear and build/lint/TypeScript pass. Existing local regressions pass after dependency cleanup.
+
+### [ ] SECURITY 02 — P1
+
+- Severity: P1
+- Location: package-lock.json; development-only lint toolchain
+- Evidence: after removing the unused generator, npm reports eight high development advisories; production audit is clean. Several transitive fixes are compatible; the braces advisory affects every currently published version (latest is 3.0.3), and npm suggests downgrading eslint-config-next to 14.2.35 for that chain.
+- Fix: apply compatible transitive patches without force or framework/linter downgrades. Record any unpatched upstream lint chain as NEEDS OWNER with a concrete follow-up rather than claiming all dependencies are clean. No new dependency.
+- Acceptance criteria: required checks and local regressions pass; npm production audit remains clean; remaining advisory chain is accurately documented with supported mitigation and owner follow-up.
+- Status: NEEDS OWNER
+- Completion note: Compatible transitive patches applied; 20 original development findings reduced to five entries in the same unpatched braces → micromatch → fast-glob → Next ESLint chain. Production dependencies are clean; build/lint/TypeScript and 99 local regressions pass. NEEDS OWNER: record a temporary development-tool risk exception, do not process untrusted glob patterns, and update the matching ESLint config when a compatible upstream fix ships. Do not force a downgrade to Next 14 tooling.
