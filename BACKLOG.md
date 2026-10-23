@@ -272,7 +272,7 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Fix: Finish the checklist and add each demonstrated defect as its own issue before fixing it; retain evidence per route/state.
 - Acceptance criteria: Complete route/state matrix with keyboard, zoom, touch, contrast, long strings, empty/single/hundreds of items and network-failure results. No untested cell is reported as passed.
 - Status: NEEDS OWNER
-- Completion note: Public 40-route x 10-viewport checks, settled images, representative interactions, long-string/empty/single/200-item component fixtures and anonymous private states are recorded in audit/. NEEDS OWNER: finish authenticated coverage using OWNER 02; check real 200% browser zoom (automation shortcut had no effect, 640px reflow only passed); run physical-device/screen-reader and slow/offline tests; after an owner-approved deployment verify preview noindex and production headers, redirects, APP_URL email links, domain/account configuration, downloadable documents and real merchant destinations. Untested checks are not passed.
+- Completion note: Public 400-case audit plus 70 loaded private viewport checks, private labels/headings/targets, actual member/non-member flows, anonymous messages, captured email/recovery and controlled failure/loading tests are recorded in audit/. NEEDS OWNER: finish exhaustive remaining private game/large-data states and real 200% zoom, screen-reader, device and clipboard-denial checks; then verify live production/preview headers, redirects, APP_URL links, domain/mailbox and merchant/download behavior after a reviewed release. Untested states are not passed.
 
 ### [ ] SECURITY 02 — P1
 

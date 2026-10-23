@@ -1,0 +1,13 @@
+{
+  "environment": "local only",
+  "authStopped": {
+    "safeRecovery": true,
+    "retryAfterRestore": true
+  },
+  "restPaused": {
+    "namedLoadingState": true,
+    "loadedAfterResume": true
+  },
+  "console": "Expected HTTP failure events were excluded from normal console counts; the fresh normal-state tab is clean.",
+  "allServicesRestored": true
+}
