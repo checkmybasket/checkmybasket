@@ -1,3 +1,4 @@
+import { OPEN_GRAPH_DEFAULTS, TWITTER_DEFAULTS } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { InfoPage, Section } from "@/components/info-page";
@@ -9,8 +10,8 @@ const description = "Plan your Secret Santa, choose gifts by budget and interest
 export const metadata: Metadata = {
   title: { absolute: title }, description,
   alternates: { canonical: "/guides" },
-  openGraph: { title, description, url: "/guides", type: "website" },
-  twitter: { card: "summary_large_image", title, description },
+  openGraph: { ...OPEN_GRAPH_DEFAULTS,  title, description, url: "/guides", type: "website" },
+  twitter: { ...TWITTER_DEFAULTS,  card: "summary_large_image", title, description },
 };
 const planning = [
   { slug: "secret-santa-whatsapp", title: "Secret Santa on WhatsApp", description: "Create a draw and share your invitation with a WhatsApp group." },

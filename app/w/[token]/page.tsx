@@ -1,3 +1,4 @@
+import { OPEN_GRAPH_DEFAULTS } from "@/lib/page-metadata";
 import { SITE_ORIGIN } from "@/lib/site";
 import type { Metadata } from "next";
 import { SharedWishlist } from "@/components/wishlists/shared";
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
     "View a shared wishlist on CheckMyBasket. Gifts from any shop, all in one place.",
   robots: { index: false, follow: false },
   referrer: "no-referrer",
-  openGraph: {
+  openGraph: { ...OPEN_GRAPH_DEFAULTS, 
     title: "A wishlist for you",
     description: "Gifts from any shop, all in one place.",
     url: `${SITE_ORIGIN}/wishlists`,

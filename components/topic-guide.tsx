@@ -1,3 +1,4 @@
+import { OPEN_GRAPH_DEFAULTS, TWITTER_DEFAULTS } from "@/lib/page-metadata";
 import { SITE_ORIGIN } from "@/lib/site";
 import { GIFT_GUIDES } from "@/lib/gift-guides";
 import { ORGANISER_GUIDES } from "@/lib/organiser-guides";
@@ -25,8 +26,8 @@ export function topicMetadata(slug: string): Metadata {
   return {
     title: { absolute: `${guide.title} | CheckMyBasket` }, description: guide.description,
     alternates: { canonical: `/${slug}` },
-    openGraph: { title: guide.title, description: guide.description, url: `${SITE_ORIGIN}/${slug}` },
-    twitter: { card: "summary_large_image", title: guide.title, description: guide.description },
+    openGraph: { ...OPEN_GRAPH_DEFAULTS,  title: guide.title, description: guide.description, url: `${SITE_ORIGIN}/${slug}` },
+    twitter: { ...TWITTER_DEFAULTS,  card: "summary_large_image", title: guide.title, description: guide.description },
   };
 }
 

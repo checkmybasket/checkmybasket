@@ -537,12 +537,12 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Added per-role private titles, descriptions and generic social previews for groups, matches, settings, recovery, join and wishlist tools. Metadata uses no private names, assignments or tokens; noindex is preserved. Build/lint/TypeScript pass.
 
-### [ ] SEO 08 — P1
+### [x] SEO 08 — P1
 
 - Severity: P1
 - Location: guide metadata and shared defaults; public guides and social previews
 - Evidence: browser on /secret-santa-gifts-under-10 shows only og:title/description/url; og:image, og:site_name and og:type are absent. Child metadata replaces the root object, and Twitter images have similar gaps.
 - Fix: share complete OG/Twitter defaults, including the existing branded image, across every page-level metadata object. Preserve page titles, descriptions and URLs.
 - Acceptance criteria: every public page emits absolute OG/Twitter images, site name, type and route-specific text/URL; build/lint/TypeScript and browser tag audit pass.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Added complete shared OG/Twitter defaults to every metadata override. Browser confirms guide image, site name and website type with absolute production image URL. Existing page text and URLs are preserved; build/lint/TypeScript pass.

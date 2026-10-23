@@ -1,3 +1,4 @@
+import { OPEN_GRAPH_DEFAULTS, TWITTER_DEFAULTS } from "@/lib/page-metadata";
 import { SITE_ORIGIN } from "@/lib/site";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -10,8 +11,8 @@ const guide = GIFT_GUIDES.find(item => item.slug === "cosy-secret-santa-gifts")!
 export const metadata: Metadata = {
   title: { absolute: `${guide.title} | CheckMyBasket` }, description: guide.description,
   alternates: { canonical: `/${guide.slug}` },
-  openGraph: { title: guide.title, description: guide.description, url: `${SITE_ORIGIN}/${guide.slug}` },
-  twitter: { card: "summary_large_image", title: guide.title, description: guide.description },
+  openGraph: { ...OPEN_GRAPH_DEFAULTS,  title: guide.title, description: guide.description, url: `${SITE_ORIGIN}/${guide.slug}` },
+  twitter: { ...TWITTER_DEFAULTS,  card: "summary_large_image", title: guide.title, description: guide.description },
 };
 export default function GiftGuide() {
   return <InfoPage title={guide.title} updated="11 October 2026">
