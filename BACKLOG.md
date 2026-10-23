@@ -28,6 +28,25 @@ Ruflo/ToolSearch tools were searched for but unavailable. No production data wri
 
 ## Issues
 
+### [x] UI 12 — P2
+
+- Severity: P2
+- Location: components/receipt/sections.tsx; homepage /
+- Evidence: Owner requests removing the visible “Example draw” line from the main receipt illustration.
+- Fix: Remove that visible line while retaining the accessible description identifying the illustrative draw. This explicitly records the requested display-copy removal before implementation; no product behavior or data change.
+- Acceptance criteria: Homepage receipt has no visible Example draw line; illustration remains labelled and contained at mobile/desktop widths; build/lint/TypeScript and regressions pass.
+- Status: DONE
+- Completion note: Removed the visible subtitle and retained the illustrative accessible description. Homepage checks at 320/375/414/768/1440px show no label or horizontal overflow. Build/lint/TypeScript and 110 regressions pass.
+
+### [ ] UI 13 — P1
+
+- Severity: P1
+- Location: components/gift-card.tsx; catalogue and gift guide routes
+- Evidence: Owner's iPhone screenshots show red Shop at retailer links ending before the full-width Save to wishlist action because the retailer anchor is inline-flex without width:100%.
+- Fix: Make each retailer link fill the card action column, with centred wrapping text and a nonshrinking external-link icon. Preserve destinations and labels.
+- Acceptance criteria: Shop and Save action rectangles have equal left/right edges across 320/375/414/768/1440 widths, including long retailer names; no horizontal overflow; build/lint/TypeScript and regressions pass.
+- Status: OPEN
+
 Sorted by severity, then area and ID. DONE refers to the documented implementation/source verification; any fixture-dependent browser coverage is explicitly retained in OWNER 02/QA 02. Every remaining issue is marked NEEDS OWNER with a concrete next action.
 
 ### [x] BUILD 02 — P0
