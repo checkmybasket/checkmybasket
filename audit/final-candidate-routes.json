@@ -1,0 +1,576 @@
+{
+  "deployment": "dpl_7YiSVs9LvqgMxzNgeSCZ6oNEx8hK",
+  "commit": "5534eb0ef523cf6d543dab745e878aea9581965a",
+  "scope": "Read-only rendered public routes; no production private records or mutations tested.",
+  "pages": [
+    {
+      "path": "/",
+      "canonical": "https://www.checkmybasket.co.uk",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Free Secret Santa Generator & Organiser | CheckMyBasket"
+    },
+    {
+      "path": "/personalised-groomsmen-gifts",
+      "canonical": "https://www.checkmybasket.co.uk/personalised-groomsmen-gifts",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Personalised groomsmen gifts: a practical ordering guide | CheckMyBasket"
+    },
+    {
+      "path": "/contact",
+      "canonical": "https://www.checkmybasket.co.uk/contact",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Contact | CheckMyBasket"
+    },
+    {
+      "path": "/privacy",
+      "canonical": "https://www.checkmybasket.co.uk/privacy",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Privacy Policy | CheckMyBasket"
+    },
+    {
+      "path": "/personalised-gifts-for-dads",
+      "canonical": "https://www.checkmybasket.co.uk/personalised-gifts-for-dads",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Personalised gifts for dads: choosing something he will use | CheckMyBasket"
+    },
+    {
+      "path": "/secret-santa-gifts-under-50",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-under-50",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Secret Santa gifts under £50 | CheckMyBasket"
+    },
+    {
+      "path": "/secret-santa-gifts-under-10",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-under-10",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Secret Santa gifts under £10 | CheckMyBasket"
+    },
+    {
+      "path": "/cosy-secret-santa-gifts",
+      "canonical": "https://www.checkmybasket.co.uk/cosy-secret-santa-gifts",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Cosy Secret Santa gifts | CheckMyBasket"
+    },
+    {
+      "path": "/secret-santa-gifts-under-20",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-under-20",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Secret Santa gifts under £20 | CheckMyBasket"
+    },
+    {
+      "path": "/terms",
+      "canonical": "https://www.checkmybasket.co.uk/terms",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Terms of Use | CheckMyBasket"
+    },
+    {
+      "path": "/funny-secret-santa-gifts",
+      "canonical": "https://www.checkmybasket.co.uk/funny-secret-santa-gifts",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Funny Secret Santa gifts | CheckMyBasket"
+    },
+    {
+      "path": "/return",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "robots": "noindex, nofollow",
+      "title": "Return to CheckMyBasket | CheckMyBasket"
+    },
+    {
+      "path": "/about",
+      "canonical": "https://www.checkmybasket.co.uk/about",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "About | CheckMyBasket"
+    },
+    {
+      "path": "/secret-santa-gifts-for-gamers",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-for-gamers",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Secret Santa gifts for gamers | CheckMyBasket"
+    },
+    {
+      "path": "/secret-santa-gifts-someone-you-dont-know",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-someone-you-dont-know",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Secret Santa gifts for someone you don’t know well | CheckMyBasket"
+    },
+    {
+      "path": "/secret-santa-gifts-for-book-lovers",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-for-book-lovers",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Secret Santa gifts for book lovers | CheckMyBasket"
+    },
+    {
+      "path": "/secret-santa-gifts-for-coffee-lovers",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-for-coffee-lovers",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Secret Santa gifts for coffee lovers | CheckMyBasket"
+    },
+    {
+      "path": "/gifts",
+      "canonical": "https://www.checkmybasket.co.uk/gifts",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Secret Santa Gift Ideas UK | CheckMyBasket"
+    },
+    {
+      "path": "/guides",
+      "canonical": "https://www.checkmybasket.co.uk/guides",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Secret Santa and gift guides | CheckMyBasket"
+    },
+    {
+      "path": "/secret-santa-wishlist-ideas",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-wishlist-ideas",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "What to Put on a Secret Santa Wishlist | CheckMyBasket"
+    },
+    {
+      "path": "/secret-santa-gifts-under-30",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-under-30",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Secret Santa gifts under £30 | CheckMyBasket"
+    },
+    {
+      "path": "/secret-santa-gifts-for-colleagues",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-for-colleagues",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Secret Santa gifts for colleagues | CheckMyBasket"
+    },
+    {
+      "path": "/personalised-secret-santa-gifts",
+      "canonical": "https://www.checkmybasket.co.uk/personalised-secret-santa-gifts",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Personalised Secret Santa gifts | CheckMyBasket"
+    },
+    {
+      "path": "/secret-santa-rules",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-rules",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Secret Santa Rules & Organiser Checklist | CheckMyBasket"
+    },
+    {
+      "path": "/personalised-money-clip-gift-guide",
+      "canonical": "https://www.checkmybasket.co.uk/personalised-money-clip-gift-guide",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Personalised money clip gift guide | CheckMyBasket"
+    },
+    {
+      "path": "/money-clip-engraving-ideas",
+      "canonical": "https://www.checkmybasket.co.uk/money-clip-engraving-ideas",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Money clip engraving ideas: initials, names and short messages | CheckMyBasket"
+    },
+    {
+      "path": "/create",
+      "canonical": "https://www.checkmybasket.co.uk/create",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Create a Secret Santa Draw | CheckMyBasket"
+    },
+    {
+      "path": "/secret-santa-whatsapp",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-whatsapp",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "How to Organise Secret Santa on WhatsApp | CheckMyBasket"
+    },
+    {
+      "path": "/office-secret-santa",
+      "canonical": "https://www.checkmybasket.co.uk/office-secret-santa",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Office Secret Santa Guide & Organiser Checklist | CheckMyBasket"
+    },
+    {
+      "path": "/secret-santa-invitation-messages",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-invitation-messages",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Secret Santa Invitation Messages for WhatsApp & Email | CheckMyBasket"
+    },
+    {
+      "path": "/secret-santa-odd-number",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-odd-number",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "Can you do Secret Santa with an odd number of people? | CheckMyBasket"
+    },
+    {
+      "path": "/remote-team-secret-santa",
+      "canonical": "https://www.checkmybasket.co.uk/remote-team-secret-santa",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "title": "How to organise Secret Santa for a remote team | CheckMyBasket"
+    },
+    {
+      "path": "/gifts/under-10",
+      "canonical": "https://www.checkmybasket.co.uk/gifts/under-10",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "robots": "index, follow",
+      "title": "Gifts under £10 UK | CheckMyBasket"
+    },
+    {
+      "path": "/gifts/under-20",
+      "canonical": "https://www.checkmybasket.co.uk/gifts/under-20",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "robots": "index, follow",
+      "title": "Gifts under £20 UK | CheckMyBasket"
+    },
+    {
+      "path": "/gifts/under-30",
+      "canonical": "https://www.checkmybasket.co.uk/gifts/under-30",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "robots": "index, follow",
+      "title": "Gifts under £30 UK | CheckMyBasket"
+    },
+    {
+      "path": "/gifts/under-50",
+      "canonical": "https://www.checkmybasket.co.uk/gifts/under-50",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "robots": "index, follow",
+      "title": "Gifts under £50 UK | CheckMyBasket"
+    },
+    {
+      "path": "/gifts/colleague",
+      "canonical": "https://www.checkmybasket.co.uk/gifts/colleague",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "robots": "index, follow",
+      "title": "Gifts for colleagues UK | CheckMyBasket"
+    },
+    {
+      "path": "/gifts/funny",
+      "canonical": "https://www.checkmybasket.co.uk/gifts/funny",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "robots": "index, follow",
+      "title": "Funny Secret Santa gifts UK | CheckMyBasket"
+    },
+    {
+      "path": "/gifts/cosy",
+      "canonical": "https://www.checkmybasket.co.uk/gifts/cosy",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "robots": "index, follow",
+      "title": "Cosy gifts UK | CheckMyBasket"
+    },
+    {
+      "path": "/gifts/personalised",
+      "canonical": "https://www.checkmybasket.co.uk/gifts/personalised",
+      "h1": 1,
+      "main": 1,
+      "manifest": [
+        {
+          "credentials": "use-credentials",
+          "href": "/manifest.webmanifest"
+        }
+      ],
+      "og": true,
+      "robots": "index, follow",
+      "title": "Personalised gifts UK | CheckMyBasket"
+    }
+  ],
+  "logs": []
+}

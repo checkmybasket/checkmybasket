@@ -1,5 +1,7 @@
 # CheckMyBasket production polish report
 
+> Current release status: see [RELEASE_CANDIDATE_REPORT.md](RELEASE_CANDIDATE_REPORT.md). Three policy fixes are now live in production; the protected website candidate is staged but customer-domain promotion remains pending. Statements below about earlier local-only stages retain their historical scope.
+
 > Staging follow-up: local Docker/Colima staging is now running and core private flows are verified. See [LOCAL_STAGING_REPORT.md](LOCAL_STAGING_REPORT.md). The original polish measurements below are a historical snapshot before these staging fixes, not a new measurement of this local build.
 
 23 October 2026 · branch `polish/production-audit` · base `237cf0c` · repository `seo-release`.

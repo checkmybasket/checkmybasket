@@ -6,9 +6,9 @@ The change adds per-route social metadata and brand icons, consistent shared sty
 
 Validation: staging build, lint, TypeScript and all 110 local regressions pass. Real local Auth/RPC/email/recovery and member/nonmember permission suites pass. Evidence includes 400 public viewport cases, 70 private-state viewport cases and 50 real wishlist stress cases, plus sampled keyboard traversal and controlled save-failure/retry checks. These counts describe different scoped matrices; they do not certify every interaction. Normal captured console errors/warnings are zero. Historical production-mode Lighthouse accessibility/best practices/SEO were 100 on measured key pages; local staging intentionally fails crawlability because it is noindex.
 
-Release gates remain open: native 200% zoom, actual screen reader, physical phone, clipboard denial and the documented upstream development-tool advisory decision. The protected cloud preview has no isolated backend configuration; local loopback services cannot be used by Vercel. Do not substitute production credentials for a test preview.
+Release gates remain open: private owner/group native 200% zoom, actual screen reader, physical phone, clipboard denial and the documented upstream development-tool advisory decision. The protected cloud preview has no isolated backend configuration; local loopback services cannot be used by Vercel. Do not substitute production credentials for a test preview.
 
-Three migrations (20261023144901, 20261023145034, 20261023145111) are applied and verified locally only. Production has not received them or this app branch. Read-only live checks show correct canonicals/headers/sitemap/redirects; 24 live pages still lack OG image tags that this branch supplies. Release the reviewed application and migrations through the normal process, rebuild using intended production env values, then rerun production verification. Never deploy the local staging .next artifact.
+SECURITY 03–05 are now applied in production as server versions 20261023161744, 20261023161924 and 20261023162053. Their SQL hashes and policy definitions were verified; all 29 migration inventories match. The website candidate is staged but not promoted to customer domains. Read-only live checks show correct canonicals/headers/sitemap/redirects; 24 live pages still lack OG image tags that this branch supplies. Release the reviewed website candidate through the normal process, retain the applied policies, then rerun custom-domain production verification. Never deploy the local staging .next artifact.
 
 Review evidence: BACKLOG.md; audit/FINAL_REPORT.md; audit/LOCAL_STAGING_REPORT.md. Reproduction and remaining owner checks: docs/staging.md; docs/owner-release-checks.md.
 
@@ -22,7 +22,7 @@ Review evidence: BACKLOG.md; audit/FINAL_REPORT.md; audit/LOCAL_STAGING_REPORT.m
 ## Release order
 
 1. Complete or explicitly resolve the open owner checks and review this draft.
-2. Review the three backward-compatible authorization migrations and apply them through the production migration process. The migrations change insert policies, not table shapes; no historical rows are rewritten.
-3. Build the reviewed commit with production settings and stage it without assigning production domains; check public pages and use a controlled production verification plan for private flows.
+2. The three backward-compatible authorization migrations are already applied and verified in production. Retain them during any app rollback; do not replay them under old timestamps.
+3. The final protected production-configured candidate for website commit 5534eb0 is staged. Complete the outstanding owner gates and review audit/RELEASE_CANDIDATE_REPORT.md before promotion.
 4. Promote only the tested production candidate, then verify the deployed commit, canonicals/OG, console, Lighthouse, email delivery and permission boundaries.
 5. If application rollback is needed, retain the tightened authorization policies: the old client API remains compatible. Do not restore the vulnerable insert policies as a routine rollback.

@@ -1,5 +1,7 @@
 # CheckMyBasket local staging verification
 
+> Current release status: see [RELEASE_CANDIDATE_REPORT.md](RELEASE_CANDIDATE_REPORT.md). Three policy fixes are now live in production; the protected website candidate is staged but customer-domain promotion remains pending. Statements below about earlier local-only stages retain their historical scope.
+
 23 October 2026 · `polish/production-audit` · local-only follow-up to the production polish report.
 
 Local staging is installed, running and verified for the flows below. The entire release definition of done is **not certified**: exhaustive private states and manual/live-environment checks remain open in OWNER 02 / QA 02. No production data, credentials, schema, deployment or subscription was changed.
