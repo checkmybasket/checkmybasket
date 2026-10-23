@@ -387,15 +387,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: OPEN
 - Completion note: Pending.
 
-### [ ] SEO 06 — P2
+### [x] SEO 06 — P2
 
 - Severity: P2
 - Location: app/manifest.ts and app/apple-icon.tsx (missing); global metadata
 - Evidence: Branded app/icon.tsx exists, but no manifest or Apple touch icon exists; no public icon set directory exists.
 - Fix: Add a valid manifest and correctly sized brand-derived icons; preserve the existing brand rather than inventing artwork.
 - Acceptance criteria: Manifest and all linked icons return 200 with correct MIME types/dimensions; no framework defaults remain.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Added a valid manifest and 180/192/512px icons from the existing basket vector. Built PNG dimensions and image/png metadata verified; manifest icon paths match outputs. Build/lint/TypeScript pass; no replacement artwork invented.
 
 ### [ ] STATE 04 — P2
 
