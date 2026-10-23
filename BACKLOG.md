@@ -297,15 +297,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Added action-specific safe errors for group/create/join, notification and wishlist surfaces while retaining draw constraints. Four error-safety tests and 16 wishlist/email regressions pass; build/lint/TypeScript pass. No database behavior changed.
 
-### [ ] UI 01 — P1
+### [x] UI 01 — P1
 
 - Severity: P1
 - Location: app/page.tsx header; / at 320x740
 - Evidence: Browser: header create CTA right edge reaches 345.1px in a 320px viewport; document horizontally overflows.
 - Fix: Adjust header layout, spacing and responsive CTA sizing.
 - Acceptance criteria: No overflow, clipping or overlap at 320px and all requested widths; navigation remains usable.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: The current receipt header already resolves the older overflow defect. Final 40-route x 10-viewport matrix has no page overflow, including homepage at 320px; visually inspected mobile and desktop layouts.
 
 ### [x] CONTENT 01 — P2
 
