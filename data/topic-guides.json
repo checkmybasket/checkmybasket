@@ -2,8 +2,9 @@
   {
     "slug": "secret-santa-odd-number",
     "title": "Can you do Secret Santa with an odd number of people?",
-    "description": "See how Secret Santa works with 3, 5 or 7 people, with clear draw examples, exclusion checks and a practical organiser checklist.",
-    "answer": "Yes. Secret Santa assigns each participant one person to buy for; it does not require pairs. With 3, 5 or 7 people, everyone can give and receive one gift. CheckMyBasket needs at least three joined members, and any exclusions must allow a valid draw.",
+    "description": "Yes, Secret Santa works with 3, 5 or 7 people. Everyone gives and receives one gift. See example draws and check exclusions before you start.",
+    "updated": "23 October 2026",
+    "answer": "Yes, you can do Secret Santa with an odd number of people, including 3, 5 or 7. Everyone buys one gift and receives one gift; nobody needs to sit out or buy twice. Names are assigned to recipients rather than split into pairs. CheckMyBasket needs at least three joined members, with exclusions that allow a valid draw.",
     "intro": "An odd-sized group does not need a spare participant or an organiser buying two gifts. What matters is that every person has one recipient, every person receives one gift, and nobody draws themselves. Here is how to plan a fair exchange when the headcount is odd.",
     "sections": [
       {
@@ -16,9 +17,10 @@
       },
       {
         "id": "examples-for-3-5-and-7-participants",
-        "heading": "Examples for 3, 5 and 7 participants",
+        "heading": "How Secret Santa works with 3, 5 or 7 people",
         "paragraphs": [
-          "In each example, read one row as “this person buys for that person”. The last person buys for the first, closing the circle. Each recipient appears exactly once. These are fictional names; do not post your real assignments in a shared group chat."
+          "For a group of five, Alex can buy for Blake, Blake for Casey, Casey for Dev, Dev for Ellis, and Ellis for Alex. All five people give and receive exactly once, with no self-assignments. A group of seven works on the same principle: add two people to the circle before drawing.",
+          "The tables show valid examples for 3, 5 and 7 participants, not your actual random assignments. Read each row as “this person buys for that person”. The last person buys for the first, closing the circle. These are fictional names; do not post your real assignments in a shared group chat."
         ],
         "tool": "odd-examples"
       },

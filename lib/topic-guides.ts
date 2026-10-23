@@ -1,8 +1,8 @@
 export const TOPIC_GUIDES = [
   {
     "slug": "secret-santa-odd-number",
-    "title": "Can you do Secret Santa with an odd number of people?",
-    "description": "See how Secret Santa works with 3, 5 or 7 people, with clear draw examples, exclusion checks and a practical organiser checklist.",
+    "title": "Secret Santa with an odd number: 3, 5 or 7 people",
+    "description": "Yes, Secret Santa works with 3, 5 or 7 people. Everyone gives and receives one gift. See example draws and check exclusions before you start.",
     "kind": "organiser"
   },
   {
