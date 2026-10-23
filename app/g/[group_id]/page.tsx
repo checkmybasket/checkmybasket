@@ -281,7 +281,7 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
             <h2 className="font-semibold text-sm">Gifts bought</h2>
             <span className="text-sm font-medium text-[var(--cmb-primary)]">{giftsBought.bought} of {giftsBought.total}</span>
           </div>
-          <Progress value={Math.round((giftsBought.bought/giftsBought.total)*100)} className="h-2 mb-2"/>
+          <Progress aria-label="Gifts bought" value={Math.round((giftsBought.bought/giftsBought.total)*100)} className="h-2 mb-2"/>
           <p className="text-xs text-[var(--cmb-text-muted)]">Only visible to you. Individual names are private.</p>
         </div>
       )}
@@ -312,7 +312,7 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
           <h2 className="font-semibold">Setup progress</h2>
           <span className="text-sm font-medium text-[var(--cmb-primary)]">{progress}% done</span>
         </div>
-        <Progress value={progress} className="mb-4 h-2"/>
+        <Progress aria-label="Setup progress" value={progress} className="mb-4 h-2"/>
         <div className="space-y-3">
           {[
             { label:"Group created",                              done:true },

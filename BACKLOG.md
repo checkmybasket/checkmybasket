@@ -704,12 +704,12 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: DONE
 - Completion note: Named the Conversation group and exposed aria-pressed on both thread choices. Loaded browser confirms exactly one pressed choice after switching; permissions and message flow remain unchanged. Build/lint/TypeScript and local regressions pass.
 
-### [ ] A11Y 20 — P1
+### [x] A11Y 20 — P1
 
 - Severity: P1
 - Location: app/g/[group_id]/page.tsx; loaded private group views — Progress indicator names
 - Evidence: Loaded Gifts bought progressbar has neither aria-label nor aria-labelledby; setup progress uses the same unnamed pattern.
 - Fix: Name both progressbars from their visible section purpose, preserving values.
 - Acceptance criteria: Loaded Gifts bought and Setup progress indicators have correct names and numeric values. Browser/build/lint/TypeScript checks pass.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Named Setup progress and Gifts bought indicators. Loaded pending/drawn browser states expose those names and correct numeric values (17 and 25 in fixtures); build/lint/TypeScript and local regressions pass.
