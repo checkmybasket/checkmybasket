@@ -124,3 +124,11 @@ Read-only checks of the currently deployed site found all 40 inventoried URLs re
 Twenty-four live pages lack OG image tags. The existing branch supplies those tags on all 24, confirmed against local staging with noindex intact: [local-og-release-check.json](local-og-release-check.json). The original SEO fixes and SECURITY 03–05 therefore still need the reviewed production release. No production deployment, backend write, account or DNS change was made.
 
 The remaining owner checks are concrete in [docs/owner-release-checks.md](../docs/owner-release-checks.md). Native zoom, actual screen-reader/physical-device use, clipboard denial and functional protected cloud preview remain unverified. The backlog now has 78 issues: 75 completed in the branch, three NEEDS OWNER. Existing Lighthouse and bundle numbers retain their measurement dates; they were not rerun for this heading-only change.
+
+## Protected review preview
+
+Draft PR [#3](https://github.com/checkmybasket/checkmybasket/pull/3) publishes the audit branch. Vercel successfully built commit `026aa1d` as deployment `dpl_3E9nGVugpnmSnRBqhhu6ZeCsPcoy`; reported PR deployment checks pass. Production remains unchanged.
+
+After the owner authorized retrying protected access, authenticated read-only checks returned 200 for home, create, gifts, guides, robots and sitemap. All four HTML pages have distinct titles, OG images, production canonicals and noindex/nofollow. Preview robots disallows all crawling; sitemap has 39 public locations. Security headers are recorded in [protected-preview-checks.json](protected-preview-checks.json). These are response checks, not browser/Lighthouse or private-flow certification. No share links, cookies or credentials are stored in evidence.
+
+The preview has no isolated Supabase/App URL environment variables, so private cloud flows remain unverified. No production credentials were substituted. The first access attempt was rejected by automatic review; an earlier CLI unexpectedly created an automation bypass token, which was revoked and verified absent before the authorized connector retry. Deployment protection stayed configured. Native Chrome control was interrupted, so native zoom remains unverified. Remaining owner gates and reviewed migration/release order still apply.

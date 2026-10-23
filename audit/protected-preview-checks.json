@@ -1,0 +1,102 @@
+{
+  "deploymentId": "dpl_3E9nGVugpnmSnRBqhhu6ZeCsPcoy",
+  "deploymentUrl": "https://checkmybasket-o3nu84sai-hassan-amjad-s-projects-1.vercel.app",
+  "commit": "026aa1de7fa6d090bbd3e069a38edec72324e00e",
+  "pullRequest": "https://github.com/checkmybasket/checkmybasket/pull/3",
+  "access": "Authenticated connector fetch after user authorized retry. Protection remains enabled. No share URLs or cookies stored in evidence.",
+  "scope": "Read-only public response checks, not browser-console, Lighthouse or private-flow certification.",
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "Free Secret Santa Generator &amp; Organiser | CheckMyBasket",
+      "robots": "noindex, nofollow",
+      "canonical": "https://www.checkmybasket.co.uk",
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "robotsHeader": "noindex, nofollow",
+      "securityHeaders": {
+        "csp": true,
+        "hsts": true,
+        "nosniff": true,
+        "frameDenied": true
+      }
+    },
+    {
+      "path": "/create",
+      "status": 200,
+      "title": "Create a Secret Santa Draw | CheckMyBasket",
+      "robots": "noindex, nofollow",
+      "canonical": "https://www.checkmybasket.co.uk/create",
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "robotsHeader": "noindex, nofollow",
+      "securityHeaders": {
+        "csp": true,
+        "hsts": true,
+        "nosniff": true,
+        "frameDenied": true
+      }
+    },
+    {
+      "path": "/gifts",
+      "status": 200,
+      "title": "Secret Santa Gift Ideas UK | CheckMyBasket",
+      "robots": "noindex, nofollow",
+      "canonical": "https://www.checkmybasket.co.uk/gifts",
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "robotsHeader": "noindex, nofollow",
+      "securityHeaders": {
+        "csp": true,
+        "hsts": true,
+        "nosniff": true,
+        "frameDenied": true
+      }
+    },
+    {
+      "path": "/guides",
+      "status": 200,
+      "title": "Secret Santa and gift guides | CheckMyBasket",
+      "robots": "noindex, nofollow",
+      "canonical": "https://www.checkmybasket.co.uk/guides",
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image",
+      "robotsHeader": "noindex, nofollow",
+      "securityHeaders": {
+        "csp": true,
+        "hsts": true,
+        "nosniff": true,
+        "frameDenied": true
+      }
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200,
+      "title": null,
+      "robots": null,
+      "canonical": null,
+      "ogImage": null,
+      "robotsHeader": "noindex, nofollow",
+      "securityHeaders": {
+        "csp": true,
+        "hsts": true,
+        "nosniff": true,
+        "frameDenied": true
+      },
+      "body": "User-Agent: *\nDisallow: /\n\n"
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "title": null,
+      "robots": null,
+      "canonical": null,
+      "ogImage": null,
+      "robotsHeader": "noindex, nofollow",
+      "securityHeaders": {
+        "csp": true,
+        "hsts": true,
+        "nosniff": true,
+        "frameDenied": true
+      },
+      "locations": 39
+    }
+  ]
+}
