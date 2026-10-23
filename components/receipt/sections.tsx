@@ -15,7 +15,7 @@ const receiptBlocks = [
 export function Receipt() {
   return <div className="receipt-sample" role="img" aria-label="Example draw summary: 12 people, £20 budget, no ads, free">
     <div aria-hidden="true">
-      <div className="receipt-sample-title">CheckMyBasket</div><div className="receipt-sample-centre">Example draw</div>
+      <div className="receipt-sample-title">CheckMyBasket</div>
       {receiptBlocks.map((rows, i) => <div key={i} className={`receipt-sample-block ${i === 2 ? "receipt-sample-totals" : ""}`}>
         {rows.map(([label, value]) => <div className="receipt-sample-row" key={label}><span>{label}</span><span>{value}</span></div>)}
       </div>)}
