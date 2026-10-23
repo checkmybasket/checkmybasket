@@ -526,3 +526,23 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Acceptance criteria: exactly one preset is announced selected, including after choosing Custom; generated markup and browser checks plus build/lint/TypeScript pass.
 - Status: DONE
 - Completion note: Named and described the budget group and added aria-pressed to presets. Production browser confirms exactly one selected Custom preset and its labelled amount field; build/lint/TypeScript pass.
+
+### [x] SEO 07 — P1
+
+- Severity: P1
+- Location: app/g/layout.tsx, group reveal/settings layouts, return and wishlist editor metadata; private routes
+- Evidence: group routes inherit the homepage marketing title/description; return and wishlist editor lack their own descriptions. Public catalogue metadata already derives from catalogue data.
+- Fix: provide accurate generic per-role private metadata and previews without fetching or publishing private group names, assignments, identities or tokens. Private metadata deliberately stays generic for confidentiality; noindex remains intact.
+- Acceptance criteria: private titles/descriptions reflect each screen, all remain noindex, and no private data enters metadata; build/lint/TypeScript pass.
+- Status: DONE
+- Completion note: Added per-role private titles, descriptions and generic social previews for groups, matches, settings, recovery, join and wishlist tools. Metadata uses no private names, assignments or tokens; noindex is preserved. Build/lint/TypeScript pass.
+
+### [ ] SEO 08 — P1
+
+- Severity: P1
+- Location: guide metadata and shared defaults; public guides and social previews
+- Evidence: browser on /secret-santa-gifts-under-10 shows only og:title/description/url; og:image, og:site_name and og:type are absent. Child metadata replaces the root object, and Twitter images have similar gaps.
+- Fix: share complete OG/Twitter defaults, including the existing branded image, across every page-level metadata object. Preserve page titles, descriptions and URLs.
+- Acceptance criteria: every public page emits absolute OG/Twitter images, site name, type and route-specific text/URL; build/lint/TypeScript and browser tag audit pass.
+- Status: OPEN
+- Completion note: Pending.
