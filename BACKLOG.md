@@ -45,14 +45,16 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 
 - Completion note: Restricted actual-gift inserts to round-group members. Live denial/unchanged-data and valid-member checks pass; local security advisor clean; staging build/lint/TypeScript and 110 regressions pass. Migration is committed for release, applied locally only.
 
-### [ ] SECURITY 04 — P0
+### [x] SECURITY 04 — P0
 
 - Severity: P0
 - Location: supabase/migrations; /g/[group_id]?tab=games Data API
 - Evidence: A local member successfully inserted a prediction whose subject was an authenticated nonmember.
 - Fix: Require the prediction subject to be a member of the round group, retaining predictor membership and identity checks. This explicitly flags a backend authorization change before implementation; no table/data-model change.
 - Acceptance criteria: Outside-group subjects and impersonated predictors fail; valid member predictions save; denied rows do not exist. Local integration, build, lint and TypeScript pass.
-- Status: OPEN
+- Status: DONE
+
+- Completion note: Prediction inserts now require subjects in the same group. Real member/outsider/impersonation and private-before-reveal checks pass; denied writes leave no rows. Local advisor clean; build/lint/TypeScript and 110 regressions pass. Applied locally only.
 
 ### [ ] SECURITY 05 — P0
 
