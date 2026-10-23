@@ -346,6 +346,17 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 
 - Completion note: Renamed the identical owner-unreserve migration to the already applied production version 20261006190849, updated references and repaired disposable local history only. Normalized SQL hashes match; build/lint/TypeScript and all 110 regressions pass. Production history and schema were preserved.
 
+### [x] DEPLOY 03 — P1
+
+- Severity: P1
+- Location: app/layout.tsx and app/manifest.ts; protected production candidate, all pages
+- Evidence: Candidate Lighthouse home/create/gifts records two manifest CSP errors per page. Credential-less /manifest.webmanifest requests redirect to Vercel SSO, then fail default-src self; best practices scores 92. Installed Next adds manifest credentials only for preview, while this protected candidate uses production settings.
+- Fix: Keep the existing static manifest URL/content in public/manifest.webmanifest and emit a single explicit head link with crossOrigin use-credentials. Remove the file-convention manifest to avoid a duplicate link. No app data, copy or route-URL change; CSP and protection stay intact. Browser requirement: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/crossorigin#web_manifest_with_credentials.
+- Acceptance criteria: One manifest link with use-credentials; identical manifest fields and application/manifest+json response; build/lint/TypeScript and regressions pass. Protected candidate browser/Lighthouse manifest errors disappear and best practices reaches at least 95; expected Vercel noindex is preserved.
+- Status: DONE
+
+- Completion note: One explicit credentialed manifest link serves the unchanged static manifest with correct MIME type. Local build/lint/TypeScript and 110 regressions pass. Protected verification build Lighthouse best practices is 100 (was 92), accessibility 100, and console audit passes on home/create/gifts; only expected noindex SEO failure remains. Before/after reports retained.
+
 ### [x] FORM 01 — P1
 
 - Severity: P1
