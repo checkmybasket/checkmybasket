@@ -147,15 +147,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Name back links by destination. Generated create HTML contains Back to home; build/lint/TypeScript pass. Final public browser sweep will recheck links.
 
-### [ ] A11Y 09 — P1
+### [x] A11Y 09 — P1
 
 - Severity: P1
 - Location: app/create/page.tsx selected group-type cards; app/globals.css muted color
 - Evidence: Lighthouse finds Friends subtitle contrast 4.36:1: #6e6e6e on composited #f1ede5 at 12px.
 - Fix: Use a selected-state text/background combination meeting AA and verify other selectable group cards.
 - Acceptance criteria: All selected/unselected group-card text is >=4.5:1; Lighthouse color-contrast passes for /create.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: The current base already replaced the old group-type cards and cream palette. Final create Lighthouse contrast/accessibility is 100; no obsolete selected-card contrast defect remains. No redundant source change made.
 
 ### [x] A11Y 10 — P1
 
