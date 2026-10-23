@@ -673,3 +673,43 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Acceptance criteria: Those controls/headings keep the same text meaning and behavior, with no decorative emoji; existing category data is unchanged; browser/build/lint/TypeScript pass.
 - Status: OPEN
 - Completion note: Pending.
+
+### [ ] A11Y 17 — P1
+
+- Severity: P1
+- Location: app/g/[group_id]/page.tsx; loaded private group views — Message composer label
+- Evidence: Loaded Messages composer has no associated label or aria-label; only a disappearing placeholder names the input.
+- Fix: Add a visible, associated message/reply label and describe the character limit.
+- Acceptance criteria: Input remains named after typing, its label focuses it, and the local message send/reply flow still works. Browser/build/lint/TypeScript checks pass.
+- Status: OPEN
+- Completion note: Pending.
+
+### [ ] A11Y 18 — P1
+
+- Severity: P1
+- Location: app/g/[group_id]/page.tsx; loaded private group views — Empty-state heading hierarchy
+- Evidence: Loaded Messages empty state goes directly from the group h1 to Break the ice h3. Games pending has the same root empty-state helper.
+- Fix: Allow the empty-state helper to render h2 by default and h3 explicitly when nested under the wishlist h2.
+- Acceptance criteria: No heading level is skipped in loaded empty Messages/Games/Wishlists views. Browser/build/lint/TypeScript checks pass.
+- Status: OPEN
+- Completion note: Pending.
+
+### [ ] A11Y 19 — P1
+
+- Severity: P1
+- Location: app/g/[group_id]/page.tsx; loaded private group views — Conversation selection state
+- Evidence: Recipient/Your Secret Santa conversation buttons expose no selected state, only selected styling.
+- Fix: Name the conversation button group and expose aria-pressed on both choices.
+- Acceptance criteria: Exactly one conversation is pressed after switching, with existing message permissions retained. Browser/build/lint/TypeScript checks pass.
+- Status: OPEN
+- Completion note: Pending.
+
+### [ ] A11Y 20 — P1
+
+- Severity: P1
+- Location: app/g/[group_id]/page.tsx; loaded private group views — Progress indicator names
+- Evidence: Loaded Gifts bought progressbar has neither aria-label nor aria-labelledby; setup progress uses the same unnamed pattern.
+- Fix: Name both progressbars from their visible section purpose, preserving values.
+- Acceptance criteria: Loaded Gifts bought and Setup progress indicators have correct names and numeric values. Browser/build/lint/TypeScript checks pass.
+- Status: OPEN
+- Completion note: Pending.
