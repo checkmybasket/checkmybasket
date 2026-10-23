@@ -260,7 +260,7 @@ export function ItemForm({
         saving a gift.
       </p>
       <div className="flex flex-wrap gap-3">
-        <Button className="rounded-xl min-h-11" disabled={busy} type="submit">
+        <Button className="rounded-[var(--cmb-radius)] min-h-11" disabled={busy} type="submit">
           {busy ? "Saving…" : item ? "Save changes" : "Add to wishlist"}
         </Button>
         <button

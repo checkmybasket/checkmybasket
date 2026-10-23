@@ -68,7 +68,7 @@
   --border:               var(--cmb-border);
   --input:                var(--cmb-border-strong);
   --ring:                 var(--cmb-primary);
-  --radius:               0.75rem;
+  --radius:               var(--cmb-radius);
   --sidebar: var(--cmb-surface);
   --sidebar-foreground: var(--cmb-text-primary);
   --sidebar-primary: var(--cmb-primary);

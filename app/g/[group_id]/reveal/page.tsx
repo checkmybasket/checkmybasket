@@ -90,7 +90,7 @@ export default function RevealPage({ params }: { params: Promise<{ group_id: str
       {/* Header */}
       <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background: "var(--cmb-header-bg)" }}>
         <div className="max-w-xl mx-auto px-4 h-14 flex items-center gap-3">
-          <Link href={`/g/${group_id}`} aria-label="Back to group" className={buttonVariants({ variant: "ghost", size: "sm", className: "h-11 w-11 p-0 rounded-lg" })}>
+          <Link href={`/g/${group_id}`} aria-label="Back to group" className={buttonVariants({ variant: "ghost", size: "sm", className: "h-11 w-11 p-0 rounded-[var(--cmb-radius)]" })}>
               <ChevronLeft size={20} strokeWidth={1.5} />
             </Link>
           <div className="flex items-center gap-2 text-[var(--cmb-primary)]">
@@ -102,7 +102,7 @@ export default function RevealPage({ params }: { params: Promise<{ group_id: str
 
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-12">
         <div className="w-full max-w-sm">
-          {stage === "loading" && <div role="status" aria-label="Loading your match" className="rounded-3xl h-64 skeleton" />}
+          {stage === "loading" && <div role="status" aria-label="Loading your match" className="rounded-[var(--cmb-radius)] h-64 skeleton" />}
           {stage === "nodraw" && (
             <div className="text-center">
               <Lock size={36} strokeWidth={1.5} className="mx-auto mb-4 text-[var(--cmb-text-muted)]" />
@@ -110,7 +110,7 @@ export default function RevealPage({ params }: { params: Promise<{ group_id: str
               <p className="text-sm mb-6 text-[var(--cmb-text-secondary)]">
                 Either names haven&apos;t been drawn, or you joined after the draw.
               </p>
-              <Link href={`/g/${group_id}`} className={buttonVariants({ variant: "outline", size: "default", className: "rounded-xl h-11 px-6 border-[var(--cmb-border-strong)]" })}>Back to group</Link>
+              <Link href={`/g/${group_id}`} className={buttonVariants({ variant: "outline", size: "default", className: "rounded-[var(--cmb-radius)] h-11 px-6 border-[var(--cmb-border-strong)]" })}>Back to group</Link>
             </div>
           )}
           {stage === "pre" && <PreReveal onReveal={handleReveal} />}
@@ -139,7 +139,7 @@ function PreReveal({ onReveal }: { onReveal: () => void }) {
       <Button
         size="lg"
         onClick={onReveal}
-        className="h-14 px-10 text-base rounded-xl font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]"
+        className="h-14 px-10 text-base rounded-[var(--cmb-radius)] font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]"
       >
         Reveal my match
         <ArrowRight size={18} strokeWidth={1.5} className="ml-2" />
@@ -159,7 +159,7 @@ function AnimatingReveal() {
       <div className="relative mx-auto mb-8" style={{ width: 160, height: 120 }}>
         {/* Envelope body */}
         <div
-          className="absolute inset-0 rounded-xl flex items-end justify-center pb-4"
+          className="absolute inset-0 rounded-[var(--cmb-radius)] flex items-end justify-center pb-4"
           style={{ background: "var(--cmb-primary)", boxShadow: "var(--shadow-xl)" }}
         >
           <div
@@ -181,7 +181,7 @@ function AnimatingReveal() {
         />
         {/* Card rising from envelope */}
         <div
-          className="absolute left-4 right-4 rounded-lg flex items-center justify-center"
+          className="absolute left-4 right-4 rounded-[var(--cmb-radius)] flex items-center justify-center"
           style={{
             background: "#fff",
             boxShadow: "var(--shadow-lg)",
@@ -227,7 +227,7 @@ function RevealedScreen({
   return (
     <div className="animate-fade-in">
       {/* Name reveal */}
-      <div className="rounded-3xl p-8 text-center mb-6 animate-card-rise bg-[var(--cmb-primary)] shadow-[var(--shadow-xl)]">
+      <div className="rounded-[var(--cmb-radius)] p-8 text-center mb-6 animate-card-rise bg-[var(--cmb-primary)] shadow-[var(--shadow-xl)]">
         <p className="text-sm mb-2" style={{ color: "color-mix(in srgb, var(--cmb-text-inverse) 60%, transparent)" }}>
           You&apos;re buying for...
         </p>
@@ -258,7 +258,7 @@ function RevealedScreen({
 
       {/* Likes / dislikes / sizes */}
       {(match.likes || match.dislikes || match.sizes) && (
-        <div className="rounded-2xl p-5 mb-4 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
+        <div className="rounded-[var(--cmb-radius)] p-5 mb-4 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
           {match.likes && (
             <div className="mb-3">
               <p className="text-xs font-semibold uppercase mb-1 text-[var(--cmb-text-muted)]">They like</p>
@@ -288,7 +288,7 @@ function RevealedScreen({
             {match.wishlist.map((item) => (
               <div
                 key={item.id}
-                className="rounded-xl px-4 py-3 flex items-center gap-3 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]"
+                className="rounded-[var(--cmb-radius)] px-4 py-3 flex items-center gap-3 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]"
               >
                 <Gift size={16} strokeWidth={1.5} className="text-[var(--cmb-primary)] shrink-0" />
                 <div className="flex-1 min-w-0">
@@ -299,7 +299,7 @@ function RevealedScreen({
                 </div>
                 {item.url && (
                   <a href={item.url} target="_blank" rel="noopener noreferrer">
-                    <Button variant="ghost" size="sm" className="h-11 w-11 p-0 rounded-lg" aria-label="View product">
+                    <Button variant="ghost" size="sm" className="h-11 w-11 p-0 rounded-[var(--cmb-radius)]" aria-label="View product">
                       <ArrowRight size={14} strokeWidth={1.5} />
                     </Button>
                   </a>
@@ -312,17 +312,17 @@ function RevealedScreen({
 
       {/* Action buttons */}
       <div className="space-y-3">
-        <Link href={`/g/${groupId}`} className={buttonVariants({ variant: "outline", size: "default", className: "w-full h-12 rounded-xl font-medium border-[var(--cmb-border-strong)]" })}>
+        <Link href={`/g/${groupId}`} className={buttonVariants({ variant: "outline", size: "default", className: "w-full h-12 rounded-[var(--cmb-radius)] font-medium border-[var(--cmb-border-strong)]" })}>
             <MessageCircle size={18} strokeWidth={1.5} className="mr-2" />
             Ask {recipientName} a question
           </Link>
-        <Link href={match.budget != null ? `/gifts?budget=${match.budget}` : "/gifts"} className={buttonVariants({ variant: "outline", size: "default", className: "w-full h-12 rounded-xl font-medium border-[var(--cmb-border-strong)]" })}>
+        <Link href={match.budget != null ? `/gifts?budget=${match.budget}` : "/gifts"} className={buttonVariants({ variant: "outline", size: "default", className: "w-full h-12 rounded-[var(--cmb-radius)] font-medium border-[var(--cmb-border-strong)]" })}>
             <ShoppingBag size={18} strokeWidth={1.5} className="mr-2" />
             {match.budget != null ? `Find gifts under ${formatBudget(match.budget)}` : "Browse gift ideas"}
           </Link>
         <Button
           onClick={onToggleBought}
-          className="w-full h-12 rounded-xl font-medium"
+          className="w-full h-12 rounded-[var(--cmb-radius)] font-medium"
           style={{
             background: match.giftBought ? "var(--cmb-success)" : "var(--cmb-surface)",
             color: match.giftBought ? "#fff" : "var(--cmb-text-primary)",

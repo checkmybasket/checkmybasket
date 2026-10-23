@@ -133,11 +133,11 @@ export default function CreatePage() {
         <p className="text-sm mb-8 animate-fade-up animate-delay-100 text-[var(--cmb-text-secondary)]">Share the link below to invite your group</p>
 
         <div className="mb-6 space-y-3 animate-fade-up animate-delay-200">
-          <Button onClick={shareInvite} disabled={sharing} size="lg" className="w-full h-14 rounded-xl font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">
+          <Button onClick={shareInvite} disabled={sharing} size="lg" className="w-full h-14 rounded-[var(--cmb-radius)] font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">
             <Share2 size={20} strokeWidth={1.5} className="mr-2" />
             {sharing ? "Sharing…" : typeof navigator !== "undefined" && typeof navigator.share === "function" ? "Share invite" : "Copy invite link"}
           </Button>
-          <Link href={`/g/${groupId}`} className={cn(buttonVariants({ variant: "outline", size: "lg" }), "w-full h-12 rounded-xl font-semibold border-[var(--cmb-border-strong)]")}>
+          <Link href={`/g/${groupId}`} className={cn(buttonVariants({ variant: "outline", size: "lg" }), "w-full h-12 rounded-[var(--cmb-radius)] font-semibold border-[var(--cmb-border-strong)]")}>
             Go to your group <ArrowRight size={18} strokeWidth={1.5} className="ml-2" />
           </Link>
         </div>
@@ -145,26 +145,26 @@ export default function CreatePage() {
         <div className="min-h-48"><EmailRecovery groupId={groupId} /></div>
 
         {/* Direct WhatsApp sharing remains available on every device. */}
-        <Button onClick={shareWhatsApp} size="lg" className="w-full h-14 rounded-xl font-semibold mb-3 animate-fade-up animate-delay-200 text-white"
+        <Button onClick={shareWhatsApp} size="lg" className="w-full h-14 rounded-[var(--cmb-radius)] font-semibold mb-3 animate-fade-up animate-delay-200 text-white"
           style={{ background:"#25D366" }}>
           <MessageCircle size={20} strokeWidth={1.5} className="mr-2" /> Share via WhatsApp
         </Button>
 
         {/* Copy link — secondary */}
-        <div className="rounded-2xl p-5 mb-4 text-left animate-fade-up animate-delay-300 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-md)]">
+        <div className="rounded-[var(--cmb-radius)] p-5 mb-4 text-left animate-fade-up animate-delay-300 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-md)]">
           <p className="text-xs font-medium mb-2 text-[var(--cmb-text-muted)]">OR COPY THE LINK</p>
           <p className="text-sm break-all mb-3 text-[var(--cmb-primary)]" style={{ fontFamily:"var(--font-ibm-plex-mono)", fontSize:"0.8rem" }}>{inviteLink}</p>
-          <Button onClick={copyLink} variant="outline" className="w-full h-10 rounded-xl font-medium text-sm"
+          <Button onClick={copyLink} variant="outline" className="w-full h-10 rounded-[var(--cmb-radius)] font-medium text-sm"
             style={{ borderColor:copied?"var(--cmb-success)":"var(--cmb-border-strong)", color:copied?"var(--cmb-success)":"var(--cmb-text-primary)" }}>
             {copied ? <><Check size={15} strokeWidth={2} className="mr-2"/>Copied</> : <><Copy size={15} strokeWidth={1.5} className="mr-2"/>Copy link</>}
           </Button>
         </div>
 
         {/* QR code */}
-        <div className="rounded-2xl p-5 text-center animate-fade-up animate-delay-400 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]">
+        <div className="rounded-[var(--cmb-radius)] p-5 text-center animate-fade-up animate-delay-400 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]">
           <QrCode size={18} strokeWidth={1.5} className="mx-auto mb-1 text-[var(--cmb-text-muted)]" />
           <p className="text-xs mb-3 text-[var(--cmb-text-muted)]">QR code for in-person sharing</p>
-          <div className="w-32 h-32 rounded-xl mx-auto overflow-hidden bg-white border border-[var(--cmb-border)]">
+          <div className="w-32 h-32 rounded-[var(--cmb-radius)] mx-auto overflow-hidden bg-white border border-[var(--cmb-border)]">
             <QRCodeSvg value={inviteLink} size={126} />
           </div>
         </div>
@@ -177,7 +177,7 @@ export default function CreatePage() {
     <div className="min-h-dvh bg-[var(--cmb-bg)]">
       <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background:"var(--cmb-header-bg)" }}>
         <div className="max-w-xl mx-auto px-4 h-14 flex items-center gap-3">
-          <Link href="/" aria-label="Back to home" className={buttonVariants({ variant: "ghost", size: "sm", className: "h-11 w-11 p-0 rounded-lg" })}><ChevronLeft size={20} strokeWidth={1.5}/></Link>
+          <Link href="/" aria-label="Back to home" className={buttonVariants({ variant: "ghost", size: "sm", className: "h-11 w-11 p-0 rounded-[var(--cmb-radius)]" })}><ChevronLeft size={20} strokeWidth={1.5}/></Link>
           <div className="flex items-center gap-2 text-[var(--cmb-primary)]">
             <BasketMark size={20} />
             <span className="font-semibold font-display">CheckMyBasket</span>
@@ -195,7 +195,7 @@ export default function CreatePage() {
         <Field htmlFor="group-name" label="Group name" error={errors.groupName} required>
           <Input id="group-name" aria-required="true" aria-invalid={!!errors.groupName} aria-describedby={errors.groupName ? "group-name-error" : undefined} placeholder="e.g. Office Secret Santa 2026" value={form.groupName}
             onChange={e => setForm(f => ({ ...f, groupName:e.target.value }))}
-            className="h-12 text-base rounded-xl" style={{ borderColor:errors.groupName?"var(--cmb-error)":"var(--cmb-border-strong)" }}/>
+            className="h-12 text-base rounded-[var(--cmb-radius)]" style={{ borderColor:errors.groupName?"var(--cmb-error)":"var(--cmb-border-strong)" }}/>
         </Field>
 
         {/* Budget — optional */}
@@ -217,7 +217,7 @@ export default function CreatePage() {
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-[var(--cmb-text-secondary)]">£</span>
               <Input id="custom-budget" aria-invalid={!!errors.customBudget} aria-describedby={errors.customBudget ? "custom-budget-error" : undefined} type="number" inputMode="decimal" placeholder="Enter amount" value={form.customBudget}
                 onChange={e => setForm(f => ({ ...f, customBudget:e.target.value }))}
-                className="h-12 pl-7 text-base rounded-xl" style={{ borderColor:errors.customBudget?"var(--cmb-error)":"var(--cmb-border-strong)" }}/>
+                className="h-12 pl-7 text-base rounded-[var(--cmb-radius)]" style={{ borderColor:errors.customBudget?"var(--cmb-error)":"var(--cmb-border-strong)" }}/>
               {errors.customBudget && <p id="custom-budget-error" role="alert" className="mt-1 text-sm text-[var(--cmb-error)]">{errors.customBudget}</p>}
             </div>
           )}
@@ -225,22 +225,22 @@ export default function CreatePage() {
 
         <Field htmlFor="exchange-date" label="Gift exchange day" hint="Optional">
           <Input id="exchange-date" aria-describedby="exchange-date-hint" type="date" value={form.exchangeDate} onChange={e => setForm(f => ({ ...f, exchangeDate:e.target.value }))}
-            className="h-12 text-base rounded-xl border border-[var(--cmb-border-strong)]"/>
+            className="h-12 text-base rounded-[var(--cmb-radius)] border border-[var(--cmb-border-strong)]"/>
         </Field>
         <Field htmlFor="exchange-location" label="Exchange location" hint="Optional">
           <Input id="exchange-location" aria-describedby="exchange-location-hint" placeholder="e.g. The Rose & Crown, 7pm" value={form.location} onChange={e => setForm(f => ({ ...f, location:e.target.value }))}
-            className="h-12 text-base rounded-xl border border-[var(--cmb-border-strong)]"/>
+            className="h-12 text-base rounded-[var(--cmb-radius)] border border-[var(--cmb-border-strong)]"/>
         </Field>
         <Field htmlFor="organiser-name" label="Your name" error={errors.yourName} required>
           <Input id="organiser-name" aria-required="true" aria-invalid={!!errors.yourName} aria-describedby={errors.yourName ? "organiser-name-error" : undefined} placeholder="What should we call you?" value={form.yourName} onChange={e => setForm(f => ({ ...f, yourName:e.target.value }))}
-            className="h-12 text-base rounded-xl" style={{ borderColor:errors.yourName?"var(--cmb-error)":"var(--cmb-border-strong)" }}/>
+            className="h-12 text-base rounded-[var(--cmb-radius)]" style={{ borderColor:errors.yourName?"var(--cmb-error)":"var(--cmb-border-strong)" }}/>
         </Field>
         <div>
           <Label htmlFor="email" className="text-base font-medium mb-1.5 block">Email (optional)</Label>
           <p id="email-hint" className="text-sm mb-2 text-[var(--cmb-text-muted)]">Get an email when names are drawn. Private from your group. Leave blank to skip.</p>
           <Input id="email" type="email" inputMode="email" autoComplete="email" placeholder="you@example.com" value={form.email}
             onChange={e => setForm(f => ({ ...f, email:e.target.value }))} aria-describedby={errors.email ? "email-hint email-error" : "email-hint"} aria-invalid={!!errors.email}
-            className="h-12 text-base rounded-xl border border-[var(--cmb-border-strong)]"/>
+            className="h-12 text-base rounded-[var(--cmb-radius)] border border-[var(--cmb-border-strong)]"/>
           {errors.email && <p id="email-error" role="alert" className="mt-1 text-sm text-[var(--cmb-error)]">{errors.email}</p>}
           <p className="text-xs mt-2 text-[var(--cmb-text-muted)]">This updates your notification email across your groups; leaving it blank turns notifications off. Notifications require email verification after joining; creating and using your group does not require email. <Link href="/privacy" className="underline">Privacy policy</Link></p>
         </div>
@@ -248,7 +248,7 @@ export default function CreatePage() {
 
       <div className="fixed bottom-0 left-0 right-0 z-20 px-4 pt-4 border-t safe-bottom bg-[var(--cmb-bg)] border-[var(--cmb-border)]">
         <div className="max-w-xl mx-auto">
-          <Button onClick={handleCreate} disabled={busy} size="lg" className="w-full h-14 text-base rounded-xl font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">
+          <Button onClick={handleCreate} disabled={busy} size="lg" className="w-full h-14 text-base rounded-[var(--cmb-radius)] font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">
             <Gift size={20} strokeWidth={1.5} className="mr-2"/> {busy ? "Creating…" : "Create your draw"}
           </Button>
           <p className="text-center mt-2 text-xs pb-2 text-[var(--cmb-text-muted)]">Free forever. No account needed.</p>

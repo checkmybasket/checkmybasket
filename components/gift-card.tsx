@@ -27,7 +27,7 @@ export function GiftCard({ id, title, price, shop, tags, url, image, description
   const checked = giftPriceCheckDate(priceCheckedAt);
   const copy = giftDescriptionParts(description);
   return (
-    <article className={`rounded-2xl overflow-hidden flex flex-col transition-shadow duration-200 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)] ${lg ? "hover:shadow-lg" : "hover:shadow-md"}`}>
+    <article className={`rounded-[var(--cmb-radius)] overflow-hidden flex flex-col transition-shadow duration-200 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)] ${lg ? "hover:shadow-lg" : "hover:shadow-md"}`}>
       <div className={`relative w-full ${lg ? "h-56" : "h-48"} bg-white`}>
         {image ? <Image src={image} alt={title} fill sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 1023px) 50vw, 320px" className="object-contain p-4" /> : <div className="h-full flex items-center justify-center text-[var(--cmb-primary)]"><Gift size={56} strokeWidth={1} aria-label="Gift idea"/></div>}
       </div>
@@ -46,10 +46,10 @@ export function GiftCard({ id, title, price, shop, tags, url, image, description
           <p className="text-xs text-[var(--cmb-text-muted)] mb-1">{checked ? <>Price checked <time dateTime={checked.dateTime}>{checked.label}</time>. Confirm current price at the retailer.</> : "Confirm current price at the retailer."}</p>
           <p className="text-xs text-[var(--cmb-text-muted)] mb-1">{deliveryNote}</p>
           <p className="text-xs text-[var(--cmb-text-muted)] mb-3">{shop}</p>
-          <a data-gift-retailer={shop} href={url} target="_blank" rel="noopener noreferrer sponsored" aria-label={`Shop at ${shop}: ${title} (opens in a new tab)`} className="inline-flex items-center justify-center gap-2 min-h-11 px-4 py-2 rounded-xl text-sm font-semibold bg-[var(--cmb-accent)] text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--cmb-primary)]">
+          <a data-gift-retailer={shop} href={url} target="_blank" rel="noopener noreferrer sponsored" aria-label={`Shop at ${shop}: ${title} (opens in a new tab)`} className="inline-flex items-center justify-center gap-2 min-h-11 px-4 py-2 rounded-[var(--cmb-radius)] text-sm font-semibold bg-[var(--cmb-accent)] text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--cmb-primary)]">
             Shop at {shop} <ExternalLink size={13} strokeWidth={1.5} aria-hidden="true"/>
           </a>
-          {id ? <Link prefetch={false} data-gift-save href={`/wishlists?gift=${encodeURIComponent(id)}`} aria-label={`Save to wishlist: ${title}`} className="flex min-h-11 items-center justify-center rounded-xl border border-[var(--cmb-border)] px-4 py-2 mt-2 text-sm font-semibold text-[var(--cmb-primary)] focus-visible:outline-2 focus-visible:outline-offset-2">Save to wishlist</Link> : null}
+          {id ? <Link prefetch={false} data-gift-save href={`/wishlists?gift=${encodeURIComponent(id)}`} aria-label={`Save to wishlist: ${title}`} className="flex min-h-11 items-center justify-center rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] px-4 py-2 mt-2 text-sm font-semibold text-[var(--cmb-primary)] focus-visible:outline-2 focus-visible:outline-offset-2">Save to wishlist</Link> : null}
         </div>
       </div>
     </article>

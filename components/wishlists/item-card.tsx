@@ -26,7 +26,7 @@ export function ItemCard({
       className={
         layout === "default"
           ? `${panel} flex flex-col h-full`
-          : "rounded-2xl border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-4 h-full"
+          : "rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-4 h-full"
       }
     >
       <div
@@ -35,7 +35,7 @@ export function ItemCard({
         }
       >
         <div
-          className={`${layout === "list" ? "h-20 w-20 sm:h-24 sm:w-24 shrink-0" : layout === "compact" ? "h-28 mb-3" : "h-40 mb-4"} relative rounded-xl bg-[var(--cmb-bg)] flex items-center justify-center overflow-hidden`}
+          className={`${layout === "list" ? "h-20 w-20 sm:h-24 sm:w-24 shrink-0" : layout === "compact" ? "h-28 mb-3" : "h-40 mb-4"} relative rounded-[var(--cmb-radius)] bg-[var(--cmb-bg)] flex items-center justify-center overflow-hidden`}
         >
           {item.image_url && !failed ? (
             <Image
@@ -101,7 +101,7 @@ export function ItemCard({
           >
             {url && (
               <a
-                className={`${layout === "default" ? "mt-4" : ""} inline-flex items-center justify-center min-h-11 rounded-xl bg-[var(--cmb-primary)] text-white px-4 py-2 text-sm`}
+                className={`${layout === "default" ? "mt-4" : ""} inline-flex items-center justify-center min-h-11 rounded-[var(--cmb-radius)] bg-[var(--cmb-primary)] text-white px-4 py-2 text-sm`}
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"

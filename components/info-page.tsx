@@ -11,7 +11,7 @@ export function InfoPage({ title, updated, children }: { title: string; updated?
       <a className="cmb-skip-link" href="#main-content">Skip to content</a>
       <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background: "var(--cmb-header-bg)" }}>
         <div className="max-w-2xl mx-auto px-4 h-14 flex items-center gap-3">
-          <Link href="/" className="inline-flex min-h-11 w-11 items-center justify-center rounded-lg hover:bg-[var(--cmb-surface-hover)]" aria-label="Back to home"><ChevronLeft size={20} strokeWidth={1.5} aria-hidden="true"/></Link>
+          <Link href="/" className="inline-flex min-h-11 w-11 items-center justify-center rounded-[var(--cmb-radius)] hover:bg-[var(--cmb-surface-hover)]" aria-label="Back to home"><ChevronLeft size={20} strokeWidth={1.5} aria-hidden="true"/></Link>
           <div className="flex items-center gap-2 text-[var(--cmb-primary)]">
             <BasketMark size={20} />
             <span className="font-semibold font-display">CheckMyBasket</span>

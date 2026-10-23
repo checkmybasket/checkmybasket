@@ -54,7 +54,7 @@ export function NotificationEmail({ groupId }: { groupId: string }) {
     finally { setBusy(false); }
   }
   const unsaved = email.trim().toLowerCase() !== (status?.email ?? "").toLowerCase();
-  return <section className="rounded-2xl p-5 mt-6 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]" aria-labelledby={`${id}-title`}>
+  return <section className="rounded-[var(--cmb-radius)] p-5 mt-6 bg-[var(--cmb-surface)] border border-[var(--cmb-border)]" aria-labelledby={`${id}-title`}>
     <h2 id={`${id}-title`} className="font-semibold text-sm mb-2">Optional draw notification email</h2>
     <p className="text-xs mb-3 text-[var(--cmb-text-secondary)]">Email is optional. Save and verify an address for future draws across your groups, or turn notifications off. Neither action changes your matches or sends an email for this draw.</p>
     <form onSubmit={event => { event.preventDefault(); void save(email); }} className="space-y-3">

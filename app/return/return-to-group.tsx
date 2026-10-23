@@ -152,7 +152,7 @@ export function ReturnToGroup() {
   }
   return (
     <main className="min-h-dvh flex items-center justify-center px-4 py-12 bg-[var(--cmb-bg)]">
-      <div className="w-full max-w-md rounded-2xl bg-[var(--cmb-surface)] border border-[var(--cmb-border)] p-6 sm:p-8">
+      <div className="w-full max-w-md rounded-[var(--cmb-radius)] bg-[var(--cmb-surface)] border border-[var(--cmb-border)] p-6 sm:p-8">
         <Link
           href="/"
           className="flex gap-2 items-center font-semibold text-[var(--cmb-primary)] mb-6"
@@ -175,7 +175,7 @@ export function ReturnToGroup() {
             <Button
               onClick={redeem}
               disabled={busy}
-              className="w-full h-12 rounded-xl"
+              className="w-full h-12 rounded-[var(--cmb-radius)]"
             >
               {busy ? "Signing you in…" : "Continue to CheckMyBasket"}
             </Button>
@@ -196,7 +196,7 @@ export function ReturnToGroup() {
                     <li key={list.id}>
                       <Link prefetch={false}
                         href={`/wishlists/${list.id}`}
-                        className="block rounded-xl border border-[var(--cmb-border)] p-3 font-medium underline"
+                        className="block rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] p-3 font-medium underline"
                       >
                         {list.title}
                       </Link>
@@ -218,7 +218,7 @@ export function ReturnToGroup() {
                     <li key={group.id}>
                       <Link
                         href={`/g/${group.id}`}
-                        className="block rounded-xl border border-[var(--cmb-border)] p-3 font-medium underline underline-offset-4"
+                        className="block rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] p-3 font-medium underline underline-offset-4"
                       >
                         {group.name}
                       </Link>
@@ -246,7 +246,7 @@ export function ReturnToGroup() {
               <Button
                 type="submit"
                 disabled={busy}
-                className="w-full h-12 rounded-xl"
+                className="w-full h-12 rounded-[var(--cmb-radius)]"
               >
                 <Mail size={16} className="mr-2" aria-hidden />
                 {busy ? "Sending…" : "Email me a sign-in link"}

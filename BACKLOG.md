@@ -507,12 +507,12 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Derive legacy tint treatments from semantic theme colors. Opacities and success/error meaning are preserved; build/lint/TypeScript pass.
 
-### [ ] UI 06 — P2
+### [x] UI 06 — P2
 
 - Severity: P2
 - Location: app/ and components/ shared theme; public and functional routes
 - Evidence: Functional control and panel radii drift from the brand. Current brand defines --cmb-radius:0, but functional pages and generated primitives hardcode rounded-lg/xl/2xl/3xl.
 - Fix: Route rectangular control/panel radii through the brand radius token, preserving intentional circles/pills for avatars and status indicators. This is a flagged visual-only consistency change.
 - Acceptance criteria: obsolete styling references are absent; current tokens/marks render consistently; build/lint/TypeScript and final responsive/contrast checks pass.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Align rectangular controls and panels with the shared brand radius. Intentional avatar/status pills remain round; build/lint/TypeScript pass.

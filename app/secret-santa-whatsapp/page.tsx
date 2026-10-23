@@ -25,7 +25,7 @@ export default function WhatsAppGuide() {
         Your participants can add wishlists from any shop and ask anonymous
         questions after the draw. Creating and joining a draw is free.
       </p>
-      <Link href="/create" className="inline-flex min-h-11 items-center rounded-xl bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Create a free Secret Santa draw</Link>
+      <Link href="/create" className="inline-flex min-h-11 items-center rounded-[var(--cmb-radius)] bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Create a free Secret Santa draw</Link>
       <Section heading="1. Agree a budget, date and joining deadline">
         <p>Planning a workplace exchange? Our <Link href="/office-secret-santa" className="underline">office Secret Santa checklist</Link> covers opt-in participation, wishlist etiquette and remote colleagues.</p>
         <p>Ask who wants to take part before you start. Agree a gift budget and when and where you will exchange gifts. Set a joining deadline so everyone has time to join before you draw names.</p>
@@ -57,7 +57,7 @@ export default function WhatsAppGuide() {
         <p>If you have already verified a recovery email, use <Link prefetch={false} href="/return" className="underline">Return &amp; sign in</Link> to request a sign-in link. Saving a notification email alone does not enable recovery. Without a verified recovery email, we cannot restore your original member identity on a new device.</p>
         <p>For wishlists outside a Secret Santa group, you can also <Link prefetch={false} href="/wishlists" className="underline">create a personal wishlist</Link> and choose whether to share it.</p>
       </Section>
-      <p><Link href="/create" className="inline-flex min-h-11 items-center rounded-xl bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Set up your free draw</Link></p>
+      <p><Link href="/create" className="inline-flex min-h-11 items-center rounded-[var(--cmb-radius)] bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Set up your free draw</Link></p>
       <Section heading="More Secret Santa planning guides"><OrganiserGuideLinks /></Section>
     </InfoPage>
   );

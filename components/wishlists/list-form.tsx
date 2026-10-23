@@ -106,7 +106,7 @@ export function ListForm({
         Your list starts private. No email or group needed.
       </p>
       <div className="flex flex-wrap gap-3">
-        <Button className="rounded-xl min-h-11" type="submit" disabled={busy}>
+        <Button className="rounded-[var(--cmb-radius)] min-h-11" type="submit" disabled={busy}>
           {busy ? "Saving…" : list ? "Save changes" : "Create my wishlist"}
         </Button>
         {onCancel && (

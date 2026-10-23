@@ -189,7 +189,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
       )}
       <div className="my-6 flex flex-wrap gap-3">
         <Button
-          className="rounded-xl min-h-11"
+          className="rounded-[var(--cmb-radius)] min-h-11"
           onClick={() => setEditing(null)}
         >
           Add a gift
@@ -231,7 +231,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
           <label className="block text-sm">
             Your sharing link
             <input
-              className="mt-1 w-full p-3 rounded-xl border border-[var(--cmb-border)] text-sm"
+              className="mt-1 w-full p-3 rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] text-sm"
               value={shareUrl}
               readOnly
               onFocus={(e) => e.target.select()}
@@ -311,7 +311,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
           </p>
           <Button
             type="button"
-            className="mt-4 rounded-xl min-h-11"
+            className="mt-4 rounded-[var(--cmb-radius)] min-h-11"
             onClick={() => setEditing(null)}
           >
             Add a gift
@@ -353,7 +353,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
               Cancel
             </button>
             <Button
-              className="rounded-xl min-h-11"
+              className="rounded-[var(--cmb-radius)] min-h-11"
               disabled={busy}
               onClick={() => mutate(confirm.action, confirm.item)}
             >

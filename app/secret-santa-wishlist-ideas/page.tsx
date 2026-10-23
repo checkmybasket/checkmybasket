@@ -23,7 +23,7 @@ export default function WishlistGuide() {
       { id: "create-and-share-your-list-in-checkmybasket", label: "Create and share your list" },
     ]} />
     <p className="text-lg leading-relaxed">Put a few things you would actually enjoy on your Secret Santa wishlist, with enough detail for someone else to choose confidently. Include options below the spending limit, explain your preferences and leave room for the buyer to surprise you.</p>
-    <Link prefetch={false} href="/wishlists" className="inline-flex min-h-11 items-center rounded-xl bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Create a wishlist</Link>
+    <Link prefetch={false} href="/wishlists" className="inline-flex min-h-11 items-center rounded-[var(--cmb-radius)] bg-[var(--cmb-primary)] px-5 py-3 font-semibold text-[var(--cmb-text-inverse)]">Create a wishlist</Link>
     <Section id="start-with-three-to-five-useful-ideas" heading="Start with three to five useful ideas">
       <p>A short list is easier to use than dozens of unrelated links. Try one practical item, one hobby idea and one small treat, provided each fits the agreed budget. Include a lower-priced option so the buyer has room for postage or wrapping.</p>
       <p>For example, a reader could add a particular paperback, a bookmark and a note saying they enjoy historical fiction. A stationery fan could specify an A5 notebook with dotted pages rather than simply writing “notebook”. These details help even when the exact item is unavailable.</p>
@@ -49,19 +49,19 @@ export default function WishlistGuide() {
     <Section id="completed-wishlist-examples" heading="Completed wishlist examples for colleagues, friends and family">
       <p>These fictional examples show useful wording rather than verified product offers. The amounts are spending limits, not quoted prices. Check current prices, postage and options before choosing a product.</p>
       <div className="space-y-4">
-        <div className="rounded-xl border border-[var(--cmb-border)] p-5">
+        <div className="rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] p-5">
           <h3 className="font-semibold mb-2">Alex: a colleague with a £10 total budget</h3>
           <p><strong>Interests:</strong> stationery, sudoku and reading at lunchtime.</p>
           <ul className="list-disc pl-5 space-y-2"><li>An A5 dotted notebook with a plain navy or green cover. No dated planner pages, please.</li><li>A medium-difficulty sudoku book, in a small format for my commute. I already have a pencil.</li><li>A slim fabric or metal bookmark. Any simple design is fine; no initials needed.</li></ul>
           <p><strong>Note to my Santa:</strong> any one of these would be lovely. Please keep the total, including delivery, under £10. A simple alternative is welcome.</p>
         </div>
-        <div className="rounded-xl border border-[var(--cmb-border)] p-5">
+        <div className="rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] p-5">
           <h3 className="font-semibold mb-2">Sam: a friend with a £20 total budget</h3>
           <p><strong>Interests:</strong> fantasy books, board games and drawing.</p>
           <ul className="list-disc pl-5 space-y-2"><li><em>Piranesi</em> by Susanna Clarke, in paperback. I have not read or bought it yet.</li><li>A small game for two adults that takes about 20 minutes. I already own UNO, so please choose something different.</li><li>An A5 sketchbook with plain pages for pencil sketches. I have pencils and do not need a paint set.</li></ul>
           <p><strong>Note to my Santa:</strong> choose one idea within £20 including delivery. Secondhand books in good condition are welcome, and a lower-priced gift is absolutely fine.</p>
         </div>
-        <div className="rounded-xl border border-[var(--cmb-border)] p-5">
+        <div className="rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] p-5">
           <h3 className="font-semibold mb-2">Jamie: a family exchange with a £30 total budget</h3>
           <p><strong>Interests:</strong> beginner embroidery, wildlife and practical keepsakes.</p>
           <ul className="list-disc pl-5 space-y-2"><li>A beginner embroidery kit with a woodland design. Please choose a complete kit with a hoop, fabric, needle and thread.</li><li>A wildlife jigsaw of around 500 pieces. A landscape or bird illustration would be ideal.</li><li>A simple personalised keyring, engraved “Jamie”. Silver-coloured is my preference; no date or extra message needed.</li></ul>

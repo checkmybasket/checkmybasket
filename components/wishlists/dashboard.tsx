@@ -97,7 +97,7 @@ export function WishlistDashboard({ draft, giftUnavailable }: { draft?: Catalogu
         />
       ) : (
         <Button
-          className="rounded-xl min-h-12 mb-6"
+          className="rounded-[var(--cmb-radius)] min-h-12 mb-6"
           disabled={loading}
           onClick={() => setCreating(true)}
         >

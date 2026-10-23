@@ -37,8 +37,8 @@ export function WishlistShell({ children }: { children: React.ReactNode }) {
   );
 }
 export const panel =
-  "rounded-2xl border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-5 sm:p-6";
+  "rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-5 sm:p-6";
 export const field =
-  "w-full rounded-xl border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-3 min-h-11 text-base";
+  "w-full rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] bg-[var(--cmb-surface)] p-3 min-h-11 text-base";
 export const secondary =
-  "inline-flex items-center justify-center rounded-xl border border-[var(--cmb-border)] px-4 py-2 min-h-11 text-sm font-medium hover:bg-[var(--cmb-bg)] disabled:opacity-50";
+  "inline-flex items-center justify-center rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] px-4 py-2 min-h-11 text-sm font-medium hover:bg-[var(--cmb-bg)] disabled:opacity-50";
