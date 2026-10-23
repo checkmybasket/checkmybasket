@@ -87,15 +87,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Converted six remaining nested link/button controls into styled links. Production create DOM has no nested controls; source scan, build/lint/TypeScript pass.
 
-### [ ] A11Y 04 — P1
+### [x] A11Y 04 — P1
 
 - Severity: P1
 - Location: app/create/page.tsx; components/info-page.tsx; mobile navigation and gift cards
 - Evidence: At 320px, back control is 36x36px; budget chips are 40px tall. Gift shop links use h-10.
 - Fix: Increase mobile control hit areas to at least 44x44px, preserving visual hierarchy.
 - Acceptance criteria: Measure all mobile controls across routes; every touch target meets the requested 44px minimum without overlap.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Added a mobile 44px button minimum and enlarged compact back/edit controls. Browser at 320px finds no undersized visible buttons or page overflow on create; private flows remain covered by OWNER 02. Build/lint/TypeScript pass.
 
 ### [ ] A11Y 05 — P1
 

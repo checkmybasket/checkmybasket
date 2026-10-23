@@ -160,7 +160,7 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
           </div>
           {isOrganiser && (
             <Link href={`/g/${group.id}/settings`}>
-              <Button variant="ghost" size="sm" className="h-9 w-9 p-0 rounded-lg" aria-label="Group settings"><Settings size={18} strokeWidth={1.5}/></Button>
+              <Button variant="ghost" size="sm" className="h-11 w-11 p-0 rounded-lg" aria-label="Group settings"><Settings size={18} strokeWidth={1.5}/></Button>
             </Link>
           )}
         </div>
@@ -576,7 +576,7 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
                     {item.notes && <p className="text-xs mt-1 text-[var(--cmb-text-muted)]">{item.notes}</p>}
                   </div>
                   <div className="flex gap-1.5 flex-shrink-0">
-                    {item.url && <a href={item.url} target="_blank" rel="noopener noreferrer"><Button variant="ghost" size="sm" className="h-9 w-9 p-0 rounded-lg" aria-label="View product"><ExternalLink size={16} strokeWidth={1.5}/></Button></a>}
+                    {item.url && <a href={item.url} target="_blank" rel="noopener noreferrer"><Button variant="ghost" size="sm" className="h-11 w-11 p-0 rounded-lg" aria-label="View product"><ExternalLink size={16} strokeWidth={1.5}/></Button></a>}
                     {!isMyList && (
                       <Button variant={claim?"default":"outline"} size="sm" onClick={()=>toggleBought(item.id)}
                         className="h-9 rounded-lg text-xs px-3" style={claim?{background:"var(--cmb-success)",color:"#fff"}:{}}>
@@ -584,7 +584,7 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
                       </Button>
                     )}
                     {isMyList && (
-                      <Button variant="ghost" size="sm" onClick={()=>deleteItem(item.id)} className="h-9 w-9 p-0 rounded-lg" aria-label="Delete item">
+                      <Button variant="ghost" size="sm" onClick={()=>deleteItem(item.id)} className="h-11 w-11 p-0 rounded-lg" aria-label="Delete item">
                         <Trash2 size={16} strokeWidth={1.5} className="text-[var(--cmb-text-muted)]"/>
                       </Button>
                     )}

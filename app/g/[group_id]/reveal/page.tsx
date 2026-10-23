@@ -84,7 +84,7 @@ export default function RevealPage({ params }: { params: Promise<{ group_id: str
       <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background: "rgba(255,248,240,0.92)", backdropFilter: "blur(12px)" }}>
         <div className="max-w-xl mx-auto px-4 h-14 flex items-center gap-3">
           <Link href={`/g/${group_id}`} aria-label="Back to group">
-            <Button variant="ghost" size="sm" className="h-9 w-9 p-0 rounded-lg">
+            <Button variant="ghost" size="sm" className="h-11 w-11 p-0 rounded-lg">
               <ChevronLeft size={20} strokeWidth={1.5} />
             </Button>
           </Link>
@@ -296,7 +296,7 @@ function RevealedScreen({
                 </div>
                 {item.url && (
                   <a href={item.url} target="_blank" rel="noopener noreferrer">
-                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0 rounded-lg" aria-label="View product">
+                    <Button variant="ghost" size="sm" className="h-11 w-11 p-0 rounded-lg" aria-label="View product">
                       <ArrowRight size={14} strokeWidth={1.5} />
                     </Button>
                   </a>

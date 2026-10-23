@@ -172,3 +172,11 @@
   background: linear-gradient(90deg,var(--cmb-surface-hover) 25%,var(--cmb-border) 50%,var(--cmb-surface-hover) 75%);
   background-size: 200% auto; animation: shimmer 1.4s linear infinite; border-radius: var(--radius-md);
 }
+
+/* Keep compact desktop controls comfortable to tap on narrow screens. */
+@media (max-width: 767px) {
+  button, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
