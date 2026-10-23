@@ -329,6 +329,17 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: DONE
 - Completion note: Added environment-aware noindex response headers, root metadata and robots. Local/production retain existing indexing; preview/development/custom environments deny indexing. Five environment cases plus build/lint/TypeScript pass; deployed host confirmation stays in final owner checklist.
 
+### [x] DEPLOY 02 — P1
+
+- Severity: P1
+- Location: supabase/migrations/20261006190147_personal_wishlist_owner_unreserve.sql; migration release workflow
+- Evidence: Production records owner-unreserve as version 20261006190849 while the repo/local history uses 20261006190147. Normalized SQL MD5 matches exactly (9f99ac3fea86bc11cdefc82cb5dc84a6). A blanket CLI push would encounter history drift before the three new fixes.
+- Fix: Rename the repository file and its test/document references to the already applied production timestamp; repair only the disposable local history to match, without rerunning the SQL or rewriting production history.
+- Acceptance criteria: Production and local history match the file version/hash; the old filename is absent; referenced test files exist. Local build/lint/TypeScript and regressions pass.
+- Status: DONE
+
+- Completion note: Renamed the identical owner-unreserve migration to the already applied production version 20261006190849, updated references and repaired disposable local history only. Normalized SQL hashes match; build/lint/TypeScript and all 110 regressions pass. Production history and schema were preserved.
+
 ### [x] FORM 01 — P1
 
 - Severity: P1
@@ -601,6 +612,15 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 
 - Completion note: Shared cards now shrink within grid columns. Real saved long-text fixtures pass 50 owner/shared/list/card viewport checks, including 200 items; zero browser warnings/errors. Build/lint/TypeScript and all 110 local checks pass. Evidence: audit/wishlist-stress-matrix.json.
 
+### [ ] UI 11 — P1
+
+- Severity: P1
+- Location: app/return/return-to-group.tsx; /return
+- Evidence: Native 200% inspection shows a generic Gift icon beside the app name, while other app-name headers use the existing basket mark.
+- Fix: Reuse BasketMark for the Return app-name link, preserving link destination and layout.
+- Acceptance criteria: Return renders the same basket mark as other functional headers; build/lint/TypeScript and browser inspection pass.
+- Status: OPEN
+
 ### [x] CONTENT 01 — P2
 
 - Severity: P2
@@ -710,6 +730,15 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Acceptance criteria: Record affected chunks and per-page transferred JS before/after; reduce proven unused initial code and verify every affected interaction.
 - Status: DONE
 - Completion note: Profiled unused code as the eagerly fetched Supabase chunk. Deferred create-only SDK/recovery/QR imports and private-tool prefetch; JS transfer fell 66,823 bytes on gifts and create, unused estimates fell to 29KiB. Browser validation and save-intent navigation work; build/lint/TypeScript pass. Gifts lab performance varied 95 to 92 while a11y/best-practices/SEO remain 100.
+
+### [ ] SECURITY 06 — P2
+
+- Severity: P2
+- Location: Supabase Auth project settings; production account configuration
+- Evidence: Production advisor reports leaked-password protection disabled. The app uses anonymous/passwordless access; the hosted password-provider configuration was not changed or certified by this audit.
+- Fix: NEEDS OWNER: confirm whether password sign-in is intentionally enabled in Supabase Auth. If used, enable the supported leaked-password setting through the owner account; otherwise document that the password flow is disabled/unsupported. Do not alter anonymous/passwordless access.
+- Acceptance criteria: Owner records the password-provider decision and confirms the relevant account setting. Anonymous/passwordless app flows remain functional.
+- Status: NEEDS OWNER
 
 ### [x] SEO 04 — P2
 
