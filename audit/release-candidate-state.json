@@ -1,5 +1,12 @@
 {
   "date": "2026-10-23",
+  "postRelease": {
+    "mergedPr": 3,
+    "mainCommit": "ae6c1ece656940cd42cd6bffdee73b8d36c8d47f",
+    "productionDeployment": "dpl_QMd9eJ8bbtLKQoLS885AwdLAtxGm",
+    "state": "READY; customer aliases assigned; five-page smoke passes",
+    "evidence": "audit/POST_RELEASE.md"
+  },
   "sourceCommit": "5534eb0ef523cf6d543dab745e878aea9581965a",
   "candidate": {
     "id": "dpl_7YiSVs9LvqgMxzNgeSCZ6oNEx8hK",

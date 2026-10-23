@@ -1,0 +1,41 @@
+{
+  "deployment": "dpl_QMd9eJ8bbtLKQoLS885AwdLAtxGm",
+  "source": "ae6c1ece656940cd42cd6bffdee73b8d36c8d47f",
+  "rows": [
+    {
+      "path": "/",
+      "canonical": "https://www.checkmybasket.co.uk/",
+      "h1": 1,
+      "main": 1,
+      "manifest": "use-credentials"
+    },
+    {
+      "path": "/create",
+      "canonical": "https://www.checkmybasket.co.uk/create",
+      "h1": 1,
+      "main": 1,
+      "manifest": "use-credentials"
+    },
+    {
+      "path": "/gifts",
+      "canonical": "https://www.checkmybasket.co.uk/gifts",
+      "h1": 1,
+      "main": 1,
+      "manifest": "use-credentials"
+    },
+    {
+      "path": "/privacy",
+      "canonical": "https://www.checkmybasket.co.uk/privacy",
+      "h1": 1,
+      "main": 1,
+      "manifest": "use-credentials"
+    },
+    {
+      "path": "/return",
+      "h1": 1,
+      "main": 1,
+      "manifest": "use-credentials"
+    }
+  ],
+  "logs": []
+}

@@ -6,6 +6,8 @@ Phase 1 summary was presented before implementation. Phase 2 changes are committ
 
 Release update: owner checks explicitly approved; verified candidate promoted to customer domains. Current count: 83 issues, 81 closed including owner acceptance, two NEEDS OWNER follow-ups (SECURITY 02 and SECURITY 06). See [audit/PRODUCTION_RELEASE.md](audit/PRODUCTION_RELEASE.md). Earlier phase summaries below retain historical scope.
 
+Post-release update: PR #3 merged into main; its production deployment is verified. SECURITY 07 patches a newly reported dev-only advisory and SECURITY 02 now has clean full-audit evidence. Current count: 84 issues, 83 closed, SECURITY 06 NEEDS OWNER. See [audit/POST_RELEASE.md](audit/POST_RELEASE.md).
+
 Some original evidence and line numbers came from an older checkout. Each finding was reconciled against this newer base before implementation; completion notes distinguish fixes made here from defects already resolved in the newer base. Older checkout Lighthouse scores are not used as this branch's baseline.
 
 ## Stack and routes
