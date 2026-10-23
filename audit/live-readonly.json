@@ -1,0 +1,694 @@
+{
+  "checkedAt": "2026-10-23T15:13:56.955Z",
+  "scope": "Read-only current deployed version; no claim this branch is deployed",
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/",
+      "title": "Free Secret Santa Generator &amp; Organiser | CheckMyBasket",
+      "description": "Organise a free Secret Santa draw. Share your invite on WhatsApp, draw names privately, add wishlists from any shop and ask anonymous questions. No ads.",
+      "canonical": "https://www.checkmybasket.co.uk",
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image?22c8f088e78d2d41",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/about",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/about",
+      "title": "About | CheckMyBasket",
+      "description": "Why CheckMyBasket exists: Secret Santa without the ads, accounts, or awkward gifts.",
+      "canonical": "https://www.checkmybasket.co.uk/about",
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image?22c8f088e78d2d41",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/contact",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/contact",
+      "title": "Contact | CheckMyBasket",
+      "description": "Get in touch with CheckMyBasket — questions, problems, feedback or data requests.",
+      "canonical": "https://www.checkmybasket.co.uk/contact",
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image?22c8f088e78d2d41",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/cosy-secret-santa-gifts",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/cosy-secret-santa-gifts",
+      "title": "Cosy Secret Santa gifts | CheckMyBasket",
+      "description": "Find cosy Secret Santa gift ideas for quiet evenings, with advice on textures, reading gifts, fragrance preferences and care.",
+      "canonical": "https://www.checkmybasket.co.uk/cosy-secret-santa-gifts",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/create",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/create",
+      "title": "Create a Secret Santa Draw | CheckMyBasket",
+      "description": "Set up a free Secret Santa draw in 30 seconds. Name your group, set a budget, share the link. No account needed.",
+      "canonical": "https://www.checkmybasket.co.uk/create",
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image?22c8f088e78d2d41",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/funny-secret-santa-gifts",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/funny-secret-santa-gifts",
+      "title": "Funny Secret Santa gifts | CheckMyBasket",
+      "description": "Choose funny Secret Santa gifts that suit the recipient, with tips for kind humour, novelty products and workplace exchanges.",
+      "canonical": "https://www.checkmybasket.co.uk/funny-secret-santa-gifts",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/gifts",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/gifts",
+      "title": "Secret Santa Gift Ideas UK | CheckMyBasket",
+      "description": "Explore Secret Santa gift ideas from UK shops, with collections under £10, £20, £30 and £50. Find a gift within your group&#x27;s budget.",
+      "canonical": "https://www.checkmybasket.co.uk/gifts",
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image?22c8f088e78d2d41",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/gifts/colleague",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/gifts/colleague",
+      "title": "Gifts for colleagues UK | CheckMyBasket",
+      "description": "Thoughtful picks for your workmates. Explore gift ideas from UK shops for your Secret Santa exchange.",
+      "canonical": "https://www.checkmybasket.co.uk/gifts/colleague",
+      "robots": "index, follow",
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image?22c8f088e78d2d41",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/gifts/cosy",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/gifts/cosy",
+      "title": "Cosy gifts UK | CheckMyBasket",
+      "description": "Warm treats for nights in. Explore gift ideas from UK shops for your Secret Santa exchange.",
+      "canonical": "https://www.checkmybasket.co.uk/gifts/cosy",
+      "robots": "index, follow",
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image?22c8f088e78d2d41",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/gifts/funny",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/gifts/funny",
+      "title": "Funny Secret Santa gifts UK | CheckMyBasket",
+      "description": "Playful picks to make them smile. Explore gift ideas from UK shops for your Secret Santa exchange.",
+      "canonical": "https://www.checkmybasket.co.uk/gifts/funny",
+      "robots": "index, follow",
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image?22c8f088e78d2d41",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/gifts/personalised",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/gifts/personalised",
+      "title": "Personalised gifts UK | CheckMyBasket",
+      "description": "Add their name or a special touch. Explore gift ideas from UK shops for your Secret Santa exchange.",
+      "canonical": "https://www.checkmybasket.co.uk/gifts/personalised",
+      "robots": "index, follow",
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image?22c8f088e78d2d41",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/gifts/under-10",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/gifts/under-10",
+      "title": "Gifts under £10 UK | CheckMyBasket",
+      "description": "Great value crowd-pleasers. Explore gift ideas from UK shops for your Secret Santa exchange.",
+      "canonical": "https://www.checkmybasket.co.uk/gifts/under-10",
+      "robots": "index, follow",
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image?22c8f088e78d2d41",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/gifts/under-20",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/gifts/under-20",
+      "title": "Gifts under £20 UK | CheckMyBasket",
+      "description": "Thoughtful gifts for a little more. Explore gift ideas from UK shops for your Secret Santa exchange.",
+      "canonical": "https://www.checkmybasket.co.uk/gifts/under-20",
+      "robots": "index, follow",
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image?22c8f088e78d2d41",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/gifts/under-30",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/gifts/under-30",
+      "title": "Gifts under £30 UK | CheckMyBasket",
+      "description": "Something a little extra special. Explore gift ideas from UK shops for your Secret Santa exchange.",
+      "canonical": "https://www.checkmybasket.co.uk/gifts/under-30",
+      "robots": "index, follow",
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image?22c8f088e78d2d41",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/gifts/under-50",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/gifts/under-50",
+      "title": "Gifts under £50 UK | CheckMyBasket",
+      "description": "Generous gifts for special people. Explore gift ideas from UK shops for your Secret Santa exchange.",
+      "canonical": "https://www.checkmybasket.co.uk/gifts/under-50",
+      "robots": "index, follow",
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image?22c8f088e78d2d41",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/guides",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/guides",
+      "title": "Secret Santa and gift guides | CheckMyBasket",
+      "description": "Plan your Secret Santa, choose gifts by budget and interest, and get personalisation right with practical guides, invitation messages and printable checklists.",
+      "canonical": "https://www.checkmybasket.co.uk/guides",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/money-clip-engraving-ideas",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/money-clip-engraving-ideas",
+      "title": "Money clip engraving ideas: initials, names and short messages | CheckMyBasket",
+      "description": "Explore original money clip engraving wording for initials, names and short messages, with a text preview, character count and printable ordering checklist.",
+      "canonical": "https://www.checkmybasket.co.uk/money-clip-engraving-ideas",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/office-secret-santa",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/office-secret-santa",
+      "title": "Office Secret Santa Guide &amp; Organiser Checklist | CheckMyBasket",
+      "description": "Plan an office Secret Santa with opt-in invitations, a clear budget, joining deadlines and wishlist etiquette. Includes a checklist and invitation template.",
+      "canonical": "https://www.checkmybasket.co.uk/office-secret-santa",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/personalised-gifts-for-dads",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/personalised-gifts-for-dads",
+      "title": "Personalised gifts for dads: choosing something he will use | CheckMyBasket",
+      "description": "Choose a personalised gift for Dad by everyday habits, meaningful wording and practical details, with current money clip designs and delivery checks.",
+      "canonical": "https://www.checkmybasket.co.uk/personalised-gifts-for-dads",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/personalised-groomsmen-gifts",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/personalised-groomsmen-gifts",
+      "title": "Personalised groomsmen gifts: a practical ordering guide | CheckMyBasket",
+      "description": "Plan personalised groomsmen gifts with names, wedding-party wording, consistent budgets, individual designs and a clear batch-order checklist.",
+      "canonical": "https://www.checkmybasket.co.uk/personalised-groomsmen-gifts",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/personalised-money-clip-gift-guide",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/personalised-money-clip-gift-guide",
+      "title": "Personalised money clip gift guide | CheckMyBasket",
+      "description": "A closer look at UtilityNestPro’s engraved Seigaiha money clip, with guidance on initials, recipient fit, clip-only pricing and gift-box options.",
+      "canonical": "https://www.checkmybasket.co.uk/personalised-money-clip-gift-guide",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/personalised-secret-santa-gifts",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/personalised-secret-santa-gifts",
+      "title": "Personalised Secret Santa gifts | CheckMyBasket",
+      "description": "Choose personalised Secret Santa gifts with checks for spelling, options, final price, dispatch time and personalised returns.",
+      "canonical": "https://www.checkmybasket.co.uk/personalised-secret-santa-gifts",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/privacy",
+      "title": "Privacy Policy | CheckMyBasket",
+      "description": "What CheckMyBasket collects, optional analytics cookies, and your privacy choices. No ads.",
+      "canonical": "https://www.checkmybasket.co.uk/privacy",
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image?22c8f088e78d2d41",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/remote-team-secret-santa",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/remote-team-secret-santa",
+      "title": "How to organise Secret Santa for a remote team | CheckMyBasket",
+      "description": "Plan a remote team Secret Santa with optional participation, delivery deadlines, private address handling, a video-call reveal and a printable plan.",
+      "canonical": "https://www.checkmybasket.co.uk/remote-team-secret-santa",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/return",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/return",
+      "title": "Return to CheckMyBasket | CheckMyBasket",
+      "description": "Draw names, share wishlists from any shop and ask anonymous questions. Organise a free Secret Santa draw and find UK gift ideas. No ads, ever.",
+      "robots": "noindex, nofollow",
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image?22c8f088e78d2d41",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/secret-santa-gifts-for-book-lovers",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/secret-santa-gifts-for-book-lovers",
+      "title": "Secret Santa gifts for book lovers | CheckMyBasket",
+      "description": "Choose book-lover Secret Santa gifts with checks for editions, duplicate titles, reading accessories and a £20 item-price catalogue selection.",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-for-book-lovers",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/secret-santa-gifts-for-coffee-lovers",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/secret-santa-gifts-for-coffee-lovers",
+      "title": "Secret Santa gifts for coffee lovers | CheckMyBasket",
+      "description": "Choose coffee-lover Secret Santa gifts by brewing method, flavour preferences and useful accessories, with current coffee-interest ideas up to £20.",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-for-coffee-lovers",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/secret-santa-gifts-for-colleagues",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/secret-santa-gifts-for-colleagues",
+      "title": "Secret Santa gifts for colleagues | CheckMyBasket",
+      "description": "Find considerate Secret Santa gifts for colleagues, with ideas by interest, workplace gift etiquette and a clear spending limit.",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-for-colleagues",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/secret-santa-gifts-for-gamers",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/secret-santa-gifts-for-gamers",
+      "title": "Secret Santa gifts for gamers | CheckMyBasket",
+      "description": "Find Secret Santa gifts for gamers with platform and compatibility checks, complete-game advice and current video-gaming gifts up to £20.",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-for-gamers",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/secret-santa-gifts-someone-you-dont-know",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/secret-santa-gifts-someone-you-dont-know",
+      "title": "Secret Santa gifts for someone you don’t know well | CheckMyBasket",
+      "description": "Choose a considerate Secret Santa gift for someone you do not know well, with three useful questions, a £20 example and current catalogue ideas.",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-someone-you-dont-know",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/secret-santa-gifts-under-10",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/secret-santa-gifts-under-10",
+      "title": "Secret Santa gifts under £10 | CheckMyBasket",
+      "description": "Choose a thoughtful Secret Santa gift under £10 with ideas for readers, stationery fans and puzzle lovers, plus tips for keeping delivery within budget.",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-under-10",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/secret-santa-gifts-under-20",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/secret-santa-gifts-under-20",
+      "title": "Secret Santa gifts under £20 | CheckMyBasket",
+      "description": "Choose a Secret Santa gift under £20 by interest, with tips for complete gifts, delivery costs and thoughtful presentation.",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-under-20",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/secret-santa-gifts-under-30",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/secret-santa-gifts-under-30",
+      "title": "Secret Santa gifts under £30 | CheckMyBasket",
+      "description": "Find Secret Santa gifts under £30 with advice on hobby gifts, quality details, useful sets and avoiding hidden extras.",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-under-30",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/secret-santa-gifts-under-50",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/secret-santa-gifts-under-50",
+      "title": "Secret Santa gifts under £50 | CheckMyBasket",
+      "description": "Choose Secret Santa gifts under £50 with a focus on recipient fit, complete products, delivery and a comfortable group budget.",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-gifts-under-50",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/secret-santa-invitation-messages",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/secret-santa-invitation-messages",
+      "title": "Secret Santa Invitation Messages for WhatsApp &amp; Email | CheckMyBasket",
+      "description": "Copy 10 Secret Santa messages for WhatsApp and email: invitations, joining and exchange reminders, wishlist requests and thank-you notes.",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-invitation-messages",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/secret-santa-odd-number",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/secret-santa-odd-number",
+      "title": "Can you do Secret Santa with an odd number of people? | CheckMyBasket",
+      "description": "See how Secret Santa works with 3, 5 or 7 people, with clear draw examples, exclusion checks and a practical organiser checklist.",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-odd-number",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/secret-santa-rules",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/secret-santa-rules",
+      "title": "Secret Santa Rules &amp; Organiser Checklist | CheckMyBasket",
+      "description": "Organise a fair Secret Santa with clear rules for budgets, deadlines, wishlists and private draws. Includes a printable PDF organiser checklist.",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-rules",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/secret-santa-whatsapp",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/secret-santa-whatsapp",
+      "title": "How to Organise Secret Santa on WhatsApp | CheckMyBasket",
+      "description": "Organise a free Secret Santa draw with WhatsApp invitations. Follow the setup steps, copy an invitation message and keep everyone&#x27;s match a surprise.",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-whatsapp",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/secret-santa-wishlist-ideas",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/secret-santa-wishlist-ideas",
+      "title": "What to Put on a Secret Santa Wishlist | CheckMyBasket",
+      "description": "Build a useful Secret Santa wishlist with examples under £10, £20 and £30, clear preferences, product details and considerate sharing tips.",
+      "canonical": "https://www.checkmybasket.co.uk/secret-santa-wishlist-ideas",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    },
+    {
+      "path": "/terms",
+      "status": 200,
+      "url": "https://www.checkmybasket.co.uk/terms",
+      "title": "Terms of Use | CheckMyBasket",
+      "description": "The plain-English terms for using CheckMyBasket&#x27;s free Secret Santa service.",
+      "canonical": "https://www.checkmybasket.co.uk/terms",
+      "ogImage": "https://www.checkmybasket.co.uk/opengraph-image?22c8f088e78d2d41",
+      "h1": 1,
+      "headers": {
+        "robots": null,
+        "csp": true,
+        "hsts": true,
+        "nosniff": "nosniff",
+        "frame": "DENY"
+      }
+    }
+  ],
+  "utility": [
+    {
+      "url": "https://www.checkmybasket.co.uk/robots.txt",
+      "status": 200,
+      "finalUrl": "https://www.checkmybasket.co.uk/robots.txt",
+      "body": "User-Agent: *\nAllow: /\nDisallow: /g/\nDisallow: /join/\n\nSitemap: https://www.checkmybasket.co.uk/sitemap.xml\n"
+    },
+    {
+      "url": "https://www.checkmybasket.co.uk/sitemap.xml",
+      "status": 200,
+      "finalUrl": "https://www.checkmybasket.co.uk/sitemap.xml",
+      "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n<url>\n<loc>https://www.checkmybasket.co.uk</loc>\n<changefreq>weekly</changefreq>\n<priority>1</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/create</loc>\n<changefreq>monthly</changefreq>\n<priority>0.9</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/guides</loc>\n<changefreq>weekly</changefreq>\n<priority>0.8</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/gifts</loc>\n<changefreq>weekly</changefreq>\n<priority>0.8</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/secret-santa-whatsapp</loc>\n<changefreq>monthly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/office-secret-santa</loc>\n<changefreq>monthly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/secret-santa-rules</loc>\n<changefreq>monthly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/secret-santa-invitation-messages</loc>\n<changefreq>monthly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/secret-santa-wishlist-ideas</loc>\n<changefreq>monthly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/secret-santa-odd-number</loc>\n<changefreq>monthly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/remote-team-secret-santa</loc>\n<changefreq>monthly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/secret-santa-gifts-under-10</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/secret-santa-gifts-for-colleagues</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/secret-santa-gifts-under-20</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/secret-santa-gifts-under-30</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/secret-santa-gifts-under-50</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/funny-secret-santa-gifts</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/cosy-secret-santa-gifts</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/personalised-secret-santa-gifts</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/personalised-money-clip-gift-guide</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/secret-santa-gifts-someone-you-dont-know</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/secret-santa-gifts-for-book-lovers</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/secret-santa-gifts-for-gamers</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/secret-santa-gifts-for-coffee-lovers</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/money-clip-engraving-ideas</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/personalised-gifts-for-dads</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/personalised-groomsmen-gifts</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/gifts/under-10</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/gifts/under-20</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/gifts/under-30</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/gifts/under-50</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/gifts/colleague</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/gifts/funny</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/gifts/cosy</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/gifts/personalised</loc>\n<changefreq>weekly</changefreq>\n<priority>0.7</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/about</loc>\n<changefreq>yearly</changefreq>\n<priority>0.3</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/privacy</loc>\n<changefreq>yearly</changefreq>\n<priority>0.3</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/terms</loc>\n<changefreq>yearly</changefreq>\n<priority>0.3</priority>\n</url>\n<url>\n<loc>https://www.checkmybasket.co.uk/contact</loc>\n<changefreq>yearly</changefreq>\n<priority>0.3</priority>\n</url>\n</urlset>\n"
+    },
+    {
+      "url": "https://checkmybasket.co.uk/",
+      "status": 200,
+      "finalUrl": "https://www.checkmybasket.co.uk/"
+    },
+    {
+      "url": "http://checkmybasket.co.uk/",
+      "status": 200,
+      "finalUrl": "https://www.checkmybasket.co.uk/"
+    }
+  ]
+}

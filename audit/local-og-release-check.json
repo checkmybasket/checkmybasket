@@ -1,0 +1,149 @@
+{
+  "scope": "Current local branch compared with live missing OG image tags",
+  "pages": [
+    {
+      "path": "/guides",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/cosy-secret-santa-gifts",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/funny-secret-santa-gifts",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/money-clip-engraving-ideas",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/office-secret-santa",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/personalised-money-clip-gift-guide",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/personalised-gifts-for-dads",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/personalised-groomsmen-gifts",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/personalised-secret-santa-gifts",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/secret-santa-gifts-for-book-lovers",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/secret-santa-gifts-for-coffee-lovers",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/remote-team-secret-santa",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/secret-santa-gifts-for-colleagues",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/secret-santa-gifts-under-10",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/secret-santa-gifts-for-gamers",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/secret-santa-gifts-someone-you-dont-know",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/secret-santa-gifts-under-20",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/secret-santa-gifts-under-30",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/secret-santa-gifts-under-50",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/secret-santa-invitation-messages",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/secret-santa-whatsapp",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/secret-santa-rules",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/secret-santa-wishlist-ideas",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    },
+    {
+      "path": "/secret-santa-odd-number",
+      "status": 200,
+      "hasOgImage": true,
+      "noindex": true
+    }
+  ]
+}
