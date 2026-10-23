@@ -28,6 +28,16 @@ Ruflo/ToolSearch tools were searched for but unavailable. No production data wri
 
 ## Issues
 
+### [x] SEO 12 — P1
+
+- Severity: P1
+- Location: lib/topic-guides.ts, data/topic-guides.json; /secret-santa-gifts-for-coffee-lovers
+- Evidence: Search Console baseline shows 27 impressions, average position 9.9 and zero clicks. Existing guide has compatibility advice but no quick budget shortlist.
+- Fix: Approved editorial change: align metadata with the existing £20 catalogue limit, give specific first-choice ideas and a budget shortlist without claiming checked offers. Preserve compatibility/ingredient/delivery checks and actual catalogue selection; revise only this guide's date.
+- Acceptance criteria: Matching accurate metadata, current revision date, clear shortlist, existing canonical and catalogue unchanged; no overflow at five widths; build/lint/TypeScript and 110 regressions pass, then live verification. No ranking gain claimed.
+- Status: DONE
+- Completion note: Search/social title now specifies up to £20, matching the inclusive catalogue limit; description and opening answer give concrete choices. Added £10/£20 shortlist with delivery/compatibility caveats; no fixed-price offers invented. Five-width checks preserve one h1, canonical and four catalogue cards with no overflow or captured errors. Final build/lint/TypeScript and 110 regressions pass. Live checks follow release; search impact remains unmeasured.
+
 ### [x] SEO 11 — P1
 
 - Severity: P1

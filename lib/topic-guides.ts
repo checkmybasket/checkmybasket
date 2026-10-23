@@ -39,8 +39,8 @@ export const TOPIC_GUIDES = [
   },
   {
     "slug": "secret-santa-gifts-for-coffee-lovers",
-    "title": "Secret Santa gifts for coffee lovers",
-    "description": "Choose coffee-lover Secret Santa gifts by brewing method, flavour preferences and useful accessories, with current coffee-interest ideas up to £20.",
+    "title": "Secret Santa gifts for coffee lovers up to £20",
+    "description": "Coffee Secret Santa ideas up to £20: beans, mugs and useful accessories. Match their brewing method, check preferences and allow for delivery.",
     "kind": "gift",
     "category": "all",
     "budget": 2000,
