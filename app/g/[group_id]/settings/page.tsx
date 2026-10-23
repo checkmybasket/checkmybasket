@@ -106,10 +106,10 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
           <Section title="Group details">
             <div className="space-y-4 p-5">
               <div>
-                <Label className="text-sm font-medium mb-1.5 block">Group name</Label>
+                <Label htmlFor="group-name" className="text-sm font-medium mb-1.5 block">Group name</Label>
                 {editName ? (
                   <div className="flex gap-2">
-                    <Input value={groupName} onChange={e=>setGroupName(e.target.value)} className="h-11 rounded-xl flex-1 border border-[var(--cmb-border-strong)]"/>
+                    <Input id="group-name" value={groupName} onChange={e=>setGroupName(e.target.value)} className="h-11 rounded-xl flex-1 border border-[var(--cmb-border-strong)]"/>
                     <Button className="h-11 px-4 rounded-xl bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]" disabled={busy}
                       onClick={saveName} aria-label="Save name">
                       <CheckCircle2 size={16} strokeWidth={2}/>

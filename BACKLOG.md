@@ -97,15 +97,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Added a mobile 44px button minimum and enlarged compact back/edit controls. Browser at 320px finds no undersized visible buttons or page overflow on create; private flows remain covered by OWNER 02. Build/lint/TypeScript pass.
 
-### [ ] A11Y 05 — P1
+### [x] A11Y 05 — P1
 
 - Severity: P1
 - Location: app/g/[group_id]/settings/page.tsx:111; /g/[group_id]/settings
 - Evidence: Group name Label has no htmlFor and the edit Input has no explicit matching id.
 - Fix: Connect the edit label and control; audit other group-route labels and fix each demonstrated gap in a separate issue.
 - Acceptance criteria: Group name input has the correct accessible name; clicking its label focuses it.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Connected group-name label and input; source associations, build/lint/TypeScript pass. Loaded private-state browser coverage remains in OWNER 02.
 
 ### [ ] A11Y 06 — P1
 
