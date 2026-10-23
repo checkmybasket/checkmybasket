@@ -34,6 +34,35 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: DONE
 - Completion note: Build, lint, TypeScript, 16 analytics, 9 gift-flow, 54 verifier and 16 wishlist/email regression checks pass.
 
+### [x] SECURITY 03 — P0
+
+- Severity: P0
+- Location: supabase/migrations; /g/[group_id]?tab=games Data API
+- Evidence: A fresh authenticated nonmember inserted its own actual_gifts row into a known local group round successfully. The insert policy checks identity only.
+- Fix: Require membership in the round group as well as matching recipient and logger identity. This explicitly flags a backend authorization change before implementation; no table/data-model change.
+- Acceptance criteria: Nonmember and impersonated inserts fail; a real member can log its own gift after reveal; denied rows do not exist. Local integration, build, lint and TypeScript pass.
+- Status: DONE
+
+- Completion note: Restricted actual-gift inserts to round-group members. Live denial/unchanged-data and valid-member checks pass; local security advisor clean; staging build/lint/TypeScript and 110 regressions pass. Migration is committed for release, applied locally only.
+
+### [ ] SECURITY 04 — P0
+
+- Severity: P0
+- Location: supabase/migrations; /g/[group_id]?tab=games Data API
+- Evidence: A local member successfully inserted a prediction whose subject was an authenticated nonmember.
+- Fix: Require the prediction subject to be a member of the round group, retaining predictor membership and identity checks. This explicitly flags a backend authorization change before implementation; no table/data-model change.
+- Acceptance criteria: Outside-group subjects and impersonated predictors fail; valid member predictions save; denied rows do not exist. Local integration, build, lint and TypeScript pass.
+- Status: OPEN
+
+### [ ] SECURITY 05 — P0
+
+- Severity: P0
+- Location: supabase/migrations; /g/[group_id]?tab=games Data API
+- Evidence: A local member successfully submitted a new prediction after the organiser revealed the round.
+- Fix: Require round status open for prediction inserts; preserve existing prediction visibility. This explicitly flags a backend authorization change before implementation; no table/data-model change.
+- Acceptance criteria: Open-round predictions succeed; closed and revealed submissions fail; denied writes leave counts unchanged. Local integration, build, lint and TypeScript pass.
+- Status: OPEN
+
 ### [x] SECURITY 01 — P0
 
 - Severity: P0
