@@ -88,7 +88,7 @@ export default function RevealPage({ params }: { params: Promise<{ group_id: str
   return (
     <div className="min-h-dvh flex flex-col bg-[var(--cmb-bg)]">
       {/* Header */}
-      <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background: "rgba(255,248,240,0.92)", backdropFilter: "blur(12px)" }}>
+      <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background: "var(--cmb-header-bg)" }}>
         <div className="max-w-xl mx-auto px-4 h-14 flex items-center gap-3">
           <Link href={`/g/${group_id}`} aria-label="Back to group" className={buttonVariants({ variant: "ghost", size: "sm", className: "h-11 w-11 p-0 rounded-lg" })}>
               <ChevronLeft size={20} strokeWidth={1.5} />

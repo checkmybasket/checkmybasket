@@ -160,7 +160,7 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
 
   return (
     <div className="flex flex-col min-h-dvh bg-[var(--cmb-bg)]">
-      <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background:"rgba(255,248,240,0.95)", backdropFilter:"blur(12px)" }}>
+      <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background:"var(--cmb-header-bg)" }}>
         <div className="max-w-2xl mx-auto px-4 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2 min-w-0">
             <Gift size={18} strokeWidth={1.5} className="text-[var(--cmb-primary)] shrink-0"/>

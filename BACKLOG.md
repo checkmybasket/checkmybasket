@@ -456,3 +456,63 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Acceptance criteria: required checks and local regressions pass; npm production audit remains clean; remaining advisory chain is accurately documented with supported mitigation and owner follow-up.
 - Status: NEEDS OWNER
 - Completion note: Compatible transitive patches applied; 20 original development findings reduced to five entries in the same unpatched braces → micromatch → fast-glob → Next ESLint chain. Production dependencies are clean; build/lint/TypeScript and 99 local regressions pass. NEEDS OWNER: record a temporary development-tool risk exception, do not process untrusted glob patterns, and update the matching ESLint config when a compatible upstream fix ships. Do not force a downgrade to Next 14 tooling.
+
+### [x] UI 02 — P2
+
+- Severity: P2
+- Location: shared functional-page headers across app/ and components/info-page.tsx
+- Evidence: headers retain hardcoded cream rgba(255,248,240,0.92/0.95) and blur from the previous design; the current receipt brand defines white paper and black ink.
+- Fix: use one shared header surface token derived from the current paper color; remove redundant blur on the opaque surface. No layout or behavior change.
+- Acceptance criteria: no old cream header literals remain, computed header backgrounds match the paper theme; build/lint/TypeScript and responsive checks pass.
+- Status: DONE
+- Completion note: Use the shared paper header surface instead of old tinted glass. Header dimensions are unchanged; build/lint/TypeScript pass.
+
+### [ ] CONTENT 03 — P2
+
+- Severity: P2
+- Location: components/receipt/sections.tsx; homepage example receipt
+- Evidence: the receipt has made-up sample member/budget counts; its example label is accessible only, while the visible caption says Draw no. 0412.
+- Fix: explicitly label it Example draw in visible text, preserving the illustration and its accessible description. This is a flagged clarification, not a claim about real usage.
+- Acceptance criteria: visual and accessible labels both make the sample nature clear; build/lint/TypeScript pass.
+- Status: OPEN
+- Completion note: Pending.
+
+### [ ] UI 03 — P2
+
+- Severity: P2
+- Location: app/ and components/ shared theme; public and functional routes
+- Evidence: Brand marks differ across public and functional headers. App-name headers in create, gifts, join, InfoPage and WishlistShell still use a generic Gift icon; the current homepage, favicon and OG use the basket mark.
+- Fix: Reuse the existing BasketMark at compact header size; keep Gift icons where they describe gifts or group sections.
+- Acceptance criteria: obsolete styling references are absent; current tokens/marks render consistently; build/lint/TypeScript and final responsive/contrast checks pass.
+- Status: OPEN
+- Completion note: Pending.
+
+### [ ] UI 04 — P2
+
+- Severity: P2
+- Location: app/ and components/ shared theme; public and functional routes
+- Evidence: Legacy font variables no longer exist. Functional pages refer to --font-fraunces and --font-jetbrains-mono, while the root only supplies Inter and IBM Plex Mono.
+- Fix: Replace old variable references with the active brand font variables; retain font roles and content.
+- Acceptance criteria: obsolete styling references are absent; current tokens/marks render consistently; build/lint/TypeScript and final responsive/contrast checks pass.
+- Status: OPEN
+- Completion note: Pending.
+
+### [ ] UI 05 — P2
+
+- Severity: P2
+- Location: app/ and components/ shared theme; public and functional routes
+- Evidence: Legacy palette literals bypass the active tokens. Functional panels still contain rgba(27,67,50,...) from the old primary palette and cream inverse text despite current black/white tokens.
+- Fix: Express these tint/inverse treatments through color-mix and the active semantic tokens; keep opacity and semantic success colors.
+- Acceptance criteria: obsolete styling references are absent; current tokens/marks render consistently; build/lint/TypeScript and final responsive/contrast checks pass.
+- Status: OPEN
+- Completion note: Pending.
+
+### [ ] UI 06 — P2
+
+- Severity: P2
+- Location: app/ and components/ shared theme; public and functional routes
+- Evidence: Functional control and panel radii drift from the brand. Current brand defines --cmb-radius:0, but functional pages and generated primitives hardcode rounded-lg/xl/2xl/3xl.
+- Fix: Route rectangular control/panel radii through the brand radius token, preserving intentional circles/pills for avatars and status indicators. This is a flagged visual-only consistency change.
+- Acceptance criteria: obsolete styling references are absent; current tokens/marks render consistently; build/lint/TypeScript and final responsive/contrast checks pass.
+- Status: OPEN
+- Completion note: Pending.

@@ -43,7 +43,7 @@ export default async function CategoryPage({ params, searchParams }: { params: P
   return (
     <div className="min-h-dvh bg-[var(--cmb-bg)]">
       <a className="cmb-skip-link" href="#main-content">Skip to content</a>
-      <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background:"rgba(255,248,240,0.92)", backdropFilter:"blur(12px)" }}>
+      <header className="sticky top-0 z-30 border-b border-[var(--cmb-border)]" style={{ background:"var(--cmb-header-bg)" }}>
         <div className="max-w-5xl mx-auto px-4 h-14 flex items-center gap-3">
           <Link href={giftFiltersHref({ budget: filters.budget, interest: filters.interest })} aria-label="Back to gift ideas" className="inline-flex min-h-11 w-11 shrink-0 items-center justify-center rounded-lg hover:bg-[var(--cmb-surface-hover)]"><ChevronLeft size={20} strokeWidth={1.5} aria-hidden="true"/></Link>
           <div className="flex items-center gap-2 flex-1 min-w-0">
