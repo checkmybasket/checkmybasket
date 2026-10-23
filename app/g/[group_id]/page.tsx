@@ -1085,6 +1085,7 @@ function GamesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<void> 
           const selected = picks[current.user_id] === cat.key;
           return (
             <button key={cat.key} onClick={()=>setPicks(p=>({...p,[current.user_id]:cat.key}))}
+              aria-pressed={selected}
               className="rounded-[var(--cmb-radius)] p-3 text-center transition-all duration-150"
               style={{ background:selected?"var(--cmb-primary)":"var(--cmb-surface)", border:`2px solid ${selected?"var(--cmb-primary)":"var(--cmb-border)"}`,
                 color:selected?"var(--cmb-text-inverse)":"var(--cmb-text-primary)", transform:selected?"scale(1.04)":"scale(1)" }}>

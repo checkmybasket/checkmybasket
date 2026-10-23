@@ -254,6 +254,17 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: DONE
 - Completion note: Shared text inputs now have a mobile-only 44px minimum. Loaded pending-group measurements at 320/375/414px show 44px inputs and no overflow; larger explicit and compact desktop sizing remain intact. Build/lint/TypeScript and local regressions pass.
 
+### [x] A11Y 22 — P1
+
+- Severity: P1
+- Location: app/g/[group_id]/page.tsx; /g/[group_id]?tab=games prediction form
+- Evidence: Selecting A Mug changes its colour but its button has no aria-pressed or other selected-state semantics in the loaded browser.
+- Fix: Expose the existing selected state with aria-pressed on category buttons; preserve selection and submission behaviour.
+- Acceptance criteria: Exactly the chosen category is pressed; changing category and revisiting a subject keep semantics in sync. Build/lint/TypeScript and local checks pass.
+- Status: DONE
+
+- Completion note: Prediction categories expose aria-pressed. Browser verified selection, replacement and back-navigation state; staging build/lint/TypeScript and all 110 local checks pass.
+
 ### [x] BUILD 01 — P1
 
 - Severity: P1
