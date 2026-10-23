@@ -427,15 +427,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Removed unused shadcn generation CLI and 255 transitive packages. Checked-in Base UI components are unchanged; build/lint/TypeScript and all 99 local regressions pass. Remaining advisories are limited to development tooling.
 
-### [ ] HYGIENE 03 — P2
+### [x] HYGIENE 03 — P2
 
 - Severity: P2
 - Location: package.json/package-lock.json; build tooling and all routes
 - Evidence: No application, library, script or test source imports date-fns. Date formatting uses Intl/custom helpers.
 - Fix: remove the unused date-fns dependency only; no replacement or new dependency.
 - Acceptance criteria: full build/lint/TypeScript and local regressions pass; application imports resolve.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Removed unused date-fns; source import scan is clear and build/lint/TypeScript pass. Existing local regressions pass after dependency cleanup.
 
 ### [ ] HYGIENE 04 — P2
 
