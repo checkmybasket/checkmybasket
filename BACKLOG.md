@@ -623,3 +623,13 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Acceptance criteria: obsolete styling references are absent; current tokens/marks render consistently; build/lint/TypeScript and final responsive/contrast checks pass.
 - Status: DONE
 - Completion note: Align rectangular controls and panels with the shared brand radius. Intentional avatar/status pills remain round; build/lint/TypeScript pass.
+
+### [x] STAGE 03 — P1
+
+- Severity: P1
+- Location: supabase/config.toml and local staging setup; /create, /g/*, /wishlists/*, /return
+- Evidence: User selected local staging with Docker. Docker/CLI and a local Supabase configuration are absent; authenticated acceptance tests cannot yet run safely.
+- Fix: Install the official Docker app and pinned Supabase CLI tooling (no app dependency), initialise a uniquely named local stack bound to loopback, enable anonymous auth and captured local email, and apply existing migrations only locally. Keep production files/credentials unchanged.
+- Acceptance criteria: Docker runs; local Auth/Postgres/API/mail capture are healthy; all checked-in migrations apply; app uses local backend and noindex; disposable fixture tests run without cloud writes or external email. Any first-run agreement/admin step stays NEEDS OWNER until performed by the user. Build/lint/TypeScript pass for committed configuration.
+- Status: DONE
+- Completion note: Installed Docker CLI 29.9.2 with Colima 0.10.3 and pinned Supabase CLI 2.122.0; all 26 migrations applied to the loopback-only local stack. App build/lint/TypeScript, 27 Node tests, existing wishlist/API acceptance suites, local Auth inbox receipt and create/join/draw/reveal/settings/role checks pass. Production env files are unchanged; evidence: audit/local-staging.json. Custom Resend capture and broader private QA remain separate follow-up.

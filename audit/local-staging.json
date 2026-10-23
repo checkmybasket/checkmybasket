@@ -1,0 +1,64 @@
+{
+  "date": "2026-10-23",
+  "environment": "local only",
+  "docker": {
+    "cli": "29.9.2",
+    "runtime": "Colima 0.10.3",
+    "profile": "cmb-staging",
+    "defaultContextChanged": false,
+    "cpu": 2,
+    "memoryGiB": 6,
+    "ports": "127.0.0.1 only"
+  },
+  "supabase": {
+    "cli": "2.122.0",
+    "projectId": "checkmybasket-local",
+    "appliedMigrations": 26,
+    "initialAuthUsers": 0,
+    "publicTablesWithoutRls": 0,
+    "securityAdvisorWarnings": 0,
+    "api": "http://127.0.0.1:54321",
+    "studio": "http://127.0.0.1:54323",
+    "capturedInbox": "http://127.0.0.1:54324",
+    "anonymousAuth": true
+  },
+  "app": {
+    "url": "http://localhost:3101",
+    "noindex": true,
+    "cspAllowsLocal": true,
+    "cspAllowsProductionBackend": false
+  },
+  "verification": {
+    "build": "PASS",
+    "lint": "PASS",
+    "typescript": "PASS",
+    "nodeTests": 27,
+    "wishlistLive": "PASS",
+    "wishlistApiLive": "PASS",
+    "nativeAuthCapture": "PASS",
+    "browser": [
+      "create group",
+      "join three disposable members",
+      "loaded organiser dashboard",
+      "edit group name",
+      "copy invite",
+      "confirm draw",
+      "reveal own match",
+      "mark gift bought"
+    ],
+    "separateMemberApi": [
+      "each sees only own match",
+      "members cannot execute organiser draw",
+      "match assignment immutable"
+    ],
+    "capturedBrowserWarningsErrors": 0
+  },
+  "productionEnvFilesUnchanged": true,
+  "cloudWrites": false,
+  "externalMailSent": false,
+  "remaining": [
+    "Custom Resend recovery/draw-email capture needs separate local transport",
+    "Full private stress/failure/role/browser matrix",
+    "Manual zoom/screen-reader and production deployment checks"
+  ]
+}
