@@ -235,7 +235,7 @@ function RevealedScreen({
         <h1 className="text-4xl font-bold mb-1 font-display text-[var(--cmb-text-inverse)]">
           {match.name}
         </h1>
-        <div className="text-3xl my-3" role="img" aria-label="gift">🎁</div>
+        <Gift size={32} strokeWidth={1.5} aria-hidden="true" className="mx-auto my-3 text-[var(--cmb-text-inverse)]" />
         {match.budget != null && (
           <p className="text-sm" style={{ color: "color-mix(in srgb, var(--cmb-text-inverse) 70%, transparent)" }}>
             Budget: {formatBudget(match.budget)}

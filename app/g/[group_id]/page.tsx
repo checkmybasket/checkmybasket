@@ -250,7 +250,7 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
   if (drawn) return (
     <div className="space-y-5">
       <div className="rounded-[var(--cmb-radius)] p-8 text-center bg-[var(--cmb-primary)] shadow-[var(--shadow-lg)]">
-        <div className="text-4xl mb-3">🎁</div>
+        <Gift size={36} strokeWidth={1.5} aria-hidden="true" className="mx-auto mb-3 text-[var(--cmb-text-inverse)]" />
         <h2 className="font-bold text-xl mb-2 text-[var(--cmb-text-inverse)] font-display">Names have been drawn</h2>
         <p className="text-sm mb-5" style={{ color:"color-mix(in srgb, var(--cmb-text-inverse) 75%, transparent)" }}>
           {myDraw ? "Your match is ready and waiting." : "You joined after the draw — ask your organiser about a redraw."}
@@ -625,7 +625,7 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
           </div>
           <div className="rounded-[var(--cmb-radius)] p-4 flex items-center justify-between gap-3 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
             <div>
-              <p className="font-semibold text-sm">Surprise me 🎁</p>
+              <p className="font-semibold text-sm">Surprise me</p>
               <p className="text-xs mt-0.5 text-[var(--cmb-text-muted)]">
                 {surpriseMe
                   ? "On — your Secret Santa knows you're happy to be surprised and will see gift ideas in budget."
@@ -666,7 +666,7 @@ function WishlistsTab({ data, refresh }: { data:DashData; refresh:()=>Promise<vo
       )}
       {!isMyList && activeMember?.surprise_me && (
         <div className="rounded-[var(--cmb-radius)] p-4 bg-[var(--cmb-surface)] border border-[var(--cmb-gold-strong)] shadow-[var(--shadow-sm)]">
-          <p className="font-semibold text-sm">🎁 {activeMember.name} is happy to be surprised</p>
+          <p className="font-semibold text-sm">{activeMember.name} is happy to be surprised</p>
           <p className="text-xs mt-1 mb-3 text-[var(--cmb-text-muted)]">
             No need to stick to a list — browse curated ideas{budgetTier ? " within the group budget" : ""} and pick something you think they&apos;d like.
           </p>
@@ -755,8 +755,8 @@ function MessagesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<voi
     <div className="space-y-4">
       <div role="group" aria-label="Conversation" className="flex gap-2">
         {([
-          { key:"recipient", label:recipientName?`To ${recipientName} 🎁`:"To your match 🎁" },
-          { key:"santa",     label:"Your Secret Santa 🤫" },
+          { key:"recipient", label:recipientName?`To ${recipientName}`:"To your match" },
+          { key:"santa",     label:"Your Secret Santa" },
         ] as const).map(({ key, label }) => (
           <button key={key} aria-pressed={thread===key} onClick={()=>setThread(key)}
             className={cn("flex-1 rounded-full px-3 py-2 text-sm font-medium border-2 transition-all duration-150",
@@ -770,7 +770,7 @@ function MessagesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<voi
         <Lock size={14} strokeWidth={1.5} className="text-[var(--cmb-primary)] shrink-0 mt-0.5"/>
         <p className="text-xs text-[var(--cmb-text-secondary)]">
           {thread==="recipient"
-            ? <>You&apos;re anonymous here — {recipientName ?? "they"} will only see &ldquo;Your Secret Santa 🤫&rdquo;</>
+            ? <>You&apos;re anonymous here — {recipientName ?? "they"} will only see &ldquo;Your Secret Santa&rdquo;</>
             : <>Questions from the person buying for you. They can&apos;t see who you are either.</>}
         </p>
       </div>
@@ -790,7 +790,7 @@ function MessagesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<voi
                 <div className="rounded-[var(--cmb-radius)] px-4 py-3 max-w-[80%]"
                   style={{ background:isMe?"var(--cmb-primary)":"var(--cmb-surface)", color:isMe?"var(--cmb-text-inverse)":"var(--cmb-text-primary)", border:isMe?"none":"1px solid var(--cmb-border)" }}>
                   {!isMe && <p className="text-xs font-medium mb-1 text-[var(--cmb-primary)]">
-                    {thread==="santa"?"Your Secret Santa 🤫":`${recipientName ?? "Them"}`}
+                    {thread==="santa"?"Your Secret Santa":`${recipientName ?? "Them"}`}
                   </p>}
                   <p className="text-sm leading-relaxed">{msg.content}</p>
                   <p className="text-xs mt-1" style={{ color:isMe?"color-mix(in srgb, var(--cmb-text-inverse) 55%, transparent)":"var(--cmb-text-muted)" }}>{timeAgo(msg.created_at)}</p>

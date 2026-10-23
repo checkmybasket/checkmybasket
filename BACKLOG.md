@@ -664,15 +664,15 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: DONE
 - Completion note: Reveal Ask now links to ?tab=messages and the group initialises its Messages section on arrival. Actual staging click opens the recipient composer with Messages pressed; ordinary group URLs retain Draw. Build/lint/TypeScript and 110 local checks pass.
 
-### [ ] CONTENT 04 — P2
+### [x] CONTENT 04 — P2
 
 - Severity: P2
 - Location: app/g/[group_id]/page.tsx and reveal/page.tsx; loaded draw, surprise prompts and recipient-message control
 - Evidence: Loaded private views use decorative gift emoji above the draw/reveal and inside surprise headings/message controls, while the rest of the app uses Lucide.
 - Fix: Use the existing Gift icon for standalone decoration and remove decorative emoji from those labels, preserving meaning and genuine game category content.
 - Acceptance criteria: Those controls/headings keep the same text meaning and behavior, with no decorative emoji; existing category data is unchanged; browser/build/lint/TypeScript pass.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Replaced standalone gift decorations with the existing Lucide Gift mark and removed decorative emoji from surprise/conversation labels. Browser confirms plain labels and clean console; game category content is unchanged. Build/lint/TypeScript and 110 local checks pass.
 
 ### [x] A11Y 17 — P1
 
