@@ -347,15 +347,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Resolved with existing app/opengraph-image.tsx artwork. Generated PNG visually inspected at 1200x630; existing basket mark and current brand are intact. Social metadata references this real asset; no fabricated replacement or owner artwork dependency remains.
 
-### [ ] PERF 02 — P2
+### [x] PERF 02 — P2
 
 - Severity: P2
 - Location: components/gift-card.tsx:24; /gifts and product categories
 - Evidence: Lighthouse image-delivery audit estimates 304KiB savings on /gifts; a 750x750 product image transfers 85,440 bytes for a much smaller displayed image.
 - Fix: Align image wrapper dimensions and sizes with the actual contained image, and use appropriate optimized dimensions/quality.
 - Acceptance criteria: Matched mobile report shows lower image transfer and image-delivery waste with crisp products at requested viewport sizes.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: The newer catalogue/image sizing already resolves historical image waste. Comparable current before/final gifts Lighthouse image-delivery audit scores 1 (pass); all 40 public routes settle with zero broken/pending images. No unnecessary image-quality reduction made.
 
 ### [x] PERF 03 — P2
 
