@@ -8,6 +8,8 @@ Release update: owner checks explicitly approved; verified candidate promoted to
 
 Post-release update: PR #3 merged into main; its production deployment is verified. SECURITY 07 patches a newly reported dev-only advisory and SECURITY 02 now has clean full-audit evidence. Current count: 84 issues, 83 closed, SECURITY 06 NEEDS OWNER. See [audit/POST_RELEASE.md](audit/POST_RELEASE.md).
 
+Final account decision: SECURITY 06 is resolved following the owner's passwordless choice and authenticated dashboard inspection. All 84 issues are closed, including documented owner acceptance/decisions; closure does not claim backend password endpoints are disabled or the paid leaked-password advisor warning is cleared. See [audit/AUTH_PROVIDER_DECISION.md](audit/AUTH_PROVIDER_DECISION.md).
+
 Some original evidence and line numbers came from an older checkout. Each finding was reconciled against this newer base before implementation; completion notes distinguish fixes made here from defects already resolved in the newer base. Older checkout Lighthouse scores are not used as this branch's baseline.
 
 ## Stack and routes
@@ -776,14 +778,16 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: DONE
 - Completion note: Profiled unused code as the eagerly fetched Supabase chunk. Deferred create-only SDK/recovery/QR imports and private-tool prefetch; JS transfer fell 66,823 bytes on gifts and create, unused estimates fell to 29KiB. Browser validation and save-intent navigation work; build/lint/TypeScript pass. Gifts lab performance varied 95 to 92 while a11y/best-practices/SEO remain 100.
 
-### [ ] SECURITY 06 — P2
+### [x] SECURITY 06 — P2
 
 - Severity: P2
 - Location: Supabase Auth project settings; production account configuration
 - Evidence: Production advisor reports leaked-password protection disabled. The app uses anonymous/passwordless access; the hosted password-provider configuration was not changed or certified by this audit.
 - Fix: NEEDS OWNER: confirm whether password sign-in is intentionally enabled in Supabase Auth. If used, enable the supported leaked-password setting through the owner account; otherwise document that the password flow is disabled/unsupported. Do not alter anonymous/passwordless access. Guidance: https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection.
 - Acceptance criteria: Owner records the password-provider decision and confirms the relevant account setting. Anonymous/passwordless app flows remain functional.
-- Status: NEEDS OWNER
+- Status: DONE — owner chose anonymous/passwordless; production dashboard settings verified.
+- Completion note: Anonymous and Email are enabled; confirm email/secure email change remain enabled, OTP expiry 3600 seconds/length 8. Email also supports password authentication and has no separate password-off control in the inspected dashboard. Leaked-password protection requires Pro; no paid upgrade or provider change was made. Password login is unsupported by the application, not claimed disabled at the backend. Existing recovery preserved. See audit/AUTH_PROVIDER_DECISION.md. The earlier access-blocked note below is historical and now resolved.
+- Owner decision, 23 October 2026: Keep anonymous/passwordless access; do not add password sign-in. Source confirms signInAnonymously and recovery verifyOtp, with no signInWithPassword or password signup in app/lib/functions. Hosted provider configuration remains unverified: the connector has no Auth-config operation, the dashboard requires login, and the native Mac is locked. Keep Email enabled for OTP recovery; do not disable that provider to suppress a password advisory. Await authenticated dashboard inspection before claiming the hosted password flow is disabled or closing this issue.
 
 ### [x] SEO 04 — P2
 
