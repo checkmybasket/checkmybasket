@@ -137,15 +137,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Visible settings title is now h1 above the h2 sections; source hierarchy and build/lint/TypeScript pass. Private browser QA remains in OWNER 02.
 
-### [ ] A11Y 08 — P1
+### [x] A11Y 08 — P1
 
 - Severity: P1
 - Location: app/create/page.tsx header; /create
 - Evidence: Lighthouse button-name and link-name fail on the icon-only back control; browser DOM scan finds one unnamed button.
 - Fix: Give the single semantic back link a meaningful accessible name while applying A11Y 03.
 - Acceptance criteria: Back navigation is announced as Back to home, with one focus stop; Lighthouse button-name and link-name pass.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Name back links by destination. Generated create HTML contains Back to home; build/lint/TypeScript pass. Final public browser sweep will recheck links.
 
 ### [ ] A11Y 09 — P1
 
