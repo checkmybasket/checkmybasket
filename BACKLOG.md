@@ -713,3 +713,23 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Acceptance criteria: Loaded Gifts bought and Setup progress indicators have correct names and numeric values. Browser/build/lint/TypeScript checks pass.
 - Status: DONE
 - Completion note: Named Setup progress and Gifts bought indicators. Loaded pending/drawn browser states expose those names and correct numeric values (17 and 25 in fixtures); build/lint/TypeScript and local regressions pass.
+
+### [ ] A11Y 21 — P1
+
+- Severity: P1
+- Location: components/ui/input.tsx styling via app/globals.css; private recovery/notification forms
+- Evidence: Loaded pending/drawn groups at 320, 375 and 414px: both email inputs are 32px high, below the requested 44px mobile target.
+- Fix: Apply a mobile minimum height to the existing shared text-input primitive; preserve compact desktop sizes and larger explicit input sizes.
+- Acceptance criteria: Every displayed email input measures at least 44px at mobile widths without new overflow; build/lint/TypeScript pass.
+- Status: OPEN
+- Completion note: Pending.
+
+### [ ] UI 09 — P1
+
+- Severity: P1
+- Location: app/g/[group_id]/page.tsx; drawn-group match CTA at 320px
+- Evidence: Browser document width is 323px at a 320px viewport; the See who you are buying for link reaches x=323.125 inside a padded card because its label cannot wrap and uses wide padding.
+- Fix: Merge button classes explicitly, allow the full label to wrap, cap width to the card and use responsive padding with a comfortable minimum height. Do not shorten or change the label meaning.
+- Acceptance criteria: CTA stays inside the card at every requested width, remains fully readable/clickable and at least 44px high; loaded browser/build/lint/TypeScript pass.
+- Status: OPEN
+- Completion note: Pending.
