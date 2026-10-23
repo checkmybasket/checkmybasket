@@ -1,6 +1,6 @@
 # CheckMyBasket production polish report
 
-> Staging follow-up: environment isolation preparation is now recorded in [staging-preparation.json](staging-preparation.json) and [the staging runbook](../docs/staging.md). The original polish measurements below are unchanged; cloud provisioning awaits the required location/organisation decision.
+> Staging follow-up: local Docker/Colima staging is now running and core private flows are verified. See [LOCAL_STAGING_REPORT.md](LOCAL_STAGING_REPORT.md). The original polish measurements below are a historical snapshot before these staging fixes, not a new measurement of this local build.
 
 23 October 2026 · branch `polish/production-audit` · base `237cf0c` · repository `seo-release`.
 

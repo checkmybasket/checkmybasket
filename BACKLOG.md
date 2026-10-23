@@ -239,10 +239,10 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Severity: P1
 - Location: Authenticated /g/[group_id], /reveal, /settings and /join/[invite_code] QA
 - Evidence: No isolated test project or valid disposable multi-member fixtures were identified. Production group membership, draws, messages and deletion were not mutated.
-- Fix: NEEDS OWNER: provide a staging Supabase project and disposable multi-member groups, including pre-draw, drawn, empty, single-item and large-data states; confirm notification email is safely isolated.
+- Fix: Provision the user-selected local Supabase environment with disposable multi-member groups and isolated email; retain human/manual acceptance checks as NEEDS OWNER until every private-state criterion is verified.
 - Acceptance criteria: Run every private-route interaction, role/permission failure, slow/failed request, long-string case, requested viewport and 200% zoom without affecting real users.
 - Status: NEEDS OWNER
-- Completion note: Read-only Supabase inventory found only the production CheckMyBasket project and no branches; both local environment files target that project. Staging preparation is recorded in docs/staging.md: branch creation was rejected on Free; a location/organisation choice is pending. STAGE 01/02 fix environment CSP and guard integration writes without changing production credentials. NEEDS OWNER: provision an isolated staging project, three disposable users, organiser/member roles, pre/post-draw groups and wishlist fixtures (empty/single/200 items), with email delivery captured in a test inbox. Then test join/draw/reveal/settings/messages/reservations/recovery and failure/permission states. Do not reuse real groups or participants.
+- Completion note: Local staging is now provisioned with Docker/Colima, all 26 migrations, disposable pending/drawn groups and captured native/custom email. Core browser, member/non-member privacy, recovery and notification idempotency checks pass; production is unchanged. NEEDS OWNER: complete the remaining exhaustive private games/large-data/permission matrix and manual device/zoom/clipboard-denial checks before certifying every private-state acceptance criterion. See audit/LOCAL_STAGING_REPORT.md; this issue is not claimed fully passed.
 
 ### [x] PERF 01 — P1
 

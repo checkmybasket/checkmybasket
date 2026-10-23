@@ -24,5 +24,7 @@
     "otherLocalRegressionChecks": 79,
     "guardSmoke": "All three live scripts refuse missing staging config before requests"
   },
-  "next": "Continue provisioning after the pending staging-location answer. See docs/staging.md."
+  "next": "Continue provisioning after the pending staging-location answer. See docs/staging.md.",
+  "supersededBy": "local-staging.json",
+  "decision": "User selected local staging with Docker; local stack is now running. Earlier provisioning gates below are historical."
 }

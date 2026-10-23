@@ -52,13 +52,30 @@
       "match assignment immutable"
     ],
     "capturedBrowserWarningsErrors": 0,
-    "customRecoveryAndDrawMail": "PASS: captured setup, identity restoration, single-use redemption, verified preference, accepted draw email and duplicate suppression"
+    "customRecoveryAndDrawMail": "PASS: captured setup, identity restoration, single-use redemption, verified preference, accepted draw email and duplicate suppression",
+    "privateViewportCases": 70,
+    "privateStates": [
+      "drawn group",
+      "pending group",
+      "messages",
+      "wishlists",
+      "games",
+      "settings",
+      "reveal ready"
+    ],
+    "privateNoindexLabelsHeadingsAndControls": "PASS",
+    "anonymousQuestionReply": "PASS: sender identity column protected, real local reply displayed",
+    "nonMemberDenials": "PASS: group/member/draw/wishlist/message reads, draw execution and late join rejected",
+    "authFailureRecovery": "PASS: local Auth stopped, safe recovery shown, restart and Try again restored group",
+    "stalledDataLoading": "PASS: local REST paused, named loader shown, unpause restored group",
+    "normalConsoleErrorsWarnings": 0
   },
   "productionEnvFilesUnchanged": true,
   "cloudWrites": false,
   "externalMailSent": false,
   "remaining": [
-    "Full private stress/failure/role/browser matrix",
-    "Manual zoom/screen-reader and production deployment checks"
+    "Full exhaustive private games/large-data/permission state certification",
+    "Native 200% zoom, screen-reader, physical device and clipboard-denial checks",
+    "Production/preview deployment and account/domain/email delivery smoke checks"
   ]
 }
