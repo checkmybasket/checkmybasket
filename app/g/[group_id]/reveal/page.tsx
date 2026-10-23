@@ -1,4 +1,5 @@
 "use client";
+import { PageRecovery } from "@/components/page-recovery";
 import { userError } from "@/lib/user-errors";
 
 import { use, useEffect, useState } from "react";
@@ -23,7 +24,7 @@ interface Match {
   giftBought: boolean;
 }
 
-type Stage = "loading" | "nodraw" | "pre" | "animating" | "revealed";
+type Stage = "error" | "loading" | "nodraw" | "pre" | "animating" | "revealed";
 
 export default function RevealPage({ params }: { params: Promise<{ group_id: string }> }) {
   const { group_id } = use(params);
@@ -36,17 +37,20 @@ export default function RevealPage({ params }: { params: Promise<{ group_id: str
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) { setStage("nodraw"); return; }
 
-      const { data: draw } = await supabase.from("draws")
+      const { data: draw, error: drawError } = await supabase.from("draws")
         .select("id,recipient_id,gift_bought").eq("group_id", group_id).maybeSingle();
+      if (drawError) throw drawError;
       if (!draw) { setStage("nodraw"); return; }
 
-      const [{ data: group }, { data: member }, { data: wishlist }, { count }] = await Promise.all([
+      const reads = await Promise.all([
         supabase.from("groups").select("budget_amount").eq("id", group_id).maybeSingle(),
         supabase.from("group_members").select("name,likes,dislikes,sizes").eq("group_id", group_id).eq("user_id", draw.recipient_id).maybeSingle(),
         supabase.from("wishlist_items").select("id,title,url,price,shop_name").eq("group_id", group_id).eq("user_id", draw.recipient_id).order("created_at"),
         // draws rows are giver-visible only, so count members for "All N matched"
         supabase.from("group_members").select("id", { count: "exact", head: true }).eq("group_id", group_id),
       ]);
+      for (const result of reads) if (result.error) throw result.error;
+      const [{ data: group }, { data: member }, { data: wishlist }, { count }] = reads;
 
       setMatch({
         drawId: draw.id,
@@ -60,7 +64,7 @@ export default function RevealPage({ params }: { params: Promise<{ group_id: str
         giftBought: draw.gift_bought,
       });
       setStage("pre");
-    })();
+    })().catch(() => setStage("error"));
   }, [group_id]);
 
   function handleReveal() {
@@ -78,6 +82,8 @@ export default function RevealPage({ params }: { params: Promise<{ group_id: str
     setMatch(m => m ? { ...m, giftBought: next } : m);
     toast.success(next ? "Marked as bought — only you can see this" : "Unmarked as bought");
   }
+
+  if (stage === "error") return <PageRecovery retry={() => window.location.reload()} />;
 
   return (
     <div className="min-h-dvh flex flex-col bg-[var(--cmb-bg)]">

@@ -406,3 +406,13 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Acceptance criteria: Throttled transitions show an accessible loading state with stable layout; no indefinite spinner on failure.
 - Status: OPEN
 - Completion note: Pending.
+
+### [x] STATE 05 — P1
+
+- Severity: P1
+- Location: app/g/[group_id]/page.tsx, reveal/page.tsx, settings/page.tsx and app/join/[invite_code]/page.tsx; initial async views
+- Evidence: initial effects lack rejection handling; join treats backend errors as invalid invitations; dashboard defaults failed queries to empty arrays. A rejected load can leave skeletons indefinitely.
+- Fix: show the shared recoverable error panel on failed reads while preserving absent-group/no-match handling. This is an explicitly flagged error-state behavior change; successful flows and models are unchanged.
+- Acceptance criteria: build/lint/TypeScript pass; initial rejected loads have a retry action; valid absent-resource states stay distinct. Private fixture validation remains OWNER 02.
+- Status: DONE
+- Completion note: Initial reads now route rejected/backend failures to retryable recovery instead of permanent skeletons, false empty data or invalid-invite copy. Absent records retain existing states. Build/lint/TypeScript pass; valid private fixtures remain OWNER 02.

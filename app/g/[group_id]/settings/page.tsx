@@ -1,4 +1,5 @@
 "use client";
+import { PageRecovery } from "@/components/page-recovery";
 import { userError } from "@/lib/user-errors";
 import { use, useEffect, useState } from "react";
 import Link from "next/link";
@@ -16,6 +17,7 @@ interface GroupInfo { id:string; name:string; exchange_date:string|null; exchang
 export default function SettingsPage({ params }: { params: Promise<{ group_id:string }> }) {
   const { group_id } = use(params);
   const router = useRouter();
+  const [loadFailed, setLoadFailed] = useState(false);
   const [group, setGroup] = useState<GroupInfo | null>(null);
   const [me, setMe] = useState<string | null>(null);
   const [editName,          setEditName]          = useState(false);
@@ -32,13 +34,16 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) { router.replace(`/g/${group_id}`); return; }
       setMe(user.id);
-      const { data } = await supabase.from("groups")
+      const { data, error } = await supabase.from("groups")
         .select("id,name,exchange_date,exchange_location,invite_code,organiser_id")
         .eq("id", group_id).maybeSingle();
+      if (error) throw error;
       if (!data) { router.replace(`/g/${group_id}`); return; }
       setGroup(data); setGroupName(data.name);
-    })();
+    })().catch(() => setLoadFailed(true));
   }, [group_id, router]);
+
+  if (loadFailed) return <PageRecovery retry={() => window.location.reload()} />;
 
   if (!group || !me) return (
     <div className="min-h-dvh flex items-center justify-center bg-[var(--cmb-bg)]">

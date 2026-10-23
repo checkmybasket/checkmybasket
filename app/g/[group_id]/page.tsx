@@ -1,4 +1,5 @@
 "use client";
+import { PageRecovery } from "@/components/page-recovery";
 import { userError } from "@/lib/user-errors";
 import { use, useCallback, useEffect, useMemo, useState } from "react";
 import { Dice5, Gift, MessageCircle, Gamepad2, Settings, CheckCircle2, Circle, AlertTriangle, ExternalLink, Send, Plus, Trash2, Lock, ArrowRight, Share2, X, Trophy, Star } from "lucide-react";
@@ -65,16 +66,18 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
   const { group_id } = use(params);
   const [tab, setTab] = useState<Tab>("draw");
   const [data, setData] = useState<DashData | null>(null);
-  const [loadState, setLoadState] = useState<"loading"|"ready"|"noaccess">("loading");
+  const [loadState, setLoadState] = useState<"loading"|"ready"|"noaccess"|"error">("loading");
 
   const refresh = useCallback(async () => {
+    try {
     const supabase = createClient();
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) { setLoadState("noaccess"); return; }
 
-    const { data: group } = await supabase.from("groups")
+    const { data: group, error: groupError } = await supabase.from("groups")
       .select("id,name,mode,budget_amount,exchange_date,exchange_location,invite_code,draw_status,organiser_id")
       .eq("id", group_id).maybeSingle();
+    if (groupError) throw groupError;
     if (!group) { setLoadState("noaccess"); return; }
 
     const [members, wishes, myDraw, messages, exclusions, round] = await Promise.all([
@@ -85,6 +88,8 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
       supabase.from("exclusions").select("id,user_a_id,user_b_id").eq("group_id", group_id),
       supabase.from("prediction_rounds").select("id,status").eq("group_id", group_id).maybeSingle(),
     ]);
+
+    for (const result of [members, wishes, myDraw, messages, exclusions, round]) if (result.error) throw result.error;
 
     const itemIds = (wishes.data ?? []).map(w => w.id);
     const [claims, predictions, actuals, bought] = await Promise.all([
@@ -102,6 +107,8 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
         : Promise.resolve({ data: null }),
     ]);
 
+    for (const result of [claims, predictions, actuals, bought]) if ("error" in result && result.error) throw result.error;
+
     setData({
       me: user.id,
       group: group as GroupRow,
@@ -117,11 +124,14 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
       giftsBought: bought.data ?? null,
     });
     setLoadState("ready");
+    } catch { setLoadState("error"); }
   }, [group_id]);
 
   // refresh updates state only after its asynchronous authentication/data reads.
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { refresh(); }, [refresh]);
+
+  if (loadState === "error") return <PageRecovery retry={() => void refresh()} />;
 
   if (loadState === "loading") return (
     <div className="min-h-dvh flex items-center justify-center bg-[var(--cmb-bg)]">

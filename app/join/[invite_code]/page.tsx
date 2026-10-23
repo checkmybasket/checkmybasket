@@ -1,4 +1,5 @@
 "use client";
+import { PageRecovery } from "@/components/page-recovery";
 import { userError } from "@/lib/user-errors";
 import { use, useEffect, useState } from "react";
 import Link from "next/link";
@@ -28,7 +29,7 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
   const { invite_code } = use(params);
   const router = useRouter();
   const [group, setGroup] = useState<GroupPreview | null>(null);
-  const [loadState, setLoadState] = useState<"loading"|"ready"|"notfound">("loading");
+  const [loadState, setLoadState] = useState<"loading"|"ready"|"notfound"|"error">("loading");
   const [step, setStep] = useState<"join"|"onboard">("join");
   const [busy, setBusy] = useState(false);
   const [name, setName] = useState("");
@@ -41,11 +42,12 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
 
   useEffect(() => {
     const supabase = createClient();
-    supabase.rpc("get_group_preview", { p_invite_code: invite_code }).then(({ data, error }) => {
-      if (error || !data) { setLoadState("notfound"); return; }
+    Promise.resolve(supabase.rpc("get_group_preview", { p_invite_code: invite_code })).then(({ data, error }) => {
+      if (error) { setLoadState("error"); return; }
+      if (!data) { setLoadState("notfound"); return; }
       setGroup(data as GroupPreview);
       setLoadState("ready");
-    });
+    }).catch(() => setLoadState("error"));
   }, [invite_code]);
 
   async function handleJoin() {
@@ -101,6 +103,8 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
 
   const exchangeDate = group?.exchange_date
     ? new Date(group.exchange_date).toLocaleDateString("en-GB", { day:"numeric", month:"long" }) : null;
+
+  if (loadState === "error") return <PageRecovery retry={() => window.location.reload()} />;
 
   if (loadState === "loading") return (
     <div className="min-h-dvh flex items-center justify-center bg-[var(--cmb-bg)]">
