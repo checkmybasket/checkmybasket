@@ -63,6 +63,7 @@ export default async function GiftsPage({ searchParams }: { searchParams: Promis
         </details>
         <GiftResults products={products} catalogue={catalogue} filters={filters} page={page} pageSize={12}/>
         <p className="sr-only" data-gift-day={day}>Gift selection for {day}</p>
+        <h2 className="sr-only">Available gift ideas</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
           {products.slice((page - 1) * 12, page * 12).map(item => <GiftCard key={item.id} {...item}/>)}
         </div>

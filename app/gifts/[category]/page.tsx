@@ -67,6 +67,7 @@ export default async function CategoryPage({ params, searchParams }: { params: P
         </div>
         <p className="sr-only" data-gift-day={londonDay()}>Gift ideas rotate daily within this collection.</p>
         <GiftResults products={products} catalogue={catalogue} filters={filters} category={category} page={page} pageSize={24}/>
+        <h2 className="sr-only">Available gift ideas</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
           {products.slice((page - 1) * 24, page * 24).map(item => <GiftCard key={item.id} size="lg" {...item}/>)}
         </div>

@@ -157,15 +157,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: OPEN
 - Completion note: Pending.
 
-### [ ] A11Y 10 — P1
+### [x] A11Y 10 — P1
 
 - Severity: P1
 - Location: components/gift-card.tsx:30; /gifts and populated /gifts/[category]
 - Evidence: Browser category headings jump h1 to h3; Lighthouse /gifts reports heading-order failure on the first product card.
 - Fix: Give the product listing an appropriate h2 section heading or render card headings at the correct contextual level.
 - Acceptance criteria: No heading-level skips on gift routes; Lighthouse heading-order passes.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Add an h2 for each product listing before the card h3 headings. Source hierarchy and build/lint/TypeScript pass; guide-card hierarchy is preserved.
 
 ### [ ] A11Y 11 — P1
 
