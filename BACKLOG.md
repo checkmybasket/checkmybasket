@@ -4,6 +4,16 @@
 
 Current baseline: build PASS, TypeScript PASS, lint FAIL (CommonJS test harnesses are checked with TypeScript-only require rules, two restricted local variable names and a this-alias). Earlier Lighthouse scores are historical, not the baseline of this version. Current OG artwork exists in app/opengraph-image.tsx and will be reused after visual QA. No additional OG artwork is required by assumption.
 
+### [x] SECURITY 01 — P0
+
+- Severity: P0
+- Location: package.json and package-lock.json; all routes
+- Evidence: npm audit --omit=dev on 23 October reports critical Next.js advisories GHSA-2464-fhr4-w9xw and GHSA-673q-mjm6-r5xr plus high GHSA-p3m5-59mp-jv5r affecting installed 16.4.0. npm recommends 16.4.2. The vendor's build security gate also interrupts verification.
+- Fix: update existing next and matching eslint-config-next to exact 16.4.2. No new dependency. This takes priority over remaining polish.
+- Acceptance criteria: production dependency audit has zero findings; build/lint/TypeScript and existing local regression suites pass; public browser smoke succeeds.
+- Status: DONE
+- Completion note: Updated Next.js and matching ESLint config to 16.4.2. Production npm audit reports zero advisories; build/lint/TypeScript, 95 local regression checks and homepage browser smoke pass. Development-tool advisories remain a separate backlog finding.
+
 ### [x] BUILD 02 — P0
 
 - Severity: P0
