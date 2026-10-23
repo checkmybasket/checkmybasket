@@ -62,6 +62,7 @@ node scripts/gift-verifier/test.cjs
 node --env-file=.env.staging.local tests/wishlists-live.cjs
 node --env-file=.env.staging.local tests/wishlists-api-live.cjs
 node --env-file=.env.staging.local tests/local-mail-live.cjs
+node --env-file=.env.staging.local tests/game-permissions-live.cjs
 ```
 
 The 110 local regression checks pass (31 Node tests plus 79 existing analytics/gift checks). The three live scripts above also pass against local staging. They create disposable identities and feature data; they refuse production targets before requests. Their implemented cleanup removes feature data, while local Auth fixture identities remain disposable.
@@ -92,3 +93,7 @@ The local setup and recorded flows are verified, not a certification of every pr
 Production/preview deployment, real domain/account configuration, mail-provider delivery and external merchant checks remain separate. No production deployment was performed. The development-tool advisory exception remains in SECURITY 02.
 
 References: [Supabase local workflow](https://supabase.com/docs/guides/local-development/cli-workflows), [Colima Docker runtime](https://github.com/abiosoft/colima#docker), [Mailpit API](https://mailpit.axllent.org/docs/api-v1/).
+
+Game permission acceptance creates three disposable staging identities and removes its group/round/feature rows on completion. It uses the guarded public-key configuration, never a service-role key. The suite checks allowed writes as well as denied writes and unchanged records. Anonymous test identities remain in the disposable Auth database.
+
+The SECURITY 03–05 migrations have been applied and recorded only in local migration history. They must be reviewed and applied through the normal release process before claiming the production permission gaps are fixed. Do not deploy a staging `.next` artifact or point a Vercel preview at this machine's loopback Supabase URL.

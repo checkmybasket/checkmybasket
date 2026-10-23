@@ -96,3 +96,19 @@ A real wishlist was created through the browser, including a 195-character unbro
 **A11Y 22** exposes prediction category selection with aria-pressed. Browser checks verified choosing, replacing and returning to a choice. Both fixes separately passed staging build, lint, TypeScript and all 110 local regression checks. Captured normal-state browser warnings/errors: zero. Lighthouse was not rerun for these narrowly scoped changes; the measurements above retain their original provenance.
 
 Remaining coverage is narrower: participant/game permission edges, empty/shared interactions beyond the checks above, controlled mutation failures, native 200% zoom, screen reader, physical devices and clipboard denial. Live deployment checks remain a release gate.
+
+## Participant permissions and failed saves
+
+The local adversarial probe found three previously allowed writes, each logged and fixed in its own implementation commit:
+
+- **SECURITY 03:** a nonmember could insert its own actual gift against a known round. Inserts now require membership in that round's group.
+- **SECURITY 04:** a member could predict for a nonmember. Prediction subjects must now belong to the same group.
+- **SECURITY 05:** a member could submit after results were revealed. Inserts now require an open round.
+
+`tests/game-permissions-live.cjs` verifies real API calls with disposable owner/member/nonmember identities. Participants cannot create/reveal rounds; attempts leave the open round unchanged. Nonmember/impersonated gift inserts fail without creating records, while a member's own gift saves. Invalid subjects and impersonated predictors fail; valid open-round predictions save and stay private before reveal. Closed/revealed predictions fail without changing the original record/count. Revealed predictions remain hidden from outsiders. The local security advisor reports no warnings. All three migrations are recorded in local history; **production has not received these fixes**.
+
+**FORM 03:** a controlled local REST outage exposed raw `name resolution failed` text in gift saves; wishlist list forms used the same fallback. Both now use safe actionable messages. Browser checks verified gift/list draft retention, enabled retry buttons and successful restored retries. Database verification found exactly 200 fixture items and one updated gift, with no duplicate. The 200-gift limit retains specific guidance. See [save-failure-checks.json](save-failure-checks.json).
+
+Each fix passed build, lint, TypeScript and all 110 local regressions before its commit. A fresh browser tab after service restoration loaded all 200 items with zero warnings/errors. Expected network errors from deliberate outages and rejected validation requests are not counted as normal-state errors. All local services were restored. No dependencies were added, no data model changed and no production writes/deployments occurred. Lighthouse/bundle measurements above were not remeasured during this stage.
+
+Backlog now has 77 individual issues: 74 completed, three retained as NEEDS OWNER. Remaining release gates include manual native zoom/screen reader/physical-device/clipboard-denial checks, broader untested interaction states, live deployment verification and the documented upstream dev-tool advisory decision.
