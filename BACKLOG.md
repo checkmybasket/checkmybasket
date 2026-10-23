@@ -566,3 +566,13 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Acceptance criteria: actual shared heading/card components render long strings plus empty/single/200-item fixtures without page overflow at requested widths. Remove the temporary test route before committing; build/lint/TypeScript pass.
 - Status: DONE
 - Completion note: Added inherited overflow-wrap:anywhere. Real InfoPage, GiftCard and GiftResults components passed long-string plus empty/single/200-item fixture checks at all requested widths, short landscape and ultrawide; 640px zoom-reflow proxy also fits. Temporary route removed; build/lint/TypeScript pass. Native browser zoom remains unverified in QA 02.
+
+### [x] A11Y 13 — P1
+
+- Severity: P1
+- Location: inline guide/contact links and compact footer links; mobile public routes
+- Evidence: the final 320px browser sweep finds prose links about 20px tall and footer links such as About/Terms narrower than the requested 44px minimum.
+- Fix: enforce mobile minimum anchor hit sizes and give plain prose/list links an inline-flex hit box, preserving existing card/grid/flex link layouts and desktop typesetting.
+- Acceptance criteria: measured mobile links meet 44x44px, no horizontal overflow/overlap is introduced, and build/lint/TypeScript pass.
+- Status: DONE
+- Completion note: Enforced mobile 44px minimum link hit boxes with prose/list links handled without changing card/flex layouts. Rechecked home, contact and two guide types at 320px: no small links or overflow. Build/lint/TypeScript pass; final full sweep follows.
