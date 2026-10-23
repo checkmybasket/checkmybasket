@@ -1,8 +1,10 @@
+import { socialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { InfoPage, Section } from "@/components/info-page";
 
 export const metadata: Metadata = {
+  ...socialMetadata("About", "Why CheckMyBasket exists: Secret Santa without the ads, accounts, or awkward gifts.", "/about"),
   alternates: { canonical: "/about" },
   title: "About",
   description: "Why CheckMyBasket exists: Secret Santa without the ads, accounts, or awkward gifts.",

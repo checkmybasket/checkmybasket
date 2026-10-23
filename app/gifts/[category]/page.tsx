@@ -1,3 +1,4 @@
+import { socialMetadata } from "@/lib/page-metadata";
 import { GIFT_GUIDES } from "@/lib/gift-guides";
 import { ExploreNavigation } from "@/components/explore-navigation";
 import { CategoryGuideLinks } from "@/components/category-guide-links";
@@ -18,6 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
   const cat = GIFT_CATEGORIES.find(cat => cat.slug === category);
   if (!cat) return {};
   return {
+    ...socialMetadata(`${cat.heading} UK`, `${cat.desc}. Explore gift ideas from UK shops for your Secret Santa exchange.`, `/gifts/${category}`),
     title: { absolute: `${cat.heading} UK | CheckMyBasket` },
     description: `${cat.desc}. Explore gift ideas from UK shops for your Secret Santa exchange.`,
     alternates: { canonical: `/gifts/${category}` },

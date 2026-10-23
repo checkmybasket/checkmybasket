@@ -247,15 +247,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: OPEN
 - Completion note: Pending.
 
-### [ ] SEO 02 — P1
+### [x] SEO 02 — P1
 
 - Severity: P1
 - Location: app/layout.tsx; app/gifts/[category]/page.tsx; public child routes
 - Evidence: Root Open Graph URL/title and Twitter title describe the homepage; category metadata only returns title and description.
 - Fix: Generate accurate per-route social titles, descriptions and absolute URLs from shared metadata helpers.
 - Acceptance criteria: Inspect every public route: OG/Twitter fields accurately describe that page and use absolute production URLs.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Added shared page-specific social metadata for home, information, create and gift routes. Generated HTML has distinct OG/Twitter titles and production URLs; categories use catalogue data; existing branded OG artwork is referenced at 1200x630. Build/lint/TypeScript pass.
 
 ### [ ] SEO 03 — P1
 

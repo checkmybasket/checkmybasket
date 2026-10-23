@@ -1,7 +1,9 @@
+import { socialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import { InfoPage, Section } from "@/components/info-page";
 
 export const metadata: Metadata = {
+  ...socialMetadata("Privacy Policy", "What CheckMyBasket collects, optional analytics cookies, and your privacy choices. No ads.", "/privacy"),
   alternates: { canonical: "/privacy" },
   title: "Privacy Policy",
   description:

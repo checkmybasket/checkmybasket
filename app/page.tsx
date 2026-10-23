@@ -1,3 +1,4 @@
+import { socialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/receipt/header";
@@ -13,6 +14,7 @@ import {
 import "./receipt.css";
 
 export const metadata: Metadata = {
+  ...socialMetadata("Free Secret Santa Generator & Organiser | CheckMyBasket", "Organise a free Secret Santa draw. Share your invite on WhatsApp, draw names privately, add wishlists from any shop and ask anonymous questions. No ads.", "/"),
   title: { absolute: "Free Secret Santa Generator & Organiser | CheckMyBasket" },
   description: "Organise a free Secret Santa draw. Share your invite on WhatsApp, draw names privately, add wishlists from any shop and ask anonymous questions. No ads.",
   alternates: { canonical: "/" },

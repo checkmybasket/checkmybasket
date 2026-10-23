@@ -1,7 +1,9 @@
+import { socialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import { InfoPage, Section } from "@/components/info-page";
 
 export const metadata: Metadata = {
+  ...socialMetadata("Terms of Use", "The plain-English terms for using CheckMyBasket's free Secret Santa service.", "/terms"),
   alternates: { canonical: "/terms" },
   title: "Terms of Use",
   description: "The plain-English terms for using CheckMyBasket's free Secret Santa service.",

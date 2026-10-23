@@ -1,3 +1,4 @@
+import { socialMetadata } from "@/lib/page-metadata";
 import { GIFT_GUIDES } from "@/lib/gift-guides";
 import { ExploreNavigation } from "@/components/explore-navigation";
 import { GiftPagination } from "@/components/gift-pagination";
@@ -11,6 +12,7 @@ import { GiftResults } from "@/components/gift-results";
 import { GiftCard } from "@/components/gift-card";
 
 export const metadata = {
+  ...socialMetadata("Secret Santa Gift Ideas UK", "Explore Secret Santa gift ideas from UK shops, with collections under \u00a310, \u00a320, \u00a330 and \u00a350. Find a gift within your group's budget.", "/gifts"),
   alternates: { canonical: "/gifts" },
   title: "Secret Santa Gift Ideas UK",
   description: "Explore Secret Santa gift ideas from UK shops, with collections under £10, £20, £30 and £50. Find a gift within your group's budget.",
