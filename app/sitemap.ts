@@ -1,3 +1,4 @@
+import { SITE_ORIGIN } from "@/lib/site";
 import { ORGANISER_GUIDES } from "@/lib/organiser-guides";
 import { GIFT_GUIDES } from "@/lib/gift-guides";
 import { selectGifts } from "@/lib/gift-selection";
@@ -5,7 +6,7 @@ import type { MetadataRoute } from "next";
 import { getAvailableGifts } from "@/lib/gift-catalogue";
 import { GIFT_CATEGORIES } from "@/lib/gift-categories";
 
-const BASE = "https://www.checkmybasket.co.uk";
+const BASE = SITE_ORIGIN;
 
 export const dynamic = "force-dynamic";
 

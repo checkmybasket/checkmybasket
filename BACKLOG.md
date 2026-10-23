@@ -367,15 +367,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: OPEN
 - Completion note: Pending.
 
-### [ ] SEO 04 — P2
+### [x] SEO 04 — P2
 
 - Severity: P2
 - Location: app/layout.tsx; app/robots.ts:12; app/sitemap.ts:4
 - Evidence: Production origin is duplicated as literals in metadata, robots and sitemap.
 - Fix: Introduce one validated production-origin source of truth; use it for public URLs and metadata.
 - Acceptance criteria: Changing the configured production origin updates canonicals, sitemap and robots consistently; previews never redefine production canonicals.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Centralise public production URLs in SITE_ORIGIN. Metadata base, robots, sitemap and public guide/social URLs share one origin; production values remain independent of previews. Build/lint/TypeScript pass.
 
 ### [ ] SEO 05 — P2
 

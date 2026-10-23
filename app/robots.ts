@@ -1,3 +1,4 @@
+import { SITE_ORIGIN } from "@/lib/site";
 import { shouldPreventIndexing } from "@/lib/deployment";
 import type { MetadataRoute } from "next";
 
@@ -10,6 +11,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/g/", "/join/"],
     },
-    sitemap: "https://www.checkmybasket.co.uk/sitemap.xml",
+    sitemap: `${SITE_ORIGIN}/sitemap.xml`,
   };
 }

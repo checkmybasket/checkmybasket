@@ -1,3 +1,4 @@
+import { SITE_ORIGIN } from "@/lib/site";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { InfoPage, Section } from "@/components/info-page";
@@ -9,7 +10,7 @@ const guide = GIFT_GUIDES.find(item => item.slug === "personalised-secret-santa-
 export const metadata: Metadata = {
   title: { absolute: `${guide.title} | CheckMyBasket` }, description: guide.description,
   alternates: { canonical: `/${guide.slug}` },
-  openGraph: { title: guide.title, description: guide.description, url: `https://www.checkmybasket.co.uk/${guide.slug}` },
+  openGraph: { title: guide.title, description: guide.description, url: `${SITE_ORIGIN}/${guide.slug}` },
   twitter: { card: "summary_large_image", title: guide.title, description: guide.description },
 };
 export default function GiftGuide() {

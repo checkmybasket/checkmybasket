@@ -1,3 +1,4 @@
+import { SITE_ORIGIN } from "@/lib/site";
 import { GIFT_GUIDES } from "@/lib/gift-guides";
 import { ORGANISER_GUIDES } from "@/lib/organiser-guides";
 import type { Metadata } from "next";
@@ -24,7 +25,7 @@ export function topicMetadata(slug: string): Metadata {
   return {
     title: { absolute: `${guide.title} | CheckMyBasket` }, description: guide.description,
     alternates: { canonical: `/${slug}` },
-    openGraph: { title: guide.title, description: guide.description, url: `https://www.checkmybasket.co.uk/${slug}` },
+    openGraph: { title: guide.title, description: guide.description, url: `${SITE_ORIGIN}/${slug}` },
     twitter: { card: "summary_large_image", title: guide.title, description: guide.description },
   };
 }

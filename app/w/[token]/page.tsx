@@ -1,3 +1,4 @@
+import { SITE_ORIGIN } from "@/lib/site";
 import type { Metadata } from "next";
 import { SharedWishlist } from "@/components/wishlists/shared";
 export const metadata: Metadata = {
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "A wishlist for you",
     description: "Gifts from any shop, all in one place.",
-    url: "https://www.checkmybasket.co.uk/wishlists",
+    url: `${SITE_ORIGIN}/wishlists`,
   },
 };
 export default async function Page({

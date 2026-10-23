@@ -1,3 +1,4 @@
+import { SITE_ORIGIN } from "@/lib/site";
 import { OrganiserGuideLinks } from "@/components/organiser-guide-links";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
   title: { absolute: title },
   description,
   alternates: { canonical: "/office-secret-santa" },
-  openGraph: { title, description, url: "https://www.checkmybasket.co.uk/office-secret-santa" },
+  openGraph: { title, description, url: `${SITE_ORIGIN}/office-secret-santa` },
   twitter: { card: "summary_large_image", title, description },
 };
 

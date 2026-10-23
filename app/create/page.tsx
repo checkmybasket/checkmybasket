@@ -1,4 +1,6 @@
 "use client";
+import { SITE_ORIGIN } from "@/lib/site";
+
 import { userError } from "@/lib/user-errors";
 import { useRef, useState } from "react";
 import Link from "next/link";
@@ -30,7 +32,7 @@ export default function CreatePage() {
 
   const inviteLink = typeof window !== "undefined"
     ? `${window.location.origin}/join/${inviteCode}`
-    : `https://www.checkmybasket.co.uk/join/${inviteCode}`;
+    : `${SITE_ORIGIN}/join/${inviteCode}`;
 
   function validate() {
     const e: typeof errors = {};

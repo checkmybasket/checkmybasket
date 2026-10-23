@@ -1,3 +1,4 @@
+import { SITE_ORIGIN } from "@/lib/site";
 import { GuideIntro, GuideScreenshot } from "@/components/guide-intro";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -10,7 +11,7 @@ const guide = ORGANISER_GUIDES.find(item => item.slug === "secret-santa-invitati
 export const metadata: Metadata = {
   title: { absolute: "Secret Santa Invitation Messages for WhatsApp & Email | CheckMyBasket" }, description: guide.description,
   alternates: { canonical: `/${guide.slug}` },
-  openGraph: { title: guide.title, description: guide.description, url: `https://www.checkmybasket.co.uk/${guide.slug}` },
+  openGraph: { title: guide.title, description: guide.description, url: `${SITE_ORIGIN}/${guide.slug}` },
   twitter: { card: "summary_large_image", title: guide.title, description: guide.description },
 };
 const extraTemplates = [
