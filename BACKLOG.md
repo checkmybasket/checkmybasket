@@ -654,15 +654,15 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: DONE
 - Completion note: Named Group sections navigation and exposed aria-pressed on its buttons. Loaded staging browser confirms exactly one selected section and correct state after switching to Wishlists. Build/lint/TypeScript and 110 local checks pass.
 
-### [ ] UI 08 — P1
+### [x] UI 08 — P1
 
 - Severity: P1
 - Location: app/g/[group_id]/reveal/page.tsx and app/g/[group_id]/page.tsx; reveal Ask link
 - Evidence: Click Ask Local member two a question after revealing the disposable match: browser navigates to the group URL and renders Names have been drawn, not the Messages composer.
 - Fix: Link directly to the messages section using an explicit query parameter and initialise that section on arrival. This is a logged navigation behavior correction; no data/model change.
 - Acceptance criteria: Ask link opens the recipient message composer directly; ordinary group URLs still open Draw; loaded browser/build/lint/TypeScript checks pass.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Reveal Ask now links to ?tab=messages and the group initialises its Messages section on arrival. Actual staging click opens the recipient composer with Messages pressed; ordinary group URLs retain Draw. Build/lint/TypeScript and 110 local checks pass.
 
 ### [ ] CONTENT 04 — P2
 

@@ -313,7 +313,7 @@ function RevealedScreen({
 
       {/* Action buttons */}
       <div className="space-y-3">
-        <Link href={`/g/${groupId}`} className={buttonVariants({ variant: "outline", size: "default", className: "w-full h-12 rounded-[var(--cmb-radius)] font-medium border-[var(--cmb-border-strong)]" })}>
+        <Link href={`/g/${groupId}?tab=messages`} className={buttonVariants({ variant: "outline", size: "default", className: "w-full h-12 rounded-[var(--cmb-radius)] font-medium border-[var(--cmb-border-strong)]" })}>
             <MessageCircle size={18} strokeWidth={1.5} className="mr-2" />
             Ask {recipientName} a question
           </Link>

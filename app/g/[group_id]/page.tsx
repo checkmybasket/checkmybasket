@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { cn, formatBudget, getInitials, timeAgo } from "@/lib/utils";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { NotificationEmail } from "@/components/notification-email";
 import { EmailRecovery } from "@/components/email-recovery";
@@ -64,7 +65,8 @@ type Tab = "draw"|"wishlists"|"messages"|"games";
 // ─── Page ────────────────────────────────────────────────────────────────────
 export default function GroupDashboard({ params }: { params: Promise<{ group_id: string }> }) {
   const { group_id } = use(params);
-  const [tab, setTab] = useState<Tab>("draw");
+  const searchParams = useSearchParams();
+  const [tab, setTab] = useState<Tab>(() => searchParams.get("tab") === "messages" ? "messages" : "draw");
   const [data, setData] = useState<DashData | null>(null);
   const [loadState, setLoadState] = useState<"loading"|"ready"|"noaccess"|"error">("loading");
 
