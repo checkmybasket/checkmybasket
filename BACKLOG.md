@@ -338,6 +338,17 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: DONE
 - Completion note: Connected fields and fixed submit action to the labelled create form, retaining custom validation and the existing async handler. Production browser Enter triggers errors and focuses group-name; the submit action belongs to create-draw. No backend write; build/lint/TypeScript pass.
 
+### [x] FORM 03 — P1
+
+- Severity: P1
+- Location: components/wishlists/item-form.tsx and list-form.tsx; /wishlists and /wishlists/[id]
+- Evidence: Stopping local REST then saving a gift displays raw backend text "name resolution failed". Wishlist creation/editing uses the same raw-message fallback. Gift draft is retained and submit re-enables.
+- Fix: Route backend/transport errors through the existing safe userError helper while preserving specific local gift validation and the draft.
+- Acceptance criteria: Failed gift and list saves show actionable guidance without raw backend text; drafts survive; submitting re-enables; retry after restoration saves exactly once. Build/lint/TypeScript and local checks pass.
+- Status: DONE
+
+- Completion note: Both forms use safe actionable backend errors while retaining local validation and known limits. Controlled REST failures retain drafts and re-enable submit; restored retries save edits exactly once (200 items, one matching gift). Build/lint/TypeScript and 110 checks pass. Evidence: audit/save-failure-checks.json.
+
 ### [ ] OWNER 02 — P1
 
 - Severity: P1

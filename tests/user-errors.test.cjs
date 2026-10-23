@@ -21,4 +21,8 @@ test("draw constraints keep specific guidance", () => {
 test("permission and throttling failures explain next steps", () => {
   assert.match(userError({code:"42501",message:"internal"}, "save"), /recover access/);
   assert.match(userError({message:"rate limit exceeded"}, "save"), /wait/);
+  assert.match(userError({message:"You can have up to 200 gifts per wishlist."}, "save"), /200-gift limit.*Remove a gift/);
+  assert.match(userError({message:"You can have up to 30 wishlists."}, "save"), /30-wishlist limit.*existing wishlist/);
+  assert.match(userError({message:"Wishlist not available."}, "save"), /Refresh the page.*recover access/);
+  assert.equal(userError({message:"name resolution failed"}, "save the gift"), "Could not save the gift. Check your connection and try again.");
 });

@@ -1,0 +1,25 @@
+{
+  "environment": "isolated local staging",
+  "giftFailure": {
+    "alerts": [
+      "Could not save the gift. Check your connection and try again."
+    ],
+    "submitDisabled": false,
+    "title": "Local failed-save acceptance"
+  },
+  "listFailure": {
+    "alerts": [
+      "Could not save your wishlist. Check your connection and try again."
+    ],
+    "submitDisabled": false,
+    "title": "Local stress acceptance retry"
+  },
+  "retry": {
+    "listTitle": "Local stress acceptance retry",
+    "giftTitle": "Local failed-save acceptance",
+    "itemCount": 200,
+    "matchingGiftCount": 1
+  },
+  "knownLimit": "This wishlist has reached its 200-gift limit. Remove a gift before adding another.",
+  "expectedNetworkErrors": "Controlled REST outage and 200-item validation requests excluded from normal console counts; not a claim of error-free outage requests."
+}

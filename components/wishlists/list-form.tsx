@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { userError } from "@/lib/user-errors";
 import { createClient } from "@/lib/supabase/client";
 import { ensureSession } from "@/lib/supabase/auth";
 import { trackCreation } from "@/lib/analytics";
@@ -33,12 +34,7 @@ export function ListForm({
       if (!list) trackCreation("wishlist_created");
       onSaved(data);
     } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : ((err as { message?: string })?.message ??
-              "Could not save your wishlist."),
-      );
+      setError(userError(err, "save your wishlist"));
     } finally {
       setBusy(false);
     }

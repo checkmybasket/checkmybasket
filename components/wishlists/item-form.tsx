@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { userError } from "@/lib/user-errors";
 import { createClient } from "@/lib/supabase/client";
 import {
   currencies,
@@ -102,10 +103,10 @@ export function ItemForm({
     e.preventDefault();
     if (busy) return;
     lookupRef.current?.abort();
-    setBusy(true);
     setError("");
+    let data: Omit<typeof values, "price"> & { price: number | null };
     try {
-      const data = {
+      data = {
         ...values,
         title: values.title.trim(),
         url: webUrl(values.url),
@@ -113,6 +114,12 @@ export function ItemForm({
         price: priceInPence(values.price),
       };
       if (!data.title) throw new Error("Add a gift title.");
+    } catch (err) {
+      setError(err instanceof TypeError ? "Enter a public http or https link." : err instanceof Error ? err.message : "Check your gift details and try again.");
+      return;
+    }
+    setBusy(true);
+    try {
       const { error } = await createClient().rpc("save_personal_wish", {
         p_list: listId,
         p_id: item?.id ?? null,
@@ -121,12 +128,7 @@ export function ItemForm({
       if (error) throw error;
       onSaved();
     } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : ((err as { message?: string })?.message ??
-              "Could not save the gift."),
-      );
+      setError(userError(err, "save the gift"));
     } finally {
       setBusy(false);
     }

@@ -2,6 +2,9 @@
 export function userError(error: unknown, action: string): string {
   const value = error && typeof error === "object" ? error as { code?: string; message?: string } : {};
   const message = typeof value.message === "string" ? value.message : "";
+  if (message === "You can have up to 200 gifts per wishlist.") return "This wishlist has reached its 200-gift limit. Remove a gift before adding another.";
+  if (message === "You can have up to 30 wishlists.") return "You have reached the 30-wishlist limit. Edit an existing wishlist or delete one before creating another.";
+  if (message === "Wishlist not available." || message === "Gift not available.") return "This wishlist or gift is no longer available. Refresh the page or use Return & sign in to recover access.";
   if (/need at least 3|at least three members/i.test(message)) return "Invite at least three people before drawing names.";
   if (/valid draw|exclusion rules/i.test(message)) return "These exclusions prevent a valid draw. Review the exclusions and try again.";
   if (/organisers must delete/i.test(message)) return "As the organiser, use Delete group in settings instead of leaving.";
