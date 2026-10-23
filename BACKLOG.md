@@ -117,15 +117,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Connected group-name label and input; source associations, build/lint/TypeScript pass. Loaded private-state browser coverage remains in OWNER 02.
 
-### [ ] A11Y 06 — P1
+### [x] A11Y 06 — P1
 
 - Severity: P1
 - Location: app/g/[group_id]/page.tsx; /g/[group_id]
 - Evidence: The only h1 is inside the private/no-access branch; loaded dashboard sections start at h2.
 - Fix: Render the group name as the loaded dashboard h1.
 - Acceptance criteria: A valid group dashboard has exactly one h1, including after tab changes.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Loaded dashboard group name is now the single h1 above all tabs; source branch review and build/lint/TypeScript pass. Private browser QA remains in OWNER 02.
 
 ### [ ] A11Y 07 — P1
 

@@ -153,7 +153,7 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
         <div className="max-w-2xl mx-auto px-4 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2 min-w-0">
             <Gift size={18} strokeWidth={1.5} className="text-[var(--cmb-primary)] shrink-0"/>
-            <span className="font-semibold truncate font-display text-[var(--cmb-primary)]">{group.name}</span>
+            <h1 className="font-semibold truncate font-display text-[var(--cmb-primary)]">{group.name}</h1>
             <span className="rounded-full px-2 py-0.5 text-xs font-medium flex-shrink-0 text-[var(--cmb-primary)]" style={{ background:"rgba(27,67,50,0.1)" }}>
               {members.length} member{members.length===1?"":"s"}
             </span>
