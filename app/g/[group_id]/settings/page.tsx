@@ -145,7 +145,7 @@ export default function SettingsPage({ params }: { params: Promise<{ group_id:st
 
         <Section title="Invite link">
           <div className="p-5 space-y-3">
-            <p className="text-sm break-all text-[var(--cmb-primary)]" style={{ fontFamily:"var(--font-jetbrains-mono)", fontSize:"0.8rem" }}>{inviteLink}</p>
+            <p className="text-sm break-all text-[var(--cmb-primary)]" style={{ fontFamily:"var(--font-ibm-plex-mono)", fontSize:"0.8rem" }}>{inviteLink}</p>
             <div className="w-32 h-32 rounded-xl mx-auto overflow-hidden bg-white border border-[var(--cmb-border)]">
               <QRCodeSvg value={inviteLink} size={126} />
             </div>

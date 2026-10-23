@@ -153,7 +153,7 @@ export default function CreatePage() {
         {/* Copy link — secondary */}
         <div className="rounded-2xl p-5 mb-4 text-left animate-fade-up animate-delay-300 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-md)]">
           <p className="text-xs font-medium mb-2 text-[var(--cmb-text-muted)]">OR COPY THE LINK</p>
-          <p className="text-sm break-all mb-3 text-[var(--cmb-primary)]" style={{ fontFamily:"var(--font-jetbrains-mono)", fontSize:"0.8rem" }}>{inviteLink}</p>
+          <p className="text-sm break-all mb-3 text-[var(--cmb-primary)]" style={{ fontFamily:"var(--font-ibm-plex-mono)", fontSize:"0.8rem" }}>{inviteLink}</p>
           <Button onClick={copyLink} variant="outline" className="w-full h-10 rounded-xl font-medium text-sm"
             style={{ borderColor:copied?"var(--cmb-success)":"var(--cmb-border-strong)", color:copied?"var(--cmb-success)":"var(--cmb-text-primary)" }}>
             {copied ? <><Check size={15} strokeWidth={2} className="mr-2"/>Copied</> : <><Copy size={15} strokeWidth={1.5} className="mr-2"/>Copy link</>}

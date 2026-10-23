@@ -195,7 +195,7 @@ function AnimatingReveal() {
         </div>
       </div>
 
-      <h2 className="text-2xl font-bold mb-2 animate-pulse" style={{ fontFamily: "var(--font-fraunces)", color: "var(--cmb-text-secondary)" }}>
+      <h2 className="text-2xl font-bold mb-2 animate-pulse" style={{ fontFamily: "var(--font-inter)", color: "var(--cmb-text-secondary)" }}>
         Drawing your match...
       </h2>
       <div className="flex justify-center gap-1 mt-4">

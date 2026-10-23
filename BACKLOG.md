@@ -487,15 +487,15 @@ Each implementation issue must pass build, lint, type check and its specific acc
 - Status: DONE
 - Completion note: Reuse the basket mark for every app-name header. Gift/category icons remain meaningful content icons; build/lint/TypeScript pass.
 
-### [ ] UI 04 — P2
+### [x] UI 04 — P2
 
 - Severity: P2
 - Location: app/ and components/ shared theme; public and functional routes
 - Evidence: Legacy font variables no longer exist. Functional pages refer to --font-fraunces and --font-jetbrains-mono, while the root only supplies Inter and IBM Plex Mono.
 - Fix: Replace old variable references with the active brand font variables; retain font roles and content.
 - Acceptance criteria: obsolete styling references are absent; current tokens/marks render consistently; build/lint/TypeScript and final responsive/contrast checks pass.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Use active Inter and IBM Plex Mono variables in functional pages. Typography roles are preserved and undefined font references are removed; build/lint/TypeScript pass.
 
 ### [ ] UI 05 — P2
 
