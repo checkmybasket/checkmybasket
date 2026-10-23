@@ -753,12 +753,12 @@ function MessagesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<voi
 
   return (
     <div className="space-y-4">
-      <div className="flex gap-2">
+      <div role="group" aria-label="Conversation" className="flex gap-2">
         {([
           { key:"recipient", label:recipientName?`To ${recipientName} 🎁`:"To your match 🎁" },
           { key:"santa",     label:"Your Secret Santa 🤫" },
         ] as const).map(({ key, label }) => (
-          <button key={key} onClick={()=>setThread(key)}
+          <button key={key} aria-pressed={thread===key} onClick={()=>setThread(key)}
             className={cn("flex-1 rounded-full px-3 py-2 text-sm font-medium border-2 transition-all duration-150",
               thread===key?"border-[var(--cmb-primary)] bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]":"border-[var(--cmb-border)] bg-[var(--cmb-surface)]")}>
             {label}

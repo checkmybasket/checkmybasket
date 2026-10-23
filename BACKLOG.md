@@ -694,15 +694,15 @@ Sorted by severity, then area and ID. DONE refers to the documented implementati
 - Status: DONE
 - Completion note: Empty states now default to h2, with wishlist-nested content explicitly h3. Loaded browser verifies root Messages and pending Games h1→h2, and wishlist h1→h2→h3. Build/lint/TypeScript and local regressions pass.
 
-### [ ] A11Y 19 — P1
+### [x] A11Y 19 — P1
 
 - Severity: P1
 - Location: app/g/[group_id]/page.tsx; loaded private group views — Conversation selection state
 - Evidence: Recipient/Your Secret Santa conversation buttons expose no selected state, only selected styling.
 - Fix: Name the conversation button group and expose aria-pressed on both choices.
 - Acceptance criteria: Exactly one conversation is pressed after switching, with existing message permissions retained. Browser/build/lint/TypeScript checks pass.
-- Status: OPEN
-- Completion note: Pending.
+- Status: DONE
+- Completion note: Named the Conversation group and exposed aria-pressed on both thread choices. Loaded browser confirms exactly one pressed choice after switching; permissions and message flow remain unchanged. Build/lint/TypeScript and local regressions pass.
 
 ### [ ] A11Y 20 — P1
 
