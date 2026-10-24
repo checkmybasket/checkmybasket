@@ -1,6 +1,7 @@
 {
   "pageAndHandlerFiles": [
     "app/about/page.tsx",
+    "app/anonymous-secret-santa-wrapping/page.tsx",
     "app/api/wishlists/image/route.ts",
     "app/api/wishlists/metadata/route.ts",
     "app/contact/page.tsx",
@@ -16,7 +17,9 @@
     "app/icon-192.png/route.tsx",
     "app/icon-512.png/route.tsx",
     "app/join/[invite_code]/page.tsx",
+    "app/last-minute-secret-santa/page.tsx",
     "app/money-clip-engraving-ideas/page.tsx",
+    "app/no-clutter-secret-santa-gifts/page.tsx",
     "app/office-secret-santa/page.tsx",
     "app/page.tsx",
     "app/personalised-gifts-for-dads/page.tsx",
@@ -26,6 +29,7 @@
     "app/privacy/page.tsx",
     "app/remote-team-secret-santa/page.tsx",
     "app/return/page.tsx",
+    "app/secondhand-secret-santa/page.tsx",
     "app/secret-santa-gifts-for-book-lovers/page.tsx",
     "app/secret-santa-gifts-for-coffee-lovers/page.tsx",
     "app/secret-santa-gifts-for-colleagues/page.tsx",
@@ -37,6 +41,7 @@
     "app/secret-santa-gifts-under-50/page.tsx",
     "app/secret-santa-invitation-messages/page.tsx",
     "app/secret-santa-odd-number/page.tsx",
+    "app/secret-santa-questionnaire/page.tsx",
     "app/secret-santa-rules/page.tsx",
     "app/secret-santa-whatsapp/page.tsx",
     "app/secret-santa-wishlist-ideas/page.tsx",
@@ -85,7 +90,12 @@
     "/gifts/colleague",
     "/gifts/funny",
     "/gifts/cosy",
-    "/gifts/personalised"
+    "/gifts/personalised",
+    "/last-minute-secret-santa",
+    "/secret-santa-questionnaire",
+    "/no-clutter-secret-santa-gifts",
+    "/secondhand-secret-santa",
+    "/anonymous-secret-santa-wrapping"
   ],
   "systemEndpoints": [
     "/icon",
@@ -97,5 +107,5 @@
     "/robots.txt",
     "/sitemap.xml"
   ],
-  "note": "Dynamic private/invite/token routes deliberately noindex; eight gifts categories resolved from catalogue."
+  "note": "Dynamic private/invite/token routes deliberately noindex; eight gifts categories resolved from catalogue. Five owner-approved editorial guides added on 24 October 2026."
 }

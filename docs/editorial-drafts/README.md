@@ -1,6 +1,6 @@
 # Five guides for morning review
 
-Status: DRAFT, unpublished. These Markdown files are outside app/ and public/, with no routes, sitemap entries or navigation links. Approval is needed before publication. Slugs are proposals, not live URLs.
+Status: Owner approved publication on 24 October 2026. These Markdown files retain the original draft/review record. The five articles are now implemented under their proposed app routes, with metadata from lib/editorial-guides.ts and discovery through the guide index/sitemap. Draft status lines and editorial review notes are not rendered publicly. Deployment verification follows the publication commit.
 
 The topics target distinct reader problems rather than duplicate existing budget, office, remote-team or wishlist guides. Search demand and competitiveness have not been measured; these are editorial hypotheses, not keyword-volume claims. No invented tests, personal experience, prices, stock, testimonials or app features are used.
 
