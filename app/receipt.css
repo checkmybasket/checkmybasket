@@ -40,6 +40,24 @@
 .receipt-sample-totals span:last-child { color: var(--cmb-red); }
 .receipt-sample-thanks { border-top: 2px dashed var(--cmb-ink); margin-top: 16px; padding-top: 16px; }
 .receipt-steps-section { border-block: var(--cmb-rule); }
+.receipt-video-section { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.6fr); gap: 48px; align-items: start; padding-block: 72px; border-bottom: var(--cmb-rule); }
+.receipt-video-copy h2 { font-size: clamp(2.25rem,4vw,3.5rem); }
+.receipt-video-copy > p { margin-top: 24px; }
+.receipt-video-frame { width: 100%; aspect-ratio: 16 / 9; background: var(--cmb-receipt); border: var(--cmb-rule); position: relative; }
+.receipt-video-frame video,.receipt-video-play,.receipt-video-play picture,.receipt-video-play img { display: block; width: 100%; height: 100%; }
+.receipt-video-frame video { object-fit: contain; background: var(--cmb-ink); }
+.receipt-video-play { border: 0; padding: 0; cursor: pointer; position: relative; background: var(--cmb-receipt); color: var(--cmb-paper); }
+.receipt-video-play img { object-fit: cover; }
+.receipt-video-play-label { position: absolute; left: 50%; bottom: 12%; transform: translateX(-50%); display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 56px; padding: 14px 20px; width: max-content; max-width: calc(100% - 24px); background: var(--cmb-red); font-size: 17px; font-weight: 700; }
+.receipt-video-play:hover .receipt-video-play-label { background: var(--cmb-red-hover); }
+.receipt-video-transcript { margin-top: 24px; }
+.receipt-video-transcript summary { cursor: pointer; min-height: 44px; padding-block: 10px; text-decoration: underline; text-underline-offset: 3px; }
+.receipt-video-transcript ol { padding-left: 24px; margin-top: 12px; }
+.receipt-video-transcript li + li { margin-top: 12px; }
+.receipt-video-error { padding: 24px; display: flex; flex-direction: column; gap: 16px; overflow-wrap: anywhere; }
+.receipt-video-error a { text-decoration: underline; min-height: 44px; display: inline-flex; align-items: center; }
+@media (max-width: 959px) { .receipt-video-section { grid-template-columns: minmax(0,1fr); gap: 32px; padding-block: 48px; } }
+@media (max-width: 639px) { .receipt-video-frame { max-width: 360px; margin-inline: auto; aspect-ratio: 9 / 16; } }
 .receipt-guide-link { padding-top: 32px; }
 .receipt-guide-link a { text-decoration: underline; text-underline-offset: 3px; }
 .receipt-guide-link a:hover { color: var(--cmb-red); }
