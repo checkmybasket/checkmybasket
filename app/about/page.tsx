@@ -22,6 +22,10 @@ export default function AboutPage() {
         </p>
       </Section>
 
+      <Section id="meet-hassan" heading="Meet Hassan">
+        <p>CheckMyBasket is owned by Hassan, a business owner and cat lover.</p>
+      </Section>
+
       <Section heading="What we believe">
         <ul className="list-disc pl-5 space-y-1">
           <li><strong>No ads, ever.</strong> We&apos;re funded by optional affiliate links on gift ideas — never by selling your attention or your data.</li>
