@@ -28,6 +28,25 @@ Ruflo/ToolSearch tools were searched for but unavailable. No production data wri
 
 ## Issues
 
+### [x] SEO 13 — P1
+
+- Severity: P1
+- Location: app/about/page.tsx; /about
+- Evidence: Owner selected trust/editorial transparency work. About explains funding but not gift-selection criteria, check-date limits or the distinction between regularly verified and partner catalogue entries. Source confirms relevance filtering/daily rotation, a freshness limit on checked-list entries and undated legacy partner offers.
+- Fix: Add plain public explanations of selection, recorded checks, partner-entry limits, delivered-price checks and affiliate funding, grounded in existing source. Do not invent hands-on testing, universal daily checks or founder credentials. This is an approved editorial change, not a change to selection behavior.
+- Acceptance criteria: Clear accurate sections and relevant links; one h1 and existing canonical; no invented universal verification claims; mobile widths fit, no console errors; build/lint/TypeScript and 110 regressions pass; live verification after release.
+- Status: DONE
+- Completion note: Added selection/rotation, price-check limitations, partner-entry caveat and affiliate/corrections explanations grounded in source. No founder attribution invented. Build/lint/TypeScript and 110 regressions pass; About fits 320/375/414/768/1440 with one h1, existing canonical and no captured errors. Production check follows release. OWNER 03 remains pending the public bio details.
+
+### [ ] OWNER 03 — P2
+
+- Severity: P2
+- Location: app/about/page.tsx; public founder/editor bio
+- Evidence: Owner requested a real founder/editor bio but has not yet supplied the name, role, background or optional public profile to publish.
+- Fix: NEEDS OWNER: provide approved public attribution; add it without invented credentials, portraits or first-hand product-test claims. The question is pending in chat.
+- Acceptance criteria: Owner-approved factual attribution appears on /about; no private account data is repurposed as a public bio.
+- Status: NEEDS OWNER
+
 ### [x] CONTENT 02 — P1
 
 - Severity: P1
