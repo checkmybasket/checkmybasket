@@ -28,6 +28,16 @@ Ruflo/ToolSearch tools were searched for but unavailable. No production data wri
 
 ## Issues
 
+### [x] OUTREACH 01 — P2
+
+- Severity: P2
+- Location: docs/marketing/OUTREACH_SHORTLIST.md and OUTREACH_PITCHES.md; unpublished outreach preparation
+- Evidence: Owner requested researched outreach opportunities and tailored drafts after conversion verification.
+- Fix: Research primary editorial/contact pages, prioritise fit, prepare resource pitches and mark evidence/author-asset prerequisites. Do not send messages, guess private contacts or invent cases/relationships.
+- Acceptance criteria: Sources/contact routes documented, tailored drafts with explicit review status, lower-fit targets held, no publication/SEO promises and no external messages sent.
+- Status: DONE — research/draft delivery only.
+- Completion note: Two first-review prospects (PA Life/The Handbook), two conditional (Small Business UK/HRZone) and two reserves documented with primary sources and requirements. Four email drafts plus two held synopsis concepts prepared. No messages, forms, subscriptions or purchases submitted.
+
 ### [x] QA 03 — P2
 
 - Severity: P2
