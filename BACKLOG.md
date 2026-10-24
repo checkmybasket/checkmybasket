@@ -28,6 +28,16 @@ Ruflo/ToolSearch tools were searched for but unavailable. No production data wri
 
 ## Issues
 
+### [x] QA 03 — P2
+
+- Severity: P2
+- Location: GA4 property 540121380, lib/analytics.ts, components/analytics-consent.tsx and creation forms
+- Evidence: Owner requested conversion tracking verification before outreach.
+- Fix: Review actual stream/key-event configuration, trigger placement and consent/privacy tests; document exact event semantics and limits rather than invent production conversions.
+- Acceptance criteria: Correct measurement ID, verified key events and received event names, success-only source paths, passing consent/privacy checks, no fabricated business events or unsupported attribution claims.
+- Status: DONE
+- Completion note: Production stream ID matches source; group/wishlist creation already marked key events, retailer/save/filter events present in recent event list. All 16 analytics/privacy checks pass. No source/account changes needed. Documented group-setup versus name-draw semantics and limited channel attribution in audit/CONVERSION_TRACKING_REVIEW.md.
+
 ### [x] SEO 13 — P1
 
 - Severity: P1
