@@ -3,6 +3,7 @@ import { socialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/receipt/header";
+import { ProductVideo } from "@/components/receipt/product-video";
 import {
   Button,
   Receipt,
@@ -65,6 +66,24 @@ export default function HomePage() {
           </div>
         </section>
         <StepStrip />
+        <section id="watch" className="receipt-container receipt-video-section" aria-labelledby="video-heading">
+          <div className="receipt-video-copy">
+            <h2 id="video-heading">See how it works</h2>
+            <p id="video-description">A 30-second look at your gift exchange, from setting a budget to sharing wishlist ideas. No sound needed.</p>
+            <details className="receipt-video-transcript">
+              <summary>Read the video transcript</summary>
+              <ol>
+                <li>Good gifts. Less guesswork. Secret Santa, with wishlists built in.</li>
+                <li>Set the budget. Start the draw. Create your group and agree what to spend.</li>
+                <li>One invite. Everyone together. Share your group link when you&apos;re ready.</li>
+                <li>Keep your match private. Each person reveals their own match.</li>
+                <li>A few hints. Better gift ideas. Save ideas and links from any shop.</li>
+                <li>Make this year&apos;s Secret Santa. Create a free draw at checkmybasket.co.uk.</li>
+              </ol>
+            </details>
+          </div>
+          <ProductVideo />
+        </section>
         <p className="receipt-container receipt-guide-link">
           Need a hand organising? Read our{" "}
           <Link href="/secret-santa-whatsapp">WhatsApp Secret Santa guide</Link>{" "}

@@ -28,6 +28,17 @@ Ruflo/ToolSearch tools were searched for but unavailable. No production data wri
 
 ## Issues
 
+### [x] MEDIA 03 — P2
+
+- Severity: P2
+- Location: app/page.tsx, components/receipt/product-video.tsx, app/receipt.css, public/videos/; /
+- Evidence: Owner approved the revised videos and requested publication in an ideal place on the website. The homepage currently explains the steps without a video.
+- Fix: Add a watch-on-request overview after How it works, using vertical media on phones and widescreen on larger screens. Include native controls, captions, a text transcript and a playback failure fallback; defer video downloads until requested. No new dependencies or data changes.
+- Acceptance criteria: Lint, build and TypeScript pass; verify both responsive formats, keyboard playback, pause, captions, failure fallback and no video request before play; verify live deployment, media responses and homepage console.
+- Baseline: Lint/build pass. Initial standalone TypeScript check found a stale generated duplicate in .next/types; a normal production build regenerated it and the repeated check passes. Node reports existing module.register deprecations during build.
+- Status: IMPLEMENTED — release verification pending
+- Completion note: Responsive, on-request video follows the homepage setup steps; both approved MP4s, optimised posters and English captions are self-hosted. Build/lint/TypeScript pass. Isolated Chrome verified eight widths (320–1920), both decoded formats, keyboard activation/focus, pause, six caption cues, transcript, no MP4 requests before play, and failure/retry recovery; zero console/page errors. No dependencies or data changes. Production publication is authorised and will be verified after merge.
+
 ### [x] SEO 13 — P1
 
 - Severity: P1
