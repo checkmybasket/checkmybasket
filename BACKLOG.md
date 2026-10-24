@@ -28,6 +28,16 @@ Ruflo/ToolSearch tools were searched for but unavailable. No production data wri
 
 ## Issues
 
+### [x] CONTENT 02 — P1
+
+- Severity: P1
+- Location: five approved editorial drafts; proposed public guide routes and /guides/sitemap
+- Evidence: Owner explicitly approved publication on 24 October 2026. The five complete articles currently exist only as Markdown drafts.
+- Fix: Publish approved article copy in the existing accessible guide shell, omitting draft-only metadata/review notes. Add unique search/social metadata, canonical URLs, real publication dates, quick answers, contents navigation and contextual links. Include all five in the guide index and sitemap through one registry; preserve app behavior and avoid dependencies.
+- Acceptance criteria: Five routes return correct articles, unique title/description/canonical/OG/Twitter, one h1, valid contents/internal links and no draft notes; all listed once in sitemap and /guides. All requested viewport sizes fit, console clean; baseline/final build/lint/TypeScript and regressions pass; production verification after release. Indexing is not assumed.
+- Status: DONE
+- Completion note: Published approved copy using existing InfoPage/GuideIntro/Section components and a shared metadata registry, with real 24 October dates. All 50 route/viewport cases pass headings, metadata, contents targets, date, overflow and draft-note checks; captured console clean. Sitemap has 44 URLs, with all five included once and linked from /guides. Baseline/final build/lint/TypeScript and 110 regressions pass after fixing JSX escaping and updating the analytics harness import map; no dependencies or runtime markdown parser added. Production check follows release.
+
 ### [x] CONTENT 01 — P2
 
 - Severity: P2
