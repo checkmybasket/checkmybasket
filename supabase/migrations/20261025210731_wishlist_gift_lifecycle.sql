@@ -2,6 +2,13 @@ alter table personal_wishlist.items
  add column state text not null default 'active' check(state in ('active','archived','received')),
  add column repeatable boolean not null default false;
 
+create or replace function public.personal_wish_image(p_item uuid,p_token uuid default null) returns text
+language sql stable security definer set search_path = '' as $$
+ select nullif(i.image_url,'') from personal_wishlist.items i
+ join personal_wishlist.lists l on l.id=i.list_id where i.id=p_item
+ and (l.owner_id=auth.uid() or (l.shared and l.share_token=p_token and i.state='active'));
+$$;
+
 create function public.set_personal_wish_state(p_list uuid,p_id uuid,p_action text) returns void
 language plpgsql security definer set search_path = '' as $$
 declare v_state text;
