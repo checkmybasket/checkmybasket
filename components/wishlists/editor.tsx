@@ -16,6 +16,7 @@ import { ListForm } from "./list-form";
 import { ItemForm } from "./item-form";
 import { ItemCard } from "./item-card";
 import { WishlistShell, panel, secondary } from "./shell";
+import { WishlistReminders } from "./reminders";
 export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWishDraft }) {
   const router = useRouter();
   const [list, setList] = useState<PersonalList | null>(null);
@@ -411,6 +412,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
           {error}
         </p>
       )}
+      <WishlistReminders key={`${id}:${list.event_date}`} id={id} eventDate={list.event_date} />
       <EmailRecovery wishlist />
       <p className="text-xs text-[var(--cmb-text-muted)] mb-5">
         Without verified email recovery, clearing browser data means losing
