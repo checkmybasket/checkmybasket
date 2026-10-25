@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <InfoPage title="Privacy Policy" updated="10 October 2026">
+    <InfoPage title="Privacy Policy" updated="25 October 2026">
       <Section heading="The short version">
         <p>
           We collect the minimum needed to run your Secret Santa or personal
@@ -94,6 +94,10 @@ export default function PrivacyPage() {
           group (Article 6(1)(b)), and our legitimate interest in keeping the
           service safe (Article 6(1)(f)).
         </p>
+      </Section>
+
+      <Section heading="Optional wishlist reminders">
+        <p>If you opt in, we use your verified recovery email and your chosen occasion date to send a wishlist review reminder 21 days before the occasion and a cleanup reminder 3 days afterwards. You can choose annual repeats, turn reminders off in your wishlist editor or unsubscribe from an email. Email verification alone does not enable reminders. Reminder timing never depends on reservations or purchases, and emails do not reveal who bought a gift. Delivery records are removed 90 days after the occasion; deleting the wishlist removes its reminder settings and delivery records.</p>
       </Section>
 
       <Section heading="Optional analytics cookies">

@@ -47,3 +47,6 @@ deno_version = 2
 
 [analytics]
 enabled = false
+
+[functions.wishlist-reminders]
+verify_jwt = false

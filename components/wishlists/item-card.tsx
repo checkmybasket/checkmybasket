@@ -72,6 +72,7 @@ export function ItemCard({
                     : "Reserved"}
               </span>
             )}
+            {item.repeatable && <span className="rounded-full bg-[var(--cmb-bg)] px-3 py-1">Happy to receive again</span>}
           </div>
           <Heading className="text-lg font-semibold break-words">{item.title}</Heading>
           <p className="mt-1 text-sm">{money(item.price, item.currency)}</p>

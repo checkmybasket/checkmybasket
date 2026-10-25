@@ -16,6 +16,7 @@ import { ListForm } from "./list-form";
 import { ItemForm } from "./item-form";
 import { ItemCard } from "./item-card";
 import { WishlistShell, panel, secondary } from "./shell";
+import { WishlistReminders } from "./reminders";
 export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWishDraft }) {
   const router = useRouter();
   const [list, setList] = useState<PersonalList | null>(null);
@@ -24,6 +25,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
   const [editList, setEditList] = useState(false);
+  const [reviewing, setReviewing] = useState(false);
   const [editing, setEditing] = useState<PersonalWish | null | undefined>(draft ? null : undefined);
   const [pendingDraft, setPendingDraft] = useState(!!draft);
   const [confirm, setConfirm] = useState<{
@@ -64,7 +66,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
     setMessage("");
     try {
       const { error } = item
-        ? await createClient().rpc("manage_personal_wish", {
+        ? await createClient().rpc(["archive", "received", "restore", "again", "repeat", "oneoff"].includes(action) ? "set_personal_wish_state" : "manage_personal_wish", {
             p_list: id,
             p_id: item.id,
             p_action: action,
@@ -83,6 +85,9 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
       setMessage(
         action === "release"
           ? "Any reservation for this gift has been cleared. The gift stays on your wishlist."
+          : action === "received" ? "Marked as received. Find it in Received and archived; you can add it back for another occasion."
+          : action === "archive" ? "Gift archived. Restore it below if you change your mind."
+          : action === "again" ? "Gift added back. Its old reservation has been cleared for the next occasion."
           : action === "rotate"
             ? "New sharing link ready. The old link no longer works."
             : action === "disable"
@@ -98,6 +103,16 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
     } finally {
       setBusy(false);
     }
+  }
+  async function finishReview() {
+    if (busy) return;
+    setBusy(true); setError(""); setMessage("");
+    try {
+      const { error } = await createClient().rpc("review_personal_wishlist", { p_id: id });
+      if (error) throw error;
+      await load(); setReviewing(false); setMessage("Wishlist reviewed. Friends can see when you last checked it.");
+    } catch (err) { setError(userError(err, "confirm your wishlist review")); }
+    finally { setBusy(false); }
   }
   const shareUrl =
     list?.share_token && base ? `${base}/w/${list.share_token}` : "";
@@ -146,6 +161,8 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
         )}
       </WishlistShell>
     );
+  const activeItems = list.items.filter(item => !item.state || item.state === "active");
+  const savedItems = list.items.filter(item => item.state === "received" || item.state === "archived");
   return (
     <WishlistShell>
       <div className="flex flex-wrap justify-between items-start gap-4">
@@ -175,6 +192,14 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
           {list.description}
         </p>
       )}
+      <section className={`${panel} mt-5`} aria-labelledby="review-heading">
+        <h2 id="review-heading" className="text-xl font-semibold">Still hoping for these?</h2>
+        <p className="text-sm mt-2">{list.reviewed_at ? `Last reviewed ${new Date(list.reviewed_at).toLocaleDateString("en-GB", { timeZone: "Europe/London" })}.` : "Not reviewed yet, or changed since your last review."} Check your wishes before sharing for your next occasion.</p>
+        {reviewing ? <>
+          <p className="text-sm my-3">Keep the gifts you still want, edit any details, and archive wishes you no longer need. Mark gifts you already have as received. When you have checked the active list, confirm below.</p>
+          <div className="flex flex-wrap gap-3"><button className={secondary} disabled={busy} onClick={finishReview}>{busy ? "Saving…" : "Everything here is still wanted"}</button><button className={secondary} disabled={busy} onClick={() => setReviewing(false)}>Review later</button></div>
+        </> : <button className={`${secondary} mt-3`} onClick={() => setReviewing(true)}>Review my wishlist</button>}
+      </section>
       {editList && (
         <div className="mt-5">
           <ListForm
@@ -255,9 +280,9 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
         Reservations are hidden from your owner view to keep gifts a surprise.
         Prices are estimates.
       </p>
-      {list.items.length ? (
+      {activeItems.length ? (
         <div className="grid sm:grid-cols-2 gap-4">
-          {list.items.map((item, index) => (
+          {activeItems.map((item, index) => (
             <ItemCard key={`${item.id}:${item.image_url}`} item={item}>
               <div className="flex flex-wrap gap-2">
                 <button
@@ -277,7 +302,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
                 </button>
                 <button
                   className={secondary}
-                  disabled={busy || index === list.items.length - 1}
+                  disabled={busy || index === activeItems.length - 1}
                   onClick={() => mutate("down", item)}
                   aria-label={`Move ${item.title} down`}
                 >
@@ -290,6 +315,9 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
                 >
                   Unreserve gift<span className="sr-only">: {item.title}</span>
                 </button>
+                <button className={secondary} disabled={busy} onClick={() => mutate("received", item)}>Received<span className="sr-only"> {item.title}</span></button>
+                <button className={secondary} disabled={busy} onClick={() => mutate("archive", item)}>Archive<span className="sr-only"> {item.title}</span></button>
+                <button className={secondary} disabled={busy} aria-pressed={!!item.repeatable} onClick={() => mutate(item.repeatable ? "oneoff" : "repeat", item)}>Happy to receive again<span className="sr-only">: {item.title}</span></button>
                 <button
                   className={secondary}
                   disabled={busy}
@@ -318,6 +346,14 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
           </Button>
         </div>
       )}
+      {savedItems.length > 0 && <section className="mt-6" aria-labelledby="saved-gifts-heading">
+        <h2 id="saved-gifts-heading" className="text-xl font-semibold mb-3">Received and archived</h2>
+        <p className="text-sm mb-3">Hidden from your shared list. Restoring an archived gift keeps any reservation. Adding a received gift back clears its old reservation.</p>
+        <div className="grid sm:grid-cols-2 gap-4">{savedItems.map(item => <ItemCard key={item.id} item={item} headingLevel={3}>
+          <p className="text-sm mb-3">{item.state === "received" ? "Received" : "Archived"}</p>
+          <button className={secondary} disabled={busy} onClick={() => item.state === "received" ? setConfirm({action:"again",item}) : mutate("restore",item)}>{item.state === "received" ? "Add back for another occasion" : "Restore gift"}<span className="sr-only">: {item.title}</span></button>
+        </ItemCard>)}</div>
+      </section>}
       {confirm && (
         <section
           className={`${panel} mt-6`}
@@ -326,7 +362,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
           aria-describedby="confirm-description"
         >
           <h2 id="confirm-heading" className="font-semibold text-lg">
-            {confirm.action === "release"
+            {confirm.action === "again" ? "Want this gift again?" : confirm.action === "release"
               ? `Unreserve “${confirm.item?.title}”?`
               : confirm.action === "rotate"
                 ? "Replace your sharing link?"
@@ -335,7 +371,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
                   : "Delete your wishlist?"}
           </h2>
           <p id="confirm-description" className="text-sm my-3">
-            {confirm.action === "release"
+            {confirm.action === "again" ? "Only continue if you have received this gift and want another. This makes it available again and clears its old reservation, including bought status." : confirm.action === "release"
               ? "This clears any reservation, including one marked as bought, and lets someone else reserve the gift. The gift stays on your list."
               : confirm.action === "rotate"
                 ? "The old link and QR code will stop working. Existing reservations stay saved."
@@ -376,6 +412,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
           {error}
         </p>
       )}
+      <WishlistReminders key={`${id}:${list.event_date}`} id={id} eventDate={list.event_date} />
       <EmailRecovery wishlist />
       <p className="text-xs text-[var(--cmb-text-muted)] mb-5">
         Without verified email recovery, clearing browser data means losing

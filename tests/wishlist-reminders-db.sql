@@ -1,0 +1,43 @@
+-- Run only against isolated local staging; every fixture is rolled back.
+begin;
+create function pg_temp.check_true(ok boolean,msg text) returns void language plpgsql as $$begin if ok is distinct from true then raise exception 'FAILED: %',msg; end if; end;$$;
+select pg_temp.check_true((select due=date '2026-12-25' from personal_wishlist.reminder_events(date '2020-01-15',true,date '2026-12-25') where event_date=date '2027-01-15' and kind='before'),'annual year boundary');
+select pg_temp.check_true((select event_date=date '2027-02-28' from personal_wishlist.reminder_events(date '2024-02-29',true,date '2027-02-01') where kind='before' and extract(year from event_date)=2027),'leap day clamp');
+select pg_temp.check_true((select count(*)=2 from personal_wishlist.reminder_events(date '2026-12-25',false,current_date)),'one-off has exactly two reminders');
+select pg_temp.check_true(not has_function_privilege('authenticated','public.claim_wishlist_reminders()','execute'),'worker not browser callable');
+select pg_temp.check_true(not has_table_privilege('authenticated','personal_wishlist.reminder_preferences','select'),'preferences private');
+select set_config('test.owner',gen_random_uuid()::text,true);
+select set_config('test.other',gen_random_uuid()::text,true);
+insert into auth.users(id,email,email_confirmed_at) values(current_setting('test.owner')::uuid,'wishlist-owner@example.invalid',now()),(current_setting('test.other')::uuid,'wishlist-other@example.invalid',now());
+insert into public.profiles(id) values(current_setting('test.owner')::uuid),(current_setting('test.other')::uuid) on conflict do nothing;
+select set_config('request.jwt.claim.sub',current_setting('test.owner'),true);
+select set_config('test.list',public.save_personal_wishlist(jsonb_build_object('title','Before occasion','display_name','Test','event_date',(now() at time zone 'Europe/London')::date+21))::text,true);
+do $$begin
+ begin perform public.set_wishlist_reminders(current_setting('test.list')::uuid,true,false); raise exception 'unverified owner unexpectedly enabled'; exception when raise_exception then if sqlerrm='unverified owner unexpectedly enabled' then raise; end if; end;
+end;$$;
+insert into public.recovery_identities(user_id,email,verified_at,auth_ready) values(current_setting('test.owner')::uuid,'wishlist-owner@example.invalid',now(),true);
+select public.set_wishlist_reminders(current_setting('test.list')::uuid,true,false);
+select pg_temp.check_true((public.wishlist_reminder_settings(current_setting('test.list')::uuid)->>'enabled')::boolean,'explicit opt-in saved');
+select set_config('request.jwt.claim.sub',current_setting('test.other'),true);
+do $$begin
+ begin perform public.set_wishlist_reminders(current_setting('test.list')::uuid,false,false); raise exception 'other user unexpectedly changed preferences'; exception when raise_exception then if sqlerrm='other user unexpectedly changed preferences' then raise; end if; end;
+end;$$;
+select pg_temp.check_true(public.wishlist_reminder_settings(current_setting('test.list')::uuid) is null,'other owner cannot read preferences');
+select set_config('request.jwt.claim.sub',current_setting('test.owner'),true);
+select set_config('test.after',public.save_personal_wishlist(jsonb_build_object('title','After occasion','display_name','Test','event_date',(now() at time zone 'Europe/London')::date-3))::text,true);
+select public.set_wishlist_reminders(current_setting('test.after')::uuid,true,false);
+select pg_temp.check_true(jsonb_array_length(public.claim_wishlist_reminders())=2,'before and after jobs queued');
+select pg_temp.check_true(public.claim_wishlist_reminders()='[]'::jsonb,'simultaneous claims cannot duplicate');
+select set_config('test.job',(select id::text from personal_wishlist.reminder_jobs where list_id=current_setting('test.list')::uuid),true);
+select pg_temp.check_true(public.wishlist_reminder_delivery(current_setting('test.job')::uuid)->>'email'='wishlist-owner@example.invalid','verified recipient only');
+select public.finish_wishlist_reminder(current_setting('test.job')::uuid,'retry');
+select pg_temp.check_true(public.claim_wishlist_reminders() ? current_setting('test.job'),'retry reuses same idempotency key');
+select public.set_wishlist_reminders(current_setting('test.list')::uuid,false,false);
+select pg_temp.check_true(public.wishlist_reminder_delivery(current_setting('test.job')::uuid) is null,'opt-out cancels queued delivery');
+select public.unsubscribe_wishlist_reminders((select unsubscribe_token from personal_wishlist.reminder_preferences where list_id=current_setting('test.after')::uuid));
+select pg_temp.check_true(not (public.wishlist_reminder_settings(current_setting('test.after')::uuid)->>'enabled')::boolean,'unsubscribe disables only this wishlist');
+select public.set_wishlist_reminders(current_setting('test.list')::uuid,true,false);
+update auth.users set email_confirmed_at=null where id=current_setting('test.owner')::uuid;
+select pg_temp.check_true(public.wishlist_reminder_delivery(current_setting('test.job')::uuid) is null,'verification rechecked before delivery');
+rollback;
+select 'PASS: calendar, permissions, opt-in, verified email, queue dedupe, retry, cancellation and unsubscribe' as result;
