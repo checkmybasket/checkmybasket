@@ -142,6 +142,7 @@ export function SharedWishlist({ token }: { token: string }) {
           {list.description}
         </p>
       )}
+      <p className="text-sm mt-3 text-[var(--cmb-text-secondary)]">{list.reviewed_at ? `Reviewed on ${new Date(list.reviewed_at).toLocaleDateString("en-GB", { timeZone: "Europe/London" })}` : "The owner hasn’t confirmed a recent review. Check with them if you’re unsure about an idea."}</p>
       {list.is_owner ? (
         <div className={`${panel} mt-5`}>
           <p className="text-sm">

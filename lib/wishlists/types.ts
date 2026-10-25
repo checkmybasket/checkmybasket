@@ -19,6 +19,7 @@ export type PersonalList = {
   display_name: string;
   occasion: string;
   event_date: string | null;
+  reviewed_at?: string | null;
   description: string;
   shared?: boolean;
   share_token?: string;

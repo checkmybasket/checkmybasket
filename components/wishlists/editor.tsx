@@ -24,6 +24,7 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
   const [editList, setEditList] = useState(false);
+  const [reviewing, setReviewing] = useState(false);
   const [editing, setEditing] = useState<PersonalWish | null | undefined>(draft ? null : undefined);
   const [pendingDraft, setPendingDraft] = useState(!!draft);
   const [confirm, setConfirm] = useState<{
@@ -98,6 +99,16 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
     } finally {
       setBusy(false);
     }
+  }
+  async function finishReview() {
+    if (busy) return;
+    setBusy(true); setError(""); setMessage("");
+    try {
+      const { error } = await createClient().rpc("review_personal_wishlist", { p_id: id });
+      if (error) throw error;
+      await load(); setReviewing(false); setMessage("Wishlist reviewed. Friends can see when you last checked it.");
+    } catch (err) { setError(userError(err, "confirm your wishlist review")); }
+    finally { setBusy(false); }
   }
   const shareUrl =
     list?.share_token && base ? `${base}/w/${list.share_token}` : "";
@@ -175,6 +186,14 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
           {list.description}
         </p>
       )}
+      <section className={`${panel} mt-5`} aria-labelledby="review-heading">
+        <h2 id="review-heading" className="text-xl font-semibold">Still hoping for these?</h2>
+        <p className="text-sm mt-2">{list.reviewed_at ? `Last reviewed ${new Date(list.reviewed_at).toLocaleDateString("en-GB", { timeZone: "Europe/London" })}.` : "Not reviewed yet, or changed since your last review."} Check your wishes before sharing for your next occasion.</p>
+        {reviewing ? <>
+          <p className="text-sm my-3">Keep the gifts you still want, edit any details, and remove wishes you no longer need. When you have checked the whole list, confirm below.</p>
+          <div className="flex flex-wrap gap-3"><button className={secondary} disabled={busy} onClick={finishReview}>{busy ? "Saving…" : "Everything here is still wanted"}</button><button className={secondary} disabled={busy} onClick={() => setReviewing(false)}>Review later</button></div>
+        </> : <button className={`${secondary} mt-3`} onClick={() => setReviewing(true)}>Review my wishlist</button>}
+      </section>
       {editList && (
         <div className="mt-5">
           <ListForm
