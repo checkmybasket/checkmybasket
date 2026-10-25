@@ -59,6 +59,7 @@ Ruflo/ToolSearch tools were searched for but unavailable. No production data wri
 - Fix: Ask Supabase support to place the extension metadata in extensions and restrict net schema grants to the scheduler role, or confirm the managed configuration is intentional. Keep net outside the Data API exposed schemas. Do not expose the private scheduler token or service key.
 - Acceptance criteria: Platform confirms placement/grants or applies them; scheduler still returns 200; advisor finding resolved or documented as accepted platform configuration. This does not block the scoped worker authentication or opt-in reminder feature.
 - Status: NEEDS OWNER — platform-managed permissions/support review
+- Verified boundary: A production request using an active publishable key and Accept-Profile: net returns HTTP 406 / PGRST106 (Invalid schema: net); the transport is not exposed by the Data API. Private reminder queue/preferences and service-only worker RPC privileges are independently verified. The remaining finding concerns the platform-managed configuration, not a publicly callable reminder sender.
 
 ### [x] MEDIA 03 — P2
 
