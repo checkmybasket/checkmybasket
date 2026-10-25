@@ -26,6 +26,8 @@ The email unsubscribe link carries an opt-out-only token in a fragment. The noin
 
 Production migrations match the checked-in timestamp versions. The Edge worker is deployed and authenticated dispatch returned `{sent:0,failed:0,cancelled:0}`; no real user has been automatically opted in and no production test email was sent. Existing email provider configuration is reused.
 
+Website PR #15 is live at commit `462d09545ae9640fe451b1a211ba972685d4a703`, deployment `dpl_8UDDdfhEvtH9q9jtkywKWNc8NuCV`. Live private-list creation, review, archive/restore, default-off reminders, mobile layout, unsubscribe noindex and zero console/page errors passed. All disposable production lists were removed. No real email was requested or sent. The scoped scheduler returned 200 after deployment; unauthenticated callers receive 401.
+
 Monitor `cron.job_run_details`, `net._http_response` for the scheduler's aggregate result, and reminder_jobs for failed/expired jobs (administrators only). Cron SQL succeeding means a request was queued, not that delivery succeeded. Investigate non-200 worker responses and failed jobs; never dump email addresses, Vault values or request headers into logs.
 
 The security advisor's private-schema RLS-without-policies and bounded RPC findings are expected: tables are deny-by-default and RPCs enforce owner/link possession. WISH 04 records the separate Supabase-managed pg_net namespace/grant follow-up. The Data API must not expose net, personal_wishlist or vault. Worker/preference RPC privileges were checked independently.

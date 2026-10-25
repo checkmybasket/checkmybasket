@@ -33,7 +33,7 @@ Ruflo/ToolSearch tools were searched for but unavailable. No production data wri
 - Evidence: Owners cannot confirm a whole-list review; buyers cannot distinguish recently reviewed wishes from an unattended list.
 - Fix: Add an explicit review action and honest last-reviewed date. Keep/edit/archive each wish before confirming; never infer review from a visit or a purchase.
 - Acceptance criteria: Only the owner can confirm review; edits invalidate the previous confirmation; shared viewers see the review date without buyer data; existing links remain valid. Build/lint/types and database/browser checks pass.
-- Status: DONE (verified locally; release after all three issues)
+- Status: DONE — deployed in PR #15 and verified on production
 - Verification: Local owner/buyer API acceptance passes, including edit invalidation and purchase independence; real-browser create/review confirmation passes. Build/lint/TypeScript pass. Baseline also passed all three checks with the existing Node module.register deprecation only.
 
 ### [x] WISH 02 — P1
@@ -41,7 +41,7 @@ Ruflo/ToolSearch tools were searched for but unavailable. No production data wri
 - Evidence: Received and no-longer-wanted gifts can only be deleted; repeatable wishes and reversible archiving are missing.
 - Fix: Add owner-controlled received/archive/restore and happy-to-receive-again actions. Hide archived gifts from buyers; preserve reservations until the owner explicitly confirms putting a received repeatable gift back on the list. Never automatically expire bought gifts.
 - Acceptance criteria: Owner/cross-list permissions, archive/restore, reservation preservation, repeatable reset confirmation and owner surprise protection verified; build/lint/types and browser checks pass.
-- Status: DONE (verified locally; release after reminders)
+- Status: DONE — deployed in PR #15; live private-list archive/restore and cleanup pass
 - Verification: Local buyer/owner tests cover cross-list denial, hidden archived wishes, archived reservation denial, bought reservation preservation on restore and explicit received reset; owner payload has no buyer data. Browser archive/restore/received/confirmation journey passes. Build/lint/TypeScript and WISH 01 regression pass.
 
 ### [x] WISH 03 — P1
@@ -49,8 +49,9 @@ Ruflo/ToolSearch tools were searched for but unavailable. No production data wri
 - Evidence: Wishlist owners receive no occasion-based refresh or post-occasion cleanup reminders.
 - Fix: Explicit opt-in using verified recovery email; optional annual occasion date; one reminder 21 days before and one 3 days after, with bounded catch-up, idempotent delivery, retry limits and unsubscribe. Scheduling must never inspect reservations.
 - Acceptance criteria: Unverified/opted-out owners receive nothing; dates/year boundaries/leap day, deduplication, retries, cancellation and unsubscribe tested; local captured email checked; production scheduler/function deployed and authenticated; no test email to real users.
-- Status: DONE (local acceptance and production worker verified; website release pending)
+- Status: DONE — deployed and verified on production
 - Verification: Five worker tests and Deno type check pass. Transactional database checks cover dates/year boundaries/leap day, verified-email opt-in, permissions, deduplication, cancellation and unsubscribe. Real local Auth → recovery verification → preferences → authenticated scheduler → Edge → captured inbox passed for both emails and repeat-run suppression. Browser verified opt-in validation, verified annual settings, unsubscribe and eight widths without overflow. Build/lint/TypeScript and wishlist regressions pass. Production worker returns 401 without its private token; authenticated dispatch returns 200 with zero sent/failed/cancelled. Two scheduled jobs are active; existing owners remain opted out.
+- Release: PR #15 merged as 462d09545ae9640fe451b1a211ba972685d4a703; production deployment dpl_8UDDdfhEvtH9q9jtkywKWNc8NuCV is READY on both custom domains. Live create/review/archive/restore/reminders-off/private-list cleanup/mobile/noindex checks pass with no console or page errors. Deployment error/fatal scan found no matching logs. Both interrupted-run test lists were removed by a normal administrator deletion restricted to their exact IDs, titles, creation times and anonymous/no-email owners; all production test lists are now removed. No real email requested or sent.
 
 ### [ ] WISH 04 — P2 — NEEDS OWNER
 - Location: Supabase-managed pg_net extension metadata and net schema grants; infrastructure only
@@ -58,6 +59,7 @@ Ruflo/ToolSearch tools were searched for but unavailable. No production data wri
 - Fix: Ask Supabase support to place the extension metadata in extensions and restrict net schema grants to the scheduler role, or confirm the managed configuration is intentional. Keep net outside the Data API exposed schemas. Do not expose the private scheduler token or service key.
 - Acceptance criteria: Platform confirms placement/grants or applies them; scheduler still returns 200; advisor finding resolved or documented as accepted platform configuration. This does not block the scoped worker authentication or opt-in reminder feature.
 - Status: NEEDS OWNER — platform-managed permissions/support review
+- Verified boundary: A production request using an active publishable key and Accept-Profile: net returns HTTP 406 / PGRST106 (Invalid schema: net); the transport is not exposed by the Data API. Private reminder queue/preferences and service-only worker RPC privileges are independently verified. The remaining finding concerns the platform-managed configuration, not a publicly callable reminder sender.
 
 ### [x] MEDIA 03 — P2
 
