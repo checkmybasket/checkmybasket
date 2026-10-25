@@ -33,7 +33,7 @@ Ruflo/ToolSearch tools were searched for but unavailable. No production data wri
 - Evidence: Owners cannot confirm a whole-list review; buyers cannot distinguish recently reviewed wishes from an unattended list.
 - Fix: Add an explicit review action and honest last-reviewed date. Keep/edit/archive each wish before confirming; never infer review from a visit or a purchase.
 - Acceptance criteria: Only the owner can confirm review; edits invalidate the previous confirmation; shared viewers see the review date without buyer data; existing links remain valid. Build/lint/types and database/browser checks pass.
-- Status: DONE (verified locally; release after all three issues)
+- Status: DONE — deployed in PR #15 and verified on production
 - Verification: Local owner/buyer API acceptance passes, including edit invalidation and purchase independence; real-browser create/review confirmation passes. Build/lint/TypeScript pass. Baseline also passed all three checks with the existing Node module.register deprecation only.
 
 ### [x] WISH 02 — P1
