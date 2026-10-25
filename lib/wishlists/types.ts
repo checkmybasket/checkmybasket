@@ -9,6 +9,8 @@ export type PersonalWish = {
   notes: string;
   priority: "love" | "like" | "inspiration";
   position: number;
+  state?: "active" | "archived" | "received";
+  repeatable?: boolean;
   reserved?: boolean;
   bought?: boolean;
   mine?: boolean;

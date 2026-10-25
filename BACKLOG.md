@@ -36,12 +36,13 @@ Ruflo/ToolSearch tools were searched for but unavailable. No production data wri
 - Status: DONE (verified locally; release after all three issues)
 - Verification: Local owner/buyer API acceptance passes, including edit invalidation and purchase independence; real-browser create/review confirmation passes. Build/lint/TypeScript pass. Baseline also passed all three checks with the existing Node module.register deprecation only.
 
-### [ ] WISH 02 — P1
+### [x] WISH 02 — P1
 - Location: personal_wishlist.items/reservations and wishlist editor/shared page
 - Evidence: Received and no-longer-wanted gifts can only be deleted; repeatable wishes and reversible archiving are missing.
 - Fix: Add owner-controlled received/archive/restore and happy-to-receive-again actions. Hide archived gifts from buyers; preserve reservations until the owner explicitly confirms putting a received repeatable gift back on the list. Never automatically expire bought gifts.
 - Acceptance criteria: Owner/cross-list permissions, archive/restore, reservation preservation, repeatable reset confirmation and owner surprise protection verified; build/lint/types and browser checks pass.
-- Status: OPEN
+- Status: DONE (verified locally; release after reminders)
+- Verification: Local buyer/owner tests cover cross-list denial, hidden archived wishes, archived reservation denial, bought reservation preservation on restore and explicit received reset; owner payload has no buyer data. Browser archive/restore/received/confirmation journey passes. Build/lint/TypeScript and WISH 01 regression pass.
 
 ### [ ] WISH 03 — P1
 - Location: reminder preferences, verified email identity, scheduled email worker and unsubscribe page
