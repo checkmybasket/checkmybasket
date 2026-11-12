@@ -1,8 +1,8 @@
 "use client";
 import { PageRecovery } from "@/components/page-recovery";
 import { userError } from "@/lib/user-errors";
-import { use, useCallback, useEffect, useMemo, useState } from "react";
-import { Dice5, Gift, MessageCircle, Gamepad2, Settings, CheckCircle2, Circle, AlertTriangle, ExternalLink, Send, Plus, Trash2, Lock, ArrowRight, Share2, X, Trophy, Star } from "lucide-react";
+import { use, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Copy, Dice5, Gift, MessageCircle, Gamepad2, Settings, CheckCircle2, Circle, AlertTriangle, ExternalLink, Send, Plus, Trash2, Lock, ArrowRight, Share2, X, Trophy, Star } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -216,7 +216,7 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
   const [showConfirm,    setShowConfirm]    = useState(false);
   const [showExclusions, setShowExclusions] = useState(false);
   const [drawBusy,       setDrawBusy]       = useState(false);
-  const [reminderSent,   setReminderSent]   = useState(false);
+  const inviteInput = useRef<HTMLInputElement>(null);
 
   const joined    = members.length;
   const usersWithWishes = new Set(wishes.map(w=>w.user_id));
@@ -240,10 +240,6 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
     }
     setShowConfirm(false); setDrawBusy(false);
     await refresh();
-  }
-  function sendReminder() {
-    window.open(`https://wa.me/?text=${encodeURIComponent(`Reminder: haven't joined Secret Santa yet? 🎅\n${window.location.origin}/join/${group.invite_code}`)}`, "_blank", "noopener");
-    setReminderSent(true); toast.success("Opening WhatsApp to send a reminder");
   }
 
   // ── Post-draw: both roles see their match card + trust messaging ──
@@ -304,8 +300,35 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
   );
 
   // ── Pre-draw, organiser ──
+  const inviteLink = `${window.location.origin}/join/${group.invite_code}`;
+  const whatsappLink = `https://wa.me/?text=${encodeURIComponent(`Join our Secret Santa draw! 🎅\n${inviteLink}`)}`;
+
+  async function copyInviteLink() {
+    try {
+      await navigator.clipboard.writeText(inviteLink);
+      toast.success("Invite link copied");
+    } catch {
+      inviteInput.current?.focus();
+      inviteInput.current?.select();
+      toast.error("Could not copy automatically. Copy the selected invite link.");
+    }
+  }
+
   return (
     <div className="space-y-5">
+      <section aria-labelledby="invite-heading" className="space-y-3 rounded-[var(--cmb-radius)] p-5 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
+        <h2 id="invite-heading" className="font-semibold">Invite people</h2>
+        <Input ref={inviteInput} aria-label="Invite link" value={inviteLink} readOnly className="h-11 rounded-[var(--cmb-radius)]" />
+        <div className="flex flex-wrap gap-2">
+          <Button onClick={copyInviteLink} className="h-11 rounded-[var(--cmb-radius)]">
+            <Copy size={16} strokeWidth={1.5} /> Copy invite link
+          </Button>
+          <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: "outline", className: "h-11 rounded-[var(--cmb-radius)]" })}>
+            <Share2 size={16} strokeWidth={1.5} /> Share via WhatsApp
+          </a>
+        </div>
+      </section>
+
       {/* Progress */}
       <div className="rounded-[var(--cmb-radius)] p-5 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
         <div className="flex items-center justify-between mb-3">
@@ -328,17 +351,11 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
         </div>
       </div>
 
-      {/* Members + remind */}
+      {/* Members */}
       <div className="rounded-[var(--cmb-radius)] overflow-hidden bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
         <div className="px-5 py-3 border-b flex items-center justify-between border-[var(--cmb-border)]">
           <h2 className="font-semibold text-sm">Members</h2>
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-[var(--cmb-text-muted)]">{joined} joined</span>
-            <Button size="sm" variant="outline" onClick={sendReminder} className="h-7 px-2.5 text-xs rounded-[var(--cmb-radius)] gap-1"
-              style={{ borderColor:"var(--cmb-success)", color:"var(--cmb-success)" }} aria-label="Send reminder via WhatsApp">
-              <Share2 size={12} strokeWidth={1.5}/> {reminderSent?"Sent":"Remind"}
-            </Button>
-          </div>
+          <span className="text-xs text-[var(--cmb-text-muted)]">{joined} joined</span>
         </div>
         {members.map(m => (
           <div key={m.id} className="px-5 py-3 flex items-center gap-3 border-b last:border-0 border-[var(--cmb-border)]">
