@@ -34,6 +34,7 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
   const [step, setStep] = useState<"join"|"onboard">("join");
   const [busy, setBusy] = useState(false);
   const [name, setName] = useState("");
+  const [personalToken, setPersonalToken] = useState<string | null>(null);
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [nameError, setNameError] = useState("");
@@ -46,6 +47,7 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
     Promise.resolve(supabase.rpc("get_group_preview", { p_invite_code: invite_code })).then(({ data, error }) => {
       if (error) { setLoadState("error"); return; }
       if (!data) { setLoadState("notfound"); return; }
+      setPersonalToken(new URLSearchParams(window.location.hash.slice(1)).get("invite"));
       setGroup(data as GroupPreview);
       setLoadState("ready");
     }).catch(() => setLoadState("error"));
@@ -70,6 +72,29 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
       setStep("onboard");
     } catch (err) {
       toast.error(userError(err, "join this group"));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function claimPersonalInvite() {
+    if (busy || personalToken === null) return;
+    if (!/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(personalToken)) {
+      toast.error("This personal invite is unavailable. Ask the organiser for your link.");
+      return;
+    }
+    setBusy(true);
+    try {
+      await ensureSession();
+      const { error } = await createClient().rpc("claim_draw_participant", {
+        p_invite_code: invite_code,
+        p_token: personalToken,
+      });
+      if (error) throw error;
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+      setStep("onboard");
+    } catch (error) {
+      toast.error(userError(error, "claim your place"));
     } finally {
       setBusy(false);
     }
@@ -205,7 +230,7 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
             {group.organiser_name && <p className="text-sm mb-4 text-[var(--cmb-text-secondary)]">Created by {group.organiser_name}</p>}
             <div className="flex gap-4 flex-wrap">
               <div className="flex items-center gap-1.5 text-sm text-[var(--cmb-text-secondary)]">
-                <Users size={14} strokeWidth={1.5}/> {group.member_count} {group.member_count === 1 ? "person" : "people"} joined
+                <Users size={14} strokeWidth={1.5}/> {group.member_count} {group.member_count === 1 ? "participant" : "participants"}
               </div>
               {group.budget_amount != null && <div className="text-sm font-medium text-[var(--cmb-primary)]">Budget: £{group.budget_amount/100}</div>}
               {exchangeDate && <div className="text-sm text-[var(--cmb-text-secondary)]">{exchangeDate}</div>}
@@ -213,9 +238,16 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
           </div>
           <div className="rounded-[var(--cmb-radius)] p-6 animate-fade-up bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-md)]">
             <h2 className="text-lg font-semibold mb-4">Join this Secret Santa</h2>
-            {group.draw_status !== "pending" ? (
+            {personalToken !== null ? (
+              <div className="space-y-3">
+                <p className="text-sm text-[var(--cmb-text-secondary)]">Your organiser has reserved a place for you. Claim it to see your match after the draw. The organiser can see all pairings.</p>
+                <Button onClick={claimPersonalInvite} disabled={busy} size="lg" className="w-full h-12 rounded-[var(--cmb-radius)]">
+                  {busy ? "Joining…" : "Claim my place"}
+                </Button>
+              </div>
+            ) : group.draw_status !== "pending" ? (
               <p className="text-sm text-[var(--cmb-text-secondary)]">
-                Names have already been drawn for this group. If you&apos;re already a member,{" "}
+                Names have already been drawn. If the organiser reserved a place for you, ask them for your personal link. If you&apos;ve already joined,{" "}
                 <Link href={`/g/${group.group_id}`} className="underline text-[var(--cmb-primary)]">open your group</Link>.
               </p>
             ) : (

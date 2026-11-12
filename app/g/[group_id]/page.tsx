@@ -19,11 +19,12 @@ import { createClient } from "@/lib/supabase/client";
 import type { DrawStatus, GiftCategory, MemberRole, PredictionRoundStatus, WishlistPriority } from "@/lib/types";
 
 // ─── Row shapes (explicit columns — select=* is denied on locked-down tables) ─
-interface GroupRow   { id:string; name:string; mode:string; budget_amount:number|null; exchange_date:string|null; exchange_location:string|null; invite_code:string; draw_status:DrawStatus; organiser_id:string; }
+interface GroupRow   { id:string; name:string; mode:string; budget_amount:number|null; exchange_date:string|null; exchange_location:string|null; invite_code:string; draw_status:DrawStatus; organiser_id:string; organiser_can_view_matches:boolean; }
 interface MemberRow  { id:string; user_id:string; role:MemberRole; name:string; likes:string|null; dislikes:string|null; sizes:string|null; surprise_me:boolean; joined_at:string; }
 interface WishRow    { id:string; user_id:string; title:string; url:string|null; price:number|null; shop_name:string|null; notes:string|null; priority:WishlistPriority; created_at:string; }
 interface ClaimRow   { id:string; wishlist_item_id:string; claimed_by:string; }
-interface DrawRow    { id:string; giver_id:string; recipient_id:string; gift_bought:boolean; }
+interface DrawRow    { id:string; giver_id:string; recipient_id:string|null; gift_bought:boolean; }
+interface OfflineParticipant { id:string; name:string; }
 interface MsgRow     { id:string; recipient_id:string; content:string; is_reply:boolean; parent_message_id:string|null; created_at:string; }
 interface ExclRow    { id:string; user_a_id:string; user_b_id:string; }
 interface RoundRow   { id:string; status:PredictionRoundStatus; }
@@ -34,6 +35,7 @@ interface DashData {
   me: string;
   group: GroupRow;
   members: MemberRow[];
+  offlineParticipants: OfflineParticipant[];
   wishes: WishRow[];
   claims: ClaimRow[];
   myDraw: DrawRow | null;
@@ -81,7 +83,7 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
       if (!user) { setLoadState("noaccess"); return; }
 
       const { data: group, error: groupError } = await supabase.from("groups")
-        .select("id,name,mode,budget_amount,exchange_date,exchange_location,invite_code,draw_status,organiser_id")
+        .select("id,name,mode,budget_amount,exchange_date,exchange_location,invite_code,draw_status,organiser_id,organiser_can_view_matches")
         .eq("id", group_id).maybeSingle();
       if (groupError) throw groupError;
       if (!group) { setLoadState("noaccess"); return; }
@@ -118,7 +120,8 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
       setData({
         me: user.id,
         group: group as GroupRow,
-        members: members.data ?? [],
+        members: (members.data ?? []).filter(member => member.user_id !== null),
+        offlineParticipants: (members.data ?? []).filter(member => member.user_id === null),
         wishes: wishes.data ?? [],
         claims: claims.data ?? [],
         myDraw: myDraw.data ?? null,
@@ -160,7 +163,8 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
     </div>
   );
 
-  const { group, members, me } = data;
+  const { group, members, offlineParticipants, me } = data;
+  const participantCount = members.length + offlineParticipants.length;
   const isOrganiser = group.organiser_id === me;
   const unreadMessages = data.messages.some(m => m.recipient_id === me);
 
@@ -172,7 +176,7 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
             <Gift size={18} strokeWidth={1.5} className="text-[var(--cmb-primary)] shrink-0"/>
             <h1 className="font-semibold truncate font-display text-[var(--cmb-primary)]">{group.name}</h1>
             <span className="rounded-full px-2 py-0.5 text-xs font-medium flex-shrink-0 text-[var(--cmb-primary)]" style={{ background:"color-mix(in srgb, var(--cmb-primary) 10%, transparent)" }}>
-              {members.length} member{members.length===1?"":"s"}
+              {participantCount} participant{participantCount===1?"":"s"}
             </span>
           </div>
           {isOrganiser && (
@@ -212,17 +216,18 @@ export default function GroupDashboard({ params }: { params: Promise<{ group_id:
 
 // ─── Draw Tab ────────────────────────────────────────────────────────────────
 function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:boolean; refresh:()=>Promise<void> }) {
-  const { group, members, wishes, me, myDraw, giftsBought } = data;
+  const { group, members, offlineParticipants, wishes, me, myDraw, giftsBought } = data;
   const [showConfirm,    setShowConfirm]    = useState(false);
   const [showExclusions, setShowExclusions] = useState(false);
   const [drawBusy,       setDrawBusy]       = useState(false);
   const inviteInput = useRef<HTMLInputElement>(null);
 
   const joined    = members.length;
+  const participantCount = joined + offlineParticipants.length;
   const usersWithWishes = new Set(wishes.map(w=>w.user_id));
   const wishlists = members.filter(m=>usersWithWishes.has(m.user_id)).length;
   const drawn     = group.draw_status !== "pending";
-  const progress  = Math.round(((Math.min(joined,3)/3)*0.5 + (joined?wishlists/joined:0)*0.3 + (drawn?0.2:0))*100);
+  const progress  = Math.round(((Math.min(participantCount,3)/3)*0.5 + (joined?wishlists/joined:0)*0.3 + (drawn?0.2:0))*100);
   const organiserName = members.find(m=>m.role==="organiser")?.name ?? "The organiser";
 
   async function handleDraw() {
@@ -232,7 +237,7 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
     const { error } = await supabase.rpc("execute_draw", { p_group_id: group.id });
     if (error) { toast.error(userError(error, "draw names")); }
     else {
-      toast.success("Names drawn! Everyone can now see their match.");
+      toast.success("Names drawn!");
       // Best-effort: email members who saved an address. No-op until RESEND_API_KEY
       // is configured; never block or fail the draw on this.
       supabase.functions.invoke("send-draw-emails", { body: { group_id: group.id } })
@@ -260,9 +265,8 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
 
       <div className="rounded-[var(--cmb-radius)] p-5 space-y-3 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
         {[
-          { icon:CheckCircle2, text:`All ${joined} people matched successfully` },
-          { icon:Lock,         text:"Your match is private. Nobody can see who picked who." },
-          { icon:Lock,         text:"The organiser cannot see individual matches." },
+          { icon:CheckCircle2, text:"Everyone on the draw list was matched." },
+          { icon:Lock, text:group.organiser_can_view_matches ? "The organiser can see all pairings and pass them on privately." : "The organiser cannot see individual matches." },
         ].map(({ icon:Icon, text }) => (
           <div key={text} className="flex items-center gap-2.5 text-sm">
             <Icon size={16} strokeWidth={2} className="text-[var(--cmb-success)] shrink-0"/>
@@ -270,6 +274,12 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
           </div>
         ))}
       </div>
+
+      {isOrganiser && group.organiser_can_view_matches && <ManagedDrawMatches groupId={group.id} />}
+
+      {isOrganiser && offlineParticipants.length > 0 && (
+        <OfflineParticipants group={group} participants={offlineParticipants} drawn refresh={refresh} />
+      )}
 
       {isOrganiser && giftsBought && giftsBought.total > 0 && (
         <div className="rounded-[var(--cmb-radius)] p-5 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
@@ -291,6 +301,7 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
         <Dice5 size={36} strokeWidth={1.5} className="mx-auto mb-3 text-[var(--cmb-primary)]"/>
         <h2 className="font-semibold text-lg mb-2 font-display">Waiting for the draw</h2>
         <p className="text-[var(--cmb-text-secondary)]">{organiserName} will draw names when everyone&apos;s ready.</p>
+        {group.organiser_can_view_matches && <p className="mt-2 text-sm text-[var(--cmb-text-secondary)]">The organiser will be able to see all pairings.</p>}
       </div>
       <div className="rounded-[var(--cmb-radius)] p-4 flex gap-3" style={{ background:"color-mix(in srgb, var(--cmb-primary) 6%, transparent)", border:"1px solid color-mix(in srgb, var(--cmb-primary) 15%, transparent)" }}>
         <Gift size={18} strokeWidth={1.5} className="text-[var(--cmb-primary)] shrink-0"/>
@@ -318,6 +329,7 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
     <div className="space-y-5">
       <section aria-labelledby="invite-heading" className="space-y-3 rounded-[var(--cmb-radius)] p-5 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
         <h2 id="invite-heading" className="font-semibold">Invite people</h2>
+        {offlineParticipants.length > 0 && <p className="text-sm text-[var(--cmb-text-secondary)]">Use the personal links below for people you add by name.</p>}
         <Input ref={inviteInput} aria-label="Invite link" value={inviteLink} readOnly className="h-11 rounded-[var(--cmb-radius)]" />
         <div className="flex flex-wrap gap-2">
           <Button onClick={copyInviteLink} className="h-11 rounded-[var(--cmb-radius)]">
@@ -329,6 +341,8 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
         </div>
       </section>
 
+      <OfflineParticipants group={group} participants={offlineParticipants} drawn={false} refresh={refresh} />
+
       {/* Progress */}
       <div className="rounded-[var(--cmb-radius)] p-5 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
         <div className="flex items-center justify-between mb-3">
@@ -339,7 +353,7 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
         <div className="space-y-3">
           {[
             { label:"Group created",                              done:true },
-            { label:`${joined} ${joined===1?"person has":"people have"} joined${joined<3?` — ${3-joined} more needed`:""}`, done:joined>=3 },
+            { label:`${participantCount} participant${participantCount===1?"":"s"}${participantCount<3?` · ${3-participantCount} more needed`:""}`, done:participantCount>=3 },
             { label:`${wishlists} of ${joined} wishlists added`,  done:joined>0 && wishlists===joined },
             { label:"Names drawn",                                done:false },
           ].map(({ label, done }) => (
@@ -380,7 +394,7 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
         <div className="rounded-[var(--cmb-radius)] p-5" style={{ background:"rgba(193,18,31,0.06)", border:"1px solid rgba(193,18,31,0.2)" }}>
           <div className="flex gap-2 mb-3">
             <AlertTriangle size={18} strokeWidth={1.5} className="text-[var(--cmb-error)] shrink-0"/>
-            <p className="text-sm font-medium text-[var(--cmb-error)]">Once names are drawn, this can&apos;t be undone. Make sure everyone has joined first.</p>
+            <p className="text-sm font-medium text-[var(--cmb-error)]">Once names are drawn, this can&apos;t be undone. Make sure everyone is on the participant list.</p>
           </div>
           <div className="flex gap-3">
             <Button variant="outline" className="flex-1 rounded-[var(--cmb-radius)]" disabled={drawBusy} onClick={()=>setShowConfirm(false)}>Cancel</Button>
@@ -390,13 +404,140 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
           </div>
         </div>
       ) : (
-        <Button size="lg" disabled={joined<3} onClick={handleDraw} className="w-full h-14 text-base rounded-[var(--cmb-radius)] font-semibold"
-          style={{ background:joined>=3?"var(--cmb-primary)":undefined, color:joined>=3?"var(--cmb-text-inverse)":undefined }}>
+        <Button size="lg" disabled={participantCount<3} onClick={handleDraw} className="w-full h-14 text-base rounded-[var(--cmb-radius)] font-semibold"
+          style={{ background:participantCount>=3?"var(--cmb-primary)":undefined, color:participantCount>=3?"var(--cmb-text-inverse)":undefined }}>
           <Dice5 size={20} strokeWidth={1.5} className="mr-2"/>
-          {joined<3?`Need ${3-joined} more member${3-joined===1?"":"s"} to draw`:"Draw names now"}
+          {participantCount<3?`Need ${3-participantCount} more participant${3-participantCount===1?"":"s"} to draw`:"Draw names now"}
         </Button>
       )}
     </div>
+  );
+}
+
+function ManagedDrawMatches({ groupId }: { groupId: string }) {
+  const [matches, setMatches] = useState<{ draw_id: string; giver_name: string; recipient_name: string }[] | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  async function toggleMatches() {
+    if (matches) { setMatches(null); return; }
+    setBusy(true);
+    try {
+      const { data, error } = await createClient().rpc("get_managed_draw_matches", { p_group_id: groupId });
+      if (error) throw error;
+      setMatches(data ?? []);
+    } catch (error) {
+      toast.error(userError(error, "show all matches"));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <section aria-labelledby="matches-heading" className="space-y-3 rounded-[var(--cmb-radius)] p-5 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
+      <h2 id="matches-heading" className="font-semibold">All matches</h2>
+      <p className="text-sm text-[var(--cmb-text-secondary)]">Tell each person privately who they’re buying for.</p>
+      <Button variant="outline" onClick={toggleMatches} disabled={busy} aria-expanded={matches !== null}>
+        {busy ? "Loading matches…" : matches ? "Hide matches" : "Show all matches"}
+      </Button>
+      {matches && (
+        <ul className="space-y-2 text-sm">
+          {matches.map(match => <li key={match.draw_id}>{match.giver_name} is buying for <strong>{match.recipient_name}</strong>.</li>)}
+        </ul>
+      )}
+    </section>
+  );
+}
+
+function OfflineParticipants({ group, participants, drawn, refresh }: {
+  group: GroupRow;
+  participants: OfflineParticipant[];
+  drawn: boolean;
+  refresh: () => Promise<void>;
+}) {
+  const [name, setName] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [link, setLink] = useState<{ memberId: string; url: string } | null>(null);
+  const personalLinkInput = useRef<HTMLInputElement>(null);
+
+  async function addParticipant() {
+    if (busy || !name.trim()) return;
+    setBusy(true);
+    try {
+      const { error } = await createClient().rpc("add_draw_participant", { p_group_id: group.id, p_name: name });
+      if (error) throw error;
+      setName("");
+      await refresh();
+    } catch (error) {
+      toast.error(userError(error, "add this participant"));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function participantAction(memberId: string, action: "invite" | "remove") {
+    if (busy) return;
+    setBusy(true);
+    try {
+      const supabase = createClient();
+      const args = { p_group_id: group.id, p_member_id: memberId };
+      if (action === "remove") {
+        const { error } = await supabase.rpc("remove_draw_participant", args);
+        if (error) throw error;
+        await refresh();
+      } else {
+        const { data, error } = await supabase.rpc("get_draw_participant_invite", args);
+        if (error || !data) throw error ?? new Error("This personal invite is unavailable");
+        setLink({ memberId, url: `${window.location.origin}/join/${group.invite_code}#invite=${data}` });
+      }
+    } catch (error) {
+      const actions = { invite: "open the personal invite", remove: "remove this participant" };
+      toast.error(userError(error, actions[action]));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <section aria-labelledby="add-participants-heading" className="space-y-3 rounded-[var(--cmb-radius)] p-5 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
+      <h2 id="add-participants-heading" className="font-semibold">{drawn ? "Participants who haven’t joined online" : "Add participants by name"}</h2>
+      <p className="text-sm text-[var(--cmb-text-secondary)]">
+        {drawn
+          ? "Send each person their own link if they want to join online."
+          : "People you add count immediately. They can join later with a personal link. Adding names lets you see all pairings after the draw."}
+      </p>
+      {!drawn && (
+        <form onSubmit={event => { event.preventDefault(); void addParticipant(); }} className="flex gap-2">
+          <Input value={name} onChange={event => setName(event.target.value)} maxLength={80} aria-label="Participant name" placeholder="Participant name" className="h-11" />
+          <Button type="submit" disabled={busy || !name.trim()} className="h-11 shrink-0"><Plus size={16} /> Add</Button>
+        </form>
+      )}
+      {participants.map(participant => (
+        <div key={participant.id} className="space-y-2 border-t border-[var(--cmb-border)] pt-3">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="text-sm font-medium break-words">{participant.name}</p>
+            <div className="flex flex-wrap gap-2">
+              <Button variant="outline" disabled={busy} onClick={() => void participantAction(participant.id, "invite")} aria-label={`Personal invite for ${participant.name}`}>Personal invite</Button>
+              {!drawn && <Button variant="ghost" disabled={busy} onClick={() => void participantAction(participant.id, "remove")} aria-label={`Remove ${participant.name}`}><Trash2 size={16} /></Button>}
+            </div>
+          </div>
+          {link?.memberId === participant.id && (
+            <div className="flex flex-wrap gap-2">
+              <Input ref={personalLinkInput} readOnly aria-label={`Personal invite link for ${participant.name}`} value={link.url} onFocus={event => event.currentTarget.select()} className="h-10 flex-1" />
+              <Button variant="outline" onClick={async () => {
+                try {
+                  await navigator.clipboard.writeText(link.url);
+                  toast.success("Personal invite copied");
+                } catch {
+                  personalLinkInput.current?.focus();
+                  personalLinkInput.current?.select();
+                  toast.error("Copy the selected personal link manually.");
+                }
+              }} className="h-10">Copy personal link</Button>
+            </div>
+          )}
+        </div>
+      ))}
+    </section>
   );
 }
 
@@ -436,6 +577,7 @@ function ExclusionsEditor({ data, open, setOpen, refresh }: { data:DashData; ope
       {open && (
         <div className="px-5 pb-5 border-t space-y-3 pt-4 border-[var(--cmb-border)]">
           <p className="text-xs text-[var(--cmb-text-muted)]">These people won&apos;t draw each other (works both ways).</p>
+          {data.offlineParticipants.length > 0 && <p className="text-xs text-[var(--cmb-text-muted)]">You can set exclusions for people who have joined online.</p>}
           {exclusions.map(exc => (
             <div key={exc.id} className="flex items-center gap-2 text-sm">
               <span className="flex-1 truncate">{nameOf(exc.user_a_id)}</span>
@@ -748,7 +890,7 @@ function MessagesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<voi
 
   const recipientName = myDraw ? members.find(m=>m.user_id===myDraw.recipient_id)?.name.split(" ")[0] ?? "your match" : null;
   const activeMessages = thread==="recipient" ? recipientThread : santaThread;
-  const canSend = thread==="recipient" ? !!myDraw : !!lastSantaMsgId;
+  const canSend = thread==="recipient" ? !!myDraw?.recipient_id : !!lastSantaMsgId;
 
   async function sendMessage(content:string) {
     const text = content.trim();
@@ -756,7 +898,7 @@ function MessagesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<voi
     setBusy(true);
     const supabase = createClient();
     let error;
-    if (thread === "recipient" && myDraw) {
+    if (thread === "recipient" && myDraw?.recipient_id) {
       ({ error } = await supabase.from("anon_messages").insert({
         group_id: group.id, sender_id: me, recipient_id: myDraw.recipient_id, content: text,
       }));
@@ -795,7 +937,9 @@ function MessagesTab({ data, refresh }: { data:DashData; refresh:()=>Promise<voi
       {activeMessages.length===0 ? (
         <EmptyState title={thread==="recipient"?"Break the ice":"Nothing yet"}
           body={thread==="recipient"
-            ? "Ask an anonymous question so you can buy something they'll actually love."
+            ? myDraw && !myDraw.recipient_id
+              ? "You can message your match after they join online."
+              : "Ask an anonymous question so you can buy something they'll actually love."
             : "When your Secret Santa asks you something, it'll show up here."}
           icon={MessageCircle}/>
       ) : (

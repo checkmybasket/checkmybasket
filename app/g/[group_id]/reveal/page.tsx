@@ -22,6 +22,8 @@ interface Match {
   budget: number | null;
   totalMatched: number;
   giftBought: boolean;
+  recipientOnline: boolean;
+  organiserCanViewMatches: boolean;
 }
 
 type Stage = "error" | "loading" | "nodraw" | "pre" | "animating" | "revealed";
@@ -39,14 +41,20 @@ export default function RevealPage({ params }: { params: Promise<{ group_id: str
       if (!user) { setStage("nodraw"); return; }
 
       const { data: draw, error: drawError } = await supabase.from("draws")
-        .select("id,recipient_id,gift_bought").eq("group_id", group_id).maybeSingle();
+        .select("id,recipient_id,recipient_member_id,gift_bought").eq("group_id", group_id).maybeSingle();
       if (drawError) throw drawError;
       if (!draw) { setStage("nodraw"); return; }
 
+      const recipientQuery = supabase.from("group_members").select("name,likes,dislikes,sizes").eq("group_id", group_id);
+      const recipient = draw.recipient_member_id
+        ? recipientQuery.eq("id", draw.recipient_member_id).maybeSingle()
+        : recipientQuery.eq("user_id", draw.recipient_id).maybeSingle();
       const reads = await Promise.all([
-        supabase.from("groups").select("budget_amount").eq("id", group_id).maybeSingle(),
-        supabase.from("group_members").select("name,likes,dislikes,sizes").eq("group_id", group_id).eq("user_id", draw.recipient_id).maybeSingle(),
-        supabase.from("wishlist_items").select("id,title,url,price,shop_name").eq("group_id", group_id).eq("user_id", draw.recipient_id).order("created_at"),
+        supabase.from("groups").select("budget_amount,organiser_can_view_matches").eq("id", group_id).maybeSingle(),
+        recipient,
+        draw.recipient_id
+          ? supabase.from("wishlist_items").select("id,title,url,price,shop_name").eq("group_id", group_id).eq("user_id", draw.recipient_id).order("created_at")
+          : Promise.resolve({ data: [], error: null }),
         // draws rows are giver-visible only, so count members for "All N matched"
         supabase.from("group_members").select("id", { count: "exact", head: true }).eq("group_id", group_id),
       ]);
@@ -63,6 +71,8 @@ export default function RevealPage({ params }: { params: Promise<{ group_id: str
         budget: group?.budget_amount ?? null,
         totalMatched: count ?? 0,
         giftBought: draw.gift_bought,
+        recipientOnline: !!draw.recipient_id && !!member,
+        organiserCanViewMatches: !!group?.organiser_can_view_matches,
       });
       setStage("pre");
     })().catch(() => setStage("error"));
@@ -145,10 +155,6 @@ function PreReveal({ onReveal }: { onReveal: () => void }) {
         Reveal my match
         <ArrowRight size={18} strokeWidth={1.5} className="ml-2" />
       </Button>
-      <div className="mt-6 flex items-center gap-2 justify-center text-sm text-[var(--cmb-text-muted)]">
-        <Lock size={14} strokeWidth={1.5} />
-        <span>Only you can see this</span>
-      </div>
     </div>
   );
 }
@@ -246,8 +252,7 @@ function RevealedScreen({
       {/* Trust signals */}
       <div className="space-y-2 mb-6">
         {[
-          "Your match is private. Nobody else can see who you picked.",
-          "The organiser cannot see individual matches.",
+          match.organiserCanViewMatches ? "The organiser can see all pairings and pass them on privately." : "The organiser cannot see your match.",
           `All ${match.totalMatched} people matched successfully`,
         ].map((t, i) => (
           <div key={i} className="flex items-center gap-2 text-sm text-[var(--cmb-text-secondary)]">
@@ -313,10 +318,10 @@ function RevealedScreen({
 
       {/* Action buttons */}
       <div className="space-y-3">
-        <Link href={`/g/${groupId}?tab=messages`} className={buttonVariants({ variant: "outline", size: "default", className: "w-full h-12 rounded-[var(--cmb-radius)] font-medium border-[var(--cmb-border-strong)]" })}>
+        {match.recipientOnline && <Link href={`/g/${groupId}?tab=messages`} className={buttonVariants({ variant: "outline", size: "default", className: "w-full h-12 rounded-[var(--cmb-radius)] font-medium border-[var(--cmb-border-strong)]" })}>
             <MessageCircle size={18} strokeWidth={1.5} className="mr-2" />
             Ask {recipientName} a question
-          </Link>
+          </Link>}
         <Link href={match.budget != null ? `/gifts?budget=${match.budget}` : "/gifts"} className={buttonVariants({ variant: "outline", size: "default", className: "w-full h-12 rounded-[var(--cmb-radius)] font-medium border-[var(--cmb-border-strong)]" })}>
             <ShoppingBag size={18} strokeWidth={1.5} className="mr-2" />
             {match.budget != null ? `Find gifts under ${formatBudget(match.budget)}` : "Browse gift ideas"}

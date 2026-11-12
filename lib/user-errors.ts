@@ -5,7 +5,9 @@ export function userError(error: unknown, action: string): string {
   if (message === "You can have up to 200 gifts per wishlist.") return "This wishlist has reached its 200-gift limit. Remove a gift before adding another.";
   if (message === "You can have up to 30 wishlists.") return "You have reached the 30-wishlist limit. Edit an existing wishlist or delete one before creating another.";
   if (message === "Wishlist not available." || message === "Gift not available.") return "This wishlist or gift is no longer available. Refresh the page or use Return & sign in to recover access.";
-  if (/need at least 3|at least three members/i.test(message)) return "Invite at least three people before drawing names.";
+  if (message === "This personal invite is unavailable") return "This personal invite is unavailable. Ask the organiser for your link.";
+  if (["You already have a place in this draw", "The draw is already complete", "This name already has a reserved place. Use your personal invite link", "Enter a name between 1 and 80 characters", "A participant already has this name. Add a surname or initial"].includes(message)) return message;
+  if (/need at least 3|at least three members/i.test(message)) return "Add or invite at least three participants before drawing names.";
   if (/valid draw|exclusion rules/i.test(message)) return "These exclusions prevent a valid draw. Review the exclusions and try again.";
   if (/organisers must delete/i.test(message)) return "As the organiser, use Delete group in settings instead of leaving.";
   if (/only the organiser|organiser only/i.test(message)) return "Only the organiser can do this. Ask your organiser to make this change.";
