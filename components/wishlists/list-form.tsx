@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useId, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { userError } from "@/lib/user-errors";
 import { createClient } from "@/lib/supabase/client";
@@ -16,6 +16,11 @@ export function ListForm({
   onSaved: (id: string) => void;
   onCancel?: () => void;
 }) {
+  const dateId = useId();
+  const dateInput = useRef<HTMLInputElement>(null);
+  const [allYearRound, setAllYearRound] = useState(list?.occasion === "All year round" && !list.event_date);
+  const [occasion, setOccasion] = useState(list?.occasion === "All year round" ? "Birthday" : list?.occasion || "Birthday");
+  const [eventDate, setEventDate] = useState(list?.event_date ?? "");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   async function submit(e: React.FormEvent<HTMLFormElement>) {
@@ -24,6 +29,8 @@ export function ListForm({
     setBusy(true);
     setError("");
     const form = new FormData(e.currentTarget);
+    form.set("occasion", allYearRound ? "All year round" : occasion);
+    form.set("event_date", allYearRound ? "" : eventDate);
     try {
       await ensureSession();
       const { data, error } = await createClient().rpc(
@@ -40,7 +47,7 @@ export function ListForm({
     }
   }
   return (
-    <form onSubmit={submit} className={`${panel} space-y-4`}>
+    <form aria-label="Wishlist settings" onSubmit={submit} className={`${panel} space-y-4`}>
       <h2 className="font-display font-semibold text-xl">
         {list ? "Edit your wishlist" : "Name your wishlist"}
       </h2>
@@ -67,27 +74,44 @@ export function ListForm({
           placeholder="My birthday wishlist"
         />
       </label>
-      <div className="grid sm:grid-cols-2 gap-4">
+      <label className="flex items-center gap-3 min-h-11 text-sm font-medium">
+        <input type="checkbox" checked={allYearRound} onChange={event => setAllYearRound(event.target.checked)} />
+        All year round
+      </label>
+      {allYearRound && <p className="text-sm text-[var(--cmb-text-secondary)]">Save wishes throughout the year. Add a birthday or occasion date whenever you want occasion reminders.</p>}
+      {!allYearRound && <div className="grid sm:grid-cols-2 gap-4">
         <label className="block text-sm font-medium">
           Occasion (optional)
           <input
             className={`${field} mt-1`}
             name="occasion"
             maxLength={80}
-            defaultValue={list?.occasion}
+            value={occasion}
+            onChange={event => setOccasion(event.target.value)}
             placeholder="Birthday, Christmas, everyday…"
           />
         </label>
-        <label className="block text-sm font-medium">
-          Date (optional)
+        <div>
+          <label htmlFor={dateId} className="block text-sm font-medium">
+            {occasion.trim().toLowerCase() === "birthday" ? "Birthday date (optional)" : "Occasion date (optional)"}
+          </label>
           <input
+            ref={dateInput}
+            id={dateId}
             className={`${field} mt-1`}
             name="event_date"
             type="date"
-            defaultValue={list?.event_date ?? ""}
+            value={eventDate}
+            onChange={event => setEventDate(event.target.value)}
+            aria-describedby={dateId + "-hint"}
           />
-        </label>
-      </div>
+          <button type="button" className={secondary + " mt-2"} onClick={() => {
+            dateInput.current?.focus();
+            try { dateInput.current?.showPicker(); } catch { /* The date remains editable when a picker is unavailable. */ }
+          }}>Choose date</button>
+          <p id={dateId + "-hint"} className="text-xs mt-2 text-[var(--cmb-text-muted)]">Leave blank to save without a date. A date is needed for occasion reminders.</p>
+        </div>
+      </div>}
       <label className="block text-sm font-medium">
         A note for friends (optional)
         <textarea
