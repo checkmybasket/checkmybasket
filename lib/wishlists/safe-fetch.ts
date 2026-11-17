@@ -42,8 +42,8 @@ export function pinnedLookup(address: LookupAddress): LookupFunction {
 
 export async function safeFetch(
   value: string,
-  kind: "html" | "image",
-  deadline = Date.now() + 6500,
+  kind: "html" | "image" | "metadata",
+  deadline = Date.now() + 10000,
   redirects = 0,
 ): Promise<{ body: Buffer; type: string; url: string }> {
   const url = new URL(webUrl(value));
@@ -78,8 +78,8 @@ export async function safeFetch(
         headers: {
           "User-Agent": "CheckMyBasket/1.0 (wishlist preview)",
           Accept:
-            kind === "html"
-              ? "text/html"
+            kind !== "image"
+              ? "text/html,application/xhtml+xml,image/png,image/jpeg,image/webp,image/gif,image/avif;q=0.8"
               : "image/png,image/jpeg,image/webp,image/gif,image/avif",
           "Accept-Encoding": "identity",
         },
@@ -99,16 +99,9 @@ export async function safeFetch(
         const type = String(response.headers["content-type"] ?? "")
           .split(";")[0]
           .toLowerCase();
-        const accepted =
-          kind === "html"
-            ? type === "text/html" || type === "application/xhtml+xml"
-            : [
-                "image/png",
-                "image/jpeg",
-                "image/webp",
-                "image/gif",
-                "image/avif",
-              ].includes(type);
+        const isHtml = type === "text/html" || type === "application/xhtml+xml";
+        const isImage = ["image/png", "image/jpeg", "image/webp", "image/gif", "image/avif"].includes(type);
+        const accepted = kind === "metadata" ? isHtml || isImage : kind === "html" ? isHtml : isImage;
         if (status < 200 || status >= 300 || !accepted) {
           response.destroy();
           reject(new Error("Preview unavailable"));
@@ -116,7 +109,7 @@ export async function safeFetch(
         }
         const chunks: Buffer[] = [];
         let size = 0;
-        const max = kind === "html" ? 524288 : 2097152;
+        const max = 2097152;
         response.on("data", (chunk: Buffer) => {
           size += chunk.length;
           if (size > max) {
@@ -140,7 +133,7 @@ export async function safeFetch(
     request.end();
   });
   if (result.location) {
-    if (redirects >= 3) throw new Error("Too many redirects");
+    if (redirects >= 5) throw new Error("Too many redirects");
     return safeFetch(
       new URL(result.location, url).href,
       kind,
@@ -160,8 +153,8 @@ function decode(value: string) {
         "&lt;": "<",
         "&gt;": ">",
       };
-      if (named[entity]) return named[entity];
-      const code = entity.startsWith("&#x")
+      if (named[entity.toLowerCase()]) return named[entity.toLowerCase()];
+      const code = entity.toLowerCase().startsWith("&#x")
         ? parseInt(entity.slice(3), 16)
         : parseInt(entity.slice(2), 10);
       return code > 0 && code <= 0x10ffff ? String.fromCodePoint(code) : "";
@@ -169,45 +162,112 @@ function decode(value: string) {
     .replace(/<[^>]*>/g, "")
     .trim();
 }
+function attributes(tag: string): Record<string, string> {
+  const attrs: Record<string, string> = {};
+  for (const match of tag.matchAll(
+    /([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/g,
+  )) attrs[match[1].toLowerCase()] = decode(match[2] ?? match[3] ?? match[4] ?? "");
+  return attrs;
+}
+
+function imageUrl(value: unknown, base: string): string {
+  if (Array.isArray(value)) {
+    for (const candidate of value) {
+      const image = imageUrl(candidate, base);
+      if (image) return image;
+    }
+    return "";
+  }
+  if (value && typeof value === "object") {
+    const image = value as Record<string, unknown>;
+    value = image.contentUrl ?? image.url ?? image["@id"];
+  }
+  if (typeof value !== "string" || !value.trim()) return "";
+  try { return webUrl(new URL(value.trim(), base).href); } catch { return ""; }
+}
+
+function productData(html: string): Record<string, unknown> {
+  for (const script of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi)) {
+    if (attributes(script[1]).type?.toLowerCase() !== "application/ld+json") continue;
+    try {
+      const queue: unknown[] = [JSON.parse(script[2])];
+      // Bound traversal independently of the response size.
+      for (let visited = 0; queue.length && visited < 1000; visited++) {
+        const node = queue.shift();
+        if (!node || typeof node !== "object") continue;
+        if (Array.isArray(node)) { queue.push(...node.slice(0, 1000)); continue; }
+        const object = node as Record<string, unknown>;
+        const types = Array.isArray(object["@type"]) ? object["@type"] : [object["@type"]];
+        if (types.some(type => typeof type === "string" && /(?:^|[/#])Product$/i.test(type))) return object;
+        queue.push(...Object.values(object).filter(value => value && typeof value === "object").slice(0, 1000));
+      }
+    } catch { /* Other metadata can still provide details when a script is malformed. */ }
+  }
+  return {};
+}
+
 export function extractMetadata(html: string, base: string) {
   const meta: Record<string, string> = {};
   for (const tag of html.match(/<meta\b[^>]*>/gi) ?? []) {
     if (tag.length > 8192) continue;
-    const attrs: Record<string, string> = {};
-    for (const match of tag.matchAll(
-      /([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/g,
-    ))
-      attrs[match[1].toLowerCase()] = decode(
-        match[2] ?? match[3] ?? match[4] ?? "",
-      );
-    const key = attrs.property ?? attrs.name;
-    if (key && attrs.content) meta[key.toLowerCase()] = attrs.content;
+    const attrs = attributes(tag);
+    const key = attrs.property ?? attrs.name ?? attrs.itemprop;
+    if (key && attrs.content && !meta[key.toLowerCase()]) meta[key.toLowerCase()] = attrs.content;
   }
-  let image = "";
-  try {
-    image = webUrl(
-      new URL(meta["og:image"] ?? meta["twitter:image"] ?? "", base).href,
-    );
-  } catch {}
-  if (!meta["og:image"] && !meta["twitter:image"]) image = "";
-  const price = meta["product:price:amount"] ?? meta["og:price:amount"];
-  const currency = meta["product:price:currency"] ?? meta["og:price:currency"];
+  const product = productData(html);
+  const rawOffers = product.offers;
+  const offers = (Array.isArray(rawOffers) ? rawOffers[0] : rawOffers) as Record<string, unknown> | undefined;
+  let image = imageUrl(product.image, base) || imageUrl([
+    meta["og:image:secure_url"], meta["og:image"], meta["twitter:image"], meta["twitter:image:src"], meta.image,
+  ], base);
+  if (!image) {
+    for (const tag of html.match(/<link\b[^>]*>/gi) ?? []) {
+      const attrs = attributes(tag);
+      if (attrs.rel?.toLowerCase().split(/\s+/).includes("image_src")) {
+        image = imageUrl(attrs.href, base);
+        if (image) break;
+      }
+    }
+  }
+  const title = decode(
+    (typeof product.name === "string" ? product.name : "") ||
+    meta["og:title"] || meta["twitter:title"] ||
+    html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1] ||
+    html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || "",
+  ).slice(0, 200);
+  if (!image) {
+    for (const tag of html.match(/<img\b[^>]*>/gi) ?? []) {
+      const attrs = attributes(tag);
+      const alt = attrs.alt?.toLowerCase();
+      const matchesTitle = alt && alt.length >= 5 && title && (alt.includes(title.toLowerCase()) || title.toLowerCase().includes(alt));
+      if (attrs.itemprop?.split(/\s+/).includes("image") || matchesTitle) {
+        image = imageUrl(attrs["data-src"] ?? attrs.src, base);
+        if (image) break;
+      }
+    }
+  }
+  const rawPrice = offers?.price ?? offers?.lowPrice ?? meta["product:price:amount"] ?? meta["og:price:amount"] ?? meta.price;
+  const price = typeof rawPrice === "number" || typeof rawPrice === "string" ? String(rawPrice) : "";
+  const rawCurrency = offers?.priceCurrency ?? meta["product:price:currency"] ?? meta["og:price:currency"] ?? meta.pricecurrency;
+  const currency = typeof rawCurrency === "string" ? rawCurrency.toUpperCase() : "";
   return {
-    title: (
-      meta["og:title"] ??
-      meta["twitter:title"] ??
-      decode(html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] ?? "")
-    ).slice(0, 200),
+    title,
     image_url: image,
-    shop_name: new URL(base).hostname.replace(/^www\./, "").slice(0, 100),
-    price:
-      price && /^\d{1,7}(\.\d{1,2})?$/.test(price) && Number(price) <= 1000000
-        ? price
-        : "",
-    currency:
-      currency &&
-      ["GBP", "USD", "EUR", "AUD", "CAD"].includes(currency.toUpperCase())
-        ? currency.toUpperCase()
-        : "",
+    shop_name: (meta["og:site_name"] || new URL(base).hostname.replace(/^www\./, "")).slice(0, 100),
+    price: price && /^\d{1,7}(\.\d{1,2})?$/.test(price) && Number(price) <= 1000000 ? price : "",
+    currency: ["GBP", "USD", "EUR", "AUD", "CAD"].includes(currency) ? currency : "",
+  };
+}
+
+export function extractFetchedMetadata(fetched: { body: Buffer; type: string; url: string }) {
+  if (!fetched.type.startsWith("image/")) return extractMetadata(fetched.body.toString("utf8"), fetched.url);
+  let title = "";
+  try {
+    title = decodeURIComponent(new URL(fetched.url).pathname.split("/").pop() ?? "")
+      .replace(/\.(?:png|jpe?g|webp|gif|avif)$/i, "").replace(/[-_]+/g, " ").slice(0, 200);
+  } catch {}
+  return {
+    title, image_url: fetched.url, shop_name: new URL(fetched.url).hostname.replace(/^www\./, ""),
+    price: "", currency: "",
   };
 }
