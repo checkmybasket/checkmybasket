@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import { extractMetadata, safeFetch } from "@/lib/wishlists/safe-fetch";
+import { extractFetchedMetadata, safeFetch } from "@/lib/wishlists/safe-fetch";
 export const runtime = "nodejs";
 export async function POST(request: Request) {
   const supabase = await createClient();
@@ -27,9 +27,9 @@ export async function POST(request: Request) {
     if (text.length > 4096) throw new Error("Too large");
     const { url } = JSON.parse(text);
     if (typeof url !== "string") throw new Error("Missing URL");
-    const fetched = await safeFetch(url, "html");
+    const fetched = await safeFetch(url, "metadata");
     return Response.json(
-      extractMetadata(fetched.body.toString("utf8"), fetched.url),
+      extractFetchedMetadata(fetched),
       { headers: { "Cache-Control": "no-store" } },
     );
   } catch {

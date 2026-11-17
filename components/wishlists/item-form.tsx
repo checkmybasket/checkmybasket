@@ -43,6 +43,7 @@ export function ItemForm({
   const lookupRef = useRef<AbortController | null>(null);
   function update(key: keyof typeof values, value: string) {
     lookupRef.current?.abort();
+    lookupRef.current = null;
     setLooking(false);
     setValues((v) => ({ ...v, [key]: value }));
   }
@@ -60,7 +61,7 @@ export function ItemForm({
     const controller = new AbortController();
     lookupRef.current = controller;
     setLooking(true);
-    const timer = setTimeout(() => controller.abort(), 8000);
+    const timer = setTimeout(() => controller.abort(), 15000);
     try {
       const response = await fetch("/api/wishlists/metadata", {
         method: "POST",
@@ -69,7 +70,11 @@ export function ItemForm({
         signal: controller.signal,
       });
       const data = await response.json();
-      if (controller.signal.aborted) return;
+      if (controller.signal.aborted || lookupRef.current !== controller) return;
+      if (!response.ok) {
+        setError(data.error ?? data.message ?? "Could not get product details. Try again.");
+        return;
+      }
       setValues((v) => ({
         ...v,
         ...Object.fromEntries(
@@ -86,6 +91,7 @@ export function ItemForm({
           "Review the details below. You can change anything before saving.",
       );
     } catch {
+      if (lookupRef.current !== controller) return;
       if (!controller.signal.aborted)
         setMessage(
           "No preview available. Your link can still be saved with a title.",
