@@ -5,7 +5,7 @@ import { userError } from "@/lib/user-errors";
 import { panel, secondary } from "./shell";
 
 export function WishlistReminders(
-  { id, eventDate }: { id: string; eventDate: string | null },
+  { id, eventDate, onEditDate }: { id: string; eventDate: string | null; onEditDate: () => void },
 ) {
   const heading = useId();
   const [enabled, setEnabled] = useState(false);
@@ -40,10 +40,11 @@ export function WishlistReminders(
     setError("");
     setMessage("");
     try {
-      if (enabled && (!verified || !eventDate)) {
-        throw new Error(
-          "Add an occasion date in Edit list and verify your email below before turning reminders on.",
-        );
+      if (enabled && !eventDate) {
+        throw new Error("Add an optional birthday or occasion date, save the list, then save your reminders. You can also keep an all-year-round wishlist without occasion reminders.");
+      }
+      if (enabled && !verified) {
+        throw new Error("Verify your recovery email below, then choose Check email status before saving reminders.");
       }
       const { error } = await createClient().rpc("set_wishlist_reminders", {
         p_id: id,
@@ -79,9 +80,10 @@ export function WishlistReminders(
         : (
           <form onSubmit={save} className="space-y-3 mt-4">
             {!eventDate && (
-              <p className="text-sm">
-                Add an occasion date using Edit list first.
-              </p>
+              <div className="space-y-2">
+                <p className="text-sm">Your wishlist can stay all year round without a date. To receive occasion reminders, add a birthday or another occasion date.</p>
+                <button type="button" className={secondary} onClick={onEditDate}>Add birthday or occasion date</button>
+              </div>
             )}
             {!verified && (
               <p className="text-sm">

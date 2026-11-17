@@ -412,7 +412,12 @@ export function WishlistEditor({ id, draft }: { id: string; draft?: CatalogueWis
           {error}
         </p>
       )}
-      <WishlistReminders key={`${id}:${list.event_date}`} id={id} eventDate={list.event_date} />
+      <WishlistReminders key={id} id={id} eventDate={list.event_date} onEditDate={() => {
+        setEditList(true);
+        requestAnimationFrame(() => {
+          document.querySelector<HTMLFormElement>('form[aria-label="Wishlist settings"]')?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }} />
       <EmailRecovery wishlist />
       <p className="text-xs text-[var(--cmb-text-muted)] mb-5">
         Without verified email recovery, clearing browser data means losing
