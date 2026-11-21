@@ -14,7 +14,7 @@ const publicClient = () =>
   });
 const generic = {
   message:
-    "If recovery is enabled for that email, a sign-in link is on its way. Check your inbox and spam folder.",
+    "If that email can recover this access, a sign-in link is on its way. Check your inbox and spam folder.",
 };
 const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const uuidPattern =
@@ -25,8 +25,9 @@ async function hash(value: string) {
     "SHA-256",
     new TextEncoder().encode(value),
   );
-  return Array.from(new Uint8Array(bytes), (b) =>
-    b.toString(16).padStart(2, "0"),
+  return Array.from(
+    new Uint8Array(bytes),
+    (b) => b.toString(16).padStart(2, "0"),
   ).join("");
 }
 async function allowed(key: string, limit: number) {
@@ -64,16 +65,17 @@ async function sendLink(
   // The secret stays in a URL fragment, outside HTTP request logs and referrers.
   // The website requires a deliberate button press before redemption.
   const link = `${APP_URL}/return#token=${token}`;
-  const title =
-    purpose === "setup"
-      ? "Verify your email to save your CheckMyBasket access"
-      : "Your CheckMyBasket sign-in link";
-  const explanation =
-    purpose === "setup"
-      ? "Confirm this email to reopen your wishlists, reservations and groups on another device."
-      : "Use this link to reopen your CheckMyBasket wishlists, reservations and groups.";
+  const title = purpose === "setup"
+    ? "Verify your email to save your CheckMyBasket access"
+    : "Your CheckMyBasket sign-in link";
+  const explanation = purpose === "setup"
+    ? "Confirm this email to reopen your wishlists, reservations and groups on another device."
+    : "Use this link to reopen your CheckMyBasket wishlists, reservations and groups.";
   try {
-    const emailFetch = localEmailFetch({ enabled: Deno.env.get("CMB_LOCAL_MAILPIT"), supabaseUrl: URL });
+    const emailFetch = localEmailFetch({
+      enabled: Deno.env.get("CMB_LOCAL_MAILPIT"),
+      supabaseUrl: URL,
+    });
     const result = await emailFetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -84,8 +86,10 @@ async function sendLink(
         from,
         to: email,
         subject: title,
-        html: `<div style="font-family:system-ui;max-width:480px;margin:auto;color:#1B4332"><h1>${title}</h1><p>${explanation}</p><p><a href="${link}">Continue to CheckMyBasket</a></p><p>This private link expires in 15 minutes and works once. Do not forward it: it grants access to your wishlists, reservations, groups and private matches.</p><p>If you did not request this, ignore this email.</p></div>`,
-        text: `${title}\n\n${explanation}\n\n${link}\n\nThis private link expires in 15 minutes and works once. Do not forward it: it grants access to your wishlists, reservations, groups and private matches. If you did not request this, ignore this email.`,
+        html:
+          `<div style="font-family:system-ui;max-width:480px;margin:auto;color:#1B4332"><h1>${title}</h1><p>${explanation}</p><p><a href="${link}">Continue to CheckMyBasket</a></p><p>This private link expires in 15 minutes and works once. Do not forward it: it grants access to your wishlists, reservations, groups and private matches.</p><p>If you did not request this, ignore this email.</p></div>`,
+        text:
+          `${title}\n\n${explanation}\n\n${link}\n\nThis private link expires in 15 minutes and works once. Do not forward it: it grants access to your wishlists, reservations, groups and private matches. If you did not request this, ignore this email.`,
       }),
     });
     if (!result.ok) throw new Error("Email provider rejected delivery");
@@ -103,8 +107,9 @@ export async function handleRequest(req: Request) {
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     Vary: "Origin",
   };
-  if (origin === APP_URL || origin === "http://localhost:3101")
+  if (origin === APP_URL || origin === "http://localhost:3101") {
     cors["Access-Control-Allow-Origin"] = origin;
+  }
   const json = (body: unknown, status = 200) =>
     new Response(JSON.stringify(body), {
       status,
@@ -115,12 +120,14 @@ export async function handleRequest(req: Request) {
         "Referrer-Policy": "no-referrer",
       },
     });
-  if (origin && !cors["Access-Control-Allow-Origin"])
+  if (origin && !cors["Access-Control-Allow-Origin"]) {
     return json({ error: "Origin not allowed" }, 403);
+  }
   if (req.method === "OPTIONS") return new Response(null, { headers: cors });
   if (req.method !== "POST") return json({ error: "Method not allowed" }, 405);
-  if (Number(req.headers.get("content-length") ?? 0) > 4096)
+  if (Number(req.headers.get("content-length") ?? 0) > 4096) {
     return json({ error: "Request too large" }, 413);
+  }
   let body: {
     action?: string;
     email?: string;
@@ -132,24 +139,28 @@ export async function handleRequest(req: Request) {
     const text = await req.text();
     if (text.length > 4096) return json({ error: "Request too large" }, 413);
     body = JSON.parse(text);
-    if (!body || typeof body !== "object" || Array.isArray(body))
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
       throw new Error();
+    }
   } catch {
     return json({ error: "Invalid request" }, 400);
   }
   try {
     if (body.action === "redeem") {
-      if (typeof body.token !== "string" || !/^[a-f0-9]{64}$/.test(body.token))
+      if (
+        typeof body.token !== "string" || !/^[a-f0-9]{64}$/.test(body.token)
+      ) {
         return json(
           { error: "This link is invalid or has expired. Request a new one." },
           400,
         );
+      }
       const { data: rows, error } = await admin.rpc("consume_recovery_token", {
         p_hash: await hash(body.token),
       });
       if (error) throw new Error("Token verification unavailable");
       const token = rows?.[0];
-      if (!token)
+      if (!token) {
         return json(
           {
             error:
@@ -157,18 +168,20 @@ export async function handleRequest(req: Request) {
           },
           400,
         );
+      }
       const {
         data: { user },
         error: userError,
       } = await admin.auth.admin.getUserById(token.user_id);
-      if (userError || !user)
+      if (userError || !user) {
         return json(
           { error: "This group access is no longer available." },
           400,
         );
+      }
       if (token.purpose === "setup") {
         // Never change an existing verified identity or merge different members.
-        if (user.email && user.email.toLowerCase() !== token.email)
+        if (user.email && user.email.toLowerCase() !== token.email) {
           return json(
             {
               error:
@@ -176,8 +189,9 @@ export async function handleRequest(req: Request) {
             },
             409,
           );
-        const { data: updated, error: updateError } =
-          await admin.auth.admin.updateUserById(user.id, {
+        }
+        const { data: updated, error: updateError } = await admin.auth.admin
+          .updateUserById(user.id, {
             email: token.email,
             email_confirm: true,
           });
@@ -218,20 +232,22 @@ export async function handleRequest(req: Request) {
         );
       }
       // Mint a Supabase session only after proving possession of our emailed token.
-      const { data: link, error: linkError } =
-        await admin.auth.admin.generateLink({
+      const { data: link, error: linkError } = await admin.auth.admin
+        .generateLink({
           type: "magiclink",
           email: token.email,
         });
-      if (linkError || link.user?.id !== token.user_id)
+      if (linkError || link.user?.id !== token.user_id) {
         throw new Error("Could not restore the original member");
-      const { data: login, error: loginError } =
-        await publicClient().auth.verifyOtp({
+      }
+      const { data: login, error: loginError } = await publicClient().auth
+        .verifyOtp({
           token_hash: link.properties.hashed_token,
           type: "magiclink",
         });
-      if (loginError || !login.session || login.user?.id !== token.user_id)
+      if (loginError || !login.session || login.user?.id !== token.user_id) {
         throw new Error("Could not restore session");
+      }
       return json({
         access_token: login.session.access_token,
         refresh_token: login.session.refresh_token,
@@ -240,13 +256,15 @@ export async function handleRequest(req: Request) {
       });
     }
     if (body.action === "request") {
-      const email =
-        typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
-      if (email.length > 254 || !emailPattern.test(email))
+      const email = typeof body.email === "string"
+        ? body.email.trim().toLowerCase()
+        : "";
+      if (email.length > 254 || !emailPattern.test(email)) {
         return json({ error: "Please enter a valid email address." }, 400);
+      }
       // Rate-limit every address, including unknown ones, before lookup.
-      const ip =
-        req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+      const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+        "unknown";
       const ipAllowed = await allowed(`ip:${ip}`, 30);
       const emailAllowed = await allowed(`email:${email}`, 3);
       if (!ipAllowed || !emailAllowed) return json(generic);
@@ -257,11 +275,55 @@ export async function handleRequest(req: Request) {
         .eq("auth_ready", true)
         .maybeSingle();
       if (error) throw new Error("Recovery lookup unavailable");
-      if (!identity) return json(generic);
       const requestedGroup =
         typeof body.group_id === "string" && uuidPattern.test(body.group_id)
           ? body.group_id
           : null;
+      if (!identity) {
+        // A group organiser may have saved an address without finishing setup.
+        // Verify possession by email before linking their original Auth identity.
+        if (!requestedGroup) return json(generic);
+        const { data: group, error: groupError } = await admin
+          .from("groups").select("organiser_id").eq("id", requestedGroup)
+          .maybeSingle();
+        if (groupError) throw new Error("Group lookup unavailable");
+        if (!group) return json(generic);
+        const { data: profile, error: profileError } = await admin
+          .from("profiles").select("id,email").eq("id", group.organiser_id)
+          .maybeSingle();
+        if (profileError) throw new Error("Organiser lookup unavailable");
+        if (profile?.email?.trim().toLowerCase() !== email) {
+          return json(generic);
+        }
+        const { data: existing, error: existingError } = await admin
+          .from("recovery_identities").select("email").eq(
+            "user_id",
+            group.organiser_id,
+          ).maybeSingle();
+        if (existingError) throw new Error("Recovery lookup unavailable");
+        if (existing && existing.email !== email) return json(generic);
+        const { data: { user }, error: userError } = await admin.auth.admin
+          .getUserById(group.organiser_id);
+        if (
+          userError || !user ||
+          (user.email && user.email.toLowerCase() !== email)
+        ) return json(generic);
+        const { data: member, error: memberError } = await admin
+          .from("group_members").select("group_id").eq(
+            "group_id",
+            requestedGroup,
+          )
+          .eq("user_id", group.organiser_id).eq("role", "organiser")
+          .maybeSingle();
+        if (memberError) throw new Error("Membership lookup unavailable");
+        if (!member) return json(generic);
+        try {
+          await sendLink(group.organiser_id, email, "setup", requestedGroup);
+        } catch {
+          // Match normal recovery responses, including provider failures.
+        }
+        return json(generic);
+      }
       const { data: membership, error: memberError } = await admin
         .from("group_members")
         .select("group_id")
@@ -279,13 +341,15 @@ export async function handleRequest(req: Request) {
         if (!access) return json(generic);
       }
       if (requestedGroup) {
-        const { data: match } = await admin
+        const { data: match, error: matchError } = await admin
           .from("group_members")
           .select("group_id")
           .eq("user_id", identity.user_id)
           .eq("group_id", requestedGroup)
           .maybeSingle();
-        if (match) groupId = match.group_id;
+        if (matchError) throw new Error("Membership lookup unavailable");
+        if (!match) return json(generic);
+        groupId = match.group_id;
       }
       try {
         await sendLink(identity.user_id, email, "login", groupId);
@@ -301,13 +365,14 @@ export async function handleRequest(req: Request) {
         data: { user },
         error: authError,
       } = await publicClient().auth.getUser(bearer);
-      if (authError || !user)
+      if (authError || !user) {
         return json(
           {
             error: "Open your group or wishlist in the original browser first.",
           },
           401,
         );
+      }
       const { data: identity, error: identityError } = await admin
         .from("recovery_identities")
         .select("email")
@@ -315,15 +380,18 @@ export async function handleRequest(req: Request) {
         .eq("auth_ready", true)
         .maybeSingle();
       if (identityError) throw new Error("Recovery status unavailable");
-      if (body.action === "status")
+      if (body.action === "status") {
         return json({ verified_email: identity?.email ?? null });
-      if (identity)
+      }
+      if (identity) {
         return json({
           verified_email: identity.email,
           message: "Email recovery is already enabled.",
         });
-      const email =
-        typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
+      }
+      const email = typeof body.email === "string"
+        ? body.email.trim().toLowerCase()
+        : "";
       const groupId =
         typeof body.group_id === "string" && uuidPattern.test(body.group_id)
           ? body.group_id
@@ -332,7 +400,7 @@ export async function handleRequest(req: Request) {
         email.length > 254 ||
         !emailPattern.test(email) ||
         (!groupId && body.wishlist !== true)
-      )
+      ) {
         return json(
           {
             error:
@@ -340,6 +408,7 @@ export async function handleRequest(req: Request) {
           },
           400,
         );
+      }
       if (groupId) {
         const { data: member, error: memberError } = await admin
           .from("group_members")
@@ -348,15 +417,16 @@ export async function handleRequest(req: Request) {
           .eq("user_id", user.id)
           .maybeSingle();
         if (memberError) throw new Error("Membership lookup unavailable");
-        if (!member)
+        if (!member) {
           return json({ error: "You must be a member of this group." }, 403);
+        }
       } else {
         const { data: access, error: accessError } = await admin.rpc(
           "personal_wishlist_recovery_access",
           { p_user: user.id },
         );
         if (accessError) throw new Error("Wishlist lookup unavailable");
-        if (!access)
+        if (!access) {
           return json(
             {
               error:
@@ -364,20 +434,23 @@ export async function handleRequest(req: Request) {
             },
             403,
           );
+        }
       }
-      if (user.email && user.email.toLowerCase() !== email)
+      if (user.email && user.email.toLowerCase() !== email) {
         return json(
           { error: "Use the email already linked to this member." },
           409,
         );
+      }
       if (
         !(await allowed(`setup:${user.id}`, 3)) ||
         !(await allowed(`email:${email}`, 3))
-      )
+      ) {
         return json(
           { error: "Too many requests. Try again in 10 minutes." },
           429,
         );
+      }
       await sendLink(user.id, email, "setup", groupId);
       return json({
         message:

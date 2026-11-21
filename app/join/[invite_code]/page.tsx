@@ -44,14 +44,28 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
 
   useEffect(() => {
     const supabase = createClient();
-    Promise.resolve(supabase.rpc("get_group_preview", { p_invite_code: invite_code })).then(({ data, error }) => {
+    let active = true;
+    Promise.resolve(supabase.rpc("get_group_preview", { p_invite_code: invite_code })).then(async ({ data, error }) => {
+      if (!active) return;
       if (error) { setLoadState("error"); return; }
       if (!data) { setLoadState("notfound"); return; }
-      setPersonalToken(new URLSearchParams(window.location.hash.slice(1)).get("invite"));
+      const personalInvite = new URLSearchParams(window.location.hash.slice(1)).get("invite");
+      setPersonalToken(personalInvite);
+      if (personalInvite === null) {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: member } = await supabase.from("group_members")
+            .select("id").eq("group_id", data.group_id).eq("user_id", user.id).maybeSingle();
+          if (!active) return;
+          if (member) { router.replace(`/g/${data.group_id}`); return; }
+        }
+      }
+      if (!active) return;
       setGroup(data as GroupPreview);
       setLoadState("ready");
-    }).catch(() => setLoadState("error"));
-  }, [invite_code]);
+    }).catch(() => { if (active) setLoadState("error"); });
+    return () => { active = false; };
+  }, [invite_code, router]);
 
   async function handleJoin() {
     if (!name.trim()) { setNameError("Please enter your name"); return; }
@@ -238,6 +252,10 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
           </div>
           <div className="rounded-[var(--cmb-radius)] p-6 animate-fade-up bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-md)]">
             <h2 className="text-lg font-semibold mb-4">Join this Secret Santa</h2>
+            <p className="text-sm mb-4 text-[var(--cmb-text-secondary)]">
+              Already joined or organising this group?{" "}
+              <Link href={`/return?group=${group.group_id}`} className="underline text-[var(--cmb-primary)]">Return to your group</Link>
+            </p>
             {personalToken !== null ? (
               <div className="space-y-3">
                 <p className="text-sm text-[var(--cmb-text-secondary)]">Your organiser has reserved a place for you. Claim it to see your match after the draw. The organiser can see all pairings.</p>
