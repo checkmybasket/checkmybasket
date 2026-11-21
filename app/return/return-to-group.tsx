@@ -229,11 +229,12 @@ export function ReturnToGroup() {
               </section>
             )}
             <p className="text-sm mb-5 text-[var(--cmb-text-secondary)]">
-              Enter the email you verified for access. We&apos;ll send a private
-              sign-in link. No password needed.
+              {groupId
+                ? "Enter your verified email, or the email you saved when you created this group. We’ll email a private link to verify your address and restore access."
+                : "Enter the email you verified for access. We’ll send a private sign-in link. No password needed."}
             </p>
             <form onSubmit={request} className="space-y-3">
-              <Label htmlFor="recovery-email">Your verified email</Label>
+              <Label htmlFor="recovery-email">{groupId ? "Your email" : "Your verified email"}</Label>
               <Input
                 id="recovery-email"
                 type="email"
@@ -254,10 +255,9 @@ export function ReturnToGroup() {
               </Button>
             </form>
             <p className="text-xs mt-4 text-[var(--cmb-text-muted)]">
-              Saved a notification email but haven&apos;t verified it? Open your
-              group or wishlist in the original browser and verify your email to
-              save access. Without a verified email, we can&apos;t restore your
-              original member identity on another device.
+              {groupId
+                ? "If you created this group and saved an email, you can verify it here to recover your organiser access. Otherwise, return in the original browser where you joined and set up email recovery."
+                : "If you created a group and saved an email, use Return to your group on its invitation page to verify it. For other access, open your group or wishlist in the original browser to set up email recovery."}
             </p>
           </>
         )}
