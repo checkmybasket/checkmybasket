@@ -1,4 +1,5 @@
 "use client";
+import { EmailRecovery } from "@/components/email-recovery";
 import { BasketMark } from "@/components/receipt/logo";
 import { PageRecovery } from "@/components/page-recovery";
 import { userError } from "@/lib/user-errors";
@@ -92,7 +93,7 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
   }
 
   async function claimPersonalInvite() {
-    if (busy || personalToken === null) return;
+    if (busy || !group || personalToken === null) return;
     if (!/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(personalToken)) {
       toast.error("This personal invite is unavailable. Ask the organiser for your link.");
       return;
@@ -106,7 +107,7 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
       });
       if (error) throw error;
       window.history.replaceState(null, "", window.location.pathname + window.location.search);
-      setStep("onboard");
+      router.replace(`/g/${group.group_id}`);
     } catch (error) {
       toast.error(userError(error, "claim your place"));
     } finally {
@@ -177,6 +178,12 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
             <p className="text-xs text-[var(--cmb-text-secondary)]">While you wait for the draw, help your Secret Santa out:</p>
           </div>
         </div>
+        <section className="rounded-[var(--cmb-radius)] p-5 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] space-y-2" aria-labelledby="keep-access-heading">
+          <h2 id="keep-access-heading" className="font-semibold">Keep access to your group</h2>
+          <p className="text-sm">This browser remembers you. To return on another device or after clearing browser data, verify a sign-in email below. Entering an email when joining does not save access until you verify it.</p>
+          <p className="text-sm">Prefer to join without email? Keep using this browser. If you lose access after names are drawn, your organiser can privately send your personal match link.</p>
+        </section>
+        <EmailRecovery groupId={group.group_id} />
         {[
           { title:"Your likes", hint:"Hobbies, interests, things you love", ph:"e.g. Coffee, hiking, 90s films, plants...", val:likes, set:setLikes, ta:true },
           { title:"Things to avoid", hint:"Allergies, dislikes, things you have plenty of", ph:"e.g. No candles, allergic to nuts...", val:dislikes, set:setDislikes, ta:true },
@@ -265,7 +272,7 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
               </div>
             ) : group.draw_status !== "pending" ? (
               <p className="text-sm text-[var(--cmb-text-secondary)]">
-                Names have already been drawn. If the organiser reserved a place for you, ask them for your personal link. If you&apos;ve already joined,{" "}
+                Names have already been drawn. Already joined without a recovery email? Ask your organiser for your personal match link from the Draw tab. If they reserved a place for you, use your personal invite. To return in your original browser,{" "}
                 <Link href={`/g/${group.group_id}`} className="underline text-[var(--cmb-primary)]">open your group</Link>.
               </p>
             ) : (
@@ -279,7 +286,7 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
                 </div>
                 <div className="mb-5">
                   <Label htmlFor="email" className="text-base font-medium mb-1.5 block">Email (optional)</Label>
-                  <p id="email-hint" className="text-sm mb-2 text-[var(--cmb-text-muted)]">Verify an optional email after joining to receive future draw notifications. Private from your group. Leave blank to skip.</p>
+                  <p id="email-hint" className="text-sm mb-2 text-[var(--cmb-text-muted)]">Email is optional. After joining, verify a sign-in email to save access on another device. Notifications are managed separately. Leave blank to skip.</p>
                   <Input id="email" type="email" inputMode="email" autoComplete="email" placeholder="you@example.com" value={email}
                     onChange={e => setEmail(e.target.value)} onKeyDown={e => e.key === "Enter" && handleJoin()}
                     aria-describedby={emailError ? "email-hint email-error" : "email-hint"} aria-invalid={!!emailError}
@@ -290,7 +297,7 @@ export default function JoinPage({ params }: { params: Promise<{ invite_code: st
                 <Button onClick={handleJoin} disabled={busy} size="lg" className="w-full h-12 text-base rounded-[var(--cmb-radius)] font-semibold bg-[var(--cmb-primary)] text-[var(--cmb-text-inverse)]">
                   {busy ? "Joining…" : <>Join this Secret Santa <ArrowRight size={18} strokeWidth={1.5} className="ml-2"/></>}
                 </Button>
-                <p className="text-center text-xs mt-3 text-[var(--cmb-text-muted)]">No account needed. Joining is free.</p>
+                <p className="text-center text-xs mt-3 text-[var(--cmb-text-muted)]">No account needed. Joining is free. Without a verified recovery email, access is remembered only in this browser.</p>
               </>
             )}
           </div>

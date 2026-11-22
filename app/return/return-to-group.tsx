@@ -233,6 +233,12 @@ export function ReturnToGroup() {
                 ? "Enter your verified email, or the email you saved when you created this group. We’ll email a private link to verify your address and restore access."
                 : "Enter the email you verified for access. We’ll send a private sign-in link. No password needed."}
             </p>
+            <section aria-labelledby="guest-return-heading" className="my-5 rounded-[var(--cmb-radius)] border border-[var(--cmb-border)] p-4 space-y-2">
+              <h2 id="guest-return-heading" className="font-semibold">Joined without an email?</h2>
+              <p className="text-sm">Open your group in the same browser and device you used to join. A new email cannot automatically identify your existing place.</p>
+              <p className="text-sm">If names have been drawn and you cannot use that browser, ask your organiser to open the Draw tab, choose Personal match links, and privately send the link beside your name. It shows your existing match without an email or a redraw.</p>
+              <p className="text-xs text-[var(--cmb-text-muted)]">Personal match links provide read access to your match and gift ideas. To restore full account access on another device, set up and verify an email while your original browser still has access.</p>
+            </section>
             <form onSubmit={request} className="space-y-3">
               <Label htmlFor="recovery-email">{groupId ? "Your email" : "Your verified email"}</Label>
               <Input

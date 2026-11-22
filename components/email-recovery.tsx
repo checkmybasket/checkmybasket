@@ -113,7 +113,7 @@ export function EmailRecovery({
         <>
           <p className="text-sm mb-3 text-[var(--cmb-text-secondary)]">
             Verify an email to reopen your wishlists, reservations and any
-            groups on another device. Optional, with no password.
+            groups on another device. Optional, with no password. Until you open the verification email and confirm, your access is saved only in this browser.
           </p>
           <form onSubmit={setup} className="space-y-3">
             <Label htmlFor={`${id}-email`}>Email for signing in</Label>
