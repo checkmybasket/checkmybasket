@@ -1,0 +1,38 @@
+name: Guest access regression
+on:
+  pull_request:
+    paths:
+      - 'supabase/migrations/**'
+      - 'tests/guest-match-links-db.cjs'
+      - 'app/join/**'
+      - 'app/return/**'
+      - 'app/personal-match/**'
+      - 'components/email-recovery.tsx'
+      - 'components/guest-match-links.tsx'
+      - '.github/workflows/guest-access.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'supabase/migrations/**'
+      - 'tests/guest-match-links-db.cjs'
+      - 'app/join/**'
+      - 'app/return/**'
+      - 'app/personal-match/**'
+      - 'components/email-recovery.tsx'
+      - 'components/guest-match-links.tsx'
+      - '.github/workflows/guest-access.yml'
+permissions:
+  contents: read
+jobs:
+  guest-access:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install isolated database test dependency
+        run: npm install --prefix "$RUNNER_TEMP/cmb-db-tests" --ignore-scripts --no-audit --no-fund @electric-sql/pglite@0.5.17
+      - name: Verify guest match privacy and unchanged assignments
+        run: node tests/guest-match-links-db.cjs "$RUNNER_TEMP/cmb-db-tests/node_modules/@electric-sql/pglite"

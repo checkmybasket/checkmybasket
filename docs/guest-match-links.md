@@ -9,3 +9,9 @@ Links use random UUID secrets, live in URL fragments, and are removed from the a
 ## Release verification, 22 November 2026
 
 A transaction that was rolled back checked seven guest links against existing assignments, invalid/null/expired tokens, rotation on expiry, non-organiser and unauthenticated issuance rejection, and denied direct table access. Assertions compared every membership, draw and exclusion row before/after; no protected data changed. No participant names, tokens, addresses or matches are recorded in this repository.
+
+## Prevention for future participants
+
+The join form explains browser-only access, and onboarding immediately offers verified email recovery before preferences. Email remains optional. The shared invite after a draw and the return page both explain how a guest can ask the organiser for a personal match link. Reserved-place claims go directly to the existing group, avoiding misleading blank-name/waiting-for-draw onboarding after a completed draw.
+
+Run `node tests/guest-match-links-db.cjs /path/to/@electric-sql/pglite` (or install PGlite in a separate test directory). The isolated database tests apply the actual migration against synthetic legacy and future draws. The 38 assertions cover issuance permissions, stable links, exact recipient scope, invalid/null/expired links, renewal, disabled access after email recovery, pending draws, private table grants and unchanged participants, matches and exclusions. No production records or mail are used.
