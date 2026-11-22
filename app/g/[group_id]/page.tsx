@@ -1,4 +1,5 @@
 "use client";
+import { GuestMatchLinks } from "@/components/guest-match-links";
 import { PageRecovery } from "@/components/page-recovery";
 import { userError } from "@/lib/user-errors";
 import { use, useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -266,7 +267,7 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
       <div className="rounded-[var(--cmb-radius)] p-5 space-y-3 bg-[var(--cmb-surface)] border border-[var(--cmb-border)] shadow-[var(--shadow-sm)]">
         {[
           { icon:CheckCircle2, text:"Everyone on the draw list was matched." },
-          { icon:Lock, text:group.organiser_can_view_matches ? "The organiser can see all pairings and pass them on privately." : "The organiser cannot see individual matches." },
+          { icon:Lock, text:group.organiser_can_view_matches ? "The organiser can see all pairings and pass them on privately." : "Matches are private. Keep personal access links between the organiser and the intended participant." },
         ].map(({ icon:Icon, text }) => (
           <div key={text} className="flex items-center gap-2.5 text-sm">
             <Icon size={16} strokeWidth={2} className="text-[var(--cmb-success)] shrink-0"/>
@@ -276,6 +277,8 @@ function DrawTab({ data, isOrganiser, refresh }: { data:DashData; isOrganiser:bo
       </div>
 
       {isOrganiser && group.organiser_can_view_matches && <ManagedDrawMatches groupId={group.id} />}
+
+      {isOrganiser && <GuestMatchLinks groupId={group.id} />}
 
       {isOrganiser && offlineParticipants.length > 0 && (
         <OfflineParticipants group={group} participants={offlineParticipants} drawn refresh={refresh} />
